@@ -35,6 +35,16 @@ def copy_static():
         shutil.copytree(STATIC_DIR, dest, dirs_exist_ok=True)
         print(f"✅ Статические файлы скопированы")
 
+def copy_og_image():
+    """Копирование og-image.png в dist."""
+    src = Path('og-image.png')
+    if src.exists():
+        dest = DIST_DIR / 'og-image.png'
+        shutil.copy2(src, dest)
+        print(f"✅ OG image скопирован: {dest}")
+    else:
+        print("⚠️ OG image og-image.png не найден в корне репозитория")
+
 def build_html():
     """Генерация HTML из шаблонов."""
     print("\n🛠️  Сборка HTML...")
@@ -128,6 +138,7 @@ def main():
     
     clean_dist()
     copy_static()
+    copy_og_image()
     build_html()
     create_404()
     create_robots_txt()
