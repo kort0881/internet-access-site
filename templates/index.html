@@ -7,8 +7,9 @@
     
     <!-- Site Verification -->
     <meta name="google-site-verification" content="7HloDytbn-zY3IaDCIrjJJObXli-u5By9DCX8ZuBhyA" />
+    <meta name="yandex-verification" content="83bc89c155ecedc0" />
 
-    <meta name="yandex-verification" content="83bc89c155ecedc0" />    <!-- Primary Meta Tags -->
+    <!-- Primary Meta Tags -->
     <title>{{ meta_title }}</title>
     <meta name="title" content="{{ meta_title }}">
     <meta name="description" content="{{ meta_description }}">
@@ -141,6 +142,25 @@
             </div>
         </section>
 
+        <!-- SEO text block -->
+        <section class="bg-white rounded-lg shadow-lg p-6 mb-8">
+            <h2 class="text-2xl font-bold mb-3">
+                Бесплатные VPN-конфигурации для доступа к интернету в России
+            </h2>
+            <p class="text-gray-700 mb-3">
+                Этот сайт собрал в одном месте бесплатные VPN конфигурации для России:
+                VLESS, V2Ray, Hysteria, Trojan, VMess и Shadowsocks. Здесь вы можете
+                быстро получить рабочие VPN-настройки для обхода блокировок и доступа
+                к заблокированным сайтам, мессенджерам и социальным сетям.
+            </p>
+            <p class="text-gray-700">
+                Конфиги автоматически обновляются, поэтому вы всегда получаете
+                актуальные VPN-подписки. Достаточно выбрать подходящий формат,
+                скопировать ссылку и добавить её в приложение v2rayNG, NekoBox,
+                v2rayN или другой совместимый клиент.
+            </p>
+        </section>
+
         <!-- Configs Grid -->
         <section aria-label="VPN конфигурации">
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -164,7 +184,7 @@
                     
                     <div class="space-y-3">
                         <button 
-                            onclick="navigator.clipboard.writeText('{{ config.url }}');this.innerHTML='<i class=\'fas fa-check\'></i> Скопировано!';setTimeout(()=>this.innerHTML='<i class=\'fas fa-copy\'></i> Копировать ссылку',2000)"
+                            onclick="navigator.clipboard.writeText('{{ config.url }}');this.innerHTML='<i class=\\'fas fa-check\\'></i> Скопировано!';setTimeout(()=>this.innerHTML='<i class=\\'fas fa-copy\\'></i> Копировать ссылку',2000)"
                             class="w-full bg-indigo-500 hover:bg-indigo-600 text-white px-4 py-2 rounded-lg transition"
                             aria-label="Копировать ссылку {{ config.name }}">
                             <i class="fas fa-copy"></i> Копировать ссылку
@@ -239,3 +259,4 @@
 
 </body>
 </html>
+
