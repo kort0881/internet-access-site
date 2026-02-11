@@ -41,8 +41,8 @@
     <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌐</text></svg>">
     
     <!-- Theme Color -->
-    <meta name="theme-color" content="#4F46E5">
-    <meta name="msapplication-TileColor" content="#4F46E5">
+    <meta name="theme-color" content="#0f0f23">
+    <meta name="msapplication-TileColor" content="#0f0f23">
     
     <!-- Structured Data (JSON-LD) -->
     <script type="application/ld+json">
@@ -67,6 +67,35 @@
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        dark: {
+                            900: '#0a0a0f',
+                            800: '#0f0f1a',
+                            700: '#151525',
+                            600: '#1a1a2e',
+                            500: '#252540',
+                        },
+                        neon: {
+                            blue: '#00d4ff',
+                            purple: '#a855f7',
+                            pink: '#ec4899',
+                            green: '#22c55e',
+                            orange: '#f97316',
+                        }
+                    },
+                    animation: {
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    }
+                }
+            }
+        }
+    </script>
     
     <!-- Alpine.js -->
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
@@ -74,49 +103,275 @@
     <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
     <style>
-        [x-cloak] { display: none !important; }
-        .config-card {
-            transition: transform 0.2s, box-shadow 0.2s;
+        * {
+            font-family: 'Inter', sans-serif;
         }
+        
+        [x-cloak] { display: none !important; }
+        
+        body {
+            background: linear-gradient(135deg, #0a0a0f 0%, #0f0f1a 50%, #1a0a20 100%);
+        }
+        
+        /* Animated background */
+        .bg-animated {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .bg-animated::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 20% 80%, rgba(120, 0, 255, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(0, 212, 255, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 40% 40%, rgba(255, 0, 128, 0.05) 0%, transparent 50%);
+            animation: rotate 60s linear infinite;
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        @keyframes glow {
+            from { box-shadow: 0 0 20px rgba(0, 212, 255, 0.3); }
+            to { box-shadow: 0 0 40px rgba(168, 85, 247, 0.4); }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        /* Glass card effect */
+        .glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        
+        .glass-strong {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Config card */
+        .config-card {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .config-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #00d4ff, #a855f7, #ec4899);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .config-card:hover::before {
+            opacity: 1;
+        }
+        
         .config-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5),
+                        0 0 100px rgba(0, 212, 255, 0.1);
+        }
+        
+        .config-card.recommended {
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            box-shadow: 0 0 30px rgba(34, 197, 94, 0.1);
+        }
+        
+        .config-card.recommended::before {
+            background: linear-gradient(90deg, #22c55e, #10b981);
+            opacity: 1;
+        }
+        
+        /* Neon buttons */
+        .btn-neon {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-neon::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .btn-neon:hover::before {
+            left: 100%;
+        }
+        
+        .btn-neon:hover {
+            box-shadow: 0 0 30px currentColor;
             transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        /* Gradient text */
+        .gradient-text {
+            background: linear-gradient(135deg, #00d4ff 0%, #a855f7 50%, #ec4899 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        /* Social buttons hover effects */
+        .social-btn {
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .social-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+        }
+        
+        /* Download cards */
+        .download-card {
+            transition: all 0.4s ease;
+        }
+        
+        .download-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .download-card:hover .icon-container {
+            transform: scale(1.1) rotate(5deg);
+        }
+        
+        .icon-container {
+            transition: transform 0.4s ease;
+        }
+        
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #0a0a0f;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #00d4ff, #a855f7);
+            border-radius: 5px;
+        }
+        
+        /* Particles */
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(0, 212, 255, 0.5);
+            border-radius: 50%;
+            animation: float 8s ease-in-out infinite;
+        }
+        
+        /* Info list */
+        .info-list li {
+            position: relative;
+            padding-left: 1.5rem;
+        }
+        
+        .info-list li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.6rem;
+            width: 6px;
+            height: 6px;
+            background: linear-gradient(135deg, #00d4ff, #a855f7);
+            border-radius: 50%;
+        }
+        
+        /* Pulse effect for recommended badge */
+        .badge-pulse {
+            animation: badge-pulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes badge-pulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.4); }
+            50% { box-shadow: 0 0 0 10px rgba(34, 197, 94, 0); }
         }
     </style>
 </head>
-<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
+<body class="min-h-screen text-gray-100">
+    
+    <!-- Animated Background -->
+    <div class="bg-animated"></div>
+    
+    <!-- Floating particles -->
+    <div class="fixed inset-0 pointer-events-none overflow-hidden z-0">
+        <div class="particle" style="top: 10%; left: 20%; animation-delay: 0s;"></div>
+        <div class="particle" style="top: 20%; left: 80%; animation-delay: 2s;"></div>
+        <div class="particle" style="top: 60%; left: 10%; animation-delay: 4s;"></div>
+        <div class="particle" style="top: 80%; left: 70%; animation-delay: 1s;"></div>
+        <div class="particle" style="top: 40%; left: 50%; animation-delay: 3s;"></div>
+    </div>
     
     <!-- Header -->
-    <header class="bg-white shadow-md">
+    <header class="glass-strong sticky top-0 z-50">
         <div class="container mx-auto px-4 py-6">
-            <div class="flex flex-col md:flex-row justify-between items-center">
-                <div class="mb-4 md:mb-0">
-                    <h1 class="text-3xl font-bold text-indigo-600">🌐 Доступ к интернету</h1>
-                    <p class="text-gray-600 mt-2">Бесплатные VPN конфигурации</p>
+            <div class="flex flex-col lg:flex-row justify-between items-center gap-6">
+                <div class="text-center lg:text-left">
+                    <h1 class="text-4xl font-bold">
+                        <span class="text-4xl mr-2">🌐</span>
+                        <span class="gradient-text">Доступ к интернету</span>
+                    </h1>
+                    <p class="text-gray-400 mt-2 text-lg">Бесплатные VPN конфигурации</p>
                 </div>
                 
                 <!-- Social Links -->
-                <div class="flex gap-4">
+                <div class="flex flex-wrap justify-center gap-3">
                     <a href="https://t.me/vlesstrojan" target="_blank" rel="noopener noreferrer"
-                       class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg flex items-center gap-2 transition">
+                       class="social-btn bg-gradient-to-r from-blue-600 to-blue-500 text-white px-5 py-2.5 rounded-xl flex items-center gap-2 shadow-lg shadow-blue-500/25">
                         <i class="fab fa-telegram"></i>
-                        <span>VLESS & Trojan</span>
+                        <span class="font-medium">VLESS & Trojan</span>
                     </a>
                     <a href="https://t.me/kibersosnew" target="_blank" rel="noopener noreferrer"
-                       class="bg-cyan-500 hover:bg-cyan-600 text-white px-6 py-3 rounded-lg flex items-center gap-2 transition">
+                       class="social-btn bg-gradient-to-r from-cyan-600 to-cyan-500 text-white px-5 py-2.5 rounded-xl flex items-center gap-2 shadow-lg shadow-cyan-500/25">
                         <i class="fab fa-telegram"></i>
-                        <span>KiberSOS</span>
+                        <span class="font-medium">KiberSOS</span>
                     </a>
                     <a href="https://t.me/+aukDHGFAhE41NWQy" target="_blank" rel="noopener noreferrer"
-                       class="bg-purple-500 hover:bg-purple-600 text-white px-6 py-3 rounded-lg flex items-center gap-2 transition">
+                       class="social-btn bg-gradient-to-r from-purple-600 to-purple-500 text-white px-5 py-2.5 rounded-xl flex items-center gap-2 shadow-lg shadow-purple-500/25">
                         <i class="fab fa-telegram"></i>
-                        <span>Доступ</span>
+                        <span class="font-medium">Доступ</span>
                     </a>
                     <a href="https://t.me/vlessbots_bot" target="_blank" rel="noopener noreferrer"
-                       class="bg-emerald-500 hover:bg-emerald-600 text-white px-6 py-3 rounded-lg flex items-center gap-2 transition">
-                        <i class="fab fa-telegram"></i>
-                        <span>@vlessbots_bot</span>
+                       class="social-btn bg-gradient-to-r from-emerald-600 to-emerald-500 text-white px-5 py-2.5 rounded-xl flex items-center gap-2 shadow-lg shadow-emerald-500/25">
+                        <i class="fas fa-robot"></i>
+                        <span class="font-medium">@vlessbots_bot</span>
                     </a>
                 </div>
             </div>
@@ -124,327 +379,372 @@
     </header>
 
     <!-- Main Content -->
-    <main class="container mx-auto px-4 py-8">
+    <main class="container mx-auto px-4 py-10 relative z-10">
         
         <!-- Info Banner -->
-        <section class="bg-white rounded-lg shadow-lg p-6 mb-8">
-            <div class="flex items-start gap-4">
-                <i class="fas fa-info-circle text-blue-500 text-2xl mt-1"></i>
-                <div>
-                    <h2 class="text-xl font-bold mb-2">💡 Как использовать</h2>
-                    <ol class="list-decimal list-inside space-y-2 text-gray-700">
-                        <li>Выберите конфигурацию ниже (рекомендуем <strong>white</strong> версии)</li>
+        <section class="glass rounded-2xl p-8 mb-10 border border-cyan-500/20">
+            <div class="flex flex-col md:flex-row items-start gap-6">
+                <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center flex-shrink-0 shadow-lg shadow-cyan-500/30">
+                    <i class="fas fa-lightbulb text-2xl text-white"></i>
+                </div>
+                <div class="flex-1">
+                    <h2 class="text-2xl font-bold mb-4 gradient-text">Как использовать</h2>
+                    <ol class="info-list space-y-3 text-gray-300">
+                        <li>Выберите конфигурацию ниже <span class="text-green-400 font-medium">(рекомендуем white версии)</span></li>
                         <li>Скопируйте ссылку на подписку</li>
-                        <li>Вставьте в ваше VPN приложение (v2rayNG, NekoBox, v2rayN)</li>
+                        <li>Вставьте в ваше VPN приложение <span class="text-cyan-400">(v2rayNG, NekoBox, v2rayN)</span></li>
                         <li>Подпишитесь на наши Telegram-каналы для обновлений</li>
                     </ol>
                     
-                    <p class="mt-4 text-sm text-gray-600">
-                        <i class="fas fa-clock"></i> Последнее обновление: <strong><time datetime="11.02.2026 12:44">11.02.2026 12:44</time></strong>
-                    </p>
+                    <div class="mt-6 inline-flex items-center gap-2 bg-dark-500 px-4 py-2 rounded-full text-sm">
+                        <i class="fas fa-clock text-cyan-400"></i>
+                        <span class="text-gray-400">Последнее обновление:</span>
+                        <time datetime="11.02.2026 12:44" class="text-white font-medium">11.02.2026 12:44</time>
+                    </div>
                     
                 </div>
             </div>
         </section>
 
         <!-- SEO text block -->
-        <section class="bg-white rounded-lg shadow-lg p-6 mb-8">
-            <h2 class="text-2xl font-bold mb-3">
-                Бесплатные VPN-конфигурации для доступа к интернету в России
+        <section class="glass rounded-2xl p-8 mb-10">
+            <h2 class="text-2xl font-bold mb-4">
+                <span class="gradient-text">Бесплатные VPN-конфигурации</span>
+                <span class="text-gray-400 font-normal">для доступа к интернету в России</span>
             </h2>
-            <p class="text-gray-700 mb-3">
+            <p class="text-gray-400 mb-4 leading-relaxed">
                 Этот сайт собрал в одном месте бесплатные VPN конфигурации для России:
-                VLESS, V2Ray, Hysteria, Trojan, VMess и Shadowsocks. Здесь вы можете
-                быстро получить рабочие VPN-настройки для обхода блокировок и доступа
+                <span class="text-cyan-400">VLESS</span>, 
+                <span class="text-purple-400">V2Ray</span>, 
+                <span class="text-pink-400">Hysteria</span>, 
+                <span class="text-green-400">Trojan</span>, 
+                <span class="text-orange-400">VMess</span> и 
+                <span class="text-blue-400">Shadowsocks</span>. 
+                Здесь вы можете быстро получить рабочие VPN-настройки для обхода блокировок и доступа
                 к заблокированным сайтам, мессенджерам и социальным сетям.
             </p>
-            <p class="text-gray-700">
+            <p class="text-gray-400 leading-relaxed">
                 Конфиги автоматически обновляются, поэтому вы всегда получаете
                 актуальные VPN-подписки. Достаточно выбрать подходящий формат,
-                скопировать ссылку и добавить её в приложение v2rayNG, NekoBox,
-                v2rayN или другой совместимый клиент.
+                скопировать ссылку и добавить её в приложение.
             </p>
         </section>
 
         <!-- Configs Grid -->
         <section aria-label="VPN конфигурации">
+            <h2 class="text-3xl font-bold text-center mb-8">
+                <span class="gradient-text">VPN Конфигурации</span>
+            </h2>
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                 
-                <article class="config-card bg-white rounded-lg shadow-lg p-6 ring-2 ring-green-500">
+                <article class="config-card glass rounded-2xl p-6 recommended">
                     
                     
-                    <div class="mb-3">
-                        <span class="bg-green-500 text-white text-xs px-3 py-1 rounded-full">
-                            <i class="fas fa-star"></i> Рекомендуется
+                    <div class="mb-4">
+                        <span class="badge-pulse inline-flex items-center gap-2 bg-green-500/20 text-green-400 text-sm px-4 py-1.5 rounded-full border border-green-500/30">
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <span class="font-medium">Рекомендуется</span>
                         </span>
                     </div>
                     
                     
-                    <div class="mb-4">
-                        <h3 class="text-lg font-bold text-gray-800">ru_white_part1</h3>
-                        <p class="text-sm text-gray-500 mt-1">
-                            <i class="fas fa-tag"></i> 🇷🇺 RUSSIA
-                        </p>
+                    <div class="mb-6">
+                        <h3 class="text-xl font-bold text-white mb-2">ru_white_part1</h3>
+                        <div class="flex items-center gap-2 text-gray-400">
+                            <i class="fas fa-tag text-purple-400"></i>
+                            <span>🇷🇺 RUSSIA</span>
+                        </div>
                     </div>
                     
                     <div class="space-y-3">
                         <button 
-                            class="copy-btn w-full bg-indigo-500 hover:bg-indigo-600 text-white px-4 py-2 rounded-lg transition"
+                            class="copy-btn btn-neon w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white px-4 py-3 rounded-xl font-medium flex items-center justify-center gap-2 shadow-lg shadow-purple-500/25"
                             data-url="https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/RU_Best/ru_white_part1.txt"
                             aria-label="Копировать ссылку ru_white_part1">
-                            <i class="fas fa-copy"></i> Копировать ссылку
+                            <i class="fas fa-copy"></i>
+                            <span>Копировать ссылку</span>
                         </button>
                         
                         <a href="https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/RU_Best/ru_white_part1.txt" target="_blank" rel="noopener noreferrer"
-                           class="block w-full bg-gray-700 hover:bg-gray-800 text-white px-4 py-2 rounded-lg text-center transition"
+                           class="btn-neon block w-full bg-dark-500 hover:bg-dark-400 text-white px-4 py-3 rounded-xl text-center font-medium border border-gray-700 hover:border-gray-600 transition-all"
                            aria-label="Открыть ru_white_part1">
-                            <i class="fas fa-external-link-alt"></i> Открыть
+                            <i class="fas fa-external-link-alt mr-2"></i>
+                            <span>Открыть</span>
                         </a>
                     </div>
                 </article>
                 
-                <article class="config-card bg-white rounded-lg shadow-lg p-6 ring-2 ring-green-500">
+                <article class="config-card glass rounded-2xl p-6 recommended">
                     
                     
-                    <div class="mb-3">
-                        <span class="bg-green-500 text-white text-xs px-3 py-1 rounded-full">
-                            <i class="fas fa-star"></i> Рекомендуется
+                    <div class="mb-4">
+                        <span class="badge-pulse inline-flex items-center gap-2 bg-green-500/20 text-green-400 text-sm px-4 py-1.5 rounded-full border border-green-500/30">
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <span class="font-medium">Рекомендуется</span>
                         </span>
                     </div>
                     
                     
-                    <div class="mb-4">
-                        <h3 class="text-lg font-bold text-gray-800">ru_white_part2</h3>
-                        <p class="text-sm text-gray-500 mt-1">
-                            <i class="fas fa-tag"></i> 🇷🇺 RUSSIA
-                        </p>
+                    <div class="mb-6">
+                        <h3 class="text-xl font-bold text-white mb-2">ru_white_part2</h3>
+                        <div class="flex items-center gap-2 text-gray-400">
+                            <i class="fas fa-tag text-purple-400"></i>
+                            <span>🇷🇺 RUSSIA</span>
+                        </div>
                     </div>
                     
                     <div class="space-y-3">
                         <button 
-                            class="copy-btn w-full bg-indigo-500 hover:bg-indigo-600 text-white px-4 py-2 rounded-lg transition"
+                            class="copy-btn btn-neon w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white px-4 py-3 rounded-xl font-medium flex items-center justify-center gap-2 shadow-lg shadow-purple-500/25"
                             data-url="https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/RU_Best/ru_white_part2.txt"
                             aria-label="Копировать ссылку ru_white_part2">
-                            <i class="fas fa-copy"></i> Копировать ссылку
+                            <i class="fas fa-copy"></i>
+                            <span>Копировать ссылку</span>
                         </button>
                         
                         <a href="https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/RU_Best/ru_white_part2.txt" target="_blank" rel="noopener noreferrer"
-                           class="block w-full bg-gray-700 hover:bg-gray-800 text-white px-4 py-2 rounded-lg text-center transition"
+                           class="btn-neon block w-full bg-dark-500 hover:bg-dark-400 text-white px-4 py-3 rounded-xl text-center font-medium border border-gray-700 hover:border-gray-600 transition-all"
                            aria-label="Открыть ru_white_part2">
-                            <i class="fas fa-external-link-alt"></i> Открыть
+                            <i class="fas fa-external-link-alt mr-2"></i>
+                            <span>Открыть</span>
                         </a>
                     </div>
                 </article>
                 
-                <article class="config-card bg-white rounded-lg shadow-lg p-6 ring-2 ring-green-500">
+                <article class="config-card glass rounded-2xl p-6 recommended">
                     
                     
-                    <div class="mb-3">
-                        <span class="bg-green-500 text-white text-xs px-3 py-1 rounded-full">
-                            <i class="fas fa-star"></i> Рекомендуется
+                    <div class="mb-4">
+                        <span class="badge-pulse inline-flex items-center gap-2 bg-green-500/20 text-green-400 text-sm px-4 py-1.5 rounded-full border border-green-500/30">
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <span class="font-medium">Рекомендуется</span>
                         </span>
                     </div>
                     
                     
-                    <div class="mb-4">
-                        <h3 class="text-lg font-bold text-gray-800">ru_white_part3</h3>
-                        <p class="text-sm text-gray-500 mt-1">
-                            <i class="fas fa-tag"></i> 🇷🇺 RUSSIA
-                        </p>
+                    <div class="mb-6">
+                        <h3 class="text-xl font-bold text-white mb-2">ru_white_part3</h3>
+                        <div class="flex items-center gap-2 text-gray-400">
+                            <i class="fas fa-tag text-purple-400"></i>
+                            <span>🇷🇺 RUSSIA</span>
+                        </div>
                     </div>
                     
                     <div class="space-y-3">
                         <button 
-                            class="copy-btn w-full bg-indigo-500 hover:bg-indigo-600 text-white px-4 py-2 rounded-lg transition"
+                            class="copy-btn btn-neon w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white px-4 py-3 rounded-xl font-medium flex items-center justify-center gap-2 shadow-lg shadow-purple-500/25"
                             data-url="https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/RU_Best/ru_white_part3.txt"
                             aria-label="Копировать ссылку ru_white_part3">
-                            <i class="fas fa-copy"></i> Копировать ссылку
+                            <i class="fas fa-copy"></i>
+                            <span>Копировать ссылку</span>
                         </button>
                         
                         <a href="https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/RU_Best/ru_white_part3.txt" target="_blank" rel="noopener noreferrer"
-                           class="block w-full bg-gray-700 hover:bg-gray-800 text-white px-4 py-2 rounded-lg text-center transition"
+                           class="btn-neon block w-full bg-dark-500 hover:bg-dark-400 text-white px-4 py-3 rounded-xl text-center font-medium border border-gray-700 hover:border-gray-600 transition-all"
                            aria-label="Открыть ru_white_part3">
-                            <i class="fas fa-external-link-alt"></i> Открыть
+                            <i class="fas fa-external-link-alt mr-2"></i>
+                            <span>Открыть</span>
                         </a>
                     </div>
                 </article>
                 
-                <article class="config-card bg-white rounded-lg shadow-lg p-6 ring-2 ring-green-500">
+                <article class="config-card glass rounded-2xl p-6 recommended">
                     
                     
-                    <div class="mb-3">
-                        <span class="bg-green-500 text-white text-xs px-3 py-1 rounded-full">
-                            <i class="fas fa-star"></i> Рекомендуется
+                    <div class="mb-4">
+                        <span class="badge-pulse inline-flex items-center gap-2 bg-green-500/20 text-green-400 text-sm px-4 py-1.5 rounded-full border border-green-500/30">
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <span class="font-medium">Рекомендуется</span>
                         </span>
                     </div>
                     
                     
-                    <div class="mb-4">
-                        <h3 class="text-lg font-bold text-gray-800">ru_white_part4</h3>
-                        <p class="text-sm text-gray-500 mt-1">
-                            <i class="fas fa-tag"></i> 🇷🇺 RUSSIA
-                        </p>
+                    <div class="mb-6">
+                        <h3 class="text-xl font-bold text-white mb-2">ru_white_part4</h3>
+                        <div class="flex items-center gap-2 text-gray-400">
+                            <i class="fas fa-tag text-purple-400"></i>
+                            <span>🇷🇺 RUSSIA</span>
+                        </div>
                     </div>
                     
                     <div class="space-y-3">
                         <button 
-                            class="copy-btn w-full bg-indigo-500 hover:bg-indigo-600 text-white px-4 py-2 rounded-lg transition"
+                            class="copy-btn btn-neon w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white px-4 py-3 rounded-xl font-medium flex items-center justify-center gap-2 shadow-lg shadow-purple-500/25"
                             data-url="https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/RU_Best/ru_white_part4.txt"
                             aria-label="Копировать ссылку ru_white_part4">
-                            <i class="fas fa-copy"></i> Копировать ссылку
+                            <i class="fas fa-copy"></i>
+                            <span>Копировать ссылку</span>
                         </button>
                         
                         <a href="https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/RU_Best/ru_white_part4.txt" target="_blank" rel="noopener noreferrer"
-                           class="block w-full bg-gray-700 hover:bg-gray-800 text-white px-4 py-2 rounded-lg text-center transition"
+                           class="btn-neon block w-full bg-dark-500 hover:bg-dark-400 text-white px-4 py-3 rounded-xl text-center font-medium border border-gray-700 hover:border-gray-600 transition-all"
                            aria-label="Открыть ru_white_part4">
-                            <i class="fas fa-external-link-alt"></i> Открыть
+                            <i class="fas fa-external-link-alt mr-2"></i>
+                            <span>Открыть</span>
                         </a>
                     </div>
                 </article>
                 
-                <article class="config-card bg-white rounded-lg shadow-lg p-6 ring-2 ring-green-500">
+                <article class="config-card glass rounded-2xl p-6 recommended">
                     
                     
-                    <div class="mb-3">
-                        <span class="bg-green-500 text-white text-xs px-3 py-1 rounded-full">
-                            <i class="fas fa-star"></i> Рекомендуется
+                    <div class="mb-4">
+                        <span class="badge-pulse inline-flex items-center gap-2 bg-green-500/20 text-green-400 text-sm px-4 py-1.5 rounded-full border border-green-500/30">
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <span class="font-medium">Рекомендуется</span>
                         </span>
                     </div>
                     
                     
-                    <div class="mb-4">
-                        <h3 class="text-lg font-bold text-gray-800">ru_white_part5</h3>
-                        <p class="text-sm text-gray-500 mt-1">
-                            <i class="fas fa-tag"></i> 🇷🇺 RUSSIA
-                        </p>
+                    <div class="mb-6">
+                        <h3 class="text-xl font-bold text-white mb-2">ru_white_part5</h3>
+                        <div class="flex items-center gap-2 text-gray-400">
+                            <i class="fas fa-tag text-purple-400"></i>
+                            <span>🇷🇺 RUSSIA</span>
+                        </div>
                     </div>
                     
                     <div class="space-y-3">
                         <button 
-                            class="copy-btn w-full bg-indigo-500 hover:bg-indigo-600 text-white px-4 py-2 rounded-lg transition"
+                            class="copy-btn btn-neon w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white px-4 py-3 rounded-xl font-medium flex items-center justify-center gap-2 shadow-lg shadow-purple-500/25"
                             data-url="https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/RU_Best/ru_white_part5.txt"
                             aria-label="Копировать ссылку ru_white_part5">
-                            <i class="fas fa-copy"></i> Копировать ссылку
+                            <i class="fas fa-copy"></i>
+                            <span>Копировать ссылку</span>
                         </button>
                         
                         <a href="https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/RU_Best/ru_white_part5.txt" target="_blank" rel="noopener noreferrer"
-                           class="block w-full bg-gray-700 hover:bg-gray-800 text-white px-4 py-2 rounded-lg text-center transition"
+                           class="btn-neon block w-full bg-dark-500 hover:bg-dark-400 text-white px-4 py-3 rounded-xl text-center font-medium border border-gray-700 hover:border-gray-600 transition-all"
                            aria-label="Открыть ru_white_part5">
-                            <i class="fas fa-external-link-alt"></i> Открыть
+                            <i class="fas fa-external-link-alt mr-2"></i>
+                            <span>Открыть</span>
                         </a>
                     </div>
                 </article>
                 
-                <article class="config-card bg-white rounded-lg shadow-lg p-6 ring-2 ring-green-500">
+                <article class="config-card glass rounded-2xl p-6 recommended">
                     
                     
-                    <div class="mb-3">
-                        <span class="bg-green-500 text-white text-xs px-3 py-1 rounded-full">
-                            <i class="fas fa-star"></i> Рекомендуется
+                    <div class="mb-4">
+                        <span class="badge-pulse inline-flex items-center gap-2 bg-green-500/20 text-green-400 text-sm px-4 py-1.5 rounded-full border border-green-500/30">
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <span class="font-medium">Рекомендуется</span>
                         </span>
                     </div>
                     
                     
-                    <div class="mb-4">
-                        <h3 class="text-lg font-bold text-gray-800">ru_white_part6</h3>
-                        <p class="text-sm text-gray-500 mt-1">
-                            <i class="fas fa-tag"></i> 🇷🇺 RUSSIA
-                        </p>
+                    <div class="mb-6">
+                        <h3 class="text-xl font-bold text-white mb-2">ru_white_part6</h3>
+                        <div class="flex items-center gap-2 text-gray-400">
+                            <i class="fas fa-tag text-purple-400"></i>
+                            <span>🇷🇺 RUSSIA</span>
+                        </div>
                     </div>
                     
                     <div class="space-y-3">
                         <button 
-                            class="copy-btn w-full bg-indigo-500 hover:bg-indigo-600 text-white px-4 py-2 rounded-lg transition"
+                            class="copy-btn btn-neon w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white px-4 py-3 rounded-xl font-medium flex items-center justify-center gap-2 shadow-lg shadow-purple-500/25"
                             data-url="https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/RU_Best/ru_white_part6.txt"
                             aria-label="Копировать ссылку ru_white_part6">
-                            <i class="fas fa-copy"></i> Копировать ссылку
+                            <i class="fas fa-copy"></i>
+                            <span>Копировать ссылку</span>
                         </button>
                         
                         <a href="https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/RU_Best/ru_white_part6.txt" target="_blank" rel="noopener noreferrer"
-                           class="block w-full bg-gray-700 hover:bg-gray-800 text-white px-4 py-2 rounded-lg text-center transition"
+                           class="btn-neon block w-full bg-dark-500 hover:bg-dark-400 text-white px-4 py-3 rounded-xl text-center font-medium border border-gray-700 hover:border-gray-600 transition-all"
                            aria-label="Открыть ru_white_part6">
-                            <i class="fas fa-external-link-alt"></i> Открыть
+                            <i class="fas fa-external-link-alt mr-2"></i>
+                            <span>Открыть</span>
                         </a>
                     </div>
                 </article>
                 
-                <article class="config-card bg-white rounded-lg shadow-lg p-6 ">
+                <article class="config-card glass rounded-2xl p-6 ">
                     
                     
                     
-                    <div class="mb-4">
-                        <h3 class="text-lg font-bold text-gray-800">my_euro_part1</h3>
-                        <p class="text-sm text-gray-500 mt-1">
-                            <i class="fas fa-tag"></i> 🇪🇺 EUROPE
-                        </p>
+                    <div class="mb-6">
+                        <h3 class="text-xl font-bold text-white mb-2">my_euro_part1</h3>
+                        <div class="flex items-center gap-2 text-gray-400">
+                            <i class="fas fa-tag text-purple-400"></i>
+                            <span>🇪🇺 EUROPE</span>
+                        </div>
                     </div>
                     
                     <div class="space-y-3">
                         <button 
-                            class="copy-btn w-full bg-indigo-500 hover:bg-indigo-600 text-white px-4 py-2 rounded-lg transition"
+                            class="copy-btn btn-neon w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white px-4 py-3 rounded-xl font-medium flex items-center justify-center gap-2 shadow-lg shadow-purple-500/25"
                             data-url="https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/My_Euro/my_euro_part1.txt"
                             aria-label="Копировать ссылку my_euro_part1">
-                            <i class="fas fa-copy"></i> Копировать ссылку
+                            <i class="fas fa-copy"></i>
+                            <span>Копировать ссылку</span>
                         </button>
                         
                         <a href="https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/My_Euro/my_euro_part1.txt" target="_blank" rel="noopener noreferrer"
-                           class="block w-full bg-gray-700 hover:bg-gray-800 text-white px-4 py-2 rounded-lg text-center transition"
+                           class="btn-neon block w-full bg-dark-500 hover:bg-dark-400 text-white px-4 py-3 rounded-xl text-center font-medium border border-gray-700 hover:border-gray-600 transition-all"
                            aria-label="Открыть my_euro_part1">
-                            <i class="fas fa-external-link-alt"></i> Открыть
+                            <i class="fas fa-external-link-alt mr-2"></i>
+                            <span>Открыть</span>
                         </a>
                     </div>
                 </article>
                 
-                <article class="config-card bg-white rounded-lg shadow-lg p-6 ">
+                <article class="config-card glass rounded-2xl p-6 ">
                     
                     
                     
-                    <div class="mb-4">
-                        <h3 class="text-lg font-bold text-gray-800">my_euro_part2</h3>
-                        <p class="text-sm text-gray-500 mt-1">
-                            <i class="fas fa-tag"></i> 🇪🇺 EUROPE
-                        </p>
+                    <div class="mb-6">
+                        <h3 class="text-xl font-bold text-white mb-2">my_euro_part2</h3>
+                        <div class="flex items-center gap-2 text-gray-400">
+                            <i class="fas fa-tag text-purple-400"></i>
+                            <span>🇪🇺 EUROPE</span>
+                        </div>
                     </div>
                     
                     <div class="space-y-3">
                         <button 
-                            class="copy-btn w-full bg-indigo-500 hover:bg-indigo-600 text-white px-4 py-2 rounded-lg transition"
+                            class="copy-btn btn-neon w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white px-4 py-3 rounded-xl font-medium flex items-center justify-center gap-2 shadow-lg shadow-purple-500/25"
                             data-url="https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/My_Euro/my_euro_part2.txt"
                             aria-label="Копировать ссылку my_euro_part2">
-                            <i class="fas fa-copy"></i> Копировать ссылку
+                            <i class="fas fa-copy"></i>
+                            <span>Копировать ссылку</span>
                         </button>
                         
                         <a href="https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/My_Euro/my_euro_part2.txt" target="_blank" rel="noopener noreferrer"
-                           class="block w-full bg-gray-700 hover:bg-gray-800 text-white px-4 py-2 rounded-lg text-center transition"
+                           class="btn-neon block w-full bg-dark-500 hover:bg-dark-400 text-white px-4 py-3 rounded-xl text-center font-medium border border-gray-700 hover:border-gray-600 transition-all"
                            aria-label="Открыть my_euro_part2">
-                            <i class="fas fa-external-link-alt"></i> Открыть
+                            <i class="fas fa-external-link-alt mr-2"></i>
+                            <span>Открыть</span>
                         </a>
                     </div>
                 </article>
                 
-                <article class="config-card bg-white rounded-lg shadow-lg p-6 ">
+                <article class="config-card glass rounded-2xl p-6 ">
                     
                     
                     
-                    <div class="mb-4">
-                        <h3 class="text-lg font-bold text-gray-800">my_euro_part3</h3>
-                        <p class="text-sm text-gray-500 mt-1">
-                            <i class="fas fa-tag"></i> 🇪🇺 EUROPE
-                        </p>
+                    <div class="mb-6">
+                        <h3 class="text-xl font-bold text-white mb-2">my_euro_part3</h3>
+                        <div class="flex items-center gap-2 text-gray-400">
+                            <i class="fas fa-tag text-purple-400"></i>
+                            <span>🇪🇺 EUROPE</span>
+                        </div>
                     </div>
                     
                     <div class="space-y-3">
                         <button 
-                            class="copy-btn w-full bg-indigo-500 hover:bg-indigo-600 text-white px-4 py-2 rounded-lg transition"
+                            class="copy-btn btn-neon w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white px-4 py-3 rounded-xl font-medium flex items-center justify-center gap-2 shadow-lg shadow-purple-500/25"
                             data-url="https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/My_Euro/my_euro_part3.txt"
                             aria-label="Копировать ссылку my_euro_part3">
-                            <i class="fas fa-copy"></i> Копировать ссылку
+                            <i class="fas fa-copy"></i>
+                            <span>Копировать ссылку</span>
                         </button>
                         
                         <a href="https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/My_Euro/my_euro_part3.txt" target="_blank" rel="noopener noreferrer"
-                           class="block w-full bg-gray-700 hover:bg-gray-800 text-white px-4 py-2 rounded-lg text-center transition"
+                           class="btn-neon block w-full bg-dark-500 hover:bg-dark-400 text-white px-4 py-3 rounded-xl text-center font-medium border border-gray-700 hover:border-gray-600 transition-all"
                            aria-label="Открыть my_euro_part3">
-                            <i class="fas fa-external-link-alt"></i> Открыть
+                            <i class="fas fa-external-link-alt mr-2"></i>
+                            <span>Открыть</span>
                         </a>
                     </div>
                 </article>
@@ -453,45 +753,60 @@
         </section>
 
         <!-- Downloads Section -->
-        <section class="mt-12 bg-white rounded-lg shadow-lg p-8" aria-label="Скачать VPN клиенты">
-            <h2 class="text-2xl font-bold mb-6 text-center">📱 Скачать VPN клиенты</h2>
-            <div class="grid md:grid-cols-3 gap-6">
-                <div class="text-center">
-                    <i class="fab fa-android text-5xl text-green-500 mb-4" aria-hidden="true"></i>
-                    <h3 class="font-bold mb-2">Android</h3>
-                    <div class="space-y-2">
+        <section class="mt-16" aria-label="Скачать VPN клиенты">
+            <h2 class="text-3xl font-bold text-center mb-10">
+                <span class="mr-3">📱</span>
+                <span class="gradient-text">Скачать VPN клиенты</span>
+            </h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                
+                <!-- Android -->
+                <div class="download-card glass rounded-2xl p-8 text-center border border-green-500/20">
+                    <div class="icon-container w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center shadow-lg shadow-green-500/30">
+                        <i class="fab fa-android text-4xl text-white" aria-hidden="true"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-6">Android</h3>
+                    <div class="space-y-3">
                         <a href="https://github.com/2dust/v2rayNG/releases/latest" target="_blank" rel="noopener noreferrer"
-                           class="block bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded transition">
+                           class="btn-neon block bg-gradient-to-r from-green-600 to-green-500 hover:from-green-500 hover:to-green-400 text-white px-4 py-3 rounded-xl font-medium shadow-lg shadow-green-500/25 transition">
                             v2rayNG
                         </a>
                         <a href="https://github.com/MatsuriDayo/NekoBoxForAndroid/releases/latest" target="_blank" rel="noopener noreferrer"
-                           class="block bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded transition">
+                           class="btn-neon block bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white px-4 py-3 rounded-xl font-medium shadow-lg shadow-blue-500/25 transition">
                             NekoBox
                         </a>
                         <a href="https://www.happ.su/main" target="_blank" rel="noopener noreferrer"
-                           class="block bg-emerald-500 hover:bg-emerald-600 text-white px-4 py-2 rounded transition">
+                           class="btn-neon block bg-gradient-to-r from-emerald-600 to-teal-500 hover:from-emerald-500 hover:to-teal-400 text-white px-4 py-3 rounded-xl font-medium shadow-lg shadow-emerald-500/25 transition">
                             Happ
                         </a>
                         <a href="https://karing.app/en/download/" target="_blank" rel="noopener noreferrer"
-                           class="block bg-purple-500 hover:bg-purple-600 text-white px-4 py-2 rounded transition">
+                           class="btn-neon block bg-gradient-to-r from-purple-600 to-purple-500 hover:from-purple-500 hover:to-purple-400 text-white px-4 py-3 rounded-xl font-medium shadow-lg shadow-purple-500/25 transition">
                             Karing
                         </a>
                     </div>
                 </div>
-                <div class="text-center">
-                    <i class="fab fa-windows text-5xl text-blue-500 mb-4" aria-hidden="true"></i>
-                    <h3 class="font-bold mb-2">Windows</h3>
+                
+                <!-- Windows -->
+                <div class="download-card glass rounded-2xl p-8 text-center border border-blue-500/20">
+                    <div class="icon-container w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-blue-500 to-cyan-600 flex items-center justify-center shadow-lg shadow-blue-500/30">
+                        <i class="fab fa-windows text-4xl text-white" aria-hidden="true"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-6">Windows</h3>
                     <a href="https://github.com/2dust/v2rayN/releases/latest/download/v2rayN-windows-64.zip"
                        target="_blank" rel="noopener noreferrer"
-                       class="block bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded transition">
+                       class="btn-neon block bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white px-4 py-3 rounded-xl font-medium shadow-lg shadow-blue-500/25 transition">
                         v2rayN (Windows)
                     </a>
                 </div>
-                <div class="text-center">
-                    <i class="fab fa-apple text-5xl text-gray-700 mb-4" aria-hidden="true"></i>
-                    <h3 class="font-bold mb-2">iOS/macOS</h3>
+                
+                <!-- iOS/macOS -->
+                <div class="download-card glass rounded-2xl p-8 text-center border border-gray-500/20">
+                    <div class="icon-container w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-gray-600 to-gray-700 flex items-center justify-center shadow-lg shadow-gray-500/30">
+                        <i class="fab fa-apple text-4xl text-white" aria-hidden="true"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-6">iOS / macOS</h3>
                     <a href="https://apps.apple.com/app/shadowrocket/id932747118" target="_blank" rel="noopener noreferrer"
-                       class="block bg-gray-700 hover:bg-gray-800 text-white px-4 py-2 rounded transition">
+                       class="btn-neon block bg-gradient-to-r from-gray-600 to-gray-500 hover:from-gray-500 hover:to-gray-400 text-white px-4 py-3 rounded-xl font-medium shadow-lg shadow-gray-500/25 transition">
                         Shadowrocket
                     </a>
                 </div>
@@ -501,16 +816,22 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-gray-800 text-white mt-12 py-8">
+    <footer class="glass-strong mt-16 py-10 border-t border-white/5">
         <div class="container mx-auto px-4 text-center">
-            <p class="mb-4">© 2026 Доступ к интернету</p>
+            <div class="mb-6">
+                <span class="text-2xl">🌐</span>
+                <span class="text-xl font-bold gradient-text ml-2">Доступ к интернету</span>
+            </div>
+            <p class="text-gray-400 mb-6">© 2026 Все права защищены</p>
             <div class="flex justify-center gap-6">
                 <a href="https://github.com/kort0881/vpn-checker-backend" target="_blank" rel="noopener noreferrer"
-                   class="hover:text-blue-400 transition" aria-label="GitHub">
+                   class="w-12 h-12 rounded-xl bg-dark-500 hover:bg-dark-400 flex items-center justify-center text-gray-400 hover:text-white transition-all hover:scale-110 border border-gray-700"
+                   aria-label="GitHub">
                     <i class="fab fa-github text-2xl"></i>
                 </a>
                 <a href="https://t.me/vlesstrojan" target="_blank" rel="noopener noreferrer"
-                   class="hover:text-blue-400 transition" aria-label="Telegram">
+                   class="w-12 h-12 rounded-xl bg-dark-500 hover:bg-blue-600 flex items-center justify-center text-gray-400 hover:text-white transition-all hover:scale-110 border border-gray-700 hover:border-blue-500"
+                   aria-label="Telegram">
                     <i class="fab fa-telegram text-2xl"></i>
                 </a>
             </div>
@@ -527,6 +848,10 @@
         if (!url) return;
 
         const originalHtml = btn.innerHTML;
+        
+        // Add animation class
+        btn.style.transform = 'scale(0.95)';
+        
         try {
             if (navigator.clipboard && navigator.clipboard.writeText) {
                 await navigator.clipboard.writeText(url);
@@ -538,16 +863,38 @@
                 document.execCommand('copy');
                 document.body.removeChild(ta);
             }
-            btn.innerHTML = '<i class="fas fa-check"></i> Скопировано!';
+            
+            btn.innerHTML = '<i class="fas fa-check"></i> <span>Скопировано!</span>';
+            btn.classList.remove('from-indigo-600', 'to-purple-600');
+            btn.classList.add('from-green-600', 'to-green-500');
+            
+            setTimeout(() => {
+                btn.style.transform = 'scale(1)';
+            }, 100);
+            
             setTimeout(() => {
                 btn.innerHTML = originalHtml;
+                btn.classList.remove('from-green-600', 'to-green-500');
+                btn.classList.add('from-indigo-600', 'to-purple-600');
             }, 2000);
         } catch (err) {
             console.error('Clipboard error', err);
+            btn.style.transform = 'scale(1)';
         }
+    });
+    
+    // Add subtle parallax effect
+    document.addEventListener('mousemove', (e) => {
+        const particles = document.querySelectorAll('.particle');
+        const x = e.clientX / window.innerWidth;
+        const y = e.clientY / window.innerHeight;
+        
+        particles.forEach((particle, i) => {
+            const speed = (i + 1) * 2;
+            particle.style.transform = `translate(${x * speed}px, ${y * speed}px)`;
+        });
     });
     </script>
 
 </body>
 </html>
-
