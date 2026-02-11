@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ meta_title }}</title>
+    <meta name="description" content="{{ meta_description }}">
+    <meta name="keywords" content="{{ meta_keywords }}">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Alpine.js -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        [x-cloak] { display: none !important; }
+        .config-card {
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .config-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
+    
+    <!-- Header -->
+    <header class="bg-white shadow-md">
+        <div class="container mx-auto px-4 py-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <h1 class="text-3xl font-bold text-indigo-600">🌐 Доступ к интернету</h1>
+                    <p class="text-gray-600 mt-2">Бесплатные VPN конфигурации</p>
+                </div>
+                
+                <!-- Social Links -->
+                <div class="flex gap-4">
+                    <a href="https://t.me/vlesstrojan" target="_blank" 
+                       class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg flex items-center gap-2 transition">
+                        <i class="fab fa-telegram"></i>
+                        <span>VLESS & Trojan</span>
+                    </a>
+                    <a href="https://t.me/kibersosnew" target="_blank" 
+                       class="bg-cyan-500 hover:bg-cyan-600 text-white px-6 py-3 rounded-lg flex items-center gap-2 transition">
+                        <i class="fab fa-telegram"></i>
+                        <span>KiberSOS</span>
+                    </a>
+                    <a href="https://t.me/+aukDHGFAhE41NWQy" target="_blank" 
+                       class="bg-purple-500 hover:bg-purple-600 text-white px-6 py-3 rounded-lg flex items-center gap-2 transition">
+                        <i class="fab fa-telegram"></i>
+                        <span>Доступ</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        
+        <!-- Info Banner -->
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+            <div class="flex items-start gap-4">
+                <i class="fas fa-info-circle text-blue-500 text-2xl mt-1"></i>
+                <div>
+                    <h2 class="text-xl font-bold mb-2">💡 Как использовать</h2>
+                    <ol class="list-decimal list-inside space-y-2 text-gray-700">
+                        <li>Выберите конфигурацию ниже (рекомендуем <strong>white</strong> версии)</li>
+                        <li>Скопируйте ссылку на подписку</li>
+                        <li>Вставьте в ваше VPN приложение (v2rayNG, NekoBox, v2rayN)</li>
+                        <li>Подпишитесь на наши Telegram-каналы для обновлений</li>
+                    </ol>
+                    {% if last_update %}
+                    <p class="mt-4 text-sm text-gray-600">
+                        <i class="fas fa-clock"></i> Последнее обновление: <strong>{{ last_update }}</strong>
+                    </p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Configs Grid -->
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {% for config in configs %}
+            <div class="config-card bg-white rounded-lg shadow-lg p-6 {% if config.is_recommended %}ring-2 ring-green-500{% endif %}">
+                
+                {% if config.is_recommended %}
+                <div class="mb-3">
+                    <span class="bg-green-500 text-white text-xs px-3 py-1 rounded-full">
+                        <i class="fas fa-star"></i> Рекомендуется
+                    </span>
+                </div>
+                {% endif %}
+                
+                <div class="mb-4">
+                    <h3 class="text-lg font-bold text-gray-800">{{ config.name }}</h3>
+                    <p class="text-sm text-gray-500 mt-1">
+                        <i class="fas fa-tag"></i> {{ config.category }}
+                    </p>
+                </div>
+                
+                <div class="space-y-3">
+                    <button 
+                        onclick="navigator.clipboard.writeText('{{ config.url }}');this.innerHTML='<i class=\'fas fa-check\'></i> Скопировано!';setTimeout(()=>this.innerHTML='<i class=\'fas fa-copy\'></i> Копировать ссылку',2000)"
+                        class="w-full bg-indigo-500 hover:bg-indigo-600 text-white px-4 py-2 rounded-lg transition">
+                        <i class="fas fa-copy"></i> Копировать ссылку
+                    </button>
+                    
+                    <a href="{{ config.url }}" target="_blank"
+                       class="block w-full bg-gray-700 hover:bg-gray-800 text-white px-4 py-2 rounded-lg text-center transition">
+                        <i class="fas fa-external-link-alt"></i> Открыть
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Downloads Section -->
+        <div class="mt-12 bg-white rounded-lg shadow-lg p-8">
+            <h2 class="text-2xl font-bold mb-6 text-center">📱 Скачать VPN клиенты</h2>
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="text-center">
+                    <i class="fab fa-android text-5xl text-green-500 mb-4"></i>
+                    <h3 class="font-bold mb-2">Android</h3>
+                    <div class="space-y-2">
+                        <a href="https://github.com/2dust/v2rayNG/releases/latest" target="_blank"
+                           class="block bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded transition">
+                            v2rayNG
+                        </a>
+                        <a href="https://github.com/MatsuriDayo/NekoBoxForAndroid/releases/latest" target="_blank"
+                           class="block bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded transition">
+                            NekoBox
+                        </a>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <i class="fab fa-windows text-5xl text-blue-500 mb-4"></i>
+                    <h3 class="font-bold mb-2">Windows</h3>
+                    <a href="https://github.com/2dust/v2rayN/releases/latest" target="_blank"
+                       class="block bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded transition">
+                        v2rayN
+                    </a>
+                </div>
+                <div class="text-center">
+                    <i class="fab fa-apple text-5xl text-gray-700 mb-4"></i>
+                    <h3 class="font-bold mb-2">iOS/macOS</h3>
+                    <a href="https://apps.apple.com/app/shadowrocket/id932747118" target="_blank"
+                       class="block bg-gray-700 hover:bg-gray-800 text-white px-4 py-2 rounded transition">
+                        Shadowrocket
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white mt-12 py-8">
+        <div class="container mx-auto px-4 text-center">
+            <p class="mb-4">© 2026 Доступ к интернету</p>
+            <div class="flex justify-center gap-6">
+                <a href="https://github.com/kort0881/vpn-checker-backend" target="_blank" 
+                   class="hover:text-blue-400 transition">
+                    <i class="fab fa-github text-2xl"></i>
+                </a>
+                <a href="https://t.me/vlesstrojan" target="_blank" 
+                   class="hover:text-blue-400 transition">
+                    <i class="fab fa-telegram text-2xl"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
