@@ -189,8 +189,8 @@
                     
                     <div class="space-y-3">
                         <button 
-                            onclick="navigator.clipboard.writeText('{{ config.url }}');this.innerHTML='<i class=\\'fas fa-check\\'></i> Скопировано!';setTimeout(()=>this.innerHTML='<i class=\\'fas fa-copy\\'></i> Копировать ссылку',2000)"
-                            class="w-full bg-indigo-500 hover:bg-indigo-600 text-white px-4 py-2 rounded-lg transition"
+                            class="copy-btn w-full bg-indigo-500 hover:bg-indigo-600 text-white px-4 py-2 rounded-lg transition"
+                            data-url="{{ config.url }}"
                             aria-label="Копировать ссылку {{ config.name }}">
                             <i class="fas fa-copy"></i> Копировать ссылку
                         </button>
@@ -261,6 +261,37 @@
             </div>
         </div>
     </footer>
+
+    <!-- Script для копирования ссылок -->
+    <script>
+    document.addEventListener('click', async (e) => {
+        const btn = e.target.closest('.copy-btn');
+        if (!btn) return;
+
+        const url = btn.dataset.url;
+        if (!url) return;
+
+        const originalHtml = btn.innerHTML;
+        try {
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                await navigator.clipboard.writeText(url);
+            } else {
+                const ta = document.createElement('textarea');
+                ta.value = url;
+                document.body.appendChild(ta);
+                ta.select();
+                document.execCommand('copy');
+                document.body.removeChild(ta);
+            }
+            btn.innerHTML = '<i class="fas fa-check"></i> Скопировано!';
+            setTimeout(() => {
+                btn.innerHTML = originalHtml;
+            }, 2000);
+        } catch (err) {
+            console.error('Clipboard error', err);
+        }
+    });
+    </script>
 
 </body>
 </html>
