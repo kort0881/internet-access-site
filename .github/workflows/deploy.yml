@@ -9,6 +9,12 @@ on:
     - cron: '0 * * * *'
   workflow_dispatch:
 
+# Добавляем права для деплоя
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
