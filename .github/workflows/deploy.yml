@@ -37,6 +37,16 @@ jobs:
         run: |
           python build.py
           
+      # ВОТ ЭТОГО ШАГА НЕ БЫЛО — ДОБАВЛЕН:
+      - name: 📄 Copy Yandex verification file
+        run: |
+          if [ -f "yandex_83bc89c155ecedc0.html" ]; then
+            cp yandex_83bc89c155ecedc0.html ./dist/
+            echo "✅ Yandex verification file copied to ./dist/"
+          else
+            echo "⚠️ Yandex verification file not found in root"
+          fi
+          
       - name: 🚀 Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
@@ -44,3 +54,4 @@ jobs:
           publish_dir: ./dist
           publish_branch: gh-pages
           commit_message: '🔄 Auto-update site'
+
