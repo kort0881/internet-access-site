@@ -722,6 +722,59 @@
                 </div>
             </div>
         </section>
+        
+     <!-- Proxy Section -->
+     <section class="downloads-section">
+         <h2 class="downloads-title">🌍 Прокси списки</h2>
+         <div class="downloads-grid">
+             <!-- Russia Proxy -->
+             <div class="download-card">
+                 <div class="platform-icon btn-blue">
+                     <i class="fas fa-globe"></i>
+                 </div>
+                 <h3 class="platform-name">🇷🇺 Прокси РФ</h3>
+                 <button class="download-btn btn-blue" onclick="openProxyModal('https://raw.githubusercontent.com/kort0881/telegram-proxy-collector/main/proxy_ru.txt', '🇷🇺 Прокси РФ')">
+                     <i class="fas fa-list"></i> Открыть список
+                 </button>
+             </div>
+             
+             <!-- EU Proxy -->
+             <div class="download-card">
+                 <div class="platform-icon btn-green">
+                     <i class="fas fa-globe"></i>
+                 </div>
+                 <h3 class="platform-name">🌍 Прокси ЕС</h3>
+                 <button class="download-btn btn-green" onclick="openProxyModal('https://raw.githubusercontent.com/kort0881/telegram-proxy-collector/main/proxy_eu.txt', '🌍 Прокси ЕС')">
+                     <i class="fas fa-list"></i> Открыть список
+                 </button>
+             </div>
+             
+             <!-- All Proxy -->
+             <div class="download-card">
+                 <div class="platform-icon btn-purple">
+                     <i class="fas fa-globe"></i>
+                 </div>
+                 <h3 class="platform-name">🔗 Все прокси</h3>
+                 <button class="download-btn btn-purple" onclick="openProxyModal('https://raw.githubusercontent.com/kort0881/telegram-proxy-collector/main/proxy_all.txt', '🔗 Все прокси')">
+                     <i class="fas fa-list"></i> Открыть список
+                 </button>
+             </div>
+         </div>
+     </section>
+     
+     <!-- Proxy Modal -->
+     <div id="proxyModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 1000; justify-content: center; align-items: center;">
+         <div style="background: #1a1a2e; border: 1px solid #00ffff; border-radius: 20px; padding: 30px; max-width: 600px; width: 90%; max-height: 70vh; overflow-y: auto; box-shadow: 0 0 30px rgba(0,255,255,0.3);">
+             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                 <h2 id="proxyTitle" style="color: #00ffff; margin: 0;">Прокси</h2>
+                 <button onclick="closeProxyModal()" style="background: none; border: none; color: #00ffff; font-size: 24px; cursor: pointer;">&times;</button>
+             </div>
+             <div id="proxyList" style="background: rgba(0,255,255,0.05); border: 1px solid rgba(0,255,255,0.2); border-radius: 10px; padding: 15px; margin-bottom: 15px; font-family: monospace; font-size: 12px; color: #00ff88; line-height: 1.8; white-space: pre-wrap; word-break: break-all;">Загрузка...</div>
+             <button onclick="copyAllProxies()" style="width: 100%; padding: 12px; background: linear-gradient(135deg, #00ff88, #00cc66); color: #000; border: none; border-radius: 10px; font-weight: bold; cursor: pointer; font-size: 16px;">
+                 <i class="fas fa-copy"></i> Копировать все
+             </button>
+         </div>
+     </div>
 
     </main>
 
@@ -778,4 +831,55 @@
 
 </body>
 </html>
+
+     
+     // Proxy Modal Functions
+     let currentProxyList = '';
+     
+     function openProxyModal(url, title) {
+         const modal = document.getElementById('proxyModal');
+         const proxyTitle = document.getElementById('proxyTitle');
+         const proxyList = document.getElementById('proxyList');
+         
+         proxyTitle.textContent = title;
+         proxyList.textContent = 'Загружаю...';
+         modal.style.display = 'flex';
+         
+         fetch(url)
+             .then(response => response.text())
+             .then(data => {
+                 currentProxyList = data;
+                 proxyList.textContent = data;
+             })
+             .catch(error => {
+                 proxyList.textContent = 'Ошибка при загружке. Попытайте еще раз.';
+             });
+     }
+     
+     function closeProxyModal() {
+         const modal = document.getElementById('proxyModal');
+         modal.style.display = 'none';
+     }
+     
+     function copyAllProxies() {
+         navigator.clipboard.writeText(currentProxyList).then(() => {
+             alert('Прокси скопированы!');
+         }).catch(() => {
+             const textarea = document.createElement('textarea');
+             textarea.value = currentProxyList;
+             document.body.appendChild(textarea);
+             textarea.select();
+             document.execCommand('copy');
+             document.body.removeChild(textarea);
+             alert('Прокси скопированы!');
+         });
+     }
+     
+     // Close modal when clicking outside
+     document.getElementById('proxyModal').addEventListener('click', function(event) {
+         if(event.target === this) {
+             closeProxyModal();
+         }
+     });
+     
 
