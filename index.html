@@ -592,67 +592,6 @@
                         <span>@vlessbots_bot</span>
                     </a>
                 </div>
-                            <!-- Proxy Section -->
-            <div class="proxy-section" style="margin-top: 40px; padding: 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
-                <h2 style="color: white; margin: 0 0 20px 0; text-align: center; font-size: 24px;">🔗 ПРОКСИ</h2>
-                <div style="display: flex; flex-direction: column; gap: 12px;">
-                    <div class="proxy-dropdown" style="position: relative;">
-                        <button id="proxy-btn-all" class="proxy-btn" style="width: 100%; padding: 12px; background: white; color: #667eea; border: none; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: space-between; transition: all 0.3s ease;">
-                            <span style="display: flex; align-items: center; gap: 8px;">
-                                <i class="fas fa-globe"></i>
-                                Все прокси (Все источники)
-                            </span>
-                            <i class="fas fa-chevron-down" style="font-size: 12px;"></i>
-                        </button>
-                        <div id="proxy-list-all" style="display: none; position: absolute; top: 100%; left: 0; right: 0; background: white; border-radius: 8px; margin-top: 5px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); max-height: 200px; overflow-y: auto; z-index: 10;">
-                            <a href="https://raw.githubusercontent.com/kort0881/telegram-proxy-collector/main/proxy_all.txt" target="_blank" style="display: block; padding: 12px; color: #667eea; text-decoration: none; border-bottom: 1px solid #eee; transition: all 0.2s ease;" onmouseover="this.style.background='#f0f0f0'; this.style.paddingLeft='16px';" onmouseout="this.style.background='transparent'; this.style.paddingLeft='12px';">
-                                📋 Скачать proxy_all.txt
-                            </a>
-                            <button onclick="copyProxyUrl('https://raw.githubusercontent.com/kort0881/telegram-proxy-collector/main/proxy_all.txt')" style="width: 100%; padding: 12px; color: #667eea; text-decoration: none; border: none; background: transparent; text-align: left; cursor: pointer; border-bottom: 1px solid #eee; transition: all 0.2s ease;" onmouseover="this.style.background='#f0f0f0'; this.style.paddingLeft='16px';" onmouseout="this.style.background='transparent'; this.style.paddingLeft='12px';">
-                                📋 Скопировать ссылку
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="proxy-dropdown" style="position: relative;">
-                        <button id="proxy-btn-ru" class="proxy-btn" style="width: 100%; padding: 12px; background: white; color: #667eea; border: none; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: space-between; transition: all 0.3s ease;">
-                            <span style="display: flex; align-items: center; gap: 8px;">
-                                <i class="fas fa-flag"></i>
-                                Прокси РУ
-                            </span>
-                            <i class="fas fa-chevron-down" style="font-size: 12px;"></i>
-                        </button>
-                        <div id="proxy-list-ru" style="display: none; position: absolute; top: 100%; left: 0; right: 0; background: white; border-radius: 8px; margin-top: 5px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); max-height: 200px; overflow-y: auto; z-index: 10;">
-                            <a href="https://raw.githubusercontent.com/kort0881/telegram-proxy-collector/main/proxy_ru.txt" target="_blank" style="display: block; padding: 12px; color: #667eea; text-decoration: none; border-bottom: 1px solid #eee; transition: all 0.2s ease;" onmouseover="this.style.background='#f0f0f0'; this.style.paddingLeft='16px';" onmouseout="this.style.background='transparent'; this.style.paddingLeft='12px';">
-                                📋 Скачать proxy_ru.txt
-                            </a>
-                            <button onclick="copyProxyUrl('https://raw.githubusercontent.com/kort0881/telegram-proxy-collector/main/proxy_ru.txt')" style="width: 100%; padding: 12px; color: #667eea; text-decoration: none; border: none; background: transparent; text-align: left; cursor: pointer; border-bottom: 1px solid #eee; transition: all 0.2s ease;" onmouseover="this.style.background='#f0f0f0'; this.style.paddingLeft='16px';" onmouseout="this.style.background='transparent'; this.style.paddingLeft='12px';">
-                                📋 Скопировать ссылку
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="proxy-dropdown" style="position: relative;">
-                        <button id="proxy-btn-eu" class="proxy-btn" style="width: 100%; padding: 12px; background: white; color: #667eea; border: none; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: space-between; transition: all 0.3s ease;">
-                            <span style="display: flex; align-items: center; gap: 8px;">
-                                <i class="fas fa-flag"></i>
-                                Прокси ЕУ
-                            </span>
-                            <i class="fas fa-chevron-down" style="font-size: 12px;"></i>
-                        </button>
-                        <div id="proxy-list-eu" style="display: none; position: absolute; top: 100%; left: 0; right: 0; background: white; border-radius: 8px; margin-top: 5px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); max-height: 200px; overflow-y: auto; z-index: 10;">
-                            <a href="https://raw.githubusercontent.com/kort0881/telegram-proxy-collector/main/proxy_eu.txt" target="_blank" style="display: block; padding: 12px; color: #667eea; text-decoration: none; border-bottom: 1px solid #eee; transition: all 0.2s ease;" onmouseover="this.style.background='#f0f0f0'; this.style.paddingLeft='16px';" onmouseout="this.style.background='transparent'; this.style.paddingLeft='12px';">
-                                📋 Скачать proxy_eu.txt
-                            </a>
-                            <button onclick="copyProxyUrl('https://raw.githubusercontent.com/kort0881/telegram-proxy-collector/main/proxy_eu.txt')" style="width: 100%; padding: 12px; color: #667eea; text-decoration: none; border: none; background: transparent; text-align: left; cursor: pointer; border-bottom: 1px solid #eee; transition: all 0.2s ease;" onmouseover="this.style.background='#f0f0f0'; this.style.paddingLeft='16px';" onmouseout="this.style.background='transparent'; this.style.paddingLeft='12px';">
-                                📋 Скопировать ссылку
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            </div>
-        </div>
     </header>
 
     <!-- Main Content -->
