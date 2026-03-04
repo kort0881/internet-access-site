@@ -9,7 +9,6 @@ on:
     - cron: '0 * * * *'
   workflow_dispatch:
 
-# Добавляем права для деплоя
 permissions:
   contents: write
   pages: write
@@ -37,7 +36,6 @@ jobs:
         run: |
           python build.py
           
-      # ВОТ ЭТОГО ШАГА НЕ БЫЛО — ДОБАВЛЕН:
       - name: 📄 Copy Yandex verification file
         run: |
           if [ -f "yandex_83bc89c155ecedc0.html" ]; then
@@ -53,5 +51,6 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
           publish_branch: gh-pages
+          force_orphan: true
           commit_message: '🔄 Auto-update site'
 
