@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     
     <!-- Site Verification -->
-    <meta name="google-site-verification" content="7HloDytbn-zY3IaDCIrjJJObXli-u5By9DCX8ZuBhyA" />
+    <meta name="google-site-verification" content="jHpcAMgKirVTtsqrIUrPzAFfA8vhcVAlBYtm9oBV__A" />
     <meta name="yandex-verification" content="83bc89c155ecedc0" />
 
     <!-- Primary Meta Tags -->
@@ -59,7 +59,7 @@
       },
       "potentialAction": {
         "@type": "SearchAction",
-        "target": "{{ site_url }}?q={search_term_string}",
+        "target": "{{ site_url }}?q={search_term_string}}",
         "query-input": "required name=search_term_string"
       }
     }
@@ -592,6 +592,8 @@
                         <span>@vlessbots_bot</span>
                     </a>
                 </div>
+            </div>
+        </div>
     </header>
 
     <!-- Main Content -->
@@ -755,7 +757,6 @@
                 button.style.background = '';
             }, 2000);
         }).catch(() => {
-            // Fallback для старых браузеров
             const textarea = document.createElement('textarea');
             textarea.value = url;
             document.body.appendChild(textarea);
@@ -771,9 +772,8 @@
                 button.style.background = '';
             }, 2000);
         });
-    
-    
-        // Proxy functions
+
+
         ['all', 'ru', 'eu'].forEach(type => {
             const btn = document.getElementById(`proxy-btn-${type}`);
             const list = document.getElementById(`proxy-list-${type}`);
@@ -797,7 +797,8 @@
             }).catch(err => {
                 console.error('Ошибка при копировании:', err);
             });
-        }}
+        }
+    }
     </script>
 
 </body>
