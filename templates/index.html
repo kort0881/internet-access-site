@@ -491,6 +491,53 @@
         .btn-teal { background: linear-gradient(135deg, #00ffcc, #00ccaa); }
         .btn-gray { background: linear-gradient(135deg, #888, #666); }
         
+        /* MTProto proxy section */
+        #mtproto-proxies {
+            margin-top: 20px;
+        }
+
+        #mtproto-proxies h2 {
+            font-size: 1.6rem;
+            margin-bottom: 15px;
+            background: linear-gradient(90deg, #00ff88, #00ffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        #mtproto-proxies p {
+            color: #aaa;
+            margin-bottom: 15px;
+        }
+
+        #proxy-list {
+            margin-top: 10px;
+        }
+
+        .proxy-btn {
+            display: block;
+            margin: 8px 0;
+            padding: 10px 14px;
+            background: linear-gradient(135deg, #0088cc, #00ccff);
+            color: #fff;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 500;
+            text-align: center;
+            transition: all 0.25s;
+        }
+
+        .proxy-btn:hover {
+            background: linear-gradient(135deg, #00ccff, #00ffff);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 204, 255, 0.4);
+        }
+
+        .proxy-error {
+            color: #ff8080;
+            font-size: 0.9rem;
+        }
+        
         /* Footer */
         footer {
             margin-top: 80px;
@@ -636,6 +683,19 @@
             </p>
         </section>
 
+        <!-- MTProto proxies -->
+        <section class="glass-card" id="mtproto-proxies">
+            <h2>MTProto прокси для Telegram</h2>
+            <p>
+                Нажмите на кнопку, чтобы открыть Telegram с готовым прокси.
+                Если при нажатии ничего не происходит, откройте сайт в обычном браузере
+                (Chrome/Firefox/Яндекс) и убедитесь, что установлен Telegram.
+            </p>
+            <div id="proxy-list">
+                Загружаем список прокси…
+            </div>
+        </section>
+
         <!-- Configs Grid -->
         <section>
             <h2 style="text-align: center; font-size: 2rem; margin: 40px 0; background: linear-gradient(90deg, #00ff88, #00ffff); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
@@ -772,33 +832,45 @@
                 button.style.background = '';
             }, 2000);
         });
-
-
-        ['all', 'ru', 'eu'].forEach(type => {
-            const btn = document.getElementById(`proxy-btn-${type}`);
-            const list = document.getElementById(`proxy-list-${type}`);
-            
-            if (btn && list) {
-                btn.addEventListener('click', () => {
-                    list.style.display = list.style.display === 'none' ? 'block' : 'none';
-                });
-                
-                document.addEventListener('click', (e) => {
-                    if (!btn.contains(e.target) && !list.contains(e.target)) {
-                        list.style.display = 'none';
-                    }
-                });
-            }
-        });
-
-        function copyProxyUrl(url) {
-            navigator.clipboard.writeText(url).then(() => {
-                alert('Ссылка скопирована в буфер обмена!');
-            }).catch(err => {
-                console.error('Ошибка при копировании:', err);
-            });
-        }
     }
+    </script>
+
+    <!-- MTProto proxy loader -->
+    <script>
+    (async () => {
+        const listEl = document.getElementById('proxy-list');
+        if (!listEl) return;
+
+        try {
+            // raw-ссылка на proxy_links_tme_clean.txt из telegram-proxy-collector
+            const url = 'https://raw.githubusercontent.com/kort0881/telegram-proxy-collector/main/verified/proxy_links_tme_clean.txt';
+
+            const resp = await fetch(url);
+            if (!resp.ok) throw new Error('HTTP ' + resp.status);
+
+            const text = await resp.text();
+            const lines = text.split('\n').map(l => l.trim()).filter(Boolean);
+
+            if (!lines.length) {
+                listEl.innerHTML = '<div class="proxy-error">Пока нет доступных прокси.</div>';
+                return;
+            }
+
+            listEl.innerHTML = '';
+
+            lines.forEach((link, idx) => {
+                const a = document.createElement('a');
+                a.href = link; // https://t.me/proxy?server=...&port=...&secret=...
+                a.textContent = 'Подключить прокси #' + (idx + 1);
+                a.className = 'proxy-btn';
+                a.rel = 'noopener noreferrer';
+                listEl.appendChild(a);
+            });
+        } catch (e) {
+            console.error('Ошибка загрузки proxy_links_tme_clean.txt:', e);
+            listEl.innerHTML = '<div class="proxy-error">Не удалось загрузить список прокси.</div>';
+        }
+    })();
     </script>
 
 </body>
