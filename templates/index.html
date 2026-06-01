@@ -3,26 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    
     <meta name="google-site-verification" content="jHpcAMgKirVTtsqrIUrPzAFfA8vhcVAlBYtm9oBV__A" />
     <meta name="yandex-verification" content="83bc89c155ecedc0" />
-
+    
     <title>{{ meta_title|default('Доступ к интернету — свобода без границ') }}</title>
     <meta name="description" content="{{ meta_description|default('Бесплатные VPN-конфигурации: VLESS, WireGuard, Hysteria, Trojan. Обход блокировок в России.') }}">
-    <meta name="keywords" content="{{ meta_keywords|default('vpn, wireguard, vless, hysteria, trojan, обход блокировок') }}">
     
-    <!-- Open Graph -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="{{ site_url|default('https://kort0881.github.io/internet-access-site/') }}">
-    <meta property="og:title" content="{{ meta_title|default('Доступ к интернету') }}">
-    <meta property="og:description" content="{{ meta_description|default('Рабочие VPN-конфигурации для свободы в сети.') }}">
-    <meta property="og:image" content="{{ site_url|default('') }}og-image.png">
-    
-    <link rel="canonical" href="{{ site_url|default('https://kort0881.github.io/internet-access-site/') }}">
     <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌐</text></svg>">
-    
-    <!-- FontAwesome 6 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
@@ -33,31 +20,40 @@
         }
 
         body {
-            /* ★★★★★ ГЛАВНОЕ: фоном стала ваша гифка ★★★★★ */
-            background: url('grok-video-ab2b232e-6e74-4ee3-9aa7-d8c988be0e78.gif') center center fixed;
-            background-size: cover;
             font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
             color: #e0f0ff;
             line-height: 1.5;
             min-height: 100vh;
+            background: #000;
             position: relative;
         }
-        
-        /* Затемняющий слой поверх гифки, чтобы текст читался */
-        body::before {
-            content: '';
+
+        /* ГИФКА ФОНОМ (через img, локальный файл) */
+        .gif-bg {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.65);
-            backdrop-filter: blur(2px);
+            object-fit: cover;
             z-index: 0;
             pointer-events: none;
         }
-        
-        /* Все содержимое — поверх затемнения */
+
+        /* Затемнение для читаемости текста */
+        .dark-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(3px);
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* Контент поверх фона */
         .container {
             position: relative;
             z-index: 2;
@@ -66,7 +62,7 @@
             padding: 0 24px;
         }
 
-        /* ========== ОСТАЛЬНЫЕ СТИЛИ (ваши же, но улучшенные) ========== */
+        /* Стеклянный хедер */
         .glass-header {
             background: rgba(0, 0, 0, 0.6);
             backdrop-filter: blur(12px);
@@ -228,6 +224,7 @@
             border: 1px solid rgba(0, 255, 255, 0.25);
             padding: 24px;
             transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            position: relative;
         }
         .config-card:hover {
             transform: translateY(-8px);
@@ -284,7 +281,6 @@
         .btn-copy {
             background: linear-gradient(95deg, #ff00cc, #ff00aa);
             color: white;
-            box-shadow: 0 2px 8px rgba(255, 0, 200, 0.3);
         }
         .btn-copy:hover {
             transform: scale(1.02);
@@ -397,175 +393,177 @@
 </head>
 <body>
 
-<div class="glass-header">
-    <div class="container">
-        <div class="header-flex">
-            <div class="logo">
-                <h1>🌐 Доступ к интернету</h1>
-                <p>VPN · Свобода без границ</p>
+    <!-- ФОН: ваша гифка (локальный файл) -->
+    <img class="gif-bg" src="grok-video-ab2b232e-6e74-4ee3-9aa7-d8c988be0e78.gif" alt="background">
+    <div class="dark-overlay"></div>
+
+    <div class="glass-header">
+        <div class="container">
+            <div class="header-flex">
+                <div class="logo">
+                    <h1>🌐 Доступ к интернету</h1>
+                    <p>VPN · Свобода без границ</p>
+                </div>
+                <div class="social-links">
+                    <a href="https://t.me/vlesstrojan" class="social-btn"><i class="fab fa-telegram"></i> VLESS & Trojan</a>
+                    <a href="https://t.me/kibersosnew" class="social-btn"><i class="fab fa-telegram"></i> KiberSOS</a>
+                    <a href="https://t.me/+aukDHGFAhE41NWQy" class="social-btn"><i class="fab fa-telegram"></i> Доступ</a>
+                    <a href="https://t.me/vlessbots_bot" class="social-btn"><i class="fas fa-robot"></i> @vlessbots_bot</a>
+                </div>
             </div>
-            <div class="social-links">
-                <a href="https://t.me/vlesstrojan" class="social-btn"><i class="fab fa-telegram"></i> VLESS & Trojan</a>
-                <a href="https://t.me/kibersosnew" class="social-btn"><i class="fab fa-telegram"></i> KiberSOS</a>
-                <a href="https://t.me/+aukDHGFAhE41NWQy" class="social-btn"><i class="fab fa-telegram"></i> Доступ</a>
-                <a href="https://t.me/vlessbots_bot" class="social-btn"><i class="fas fa-robot"></i> @vlessbots_bot</a>
-            </div>
-        </div>
-    </div>
-</div>
-
-<main class="container">
-    <div class="info-grid">
-        <div class="info-card">
-            <div class="info-icon"><i class="fas fa-compass"></i></div>
-            <h3>Как использовать</h3>
-            <ul class="step-list">
-                <li>Выберите конфигурацию <span class="highlight">(white версии самые стабильные)</span></li>
-                <li>Скопируйте ссылку на подписку</li>
-                <li>Вставьте в приложение <span class="highlight">v2rayNG / NekoBox / v2rayN</span></li>
-                <li>Подпишитесь на Telegram-каналы для новых ключей</li>
-            </ul>
-            {% if last_update %}
-            <div class="update-badge"><i class="far fa-clock"></i> Обновлено: {{ last_update }}</div>
-            {% else %}
-            <div class="update-badge"><i class="far fa-clock"></i> Обновлено: 01.06.2026</div>
-            {% endif %}
-        </div>
-        <div class="info-card">
-            <div class="info-icon"><i class="fas fa-shield-alt"></i></div>
-            <h3>Почему это работает</h3>
-            <p style="color:#bbb;">Современные протоколы (VLESS, WireGuard, Hysteria) маскируют трафик и обходят блокировки. Наши конфигурации обновляются автоматически.</p>
         </div>
     </div>
 
-    <div class="info-card" style="margin-bottom: 40px;">
-        <div class="info-icon"><i class="fas fa-globe"></i></div>
-        <h3>Бесплатные VPN-конфигурации для России</h3>
-        <p style="color:#ccc;">Сайт собирает рабочие VPN-настройки: VLESS, V2Ray, Hysteria, Trojan, VMess, Shadowsocks. Быстрый доступ к заблокированным сайтам и мессенджерам.</p>
-    </div>
-
-    <div class="section">
-        <h2 class="section-title">📡 MTProto прокси для Telegram</h2>
-        <div id="proxy-list" class="proxy-grid">Загружаем прокси...</div>
-    </div>
-
-    <div class="section">
-        <h2 class="section-title">⚡ Актуальные конфигурации VPN</h2>
-        <div class="configs-grid">
-            {% for config in configs %}
-            <div class="config-card {% if config.is_recommended %}recommended{% endif %}">
-                {% if config.is_recommended %}
-                <div class="rec-badge"><i class="fas fa-star"></i> Рекомендовано</div>
+    <main class="container">
+        <div class="info-grid">
+            <div class="info-card">
+                <div class="info-icon"><i class="fas fa-compass"></i></div>
+                <h3>Как использовать</h3>
+                <ul class="step-list">
+                    <li>Выберите конфигурацию <span class="highlight">(white версии самые стабильные)</span></li>
+                    <li>Скопируйте ссылку на подписку</li>
+                    <li>Вставьте в приложение <span class="highlight">v2rayNG / NekoBox / v2rayN</span></li>
+                    <li>Подпишитесь на Telegram-каналы для новых ключей</li>
+                </ul>
+                {% if last_update %}
+                <div class="update-badge"><i class="far fa-clock"></i> Обновлено: {{ last_update }}</div>
+                {% else %}
+                <div class="update-badge"><i class="far fa-clock"></i> Обновлено: 01.06.2026</div>
                 {% endif %}
-                <div class="config-name">{{ config.name }}</div>
-                <div class="config-category"><i class="fas fa-tag"></i> {{ config.category }}</div>
-                <div class="button-group">
-                    <button class="btn-neon btn-copy copy-btn" data-url="{{ config.url }}" onclick="copyToClipboard(this, '{{ config.url }}')">
-                        <i class="fas fa-copy"></i> Копировать ссылку
-                    </button>
-                    <a href="{{ config.url }}" target="_blank" class="btn-neon btn-link">
-                        <i class="fas fa-external-link-alt"></i> Открыть
-                    </a>
-                </div>
             </div>
-            {% endfor %}
-        </div>
-    </div>
-
-    <div class="section">
-        <h2 class="section-title">📱 Скачать VPN-клиенты</h2>
-        <div class="apps-grid">
-            <div class="app-card">
-                <div class="app-icon"><i class="fab fa-android" style="color:#3ddc84;"></i></div>
-                <h3>Android</h3>
-                <div class="app-links">
-                    <a href="https://github.com/2dust/v2rayNG/releases/latest" class="app-link">v2rayNG</a>
-                    <a href="https://github.com/MatsuriDayo/NekoBoxForAndroid/releases/latest" class="app-link">NekoBox</a>
-                    <a href="https://www.happ.su/main" class="app-link">Happ</a>
-                    <a href="https://karing.app/en/download/" class="app-link">Karing</a>
-                </div>
-            </div>
-            <div class="app-card">
-                <div class="app-icon"><i class="fab fa-windows" style="color:#00aaff;"></i></div>
-                <h3>Windows</h3>
-                <div class="app-links">
-                    <a href="https://github.com/2dust/v2rayN/releases/latest/download/v2rayN-windows-64.zip" class="app-link">v2rayN</a>
-                </div>
-            </div>
-            <div class="app-card">
-                <div class="app-icon"><i class="fab fa-apple" style="color:#aaa;"></i></div>
-                <h3>iOS / macOS</h3>
-                <div class="app-links">
-                    <a href="https://apps.apple.com/app/shadowrocket/id932747118" class="app-link">Shadowrocket</a>
-                </div>
+            <div class="info-card">
+                <div class="info-icon"><i class="fas fa-shield-alt"></i></div>
+                <h3>Почему это работает</h3>
+                <p style="color:#bbb;">Современные протоколы (VLESS, WireGuard, Hysteria) маскируют трафик и обходят блокировки. Наши конфигурации обновляются автоматически.</p>
             </div>
         </div>
-    </div>
-</main>
 
-<footer>
-    <div class="container">
-        <div class="footer-links">
-            <a href="https://github.com/kort0881/vpn-checker-backend" target="_blank"><i class="fab fa-github"></i></a>
-            <a href="https://t.me/vlesstrojan" target="_blank"><i class="fab fa-telegram"></i></a>
+        <div class="info-card" style="margin-bottom: 40px;">
+            <div class="info-icon"><i class="fas fa-globe"></i></div>
+            <h3>Бесплатные VPN-конфигурации для России</h3>
+            <p style="color:#ccc;">Сайт собирает рабочие VPN-настройки: VLESS, V2Ray, Hysteria, Trojan, VMess, Shadowsocks. Быстрый доступ к заблокированным сайтам и мессенджерам.</p>
         </div>
-        <div style="margin-top: 20px; opacity: 0.6;">© 2026 Доступ к интернету</div>
-    </div>
-</footer>
 
-<script>
-    // Копирование ссылки
-    function copyToClipboard(button, url) {
-        const original = button.innerHTML;
-        navigator.clipboard.writeText(url).then(() => {
-            button.innerHTML = '<i class="fas fa-check"></i> Скопировано!';
-            button.style.background = 'linear-gradient(95deg, #00ff88, #00cc66)';
-            setTimeout(() => {
-                button.innerHTML = original;
-                button.style.background = '';
-            }, 2000);
-        }).catch(() => {
-            const textarea = document.createElement('textarea');
-            textarea.value = url;
-            document.body.appendChild(textarea);
-            textarea.select();
-            document.execCommand('copy');
-            document.body.removeChild(textarea);
-            button.innerHTML = '<i class="fas fa-check"></i> Скопировано!';
-            setTimeout(() => {
-                button.innerHTML = original;
-                button.style.background = '';
-            }, 2000);
-        });
-    }
+        <div class="section">
+            <h2 class="section-title">📡 MTProto прокси для Telegram</h2>
+            <div id="proxy-list" class="proxy-grid">Загружаем прокси...</div>
+        </div>
 
-    // Загрузка MTProto прокси
-    (async () => {
-        const proxyContainer = document.getElementById('proxy-list');
-        if (!proxyContainer) return;
-        try {
-            const url = 'https://raw.githubusercontent.com/kort0881/telegram-proxy-collector/main/verified/proxy_links_tme_clean.txt';
-            const resp = await fetch(url);
-            if (!resp.ok) throw new Error();
-            const text = await resp.text();
-            const lines = text.split('\n').map(l => l.trim()).filter(l => l && l.startsWith('https://t.me/proxy'));
-            if (lines.length === 0) {
-                proxyContainer.innerHTML = '<div>Прокси пока нет</div>';
-                return;
-            }
-            proxyContainer.innerHTML = '';
-            lines.forEach((link, idx) => {
-                const a = document.createElement('a');
-                a.href = link;
-                a.textContent = `🔌 Прокси #${idx+1}`;
-                a.className = 'proxy-item';
-                a.target = '_blank';
-                proxyContainer.appendChild(a);
+        <div class="section">
+            <h2 class="section-title">⚡ Актуальные конфигурации VPN</h2>
+            <div class="configs-grid">
+                {% for config in configs %}
+                <div class="config-card {% if config.is_recommended %}recommended{% endif %}">
+                    {% if config.is_recommended %}
+                    <div class="rec-badge"><i class="fas fa-star"></i> Рекомендовано</div>
+                    {% endif %}
+                    <div class="config-name">{{ config.name }}</div>
+                    <div class="config-category"><i class="fas fa-tag"></i> {{ config.category }}</div>
+                    <div class="button-group">
+                        <button class="btn-neon btn-copy copy-btn" data-url="{{ config.url }}" onclick="copyToClipboard(this, '{{ config.url }}')">
+                            <i class="fas fa-copy"></i> Копировать ссылку
+                        </button>
+                        <a href="{{ config.url }}" target="_blank" class="btn-neon btn-link">
+                            <i class="fas fa-external-link-alt"></i> Открыть
+                        </a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">📱 Скачать VPN-клиенты</h2>
+            <div class="apps-grid">
+                <div class="app-card">
+                    <div class="app-icon"><i class="fab fa-android" style="color:#3ddc84;"></i></div>
+                    <h3>Android</h3>
+                    <div class="app-links">
+                        <a href="https://github.com/2dust/v2rayNG/releases/latest" class="app-link">v2rayNG</a>
+                        <a href="https://github.com/MatsuriDayo/NekoBoxForAndroid/releases/latest" class="app-link">NekoBox</a>
+                        <a href="https://www.happ.su/main" class="app-link">Happ</a>
+                        <a href="https://karing.app/en/download/" class="app-link">Karing</a>
+                    </div>
+                </div>
+                <div class="app-card">
+                    <div class="app-icon"><i class="fab fa-windows" style="color:#00aaff;"></i></div>
+                    <h3>Windows</h3>
+                    <div class="app-links">
+                        <a href="https://github.com/2dust/v2rayN/releases/latest/download/v2rayN-windows-64.zip" class="app-link">v2rayN</a>
+                    </div>
+                </div>
+                <div class="app-card">
+                    <div class="app-icon"><i class="fab fa-apple" style="color:#aaa;"></i></div>
+                    <h3>iOS / macOS</h3>
+                    <div class="app-links">
+                        <a href="https://apps.apple.com/app/shadowrocket/id932747118" class="app-link">Shadowrocket</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="https://github.com/kort0881/vpn-checker-backend" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://t.me/vlesstrojan" target="_blank"><i class="fab fa-telegram"></i></a>
+            </div>
+            <div style="margin-top: 20px; opacity: 0.6;">© 2026 Доступ к интернету</div>
+        </div>
+    </footer>
+
+    <script>
+        function copyToClipboard(button, url) {
+            const original = button.innerHTML;
+            navigator.clipboard.writeText(url).then(() => {
+                button.innerHTML = '<i class="fas fa-check"></i> Скопировано!';
+                button.style.background = 'linear-gradient(95deg, #00ff88, #00cc66)';
+                setTimeout(() => {
+                    button.innerHTML = original;
+                    button.style.background = '';
+                }, 2000);
+            }).catch(() => {
+                const textarea = document.createElement('textarea');
+                textarea.value = url;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+                button.innerHTML = '<i class="fas fa-check"></i> Скопировано!';
+                setTimeout(() => {
+                    button.innerHTML = original;
+                    button.style.background = '';
+                }, 2000);
             });
-        } catch(e) {
-            proxyContainer.innerHTML = '<div>Ошибка загрузки прокси</div>';
         }
-    })();
-</script>
+
+        (async () => {
+            const proxyContainer = document.getElementById('proxy-list');
+            if (!proxyContainer) return;
+            try {
+                const url = 'https://raw.githubusercontent.com/kort0881/telegram-proxy-collector/main/verified/proxy_links_tme_clean.txt';
+                const resp = await fetch(url);
+                if (!resp.ok) throw new Error();
+                const text = await resp.text();
+                const lines = text.split('\n').map(l => l.trim()).filter(l => l && l.startsWith('https://t.me/proxy'));
+                if (lines.length === 0) {
+                    proxyContainer.innerHTML = '<div>Прокси пока нет</div>';
+                    return;
+                }
+                proxyContainer.innerHTML = '';
+                lines.forEach((link, idx) => {
+                    const a = document.createElement('a');
+                    a.href = link;
+                    a.textContent = `🔌 Прокси #${idx+1}`;
+                    a.className = 'proxy-item';
+                    a.target = '_blank';
+                    proxyContainer.appendChild(a);
+                });
+            } catch(e) {
+                proxyContainer.innerHTML = '<div>Ошибка загрузки прокси</div>';
+            }
+        })();
+    </script>
 </body>
 </html>
