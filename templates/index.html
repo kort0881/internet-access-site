@@ -2,14 +2,19 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <meta name="google-site-verification" content="jHpcAMgKirVTtsqrIUrPzAFfA8vhcVAlBYtm9oBV__A" />
     <meta name="yandex-verification" content="83bc89c155ecedc0" />
     <title>{{ meta_title }}</title>
     <meta name="description" content="{{ meta_description }}">
     <meta name="keywords" content="{{ meta_keywords }}">
     <link rel="canonical" href="{{ site_url }}">
-    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌐</text></svg>">
+    <meta property="og:title" content="{{ meta_title }}">
+    <meta property="og:description" content="{{ meta_description }}">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ site_url }}">
+    <meta property="og:image" content="{{ site_url }}og-image.png">
+    <meta name="twitter:card" content="summary_large_image">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         * {
@@ -19,24 +24,22 @@
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #87CEEB;  /* голубое небо, запасной цвет */
-            color: #1a2a3a;
-            line-height: 1.5;
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+            background: #0b3b5f; /* fallback */
             min-height: 100vh;
             position: relative;
-            overflow-x: hidden;
+            color: #e2e8f0;
         }
 
-        /* --- НЕБО С ОБЛАКАМИ И КОРОВАМИ (фон) --- */
-        .sky {
+        /* ЯРКО-ГОЛУБОЕ НЕБО + ОБЛАКА + КОРОВЫ */
+        .sky-bg {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             z-index: -2;
-            background: linear-gradient(145deg, #a0d8ef 0%, #e0f4ff 100%);
+            background: linear-gradient(145deg, #4aa3ff 0%, #87cefa 100%);
             overflow: hidden;
         }
 
@@ -54,15 +57,15 @@
             background: inherit;
             border-radius: 50%;
         }
-        .cloud1 { width: 200px; height: 120px; top: 15%; left: -200px; }
+        .cloud1 { width: 200px; height: 120px; top: 15%; left: -200px; opacity: 0.9; }
         .cloud1::before { width: 90px; height: 90px; top: -40px; left: 20px; }
         .cloud1::after { width: 130px; height: 130px; top: -60px; left: 80px; }
 
-        .cloud2 { width: 280px; height: 150px; top: 45%; right: -280px; }
+        .cloud2 { width: 280px; height: 150px; top: 45%; right: -280px; opacity: 0.85; }
         .cloud2::before { width: 120px; height: 120px; top: -50px; left: 20px; }
         .cloud2::after { width: 160px; height: 160px; top: -80px; left: 100px; }
 
-        .cloud3 { width: 170px; height: 100px; bottom: 15%; left: -170px; }
+        .cloud3 { width: 170px; height: 100px; bottom: 15%; left: -170px; opacity: 0.9; }
         .cloud3::before { width: 70px; height: 70px; top: -30px; left: 20px; }
         .cloud3::after { width: 100px; height: 100px; top: -50px; left: 70px; }
 
@@ -78,7 +81,7 @@
         .flying-cow {
             position: absolute;
             font-size: 64px;
-            filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.15));
+            filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.1));
             z-index: -1;
             pointer-events: none;
             animation-timing-function: linear;
@@ -91,43 +94,40 @@
         .cow5 { top: 25%; animation: flyAcross 40s linear infinite 14s; font-size: 60px;}
 
         @keyframes flyAcross {
-            0% { transform: translateX(-150px) translateY(0px) rotate(0deg); opacity: 0; }
-            10% { opacity: 0.9; }
-            85% { opacity: 0.9; }
-            100% { transform: translateX(calc(100vw + 150px)) translateY(-40px) rotate(5deg); opacity: 0; }
+            0% {
+                transform: translateX(-150px) translateY(0px) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.9;
+            }
+            85% {
+                opacity: 0.9;
+            }
+            100% {
+                transform: translateX(calc(100vw + 150px)) translateY(-40px) rotate(5deg);
+                opacity: 0;
+            }
         }
 
-        /* Полупрозрачный слой для читаемости текста (светлый, не затемняет сильно) */
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(1px);
-            z-index: -1;
-            pointer-events: none;
-        }
-
-        /* Контент */
-        .container {
+        /* Основной контент — тёмно-стальной фон карточек */
+        .content-wrapper {
+            position: relative;
+            z-index: 2;
             max-width: 1400px;
             margin: 0 auto;
             padding: 0 24px;
-            position: relative;
-            z-index: 2;
         }
 
-        /* Шапка – стеклянная, но без неона */
-        .site-header {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(8px);
-            border-bottom: 1px solid rgba(0,0,0,0.1);
-            padding: 20px 0;
+        /* Хедер (тёмный стальной) */
+        .glass-header {
+            background: #1e2a3a;
+            border-bottom: 1px solid #2d3e50;
+            padding: 16px 0;
             position: sticky;
             top: 0;
             z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
         }
         .header-flex {
             display: flex;
@@ -137,13 +137,13 @@
             gap: 20px;
         }
         .logo h1 {
-            font-size: 2rem;
+            font-size: 1.8rem;
             font-weight: 700;
-            color: #0b3b5f;
-            letter-spacing: -0.5px;
+            color: #cbd5e1;
+            margin-bottom: 4px;
         }
         .logo p {
-            color: #2c5a7a;
+            color: #9aaebf;
             font-size: 0.9rem;
         }
         .social-links {
@@ -152,22 +152,22 @@
             flex-wrap: wrap;
         }
         .social-btn {
-            padding: 8px 18px;
-            border-radius: 40px;
+            padding: 6px 16px;
+            border-radius: 30px;
             text-decoration: none;
-            background: #eef2f5;
-            color: #1a4d6b;
             font-size: 0.9rem;
             font-weight: 500;
             display: inline-flex;
             align-items: center;
             gap: 8px;
+            background: #2d3e50;
+            color: #e2e8f0;
+            border: 1px solid #3a5068;
             transition: all 0.2s;
-            border: 1px solid #cbdbe0;
         }
         .social-btn:hover {
-            background: #dce5ec;
-            transform: translateY(-2px);
+            background: #3a5068;
+            transform: translateY(-1px);
         }
 
         /* Секции */
@@ -177,13 +177,12 @@
         .section-title {
             font-size: 1.8rem;
             font-weight: 600;
-            color: #0a2f44;
-            border-left: 4px solid #2c7ab1;
+            color: #cbd5e1;
+            border-left: 4px solid #5a7a9a;
             padding-left: 20px;
             margin-bottom: 32px;
         }
 
-        /* Карточки инструкций */
         .info-grid {
             display: flex;
             flex-wrap: wrap;
@@ -193,35 +192,35 @@
         .info-card {
             flex: 1;
             min-width: 260px;
-            background: rgba(255, 255, 255, 0.9);
+            background: #1e2a3a;
             backdrop-filter: blur(4px);
-            border-radius: 24px;
+            border-radius: 20px;
             padding: 28px;
-            border: 1px solid rgba(0,0,0,0.05);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-            transition: all 0.2s;
+            border: 1px solid #2d3e50;
+            transition: all 0.3s;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
         }
         .info-card:hover {
             transform: translateY(-3px);
-            background: rgba(255, 255, 255, 0.95);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 12px 28px rgba(0,0,0,0.3);
         }
         .info-icon {
             width: 56px;
             height: 56px;
-            background: #2c7ab1;
+            background: #2d3e50;
             border-radius: 18px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 28px;
-            color: white;
             margin-bottom: 24px;
+            color: #7aa2c2;
         }
         .info-card h3 {
             font-size: 1.5rem;
             margin-bottom: 16px;
-            color: #0b3b5f;
+            color: #cbd5e1;
+            font-weight: 600;
         }
         .step-list {
             list-style: none;
@@ -232,7 +231,7 @@
             margin-bottom: 12px;
             padding-left: 32px;
             position: relative;
-            color: #2c3e50;
+            color: #cbd5e1;
         }
         .step-list li::before {
             content: counter(step);
@@ -241,30 +240,31 @@
             top: 0;
             width: 22px;
             height: 22px;
-            background: #2c7ab1;
+            background: #3a5068;
             border-radius: 30px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 12px;
             font-weight: bold;
-            color: white;
+            color: #cbd5e1;
         }
         .highlight {
+            color: #7aa2c2;
             font-weight: 600;
-            color: #1a6b9e;
         }
         .update-badge {
             display: inline-block;
             margin-top: 20px;
             padding: 6px 18px;
-            background: #eef2f5;
+            background: #2d3e50;
             border-radius: 30px;
             font-size: 0.8rem;
-            color: #1a4d6b;
+            color: #cbd5e1;
+            border: 1px solid #3a5068;
         }
 
-        /* Сетка конфигураций */
+        /* Карточки конфигураций — стальные */
         .configs-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -272,43 +272,43 @@
             margin: 32px 0;
         }
         .config-card {
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(4px);
-            border-radius: 24px;
-            border: 1px solid rgba(0,0,0,0.08);
+            background: #1e2a3a;
+            border-radius: 20px;
+            border: 1px solid #2d3e50;
             padding: 24px;
-            transition: all 0.2s;
+            transition: all 0.3s;
             position: relative;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
         }
         .config-card:hover {
             transform: translateY(-5px);
-            background: rgba(255, 255, 255, 0.98);
-            box-shadow: 0 12px 24px rgba(0,0,0,0.1);
+            box-shadow: 0 20px 30px -12px rgba(0,0,0,0.4);
+            border-color: #4a6a8a;
         }
         .recommended {
-            border-left: 5px solid #2c7ab1;
-            background: rgba(255, 255, 255, 0.95);
+            border-left: 5px solid #7aa2c2;
+            background: #1a2533;
         }
         .rec-badge {
             position: absolute;
             top: 16px;
             right: 20px;
-            background: #2c7ab1;
-            color: white;
-            font-weight: 600;
+            background: #3a5068;
+            color: #cbd5e1;
+            font-weight: bold;
             font-size: 0.7rem;
             padding: 4px 12px;
             border-radius: 30px;
         }
         .config-name {
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             font-weight: 700;
-            color: #0a2f44;
+            color: #cbd5e1;
             margin-bottom: 8px;
         }
         .config-category {
             font-size: 0.85rem;
-            color: #4a6f8f;
+            color: #9aaebf;
             margin-bottom: 20px;
         }
         .button-group {
@@ -317,8 +317,8 @@
             gap: 12px;
             margin-top: 20px;
         }
-        .btn {
-            padding: 12px;
+        .btn-neon {
+            padding: 10px;
             border-radius: 40px;
             font-weight: 600;
             text-align: center;
@@ -333,20 +333,21 @@
             text-decoration: none;
         }
         .btn-copy {
-            background: #2c7ab1;
-            color: white;
+            background: #2d3e50;
+            color: #e2e8f0;
+            border: 1px solid #4a6a8a;
         }
         .btn-copy:hover {
-            background: #1f5a82;
-            transform: scale(1.01);
+            background: #3a5068;
+            transform: scale(1.02);
         }
         .btn-link {
-            background: #eef2f5;
-            color: #1a4d6b;
-            border: 1px solid #cbdbe0;
+            background: #1a2533;
+            border: 1px solid #2d3e50;
+            color: #cbd5e1;
         }
         .btn-link:hover {
-            background: #e2e8ed;
+            background: #2d3e50;
         }
 
         /* Прокси */
@@ -357,24 +358,24 @@
             margin-top: 16px;
         }
         .proxy-item {
-            background: #eef2f5;
+            background: #2d3e50;
+            border: 1px solid #3a5068;
             padding: 10px 20px;
             border-radius: 60px;
-            color: #1a4d6b;
+            color: #e2e8f0;
             text-decoration: none;
             font-weight: 500;
             transition: 0.2s;
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            border: 1px solid #cbdbe0;
         }
         .proxy-item:hover {
-            background: #dce5ec;
+            background: #3a5068;
             transform: translateY(-2px);
         }
 
-        /* Приложения */
+        /* Скачать клиенты */
         .apps-grid {
             display: flex;
             flex-wrap: wrap;
@@ -383,29 +384,28 @@
             margin: 40px 0;
         }
         .app-card {
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(4px);
-            border-radius: 24px;
+            background: #1e2a3a;
+            border-radius: 20px;
             padding: 24px;
             width: 260px;
             text-align: center;
-            border: 1px solid rgba(0,0,0,0.05);
-            transition: 0.2s;
+            border: 1px solid #2d3e50;
+            transition: 0.3s;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
         }
         .app-card:hover {
             transform: translateY(-5px);
-            background: white;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            border-color: #4a6a8a;
         }
         .app-icon {
             font-size: 48px;
             margin-bottom: 16px;
-            color: #2c7ab1;
+            color: #7aa2c2;
         }
         .app-card h3 {
             font-size: 1.3rem;
             margin-bottom: 20px;
-            color: #0a2f44;
+            color: #cbd5e1;
         }
         .app-links {
             display: flex;
@@ -415,32 +415,33 @@
         .app-link {
             padding: 10px;
             border-radius: 40px;
-            background: #eef2f5;
-            color: #1a4d6b;
+            background: #2d3e50;
+            border: 1px solid #3a5068;
+            color: #e2e8f0;
             text-decoration: none;
             transition: 0.2s;
-            border: 1px solid #cbdbe0;
         }
         .app-link:hover {
-            background: #dce5ec;
+            background: #3a5068;
         }
 
         footer {
             margin-top: 70px;
             padding: 40px 0;
             text-align: center;
-            border-top: 1px solid rgba(0,0,0,0.1);
-            color: #3a6b8f;
+            border-top: 1px solid #2d3e50;
+            color: #9aaebf;
         }
         .footer-links a {
-            color: #2c7ab1;
+            color: #7aa2c2;
             margin: 0 12px;
             font-size: 1.5rem;
             transition: 0.2s;
         }
         .footer-links a:hover {
-            opacity: 0.7;
+            color: #a0c4e8;
         }
+
         @media (max-width: 800px) {
             .configs-grid {
                 grid-template-columns: 1fr;
@@ -452,161 +453,185 @@
     </style>
 </head>
 <body>
-
-<div class="sky">
-    <div class="cloud cloud1"></div>
-    <div class="cloud cloud2"></div>
-    <div class="cloud cloud3"></div>
-    <div class="flying-cow cow1">🐄</div>
-    <div class="flying-cow cow2">🐮</div>
-    <div class="flying-cow cow3">🐄</div>
-    <div class="flying-cow cow4">🐮</div>
-    <div class="flying-cow cow5">🐄</div>
-</div>
-<div class="overlay"></div>
-
-<header class="site-header">
-    <div class="container">
-        <div class="header-flex">
-            <div class="logo">
-                <h1>🌐 Доступ к интернету</h1>
-                <p>VPN · Свобода без границ</p>
-            </div>
-            <div class="social-links">
-                <a href="https://t.me/vlesstrojan" class="social-btn"><i class="fab fa-telegram"></i> VLESS & Trojan</a>
-                <a href="https://t.me/kibersosnew" class="social-btn"><i class="fab fa-telegram"></i> KiberSOS</a>
-                <a href="https://t.me/+aukDHGFAhE41NWQy" class="social-btn"><i class="fab fa-telegram"></i> Доступ</a>
-                <a href="https://t.me/vlessbots_bot" class="social-btn"><i class="fas fa-robot"></i> @vlessbots_bot</a>
-            </div>
-        </div>
-    </div>
-</header>
-
-<main class="container">
-    <div class="info-grid">
-        <div class="info-card">
-            <div class="info-icon"><i class="fas fa-compass"></i></div>
-            <h3>Как использовать</h3>
-            <ul class="step-list">
-                <li>Выберите конфигурацию <span class="highlight">(white версии самые стабильные)</span></li>
-                <li>Скопируйте ссылку на подписку</li>
-                <li>Вставьте в приложение <span class="highlight">v2rayNG / NekoBox / v2rayN</span></li>
-                <li>Подпишитесь на Telegram-каналы для новых ключей</li>
-            </ul>
-            <div class="update-badge"><i class="far fa-clock"></i> Обновлено: {{ last_update }}</div>
-        </div>
-        <div class="info-card">
-            <div class="info-icon"><i class="fas fa-shield-alt"></i></div>
-            <h3>Почему это работает</h3>
-            <p>Современные протоколы (VLESS, WireGuard, Hysteria) маскируют трафик и обходят блокировки. Наши конфигурации обновляются автоматически.</p>
-        </div>
+    <div class="sky-bg">
+        <div class="cloud cloud1"></div>
+        <div class="cloud cloud2"></div>
+        <div class="cloud cloud3"></div>
+        <div class="flying-cow cow1">🐄</div>
+        <div class="flying-cow cow2">🐮</div>
+        <div class="flying-cow cow3">🐄</div>
+        <div class="flying-cow cow4">🐮</div>
+        <div class="flying-cow cow5">🐄</div>
     </div>
 
-    <div class="info-card" style="margin-bottom: 40px;">
-        <div class="info-icon"><i class="fas fa-globe"></i></div>
-        <h3>Бесплатные VPN-конфигурации для России</h3>
-        <p>Сайт собирает рабочие VPN-настройки: VLESS, V2Ray, Hysteria, Trojan, VMess, Reality, Shadowsocks. Быстрый доступ к заблокированным сайтам и мессенджерам.</p>
-    </div>
-
-    <div class="section">
-        <h2 class="section-title">📡 MTProto прокси для Telegram</h2>
-        <div class="proxy-grid" id="proxy-list">
-            {% for proxy in proxies %}
-            <a href="{{ proxy }}" class="proxy-item" target="_blank" rel="noopener noreferrer">
-                🔌 Прокси #{{ loop.index }}
-            </a>
-            {% endfor %}
-        </div>
-    </div>
-
-    <div class="section">
-        <h2 class="section-title">⚡ Актуальные конфигурации VPN</h2>
-        <div class="configs-grid">
-            {% for config in configs %}
-            <div class="config-card {% if config.is_recommended %}recommended{% endif %}">
-                {% if config.is_recommended %}
-                <div class="rec-badge"><i class="fas fa-star"></i> Рекомендовано</div>
-                {% endif %}
-                <div class="config-name">{{ config.name }}</div>
-                <div class="config-category"><i class="fas fa-tag"></i> {{ config.category }}</div>
-                <div class="button-group">
-                    <button class="btn btn-copy" data-url="{{ config.url }}" onclick="copyToClipboard(this, '{{ config.url }}')">
-                        <i class="fas fa-copy"></i> Копировать ссылку
-                    </button>
-                    <a href="{{ config.url }}" target="_blank" rel="noopener noreferrer" class="btn btn-link">
-                        <i class="fas fa-external-link-alt"></i> Открыть
-                    </a>
+    <div class="glass-header">
+        <div class="content-wrapper">
+            <div class="header-flex">
+                <div class="logo">
+                    <h1>🌐 Доступ к интернету</h1>
+                    <p>VPN · Свобода без границ</p>
                 </div>
-            </div>
-            {% endfor %}
-        </div>
-    </div>
-
-    <div class="section">
-        <h2 class="section-title">📱 Скачать VPN-клиенты</h2>
-        <div class="apps-grid">
-            <div class="app-card">
-                <div class="app-icon"><i class="fab fa-android"></i></div>
-                <h3>Android</h3>
-                <div class="app-links">
-                    <a href="https://github.com/2dust/v2rayNG/releases/latest" class="app-link">v2rayNG</a>
-                    <a href="https://github.com/MatsuriDayo/NekoBoxForAndroid/releases/latest" class="app-link">NekoBox</a>
-                    <a href="https://www.happ.su/main" class="app-link">Happ</a>
-                    <a href="https://karing.app/en/download/" class="app-link">Karing</a>
-                </div>
-            </div>
-            <div class="app-card">
-                <div class="app-icon"><i class="fab fa-windows"></i></div>
-                <h3>Windows</h3>
-                <div class="app-links">
-                    <a href="https://github.com/2dust/v2rayN/releases/latest/download/v2rayN-windows-64.zip" class="app-link">v2rayN</a>
-                </div>
-            </div>
-            <div class="app-card">
-                <div class="app-icon"><i class="fab fa-apple"></i></div>
-                <h3>iOS / macOS</h3>
-                <div class="app-links">
-                    <a href="https://apps.apple.com/app/shadowrocket/id932747118" class="app-link">Shadowrocket</a>
+                <div class="social-links">
+                    <a href="https://t.me/vlesstrojan" class="social-btn"><i class="fab fa-telegram"></i> VLESS & Trojan</a>
+                    <a href="https://t.me/kibersosnew" class="social-btn"><i class="fab fa-telegram"></i> KiberSOS</a>
+                    <a href="https://t.me/+aukDHGFAhE41NWQy" class="social-btn"><i class="fab fa-telegram"></i> Доступ</a>
+                    <a href="https://t.me/vlessbots_bot" class="social-btn"><i class="fas fa-robot"></i> @vlessbots_bot</a>
                 </div>
             </div>
         </div>
     </div>
-</main>
 
-<footer>
-    <div class="container">
-        <div class="footer-links">
-            <a href="https://github.com/kort0881/vpn-checker-backend" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
-            <a href="https://t.me/vlesstrojan" target="_blank" rel="noopener noreferrer"><i class="fab fa-telegram"></i></a>
+    <main class="content-wrapper">
+        <div class="info-grid">
+            <div class="info-card">
+                <div class="info-icon"><i class="fas fa-compass"></i></div>
+                <h3>Как использовать</h3>
+                <ul class="step-list">
+                    <li>Выберите конфигурацию <span class="highlight">(white версии самые стабильные)</span></li>
+                    <li>Скопируйте ссылку на подписку</li>
+                    <li>Вставьте в приложение <span class="highlight">v2rayNG / NekoBox / v2rayN</span></li>
+                    <li>Подпишитесь на Telegram-каналы для новых ключей</li>
+                </ul>
+                <div class="update-badge"><i class="far fa-clock"></i> Обновлено: {{ last_update }}</div>
+            </div>
+            <div class="info-card">
+                <div class="info-icon"><i class="fas fa-shield-alt"></i></div>
+                <h3>Почему это работает</h3>
+                <p>Современные протоколы (VLESS, WireGuard, Hysteria) маскируют трафик и обходят блокировки. Конфигурации обновляются автоматически.</p>
+            </div>
         </div>
-        <div style="margin-top: 20px; opacity: 0.6;">© 2026 Доступ к интернету</div>
-    </div>
-</footer>
 
-<script>
-    function copyToClipboard(button, url) {
-        const originalHtml = button.innerHTML;
-        navigator.clipboard.writeText(url).then(() => {
-            button.innerHTML = '<i class="fas fa-check"></i> Скопировано!';
-            button.style.background = '#1f5a82';
-            setTimeout(() => {
-                button.innerHTML = originalHtml;
-                button.style.background = '';
-            }, 2000);
-        }).catch(() => {
-            const textarea = document.createElement('textarea');
-            textarea.value = url;
-            document.body.appendChild(textarea);
-            textarea.select();
-            document.execCommand('copy');
-            document.body.removeChild(textarea);
-            button.innerHTML = '<i class="fas fa-check"></i> Скопировано!';
-            setTimeout(() => {
-                button.innerHTML = originalHtml;
-                button.style.background = '';
-            }, 2000);
+        <div class="info-card" style="margin-bottom: 40px;">
+            <div class="info-icon"><i class="fas fa-globe"></i></div>
+            <h3>Бесплатные VPN-конфигурации для России</h3>
+            <p>Сайт собирает рабочие VPN-настройки: VLESS, V2Ray, Hysteria, Trojan, VMess, Shadowsocks. Быстрый доступ к заблокированным сайтам и мессенджерам.</p>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">📡 MTProto прокси для Telegram</h2>
+            <div id="proxy-list" class="proxy-grid">Загружаем прокси...</div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">⚡ Актуальные конфигурации VPN</h2>
+            <div class="configs-grid">
+                {% for config in configs %}
+                <div class="config-card {% if config.is_recommended %}recommended{% endif %}">
+                    {% if config.is_recommended %}
+                    <div class="rec-badge"><i class="fas fa-star"></i> Рекомендовано</div>
+                    {% endif %}
+                    <div class="config-name">{{ config.name }}</div>
+                    <div class="config-category"><i class="fas fa-tag"></i> {{ config.category }}</div>
+                    <div class="button-group">
+                        <button class="btn-neon btn-copy copy-btn" data-url="{{ config.url }}" onclick="copyToClipboard(this, '{{ config.url }}')">
+                            <i class="fas fa-copy"></i> Копировать ссылку
+                        </button>
+                        <a href="{{ config.url }}" target="_blank" class="btn-neon btn-link">
+                            <i class="fas fa-external-link-alt"></i> Открыть
+                        </a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">📱 Скачать VPN-клиенты</h2>
+            <div class="apps-grid">
+                <div class="app-card">
+                    <div class="app-icon"><i class="fab fa-android"></i></div>
+                    <h3>Android</h3>
+                    <div class="app-links">
+                        <a href="https://github.com/2dust/v2rayNG/releases/latest" class="app-link">v2rayNG</a>
+                        <a href="https://github.com/MatsuriDayo/NekoBoxForAndroid/releases/latest" class="app-link">NekoBox</a>
+                        <a href="https://www.happ.su/main" class="app-link">Happ</a>
+                        <a href="https://karing.app/en/download/" class="app-link">Karing</a>
+                    </div>
+                </div>
+                <div class="app-card">
+                    <div class="app-icon"><i class="fab fa-windows"></i></div>
+                    <h3>Windows</h3>
+                    <div class="app-links">
+                        <a href="https://github.com/2dust/v2rayN/releases/latest/download/v2rayN-windows-64.zip" class="app-link">v2rayN</a>
+                    </div>
+                </div>
+                <div class="app-card">
+                    <div class="app-icon"><i class="fab fa-apple"></i></div>
+                    <h3>iOS / macOS</h3>
+                    <div class="app-links">
+                        <a href="https://apps.apple.com/app/shadowrocket/id932747118" class="app-link">Shadowrocket</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="content-wrapper">
+            <div class="footer-links">
+                <a href="https://github.com/kort0881/vpn-checker-backend" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://t.me/vlesstrojan" target="_blank"><i class="fab fa-telegram"></i></a>
+            </div>
+            <div style="margin-top: 20px;">© 2026 Доступ к интернету</div>
+        </div>
+    </footer>
+
+    <script>
+        function copyToClipboard(button, url) {
+            const originalHtml = button.innerHTML;
+            navigator.clipboard.writeText(url).then(() => {
+                button.innerHTML = '<i class="fas fa-check"></i> Скопировано!';
+                button.style.background = '#3a5068';
+                setTimeout(() => {
+                    button.innerHTML = originalHtml;
+                    button.style.background = '#2d3e50';
+                }, 2000);
+            }).catch(() => {
+                const textarea = document.createElement('textarea');
+                textarea.value = url;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+                button.innerHTML = '<i class="fas fa-check"></i> Скопировано!';
+                setTimeout(() => {
+                    button.innerHTML = originalHtml;
+                    button.style.background = '#2d3e50';
+                }, 2000);
+            });
+        }
+
+        async function loadProxies() {
+            const proxyContainer = document.getElementById('proxy-list');
+            if (!proxyContainer) return;
+            try {
+                const url = 'https://raw.githubusercontent.com/kort0881/telegram-proxy-collector/main/verified/proxy_links_tme_clean.txt';
+                const response = await fetch(url);
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                const text = await response.text();
+                const lines = text.split('\n').map(l => l.trim()).filter(l => l && l.startsWith('https://t.me/proxy'));
+                if (lines.length === 0) {
+                    proxyContainer.innerHTML = '<div>Прокси пока нет</div>';
+                    return;
+                }
+                proxyContainer.innerHTML = '';
+                lines.forEach((link, idx) => {
+                    const a = document.createElement('a');
+                    a.href = link;
+                    a.textContent = `🔌 Прокси #${idx+1}`;
+                    a.className = 'proxy-item';
+                    a.target = '_blank';
+                    proxyContainer.appendChild(a);
+                });
+            } catch (e) {
+                console.error('Ошибка загрузки прокси:', e);
+                proxyContainer.innerHTML = '<div>Ошибка загрузки прокси</div>';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadProxies();
         });
-    }
-</script>
+    </script>
 </body>
 </html>
