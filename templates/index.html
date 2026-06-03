@@ -5,17 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <meta name="google-site-verification" content="jHpcAMgKirVTtsqrIUrPzAFfA8vhcVAlBYtm9oBV__A" />
     <meta name="yandex-verification" content="83bc89c155ecedc0" />
-    <title>{{ meta_title }}</title>
-    <meta name="description" content="{{ meta_description }}">
-    <meta name="keywords" content="{{ meta_keywords }}">
-    <link rel="canonical" href="{{ site_url }}">
-    <meta property="og:title" content="{{ meta_title }}">
-    <meta property="og:description" content="{{ meta_description }}">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="{{ site_url }}">
-    <meta property="og:image" content="{{ site_url }}og-image.png">
-    <meta name="twitter:card" content="summary_large_image">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <title>{{ meta_title|default('Доступ к интернету — VPN без границ') }}</title>
+    <meta name="description" content="{{ meta_description|default('Бесплатные VPN-конфигурации: VLESS, WireGuard, Hysteria, Trojan. Обход блокировок в России.') }}">
+    <meta name="keywords" content="{{ meta_keywords|default('vpn, wireguard, vless, hysteria, trojan, обход блокировок') }}">
+    
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌐</text></svg>">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Roboto+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
         * {
             margin: 0;
@@ -24,14 +22,15 @@
         }
 
         body {
+            background: #0a0a0f;
             font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-            background: #0b3b5f; /* fallback */
+            color: #e0e0e8;
+            line-height: 1.5;
             min-height: 100vh;
             position: relative;
-            color: #e2e8f0;
         }
 
-        /* ЯРКО-ГОЛУБОЕ НЕБО + ОБЛАКА + КОРОВЫ */
+        /* ===== ФОН С ЛЕТАЮЩИМИ КОРОВАМИ (стиль chaingpt) ===== */
         .sky-bg {
             position: fixed;
             top: 0;
@@ -39,16 +38,15 @@
             width: 100%;
             height: 100%;
             z-index: -2;
-            background: linear-gradient(145deg, #4aa3ff 0%, #87cefa 100%);
+            background: radial-gradient(circle at 20% 30%, #0b0b14, #050508);
             overflow: hidden;
         }
 
-        /* Облака */
         .cloud {
             position: absolute;
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(255, 255, 255, 0.08);
             border-radius: 1000px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+            backdrop-filter: blur(4px);
             z-index: -1;
         }
         .cloud::before, .cloud::after {
@@ -57,77 +55,89 @@
             background: inherit;
             border-radius: 50%;
         }
-        .cloud1 { width: 200px; height: 120px; top: 15%; left: -200px; opacity: 0.9; }
-        .cloud1::before { width: 90px; height: 90px; top: -40px; left: 20px; }
-        .cloud1::after { width: 130px; height: 130px; top: -60px; left: 80px; }
-
-        .cloud2 { width: 280px; height: 150px; top: 45%; right: -280px; opacity: 0.85; }
-        .cloud2::before { width: 120px; height: 120px; top: -50px; left: 20px; }
-        .cloud2::after { width: 160px; height: 160px; top: -80px; left: 100px; }
-
-        .cloud3 { width: 170px; height: 100px; bottom: 15%; left: -170px; opacity: 0.9; }
-        .cloud3::before { width: 70px; height: 70px; top: -30px; left: 20px; }
-        .cloud3::after { width: 100px; height: 100px; top: -50px; left: 70px; }
+        .cloud1 { width: 240px; height: 140px; top: 15%; left: -240px; }
+        .cloud1::before { width: 110px; height: 110px; top: -45px; left: 30px; }
+        .cloud1::after { width: 150px; height: 150px; top: -70px; left: 90px; }
+        .cloud2 { width: 320px; height: 170px; top: 45%; right: -320px; }
+        .cloud2::before { width: 140px; height: 140px; top: -55px; left: 30px; }
+        .cloud2::after { width: 180px; height: 180px; top: -90px; left: 110px; }
+        .cloud3 { width: 200px; height: 120px; bottom: 20%; left: -200px; }
+        .cloud3::before { width: 90px; height: 90px; top: -35px; left: 25px; }
+        .cloud3::after { width: 120px; height: 120px; top: -60px; left: 80px; }
 
         @keyframes floatClouds {
             from { transform: translateX(0); }
             to { transform: translateX(calc(100vw + 300px)); }
         }
-        .cloud1 { animation: floatClouds 25s linear infinite; }
-        .cloud2 { animation: floatClouds 35s linear infinite; }
-        .cloud3 { animation: floatClouds 45s linear infinite; }
+        .cloud1 { animation: floatClouds 35s linear infinite; }
+        .cloud2 { animation: floatClouds 45s linear infinite; }
+        .cloud3 { animation: floatClouds 55s linear infinite; }
 
-        /* Летающие коровы */
         .flying-cow {
             position: absolute;
-            font-size: 64px;
-            filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.1));
+            font-size: 72px;
+            filter: drop-shadow(0 0 6px rgba(0,255,255,0.3));
             z-index: -1;
             pointer-events: none;
             animation-timing-function: linear;
             animation-iteration-count: infinite;
+            text-shadow: 0 0 8px rgba(0,255,255,0.2);
         }
-        .cow1 { top: 12%; animation: flyAcross 18s linear infinite; }
-        .cow2 { top: 38%; animation: flyAcross 23s linear infinite 2s; font-size: 56px; transform: scaleX(-1);}
-        .cow3 { top: 68%; animation: flyAcross 28s linear infinite 5s; font-size: 72px; }
-        .cow4 { top: 82%; animation: flyAcross 32s linear infinite 9s; font-size: 48px; transform: scaleX(-1);}
-        .cow5 { top: 25%; animation: flyAcross 40s linear infinite 14s; font-size: 60px;}
+        .cow1 { top: 12%; animation: flyAcross 22s linear infinite; font-size: 68px; }
+        .cow2 { top: 35%; animation: flyAcross 28s linear infinite 3s; font-size: 58px; transform: scaleX(-1);}
+        .cow3 { top: 62%; animation: flyAcross 32s linear infinite 7s; font-size: 82px; }
+        .cow4 { top: 78%; animation: flyAcross 38s linear infinite 12s; font-size: 54px; transform: scaleX(-1);}
+        .cow5 { top: 25%; animation: flyAcross 42s linear infinite 18s; font-size: 64px; }
 
         @keyframes flyAcross {
             0% {
-                transform: translateX(-150px) translateY(0px) rotate(0deg);
+                transform: translateX(-180px) translateY(0px) rotate(0deg);
                 opacity: 0;
             }
-            10% {
+            12% {
                 opacity: 0.9;
             }
-            85% {
+            88% {
                 opacity: 0.9;
             }
             100% {
-                transform: translateX(calc(100vw + 150px)) translateY(-40px) rotate(5deg);
+                transform: translateX(calc(100vw + 180px)) translateY(-50px) rotate(6deg);
                 opacity: 0;
             }
         }
 
-        /* Основной контент — тёмно-стальной фон карточек */
-        .content-wrapper {
+        /* Затемнение (чтобы текст читался) */
+        .dark-gradient {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(5, 5, 10, 0.6);
+            backdrop-filter: blur(2px);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Основной контейнер */
+        .container {
             position: relative;
             z-index: 2;
             max-width: 1400px;
             margin: 0 auto;
-            padding: 0 24px;
+            padding: 0 28px;
         }
 
-        /* Хедер (тёмный стальной) */
+        /* ===== СТИЛИ В СТИЛЕ CHAINGPT ===== */
+        /* Хедер */
         .glass-header {
-            background: #1e2a3a;
-            border-bottom: 1px solid #2d3e50;
-            padding: 16px 0;
+            background: rgba(10, 10, 18, 0.75);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+            padding: 18px 0;
             position: sticky;
             top: 0;
             z-index: 100;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
         }
         .header-flex {
             display: flex;
@@ -137,14 +147,18 @@
             gap: 20px;
         }
         .logo h1 {
-            font-size: 1.8rem;
+            font-size: 1.9rem;
             font-weight: 700;
-            color: #cbd5e1;
-            margin-bottom: 4px;
+            background: linear-gradient(135deg, #fff, #0ff, #a06eff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -0.5px;
         }
         .logo p {
-            color: #9aaebf;
-            font-size: 0.9rem;
+            color: #6c7a8a;
+            font-size: 0.85rem;
+            margin-top: 4px;
         }
         .social-links {
             display: flex;
@@ -152,74 +166,105 @@
             flex-wrap: wrap;
         }
         .social-btn {
-            padding: 6px 16px;
-            border-radius: 30px;
+            padding: 8px 20px;
+            border-radius: 40px;
             text-decoration: none;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: 500;
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            background: #2d3e50;
-            color: #e2e8f0;
-            border: 1px solid #3a5068;
-            transition: all 0.2s;
+            background: rgba(0, 255, 255, 0.08);
+            border: 1px solid rgba(0, 255, 255, 0.25);
+            color: #e0e0e8;
+            transition: all 0.25s;
         }
         .social-btn:hover {
-            background: #3a5068;
-            transform: translateY(-1px);
+            background: rgba(0, 255, 255, 0.2);
+            border-color: #0ff;
+            box-shadow: 0 0 12px rgba(0,255,255,0.3);
+            transform: translateY(-2px);
         }
 
         /* Секции */
         .section {
-            margin: 48px 0 32px;
+            margin: 56px 0 40px;
         }
         .section-title {
-            font-size: 1.8rem;
-            font-weight: 600;
-            color: #cbd5e1;
-            border-left: 4px solid #5a7a9a;
+            font-size: 2.2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #fff, #0ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: inline-block;
+            border-left: 4px solid #0ff;
             padding-left: 20px;
             margin-bottom: 32px;
+        }
+
+        /* Угловатые карточки (как на chaingpt) */
+        .corner-card {
+            background: rgba(15, 20, 30, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            border-radius: 24px;
+            padding: 28px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .corner-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 20%, rgba(0,255,255,0.05), transparent);
+            pointer-events: none;
+        }
+        .corner-card:hover {
+            border-color: #0ff;
+            box-shadow: 0 0 28px rgba(0, 255, 255, 0.15);
+            transform: translateY(-3px);
         }
 
         .info-grid {
             display: flex;
             flex-wrap: wrap;
-            gap: 24px;
-            margin-bottom: 40px;
+            gap: 28px;
+            margin-bottom: 48px;
         }
         .info-card {
             flex: 1;
             min-width: 260px;
-            background: #1e2a3a;
-            backdrop-filter: blur(4px);
-            border-radius: 20px;
+            background: rgba(12, 16, 24, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
             padding: 28px;
-            border: 1px solid #2d3e50;
-            transition: all 0.3s;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            transition: 0.25s;
         }
         .info-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 28px rgba(0,0,0,0.3);
+            border-color: #0ff;
+            box-shadow: 0 8px 24px rgba(0,255,255,0.1);
         }
         .info-icon {
-            width: 56px;
-            height: 56px;
-            background: #2d3e50;
-            border-radius: 18px;
+            width: 54px;
+            height: 54px;
+            background: linear-gradient(135deg, #0ff, #a06eff);
+            border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 28px;
             margin-bottom: 24px;
-            color: #7aa2c2;
         }
         .info-card h3 {
             font-size: 1.5rem;
             margin-bottom: 16px;
-            color: #cbd5e1;
+            color: #fff;
             font-weight: 600;
         }
         .step-list {
@@ -231,7 +276,7 @@
             margin-bottom: 12px;
             padding-left: 32px;
             position: relative;
-            color: #cbd5e1;
+            color: #b0c0d0;
         }
         .step-list li::before {
             content: counter(step);
@@ -240,75 +285,75 @@
             top: 0;
             width: 22px;
             height: 22px;
-            background: #3a5068;
+            background: linear-gradient(135deg, #0ff, #0088ff);
             border-radius: 30px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 12px;
             font-weight: bold;
-            color: #cbd5e1;
+            color: #000;
         }
         .highlight {
-            color: #7aa2c2;
+            color: #0ff;
             font-weight: 600;
         }
         .update-badge {
             display: inline-block;
             margin-top: 20px;
-            padding: 6px 18px;
-            background: #2d3e50;
+            padding: 6px 16px;
+            background: rgba(0, 255, 255, 0.12);
             border-radius: 30px;
             font-size: 0.8rem;
-            color: #cbd5e1;
-            border: 1px solid #3a5068;
+            color: #0ff;
+            border: 1px solid rgba(0,255,255,0.3);
         }
 
-        /* Карточки конфигураций — стальные */
+        /* Карточки конфигураций */
         .configs-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
             gap: 28px;
             margin: 32px 0;
         }
         .config-card {
-            background: #1e2a3a;
-            border-radius: 20px;
-            border: 1px solid #2d3e50;
+            background: rgba(8, 12, 20, 0.7);
+            backdrop-filter: blur(12px);
+            border-radius: 24px;
+            border: 1px solid rgba(0, 255, 255, 0.25);
             padding: 24px;
-            transition: all 0.3s;
+            transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
             position: relative;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
         }
         .config-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 30px -12px rgba(0,0,0,0.4);
-            border-color: #4a6a8a;
+            transform: translateY(-6px);
+            border-color: #0ff;
+            box-shadow: 0 16px 32px -12px rgba(0, 255, 255, 0.2);
         }
         .recommended {
-            border-left: 5px solid #7aa2c2;
-            background: #1a2533;
+            border-color: #0f0;
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.15);
         }
         .rec-badge {
             position: absolute;
             top: 16px;
             right: 20px;
-            background: #3a5068;
-            color: #cbd5e1;
+            background: linear-gradient(135deg, #0f0, #0a0);
+            color: #000;
             font-weight: bold;
             font-size: 0.7rem;
             padding: 4px 12px;
             border-radius: 30px;
         }
         .config-name {
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             font-weight: 700;
-            color: #cbd5e1;
+            color: #0ff;
             margin-bottom: 8px;
         }
         .config-category {
             font-size: 0.85rem;
-            color: #9aaebf;
+            color: #8aa;
             margin-bottom: 20px;
         }
         .button-group {
@@ -318,7 +363,7 @@
             margin-top: 20px;
         }
         .btn-neon {
-            padding: 10px;
+            padding: 12px;
             border-radius: 40px;
             font-weight: 600;
             text-align: center;
@@ -331,38 +376,38 @@
             justify-content: center;
             gap: 8px;
             text-decoration: none;
+            background: rgba(0, 255, 255, 0.1);
+            border: 1px solid rgba(0, 255, 255, 0.5);
+            color: #0ff;
         }
         .btn-copy {
-            background: #2d3e50;
-            color: #e2e8f0;
-            border: 1px solid #4a6a8a;
+            background: linear-gradient(95deg, #a06eff, #0ff);
+            color: #000;
+            font-weight: 700;
+            border: none;
         }
         .btn-copy:hover {
-            background: #3a5068;
             transform: scale(1.02);
-        }
-        .btn-link {
-            background: #1a2533;
-            border: 1px solid #2d3e50;
-            color: #cbd5e1;
+            box-shadow: 0 0 20px #0ff;
         }
         .btn-link:hover {
-            background: #2d3e50;
+            background: rgba(0, 255, 255, 0.25);
+            border-color: #0ff;
         }
 
         /* Прокси */
         .proxy-grid {
             display: flex;
             flex-wrap: wrap;
-            gap: 12px;
-            margin-top: 16px;
+            gap: 14px;
+            margin-top: 20px;
         }
         .proxy-item {
-            background: #2d3e50;
-            border: 1px solid #3a5068;
-            padding: 10px 20px;
+            background: rgba(0, 136, 204, 0.2);
+            border: 1px solid rgba(0, 255, 255, 0.4);
+            padding: 10px 22px;
             border-radius: 60px;
-            color: #e2e8f0;
+            color: #0ff;
             text-decoration: none;
             font-weight: 500;
             transition: 0.2s;
@@ -371,88 +416,89 @@
             gap: 8px;
         }
         .proxy-item:hover {
-            background: #3a5068;
+            background: rgba(0, 255, 255, 0.3);
             transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 136, 204, 0.3);
         }
 
         /* Скачать клиенты */
         .apps-grid {
             display: flex;
             flex-wrap: wrap;
-            gap: 24px;
+            gap: 28px;
             justify-content: center;
-            margin: 40px 0;
+            margin: 48px 0;
         }
         .app-card {
-            background: #1e2a3a;
-            border-radius: 20px;
-            padding: 24px;
+            background: rgba(8, 12, 20, 0.7);
+            backdrop-filter: blur(12px);
+            border-radius: 24px;
+            padding: 28px;
             width: 260px;
             text-align: center;
-            border: 1px solid #2d3e50;
+            border: 1px solid rgba(0, 255, 255, 0.2);
             transition: 0.3s;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
         }
         .app-card:hover {
+            border-color: #0ff;
             transform: translateY(-5px);
-            border-color: #4a6a8a;
         }
         .app-icon {
             font-size: 48px;
             margin-bottom: 16px;
-            color: #7aa2c2;
+            color: #0ff;
         }
         .app-card h3 {
             font-size: 1.3rem;
             margin-bottom: 20px;
-            color: #cbd5e1;
+            color: #fff;
         }
         .app-links {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 12px;
         }
         .app-link {
             padding: 10px;
             border-radius: 40px;
-            background: #2d3e50;
-            border: 1px solid #3a5068;
-            color: #e2e8f0;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            color: #e0e0e8;
             text-decoration: none;
             transition: 0.2s;
         }
         .app-link:hover {
-            background: #3a5068;
+            background: rgba(0, 255, 255, 0.15);
+            border-color: #0ff;
         }
 
         footer {
-            margin-top: 70px;
+            margin-top: 80px;
             padding: 40px 0;
             text-align: center;
-            border-top: 1px solid #2d3e50;
-            color: #9aaebf;
+            border-top: 1px solid rgba(0, 255, 255, 0.2);
+            color: #7a8a9a;
         }
         .footer-links a {
-            color: #7aa2c2;
+            color: #0ff;
             margin: 0 12px;
             font-size: 1.5rem;
             transition: 0.2s;
         }
         .footer-links a:hover {
-            color: #a0c4e8;
+            text-shadow: 0 0 8px #0ff;
         }
-
         @media (max-width: 800px) {
-            .configs-grid {
-                grid-template-columns: 1fr;
-            }
-            .info-grid {
-                flex-direction: column;
-            }
+            .container { padding: 0 20px; }
+            .configs-grid { grid-template-columns: 1fr; }
+            .info-grid { flex-direction: column; }
+            .section-title { font-size: 1.8rem; }
         }
     </style>
 </head>
 <body>
+
+    <!-- ЛЕТАЮЩИЕ КОРОВЫ (фон) -->
     <div class="sky-bg">
         <div class="cloud cloud1"></div>
         <div class="cloud cloud2"></div>
@@ -463,9 +509,10 @@
         <div class="flying-cow cow4">🐮</div>
         <div class="flying-cow cow5">🐄</div>
     </div>
+    <div class="dark-gradient"></div>
 
     <div class="glass-header">
-        <div class="content-wrapper">
+        <div class="container">
             <div class="header-flex">
                 <div class="logo">
                     <h1>🌐 Доступ к интернету</h1>
@@ -481,7 +528,8 @@
         </div>
     </div>
 
-    <main class="content-wrapper">
+    <main class="container">
+        <!-- Инструкция -->
         <div class="info-grid">
             <div class="info-card">
                 <div class="info-icon"><i class="fas fa-compass"></i></div>
@@ -492,26 +540,33 @@
                     <li>Вставьте в приложение <span class="highlight">v2rayNG / NekoBox / v2rayN</span></li>
                     <li>Подпишитесь на Telegram-каналы для новых ключей</li>
                 </ul>
+                {% if last_update %}
                 <div class="update-badge"><i class="far fa-clock"></i> Обновлено: {{ last_update }}</div>
+                {% else %}
+                <div class="update-badge"><i class="far fa-clock"></i> Обновлено: 03.06.2026</div>
+                {% endif %}
             </div>
             <div class="info-card">
                 <div class="info-icon"><i class="fas fa-shield-alt"></i></div>
                 <h3>Почему это работает</h3>
-                <p>Современные протоколы (VLESS, WireGuard, Hysteria) маскируют трафик и обходят блокировки. Конфигурации обновляются автоматически.</p>
+                <p>Современные протоколы (VLESS, WireGuard, Hysteria) маскируют трафик и обходят блокировки. Наши конфигурации обновляются автоматически.</p>
             </div>
         </div>
 
-        <div class="info-card" style="margin-bottom: 40px;">
+        <!-- SEO блок -->
+        <div class="corner-card" style="margin-bottom: 40px;">
             <div class="info-icon"><i class="fas fa-globe"></i></div>
-            <h3>Бесплатные VPN-конфигурации для России</h3>
-            <p>Сайт собирает рабочие VPN-настройки: VLESS, V2Ray, Hysteria, Trojan, VMess, Shadowsocks. Быстрый доступ к заблокированным сайтам и мессенджерам.</p>
+            <h3 style="color:#fff; font-size:1.5rem; margin-bottom:16px;">Бесплатные VPN-конфигурации для России</h3>
+            <p>Сайт собирает рабочие VPN-настройки: VLESS, V2Ray, Hysteria, Trojan, VMess, Shadowsocks. Быстрый доступ к заблокиранным сайтам и мессенджерам.</p>
         </div>
 
+        <!-- MTProto прокси -->
         <div class="section">
             <h2 class="section-title">📡 MTProto прокси для Telegram</h2>
             <div id="proxy-list" class="proxy-grid">Загружаем прокси...</div>
         </div>
 
+        <!-- VPN конфигурации -->
         <div class="section">
             <h2 class="section-title">⚡ Актуальные конфигурации VPN</h2>
             <div class="configs-grid">
@@ -535,6 +590,7 @@
             </div>
         </div>
 
+        <!-- Скачать клиенты -->
         <div class="section">
             <h2 class="section-title">📱 Скачать VPN-клиенты</h2>
             <div class="apps-grid">
@@ -567,24 +623,24 @@
     </main>
 
     <footer>
-        <div class="content-wrapper">
+        <div class="container">
             <div class="footer-links">
                 <a href="https://github.com/kort0881/vpn-checker-backend" target="_blank"><i class="fab fa-github"></i></a>
                 <a href="https://t.me/vlesstrojan" target="_blank"><i class="fab fa-telegram"></i></a>
             </div>
-            <div style="margin-top: 20px;">© 2026 Доступ к интернету</div>
+            <div style="margin-top: 24px;">© 2026 Доступ к интернету</div>
         </div>
     </footer>
 
     <script>
         function copyToClipboard(button, url) {
-            const originalHtml = button.innerHTML;
+            const original = button.innerHTML;
             navigator.clipboard.writeText(url).then(() => {
                 button.innerHTML = '<i class="fas fa-check"></i> Скопировано!';
-                button.style.background = '#3a5068';
+                button.style.background = 'linear-gradient(95deg, #00ff88, #00cc66)';
                 setTimeout(() => {
-                    button.innerHTML = originalHtml;
-                    button.style.background = '#2d3e50';
+                    button.innerHTML = original;
+                    button.style.background = '';
                 }, 2000);
             }).catch(() => {
                 const textarea = document.createElement('textarea');
@@ -595,8 +651,8 @@
                 document.body.removeChild(textarea);
                 button.innerHTML = '<i class="fas fa-check"></i> Скопировано!';
                 setTimeout(() => {
-                    button.innerHTML = originalHtml;
-                    button.style.background = '#2d3e50';
+                    button.innerHTML = original;
+                    button.style.background = '';
                 }, 2000);
             });
         }
@@ -606,9 +662,9 @@
             if (!proxyContainer) return;
             try {
                 const url = 'https://raw.githubusercontent.com/kort0881/telegram-proxy-collector/main/verified/proxy_links_tme_clean.txt';
-                const response = await fetch(url);
-                if (!response.ok) throw new Error(`HTTP ${response.status}`);
-                const text = await response.text();
+                const resp = await fetch(url);
+                if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+                const text = await resp.text();
                 const lines = text.split('\n').map(l => l.trim()).filter(l => l && l.startsWith('https://t.me/proxy'));
                 if (lines.length === 0) {
                     proxyContainer.innerHTML = '<div>Прокси пока нет</div>';
