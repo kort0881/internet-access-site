@@ -30,7 +30,7 @@
             position: relative;
         }
 
-        /* ===== ФОН С ЛЕТАЮЩИМИ КОРОВАМИ (стиль chaingpt) ===== */
+        /* ===== ЯРКО-ГОЛУБОЕ НЕБО С ЛЕТАЮЩИМИ КОРОВАМИ ===== */
         .sky-bg {
             position: fixed;
             top: 0;
@@ -38,15 +38,16 @@
             width: 100%;
             height: 100%;
             z-index: -2;
-            background: radial-gradient(circle at 20% 30%, #0b0b14, #050508);
+            background: linear-gradient(145deg, #7bc5ff 0%, #b8e1ff 100%);
             overflow: hidden;
         }
 
+        /* Облака — белые, полупрозрачные */
         .cloud {
             position: absolute;
-            background: rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.85);
             border-radius: 1000px;
-            backdrop-filter: blur(4px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
             z-index: -1;
         }
         .cloud::before, .cloud::after {
@@ -73,15 +74,16 @@
         .cloud2 { animation: floatClouds 45s linear infinite; }
         .cloud3 { animation: floatClouds 55s linear infinite; }
 
+        /* Коровы — яркие, с тенью */
         .flying-cow {
             position: absolute;
             font-size: 72px;
-            filter: drop-shadow(0 0 6px rgba(0,255,255,0.3));
+            filter: drop-shadow(2px 4px 8px rgba(0,0,0,0.2));
             z-index: -1;
             pointer-events: none;
             animation-timing-function: linear;
             animation-iteration-count: infinite;
-            text-shadow: 0 0 8px rgba(0,255,255,0.2);
+            text-shadow: 0 0 4px rgba(0,0,0,0.2);
         }
         .cow1 { top: 12%; animation: flyAcross 22s linear infinite; font-size: 68px; }
         .cow2 { top: 35%; animation: flyAcross 28s linear infinite 3s; font-size: 58px; transform: scaleX(-1);}
@@ -106,14 +108,14 @@
             }
         }
 
-        /* Затемнение (чтобы текст читался) */
-        .dark-gradient {
+        /* Лёгкое затемнение, чтобы текст читался поверх яркого неба */
+        .dark-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(5, 5, 10, 0.6);
+            background: rgba(5, 5, 15, 0.5);
             backdrop-filter: blur(2px);
             z-index: -1;
             pointer-events: none;
@@ -128,12 +130,11 @@
             padding: 0 28px;
         }
 
-        /* ===== СТИЛИ В СТИЛЕ CHAINGPT ===== */
-        /* Хедер */
+        /* ===== СТИЛИ В СТИЛЕ CHAINGPT (тёмные карточки, неон) ===== */
         .glass-header {
-            background: rgba(10, 10, 18, 0.75);
+            background: rgba(10, 10, 18, 0.8);
             backdrop-filter: blur(16px);
-            border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+            border-bottom: 1px solid rgba(0, 255, 255, 0.3);
             padding: 18px 0;
             position: sticky;
             top: 0;
@@ -174,19 +175,18 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            background: rgba(0, 255, 255, 0.08);
-            border: 1px solid rgba(0, 255, 255, 0.25);
+            background: rgba(0, 255, 255, 0.1);
+            border: 1px solid rgba(0, 255, 255, 0.3);
             color: #e0e0e8;
             transition: all 0.25s;
         }
         .social-btn:hover {
-            background: rgba(0, 255, 255, 0.2);
+            background: rgba(0, 255, 255, 0.25);
             border-color: #0ff;
             box-shadow: 0 0 12px rgba(0,255,255,0.3);
             transform: translateY(-2px);
         }
 
-        /* Секции */
         .section {
             margin: 56px 0 40px;
         }
@@ -203,9 +203,8 @@
             margin-bottom: 32px;
         }
 
-        /* Угловатые карточки (как на chaingpt) */
         .corner-card {
-            background: rgba(15, 20, 30, 0.7);
+            background: rgba(15, 20, 30, 0.8);
             backdrop-filter: blur(12px);
             border: 1px solid rgba(0, 255, 255, 0.2);
             border-radius: 24px;
@@ -221,12 +220,12 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle at 30% 20%, rgba(0,255,255,0.05), transparent);
+            background: radial-gradient(circle at 30% 20%, rgba(0,255,255,0.08), transparent);
             pointer-events: none;
         }
         .corner-card:hover {
             border-color: #0ff;
-            box-shadow: 0 0 28px rgba(0, 255, 255, 0.15);
+            box-shadow: 0 0 28px rgba(0, 255, 255, 0.2);
             transform: translateY(-3px);
         }
 
@@ -239,16 +238,16 @@
         .info-card {
             flex: 1;
             min-width: 260px;
-            background: rgba(12, 16, 24, 0.7);
+            background: rgba(12, 16, 24, 0.8);
             backdrop-filter: blur(10px);
             border-radius: 24px;
             padding: 28px;
-            border: 1px solid rgba(0, 255, 255, 0.2);
+            border: 1px solid rgba(0, 255, 255, 0.25);
             transition: 0.25s;
         }
         .info-card:hover {
             border-color: #0ff;
-            box-shadow: 0 8px 24px rgba(0,255,255,0.1);
+            box-shadow: 0 8px 24px rgba(0,255,255,0.15);
         }
         .info-icon {
             width: 54px;
@@ -302,14 +301,13 @@
             display: inline-block;
             margin-top: 20px;
             padding: 6px 16px;
-            background: rgba(0, 255, 255, 0.12);
+            background: rgba(0, 255, 255, 0.15);
             border-radius: 30px;
             font-size: 0.8rem;
             color: #0ff;
             border: 1px solid rgba(0,255,255,0.3);
         }
 
-        /* Карточки конфигураций */
         .configs-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
@@ -317,10 +315,10 @@
             margin: 32px 0;
         }
         .config-card {
-            background: rgba(8, 12, 20, 0.7);
+            background: rgba(8, 12, 20, 0.8);
             backdrop-filter: blur(12px);
             border-radius: 24px;
-            border: 1px solid rgba(0, 255, 255, 0.25);
+            border: 1px solid rgba(0, 255, 255, 0.3);
             padding: 24px;
             transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
             position: relative;
@@ -328,11 +326,11 @@
         .config-card:hover {
             transform: translateY(-6px);
             border-color: #0ff;
-            box-shadow: 0 16px 32px -12px rgba(0, 255, 255, 0.2);
+            box-shadow: 0 16px 32px -12px rgba(0, 255, 255, 0.3);
         }
         .recommended {
             border-color: #0f0;
-            box-shadow: 0 0 15px rgba(0, 255, 0, 0.15);
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.2);
         }
         .rec-badge {
             position: absolute;
@@ -395,7 +393,6 @@
             border-color: #0ff;
         }
 
-        /* Прокси */
         .proxy-grid {
             display: flex;
             flex-wrap: wrap;
@@ -421,7 +418,6 @@
             box-shadow: 0 8px 20px rgba(0, 136, 204, 0.3);
         }
 
-        /* Скачать клиенты */
         .apps-grid {
             display: flex;
             flex-wrap: wrap;
@@ -430,13 +426,13 @@
             margin: 48px 0;
         }
         .app-card {
-            background: rgba(8, 12, 20, 0.7);
+            background: rgba(8, 12, 20, 0.8);
             backdrop-filter: blur(12px);
             border-radius: 24px;
             padding: 28px;
             width: 260px;
             text-align: center;
-            border: 1px solid rgba(0, 255, 255, 0.2);
+            border: 1px solid rgba(0, 255, 255, 0.3);
             transition: 0.3s;
         }
         .app-card:hover {
@@ -498,7 +494,7 @@
 </head>
 <body>
 
-    <!-- ЛЕТАЮЩИЕ КОРОВЫ (фон) -->
+    <!-- ЯРКО-ГОЛУБОЕ НЕБО С ЛЕТАЮЩИМИ КОРОВАМИ -->
     <div class="sky-bg">
         <div class="cloud cloud1"></div>
         <div class="cloud cloud2"></div>
@@ -509,7 +505,7 @@
         <div class="flying-cow cow4">🐮</div>
         <div class="flying-cow cow5">🐄</div>
     </div>
-    <div class="dark-gradient"></div>
+    <div class="dark-overlay"></div>
 
     <div class="glass-header">
         <div class="container">
@@ -529,7 +525,6 @@
     </div>
 
     <main class="container">
-        <!-- Инструкция -->
         <div class="info-grid">
             <div class="info-card">
                 <div class="info-icon"><i class="fas fa-compass"></i></div>
@@ -553,20 +548,17 @@
             </div>
         </div>
 
-        <!-- SEO блок -->
         <div class="corner-card" style="margin-bottom: 40px;">
             <div class="info-icon"><i class="fas fa-globe"></i></div>
             <h3 style="color:#fff; font-size:1.5rem; margin-bottom:16px;">Бесплатные VPN-конфигурации для России</h3>
-            <p>Сайт собирает рабочие VPN-настройки: VLESS, V2Ray, Hysteria, Trojan, VMess, Shadowsocks. Быстрый доступ к заблокиранным сайтам и мессенджерам.</p>
+            <p>Сайт собирает рабочие VPN-настройки: VLESS, V2Ray, Hysteria, Trojan, VMess, Shadowsocks. Быстрый доступ к заблокированным сайтам и мессенджерам.</p>
         </div>
 
-        <!-- MTProto прокси -->
         <div class="section">
             <h2 class="section-title">📡 MTProto прокси для Telegram</h2>
             <div id="proxy-list" class="proxy-grid">Загружаем прокси...</div>
         </div>
 
-        <!-- VPN конфигурации -->
         <div class="section">
             <h2 class="section-title">⚡ Актуальные конфигурации VPN</h2>
             <div class="configs-grid">
@@ -590,7 +582,6 @@
             </div>
         </div>
 
-        <!-- Скачать клиенты -->
         <div class="section">
             <h2 class="section-title">📱 Скачать VPN-клиенты</h2>
             <div class="apps-grid">
