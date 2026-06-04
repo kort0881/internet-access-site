@@ -22,12 +22,12 @@
         }
 
         body {
-            background: #0a0a0f;
             font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
             color: #e0e0e8;
             line-height: 1.5;
             min-height: 100vh;
             position: relative;
+            background: #7bc5ff; /* fallback */
         }
 
         /* ===== ЯРКО-ГОЛУБОЕ НЕБО С ЛЕТАЮЩИМИ КОРОВАМИ ===== */
@@ -38,16 +38,15 @@
             width: 100%;
             height: 100%;
             z-index: -2;
-            background: linear-gradient(145deg, #7bc5ff 0%, #b8e1ff 100%);
+            background: linear-gradient(145deg, #6bc0ff 0%, #a8d8ff 100%);
             overflow: hidden;
         }
 
-        /* Облака — белые, полупрозрачные */
         .cloud {
             position: absolute;
-            background: rgba(255, 255, 255, 0.85);
+            background: rgba(255, 255, 255, 0.95);
             border-radius: 1000px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
             z-index: -1;
         }
         .cloud::before, .cloud::after {
@@ -74,7 +73,6 @@
         .cloud2 { animation: floatClouds 45s linear infinite; }
         .cloud3 { animation: floatClouds 55s linear infinite; }
 
-        /* Коровы — яркие, с тенью */
         .flying-cow {
             position: absolute;
             font-size: 72px;
@@ -83,7 +81,6 @@
             pointer-events: none;
             animation-timing-function: linear;
             animation-iteration-count: infinite;
-            text-shadow: 0 0 4px rgba(0,0,0,0.2);
         }
         .cow1 { top: 12%; animation: flyAcross 22s linear infinite; font-size: 68px; }
         .cow2 { top: 35%; animation: flyAcross 28s linear infinite 3s; font-size: 58px; transform: scaleX(-1);}
@@ -97,10 +94,10 @@
                 opacity: 0;
             }
             12% {
-                opacity: 0.9;
+                opacity: 0.95;
             }
             88% {
-                opacity: 0.9;
+                opacity: 0.95;
             }
             100% {
                 transform: translateX(calc(100vw + 180px)) translateY(-50px) rotate(6deg);
@@ -108,20 +105,8 @@
             }
         }
 
-        /* Лёгкое затемнение, чтобы текст читался поверх яркого неба */
-        .dark-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(5, 5, 15, 0.5);
-            backdrop-filter: blur(2px);
-            z-index: -1;
-            pointer-events: none;
-        }
+        /* НЕТ ЗАТЕМНЕНИЯ — небо полностью видно */
 
-        /* Основной контейнер */
         .container {
             position: relative;
             z-index: 2;
@@ -130,10 +115,10 @@
             padding: 0 28px;
         }
 
-        /* ===== СТИЛИ В СТИЛЕ CHAINGPT (тёмные карточки, неон) ===== */
+        /* ===== ТЁМНЫЕ КАРТОЧКИ, ХЕДЕР, НЕОН ===== */
         .glass-header {
-            background: rgba(10, 10, 18, 0.8);
-            backdrop-filter: blur(16px);
+            background: rgba(8, 10, 18, 0.85);
+            backdrop-filter: blur(12px);
             border-bottom: 1px solid rgba(0, 255, 255, 0.3);
             padding: 18px 0;
             position: sticky;
@@ -157,7 +142,7 @@
             letter-spacing: -0.5px;
         }
         .logo p {
-            color: #6c7a8a;
+            color: #c0d0e0;
             font-size: 0.85rem;
             margin-top: 4px;
         }
@@ -175,15 +160,15 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            background: rgba(0, 255, 255, 0.1);
-            border: 1px solid rgba(0, 255, 255, 0.3);
+            background: rgba(0, 255, 255, 0.15);
+            border: 1px solid rgba(0, 255, 255, 0.35);
             color: #e0e0e8;
             transition: all 0.25s;
         }
         .social-btn:hover {
-            background: rgba(0, 255, 255, 0.25);
+            background: rgba(0, 255, 255, 0.3);
             border-color: #0ff;
-            box-shadow: 0 0 12px rgba(0,255,255,0.3);
+            box-shadow: 0 0 12px rgba(0,255,255,0.4);
             transform: translateY(-2px);
         }
 
@@ -201,27 +186,17 @@
             border-left: 4px solid #0ff;
             padding-left: 20px;
             margin-bottom: 32px;
+            text-shadow: 0 0 5px rgba(0,0,0,0.3);
         }
 
         .corner-card {
-            background: rgba(15, 20, 30, 0.8);
+            background: rgba(12, 16, 24, 0.85);
             backdrop-filter: blur(12px);
-            border: 1px solid rgba(0, 255, 255, 0.2);
+            border: 1px solid rgba(0, 255, 255, 0.25);
             border-radius: 24px;
             padding: 28px;
             transition: all 0.3s ease;
             position: relative;
-            overflow: hidden;
-        }
-        .corner-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 30% 20%, rgba(0,255,255,0.08), transparent);
-            pointer-events: none;
         }
         .corner-card:hover {
             border-color: #0ff;
@@ -238,7 +213,7 @@
         .info-card {
             flex: 1;
             min-width: 260px;
-            background: rgba(12, 16, 24, 0.8);
+            background: rgba(12, 16, 24, 0.85);
             backdrop-filter: blur(10px);
             border-radius: 24px;
             padding: 28px;
@@ -275,7 +250,7 @@
             margin-bottom: 12px;
             padding-left: 32px;
             position: relative;
-            color: #b0c0d0;
+            color: #d0e0f0;
         }
         .step-list li::before {
             content: counter(step);
@@ -301,11 +276,11 @@
             display: inline-block;
             margin-top: 20px;
             padding: 6px 16px;
-            background: rgba(0, 255, 255, 0.15);
+            background: rgba(0, 255, 255, 0.2);
             border-radius: 30px;
             font-size: 0.8rem;
             color: #0ff;
-            border: 1px solid rgba(0,255,255,0.3);
+            border: 1px solid rgba(0,255,255,0.4);
         }
 
         .configs-grid {
@@ -315,7 +290,7 @@
             margin: 32px 0;
         }
         .config-card {
-            background: rgba(8, 12, 20, 0.8);
+            background: rgba(8, 12, 20, 0.85);
             backdrop-filter: blur(12px);
             border-radius: 24px;
             border: 1px solid rgba(0, 255, 255, 0.3);
@@ -351,7 +326,7 @@
         }
         .config-category {
             font-size: 0.85rem;
-            color: #8aa;
+            color: #b0c0d0;
             margin-bottom: 20px;
         }
         .button-group {
@@ -400,8 +375,8 @@
             margin-top: 20px;
         }
         .proxy-item {
-            background: rgba(0, 136, 204, 0.2);
-            border: 1px solid rgba(0, 255, 255, 0.4);
+            background: rgba(0, 136, 204, 0.25);
+            border: 1px solid rgba(0, 255, 255, 0.5);
             padding: 10px 22px;
             border-radius: 60px;
             color: #0ff;
@@ -413,7 +388,7 @@
             gap: 8px;
         }
         .proxy-item:hover {
-            background: rgba(0, 255, 255, 0.3);
+            background: rgba(0, 255, 255, 0.4);
             transform: translateY(-2px);
             box-shadow: 0 8px 20px rgba(0, 136, 204, 0.3);
         }
@@ -426,7 +401,7 @@
             margin: 48px 0;
         }
         .app-card {
-            background: rgba(8, 12, 20, 0.8);
+            background: rgba(8, 12, 20, 0.85);
             backdrop-filter: blur(12px);
             border-radius: 24px;
             padding: 28px;
@@ -457,14 +432,14 @@
         .app-link {
             padding: 10px;
             border-radius: 40px;
-            background: rgba(255,255,255,0.05);
+            background: rgba(255,255,255,0.08);
             border: 1px solid rgba(0, 255, 255, 0.3);
             color: #e0e0e8;
             text-decoration: none;
             transition: 0.2s;
         }
         .app-link:hover {
-            background: rgba(0, 255, 255, 0.15);
+            background: rgba(0, 255, 255, 0.2);
             border-color: #0ff;
         }
 
@@ -472,8 +447,8 @@
             margin-top: 80px;
             padding: 40px 0;
             text-align: center;
-            border-top: 1px solid rgba(0, 255, 255, 0.2);
-            color: #7a8a9a;
+            border-top: 1px solid rgba(0, 255, 255, 0.3);
+            color: #c0d0e0;
         }
         .footer-links a {
             color: #0ff;
@@ -494,7 +469,7 @@
 </head>
 <body>
 
-    <!-- ЯРКО-ГОЛУБОЕ НЕБО С ЛЕТАЮЩИМИ КОРОВАМИ -->
+    <!-- ЯРКО-ГОЛУБОЕ НЕБО С ОБЛАКАМИ И ЛЕТАЮЩИМИ КОРОВАМИ (без затемнения) -->
     <div class="sky-bg">
         <div class="cloud cloud1"></div>
         <div class="cloud cloud2"></div>
@@ -505,7 +480,6 @@
         <div class="flying-cow cow4">🐮</div>
         <div class="flying-cow cow5">🐄</div>
     </div>
-    <div class="dark-overlay"></div>
 
     <div class="glass-header">
         <div class="container">
@@ -538,7 +512,7 @@
                 {% if last_update %}
                 <div class="update-badge"><i class="far fa-clock"></i> Обновлено: {{ last_update }}</div>
                 {% else %}
-                <div class="update-badge"><i class="far fa-clock"></i> Обновлено: 03.06.2026</div>
+                <div class="update-badge"><i class="far fa-clock"></i> Обновлено: 04.06.2026</div>
                 {% endif %}
             </div>
             <div class="info-card">
