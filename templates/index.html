@@ -5,15 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <meta name="google-site-verification" content="jHpcAMgKirVTtsqrIUrPzAFfA8vhcVAlBYtm9oBV__A" />
     <meta name="yandex-verification" content="83bc89c155ecedc0" />
-    
-    <title>{{ meta_title|default('Доступ к интернету — VPN без границ') }}</title>
-    <meta name="description" content="{{ meta_description|default('Бесплатные VPN-конфигурации: VLESS, WireGuard, Hysteria, Trojan. Обход блокировок в России.') }}">
-    <meta name="keywords" content="{{ meta_keywords|default('vpn, wireguard, vless, hysteria, trojan, обход блокировок') }}">
-    
+
+    <!-- ===== МЕТА-ТЕГИ ДЛЯ ВСЕХ СОЦСЕТЕЙ (Open Graph + Twitter Card) ===== -->
+    <meta property="og:title" content="Доступ к интернету — VPN без границ">
+    <meta property="og:description" content="Бесплатные VPN-конфигурации: VLESS, WireGuard, Hysteria, Trojan. Обход блокировок в России. Рабочие ссылки каждый день.">
+    <meta property="og:image" content="https://kort0881.github.io/internet-access-site/cover_private.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:url" content="https://kort0881.github.io/internet-access-site/">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Доступ к интернету">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Доступ к интернету — VPN без границ">
+    <meta name="twitter:description" content="Бесплатные VPN-конфигурации: VLESS, WireGuard, Hysteria, Trojan. Обход блокировок в России.">
+    <meta name="twitter:image" content="https://kort0881.github.io/internet-access-site/cover_private.png">
+    <!-- ===== КОНЕЦ МЕТА-ТЕГОВ ===== -->
+
+    <title>Доступ к интернету — VPN без границ</title>
+    <meta name="description" content="Бесплатные VPN-конфигурации: VLESS, WireGuard, Hysteria, Trojan. Обход блокировок в России.">
+    <meta name="keywords" content="vpn, wireguard, vless, hysteria, trojan, обход блокировок">
+
     <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌐</text></svg>">
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Roboto+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+
     <style>
         * {
             margin: 0;
@@ -27,10 +43,9 @@
             line-height: 1.5;
             min-height: 100vh;
             position: relative;
-            background: #7bc5ff; /* fallback */
+            background: #7bc5ff;
         }
 
-        /* ===== ЯРКО-ГОЛУБОЕ НЕБО С ЛЕТАЮЩИМИ КОРОВАМИ ===== */
         .sky-bg {
             position: fixed;
             top: 0;
@@ -105,8 +120,6 @@
             }
         }
 
-        /* НЕТ ЗАТЕМНЕНИЯ — небо полностью видно */
-
         .container {
             position: relative;
             z-index: 2;
@@ -115,7 +128,6 @@
             padding: 0 28px;
         }
 
-        /* ===== ТЁМНЫЕ КАРТОЧКИ, ХЕДЕР, НЕОН ===== */
         .glass-header {
             background: rgba(8, 10, 18, 0.85);
             backdrop-filter: blur(12px);
@@ -469,7 +481,6 @@
 </head>
 <body>
 
-    <!-- ЯРКО-ГОЛУБОЕ НЕБО С ОБЛАКАМИ И ЛЕТАЮЩИМИ КОРОВАМИ (без затемнения) -->
     <div class="sky-bg">
         <div class="cloud cloud1"></div>
         <div class="cloud cloud2"></div>
@@ -509,11 +520,7 @@
                     <li>Вставьте в приложение <span class="highlight">v2rayNG / NekoBox / v2rayN</span></li>
                     <li>Подпишитесь на Telegram-каналы для новых ключей</li>
                 </ul>
-                {% if last_update %}
-                <div class="update-badge"><i class="far fa-clock"></i> Обновлено: {{ last_update }}</div>
-                {% else %}
                 <div class="update-badge"><i class="far fa-clock"></i> Обновлено: 04.06.2026</div>
-                {% endif %}
             </div>
             <div class="info-card">
                 <div class="info-icon"><i class="fas fa-shield-alt"></i></div>
@@ -536,23 +543,44 @@
         <div class="section">
             <h2 class="section-title">⚡ Актуальные конфигурации VPN</h2>
             <div class="configs-grid">
-                {% for config in configs %}
-                <div class="config-card {% if config.is_recommended %}recommended{% endif %}">
-                    {% if config.is_recommended %}
+                <!-- Пример карточки конфигурации (можно дублировать под свои данные) -->
+                <div class="config-card recommended">
                     <div class="rec-badge"><i class="fas fa-star"></i> Рекомендовано</div>
-                    {% endif %}
-                    <div class="config-name">{{ config.name }}</div>
-                    <div class="config-category"><i class="fas fa-tag"></i> {{ config.category }}</div>
+                    <div class="config-name">VLESS + uTLS</div>
+                    <div class="config-category"><i class="fas fa-tag"></i> VLESS / Reality</div>
                     <div class="button-group">
-                        <button class="btn-neon btn-copy copy-btn" data-url="{{ config.url }}" onclick="copyToClipboard(this, '{{ config.url }}')">
+                        <button class="btn-neon btn-copy copy-btn" data-url="https://example.com/config1" onclick="copyToClipboard(this, 'https://example.com/config1')">
                             <i class="fas fa-copy"></i> Копировать ссылку
                         </button>
-                        <a href="{{ config.url }}" target="_blank" class="btn-neon btn-link">
+                        <a href="https://example.com/config1" target="_blank" class="btn-neon btn-link">
                             <i class="fas fa-external-link-alt"></i> Открыть
                         </a>
                     </div>
                 </div>
-                {% endfor %}
+                <div class="config-card">
+                    <div class="config-name">WireGuard</div>
+                    <div class="config-category"><i class="fas fa-tag"></i> WireGuard</div>
+                    <div class="button-group">
+                        <button class="btn-neon btn-copy copy-btn" data-url="https://example.com/config2" onclick="copyToClipboard(this, 'https://example.com/config2')">
+                            <i class="fas fa-copy"></i> Копировать ссылку
+                        </button>
+                        <a href="https://example.com/config2" target="_blank" class="btn-neon btn-link">
+                            <i class="fas fa-external-link-alt"></i> Открыть
+                        </a>
+                    </div>
+                </div>
+                <div class="config-card">
+                    <div class="config-name">Hysteria2</div>
+                    <div class="config-category"><i class="fas fa-tag"></i> Hysteria</div>
+                    <div class="button-group">
+                        <button class="btn-neon btn-copy copy-btn" data-url="https://example.com/config3" onclick="copyToClipboard(this, 'https://example.com/config3')">
+                            <i class="fas fa-copy"></i> Копировать ссылку
+                        </button>
+                        <a href="https://example.com/config3" target="_blank" class="btn-neon btn-link">
+                            <i class="fas fa-external-link-alt"></i> Открыть
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
 
