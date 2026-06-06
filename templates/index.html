@@ -6,7 +6,6 @@
     <meta name="google-site-verification" content="jHpcAMgKirVTtsqrIUrPzAFfA8vhcVAlBYtm9oBV__A" />
     <meta name="yandex-verification" content="83bc89c155ecedc0" />
 
-    <!-- ===== МЕТА-ТЕГИ ДЛЯ ВСЕХ СОЦСЕТЕЙ ===== -->
     <meta property="og:title" content="Доступ к интернету — VPN без границ">
     <meta property="og:description" content="Бесплатные VPN-конфигурации: VLESS, WireGuard, Hysteria, Trojan. Обход блокировок в России. Рабочие ссылки каждый день.">
     <meta property="og:image" content="https://kort0881.github.io/internet-access-site/cover_private.png">
@@ -15,6 +14,7 @@
     <meta property="og:url" content="https://kort0881.github.io/internet-access-site/">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Доступ к интернету">
+
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Доступ к интернету — VPN без границ">
     <meta name="twitter:description" content="Бесплатные VPN-конфигурации: VLESS, WireGuard, Hysteria, Trojan. Обход блокировок в России.">
@@ -29,45 +29,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-            color: #e0e0e8;
-            line-height: 1.5;
-            min-height: 100vh;
-            position: relative;
-            background: #7bc5ff;
-        }
-
-        .sky-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -2;
-            background: linear-gradient(145deg, #6bc0ff 0%, #a8d8ff 100%);
-            overflow: hidden;
-        }
-
-        .cloud {
-            position: absolute;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 1000px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-            z-index: -1;
-        }
-        .cloud::before, .cloud::after {
-            content: '';
-            position: absolute;
-            background: inherit;
-            border-radius: 50%;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; color: #e0e0e8; line-height: 1.5; min-height: 100vh; position: relative; background: #7bc5ff; }
+        .sky-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; background: linear-gradient(145deg, #6bc0ff 0%, #a8d8ff 100%); overflow: hidden; }
+        .cloud { position: absolute; background: rgba(255, 255, 255, 0.95); border-radius: 1000px; box-shadow: 0 8px 20px rgba(0,0,0,0.1); z-index: -1; }
+        .cloud::before, .cloud::after { content: ''; position: absolute; background: inherit; border-radius: 50%; }
         .cloud1 { width: 240px; height: 140px; top: 15%; left: -240px; }
         .cloud1::before { width: 110px; height: 110px; top: -45px; left: 30px; }
         .cloud1::after { width: 150px; height: 150px; top: -70px; left: 90px; }
@@ -77,408 +43,69 @@
         .cloud3 { width: 200px; height: 120px; bottom: 20%; left: -200px; }
         .cloud3::before { width: 90px; height: 90px; top: -35px; left: 25px; }
         .cloud3::after { width: 120px; height: 120px; top: -60px; left: 80px; }
-
-        @keyframes floatClouds {
-            from { transform: translateX(0); }
-            to { transform: translateX(calc(100vw + 300px)); }
-        }
+        @keyframes floatClouds { from { transform: translateX(0); } to { transform: translateX(calc(100vw + 300px)); } }
         .cloud1 { animation: floatClouds 35s linear infinite; }
         .cloud2 { animation: floatClouds 45s linear infinite; }
         .cloud3 { animation: floatClouds 55s linear infinite; }
-
-        .flying-cow {
-            position: absolute;
-            font-size: 72px;
-            filter: drop-shadow(2px 4px 8px rgba(0,0,0,0.2));
-            z-index: -1;
-            pointer-events: none;
-            animation-timing-function: linear;
-            animation-iteration-count: infinite;
-        }
+        .flying-cow { position: absolute; font-size: 72px; filter: drop-shadow(2px 4px 8px rgba(0,0,0,0.2)); z-index: -1; pointer-events: none; animation-timing-function: linear; animation-iteration-count: infinite; }
         .cow1 { top: 12%; animation: flyAcross 22s linear infinite; font-size: 68px; }
         .cow2 { top: 35%; animation: flyAcross 28s linear infinite 3s; font-size: 58px; transform: scaleX(-1);}
         .cow3 { top: 62%; animation: flyAcross 32s linear infinite 7s; font-size: 82px; }
         .cow4 { top: 78%; animation: flyAcross 38s linear infinite 12s; font-size: 54px; transform: scaleX(-1);}
         .cow5 { top: 25%; animation: flyAcross 42s linear infinite 18s; font-size: 64px; }
-
-        @keyframes flyAcross {
-            0% {
-                transform: translateX(-180px) translateY(0px) rotate(0deg);
-                opacity: 0;
-            }
-            12% {
-                opacity: 0.95;
-            }
-            88% {
-                opacity: 0.95;
-            }
-            100% {
-                transform: translateX(calc(100vw + 180px)) translateY(-50px) rotate(6deg);
-                opacity: 0;
-            }
-        }
-
-        .container {
-            position: relative;
-            z-index: 2;
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 28px;
-        }
-
-        .glass-header {
-            background: rgba(8, 10, 18, 0.85);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(0, 255, 255, 0.3);
-            padding: 18px 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-        .header-flex {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-        .logo h1 {
-            font-size: 1.9rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, #fff, #0ff, #a06eff);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            letter-spacing: -0.5px;
-        }
-        .logo p {
-            color: #c0d0e0;
-            font-size: 0.85rem;
-            margin-top: 4px;
-        }
-        .social-links {
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-        .social-btn {
-            padding: 8px 20px;
-            border-radius: 40px;
-            text-decoration: none;
-            font-size: 0.85rem;
-            font-weight: 500;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(0, 255, 255, 0.15);
-            border: 1px solid rgba(0, 255, 255, 0.35);
-            color: #e0e0e8;
-            transition: all 0.25s;
-        }
-        .social-btn:hover {
-            background: rgba(0, 255, 255, 0.3);
-            border-color: #0ff;
-            box-shadow: 0 0 12px rgba(0,255,255,0.4);
-            transform: translateY(-2px);
-        }
-
-        .section {
-            margin: 56px 0 40px;
-        }
-        .section-title {
-            font-size: 2.2rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, #fff, #0ff);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            display: inline-block;
-            border-left: 4px solid #0ff;
-            padding-left: 20px;
-            margin-bottom: 32px;
-            text-shadow: 0 0 5px rgba(0,0,0,0.3);
-        }
-
-        .corner-card {
-            background: rgba(12, 16, 24, 0.85);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(0, 255, 255, 0.25);
-            border-radius: 24px;
-            padding: 28px;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-        .corner-card:hover {
-            border-color: #0ff;
-            box-shadow: 0 0 28px rgba(0, 255, 255, 0.2);
-            transform: translateY(-3px);
-        }
-
-        .info-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 28px;
-            margin-bottom: 48px;
-        }
-        .info-card {
-            flex: 1;
-            min-width: 260px;
-            background: rgba(12, 16, 24, 0.85);
-            backdrop-filter: blur(10px);
-            border-radius: 24px;
-            padding: 28px;
-            border: 1px solid rgba(0, 255, 255, 0.25);
-            transition: 0.25s;
-        }
-        .info-card:hover {
-            border-color: #0ff;
-            box-shadow: 0 8px 24px rgba(0,255,255,0.15);
-        }
-        .info-icon {
-            width: 54px;
-            height: 54px;
-            background: linear-gradient(135deg, #0ff, #a06eff);
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 28px;
-            margin-bottom: 24px;
-        }
-        .info-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 16px;
-            color: #fff;
-            font-weight: 600;
-        }
-        .step-list {
-            list-style: none;
-            counter-reset: step;
-        }
-        .step-list li {
-            counter-increment: step;
-            margin-bottom: 12px;
-            padding-left: 32px;
-            position: relative;
-            color: #d0e0f0;
-        }
-        .step-list li::before {
-            content: counter(step);
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 22px;
-            height: 22px;
-            background: linear-gradient(135deg, #0ff, #0088ff);
-            border-radius: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 12px;
-            font-weight: bold;
-            color: #000;
-        }
-        .highlight {
-            color: #0ff;
-            font-weight: 600;
-        }
-        .update-badge {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 6px 16px;
-            background: rgba(0, 255, 255, 0.2);
-            border-radius: 30px;
-            font-size: 0.8rem;
-            color: #0ff;
-            border: 1px solid rgba(0,255,255,0.4);
-        }
-
-        .configs-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-            gap: 28px;
-            margin: 32px 0;
-        }
-        .config-card {
-            background: rgba(8, 12, 20, 0.85);
-            backdrop-filter: blur(12px);
-            border-radius: 24px;
-            border: 1px solid rgba(0, 255, 255, 0.3);
-            padding: 24px;
-            transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-            position: relative;
-        }
-        .config-card:hover {
-            transform: translateY(-6px);
-            border-color: #0ff;
-            box-shadow: 0 16px 32px -12px rgba(0, 255, 255, 0.3);
-        }
-        .recommended {
-            border-color: #0f0;
-            box-shadow: 0 0 15px rgba(0, 255, 0, 0.2);
-        }
-        .rec-badge {
-            position: absolute;
-            top: 16px;
-            right: 20px;
-            background: linear-gradient(135deg, #0f0, #0a0);
-            color: #000;
-            font-weight: bold;
-            font-size: 0.7rem;
-            padding: 4px 12px;
-            border-radius: 30px;
-        }
-        .config-name {
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: #0ff;
-            margin-bottom: 8px;
-        }
-        .config-category {
-            font-size: 0.85rem;
-            color: #b0c0d0;
-            margin-bottom: 20px;
-        }
-        .button-group {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin-top: 20px;
-        }
-        .btn-neon {
-            padding: 12px;
-            border-radius: 40px;
-            font-weight: 600;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.2s;
-            border: none;
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            text-decoration: none;
-            background: rgba(0, 255, 255, 0.1);
-            border: 1px solid rgba(0, 255, 255, 0.5);
-            color: #0ff;
-        }
-        .btn-copy {
-            background: linear-gradient(95deg, #a06eff, #0ff);
-            color: #000;
-            font-weight: 700;
-            border: none;
-        }
-        .btn-copy:hover {
-            transform: scale(1.02);
-            box-shadow: 0 0 20px #0ff;
-        }
-        .btn-link:hover {
-            background: rgba(0, 255, 255, 0.25);
-            border-color: #0ff;
-        }
-
-        .proxy-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 14px;
-            margin-top: 20px;
-        }
-        .proxy-item {
-            background: rgba(0, 136, 204, 0.25);
-            border: 1px solid rgba(0, 255, 255, 0.5);
-            padding: 10px 22px;
-            border-radius: 60px;
-            color: #0ff;
-            text-decoration: none;
-            font-weight: 500;
-            transition: 0.2s;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .proxy-item:hover {
-            background: rgba(0, 255, 255, 0.4);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(0, 136, 204, 0.3);
-        }
-
-        .apps-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 28px;
-            justify-content: center;
-            margin: 48px 0;
-        }
-        .app-card {
-            background: rgba(8, 12, 20, 0.85);
-            backdrop-filter: blur(12px);
-            border-radius: 24px;
-            padding: 28px;
-            width: 260px;
-            text-align: center;
-            border: 1px solid rgba(0, 255, 255, 0.3);
-            transition: 0.3s;
-        }
-        .app-card:hover {
-            border-color: #0ff;
-            transform: translateY(-5px);
-        }
-        .app-icon {
-            font-size: 48px;
-            margin-bottom: 16px;
-            color: #0ff;
-        }
-        .app-card h3 {
-            font-size: 1.3rem;
-            margin-bottom: 20px;
-            color: #fff;
-        }
-        .app-links {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-        .app-link {
-            padding: 10px;
-            border-radius: 40px;
-            background: rgba(255,255,255,0.08);
-            border: 1px solid rgba(0, 255, 255, 0.3);
-            color: #e0e0e8;
-            text-decoration: none;
-            transition: 0.2s;
-        }
-        .app-link:hover {
-            background: rgba(0, 255, 255, 0.2);
-            border-color: #0ff;
-        }
-
-        footer {
-            margin-top: 80px;
-            padding: 40px 0;
-            text-align: center;
-            border-top: 1px solid rgba(0, 255, 255, 0.3);
-            color: #c0d0e0;
-        }
-        .footer-links a {
-            color: #0ff;
-            margin: 0 12px;
-            font-size: 1.5rem;
-            transition: 0.2s;
-        }
-        .footer-links a:hover {
-            text-shadow: 0 0 8px #0ff;
-        }
-        @media (max-width: 800px) {
-            .container { padding: 0 20px; }
-            .configs-grid { grid-template-columns: 1fr; }
-            .info-grid { flex-direction: column; }
-            .section-title { font-size: 1.8rem; }
-        }
+        @keyframes flyAcross { 0% { transform: translateX(-180px) translateY(0px) rotate(0deg); opacity: 0; } 12% { opacity: 0.95; } 88% { opacity: 0.95; } 100% { transform: translateX(calc(100vw + 180px)) translateY(-50px) rotate(6deg); opacity: 0; } }
+        .container { position: relative; z-index: 2; max-width: 1400px; margin: 0 auto; padding: 0 28px; }
+        .glass-header { background: rgba(8, 10, 18, 0.85); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(0, 255, 255, 0.3); padding: 18px 0; position: sticky; top: 0; z-index: 100; }
+        .header-flex { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .logo h1 { font-size: 1.9rem; font-weight: 700; background: linear-gradient(135deg, #fff, #0ff, #a06eff); -webkit-background-clip: text; background-clip: text; color: transparent; letter-spacing: -0.5px; }
+        .logo p { color: #c0d0e0; font-size: 0.85rem; margin-top: 4px; }
+        .social-links { display: flex; gap: 12px; flex-wrap: wrap; }
+        .social-btn { padding: 8px 20px; border-radius: 40px; text-decoration: none; font-size: 0.85rem; font-weight: 500; display: inline-flex; align-items: center; gap: 8px; background: rgba(0, 255, 255, 0.15); border: 1px solid rgba(0, 255, 255, 0.35); color: #e0e0e8; transition: all 0.25s; }
+        .social-btn:hover { background: rgba(0, 255, 255, 0.3); border-color: #0ff; box-shadow: 0 0 12px rgba(0,255,255,0.4); transform: translateY(-2px); }
+        .section { margin: 56px 0 40px; }
+        .section-title { font-size: 2.2rem; font-weight: 700; background: linear-gradient(135deg, #fff, #0ff); -webkit-background-clip: text; background-clip: text; color: transparent; display: inline-block; border-left: 4px solid #0ff; padding-left: 20px; margin-bottom: 32px; text-shadow: 0 0 5px rgba(0,0,0,0.3); }
+        .corner-card { background: rgba(12, 16, 24, 0.85); backdrop-filter: blur(12px); border: 1px solid rgba(0, 255, 255, 0.25); border-radius: 24px; padding: 28px; transition: all 0.3s ease; position: relative; }
+        .corner-card:hover { border-color: #0ff; box-shadow: 0 0 28px rgba(0, 255, 255, 0.2); transform: translateY(-3px); }
+        .info-grid { display: flex; flex-wrap: wrap; gap: 28px; margin-bottom: 48px; }
+        .info-card { flex: 1; min-width: 260px; background: rgba(12, 16, 24, 0.85); backdrop-filter: blur(10px); border-radius: 24px; padding: 28px; border: 1px solid rgba(0, 255, 255, 0.25); transition: 0.25s; }
+        .info-card:hover { border-color: #0ff; box-shadow: 0 8px 24px rgba(0,255,255,0.15); }
+        .info-icon { width: 54px; height: 54px; background: linear-gradient(135deg, #0ff, #a06eff); border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 28px; margin-bottom: 24px; }
+        .info-card h3 { font-size: 1.5rem; margin-bottom: 16px; color: #fff; font-weight: 600; }
+        .step-list { list-style: none; counter-reset: step; }
+        .step-list li { counter-increment: step; margin-bottom: 12px; padding-left: 32px; position: relative; color: #d0e0f0; }
+        .step-list li::before { content: counter(step); position: absolute; left: 0; top: 0; width: 22px; height: 22px; background: linear-gradient(135deg, #0ff, #0088ff); border-radius: 30px; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold; color: #000; }
+        .highlight { color: #0ff; font-weight: 600; }
+        .update-badge { display: inline-block; margin-top: 20px; padding: 6px 16px; background: rgba(0, 255, 255, 0.2); border-radius: 30px; font-size: 0.8rem; color: #0ff; border: 1px solid rgba(0,255,255,0.4); }
+        .configs-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 28px; margin: 32px 0; }
+        .config-card { background: rgba(8, 12, 20, 0.85); backdrop-filter: blur(12px); border-radius: 24px; border: 1px solid rgba(0, 255, 255, 0.3); padding: 24px; transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1); position: relative; }
+        .config-card:hover { transform: translateY(-6px); border-color: #0ff; box-shadow: 0 16px 32px -12px rgba(0, 255, 255, 0.3); }
+        .recommended { border-color: #0f0; box-shadow: 0 0 15px rgba(0, 255, 0, 0.2); }
+        .rec-badge { position: absolute; top: 16px; right: 20px; background: linear-gradient(135deg, #0f0, #0a0); color: #000; font-weight: bold; font-size: 0.7rem; padding: 4px 12px; border-radius: 30px; }
+        .config-name { font-size: 1.4rem; font-weight: 700; color: #0ff; margin-bottom: 8px; }
+        .config-category { font-size: 0.85rem; color: #b0c0d0; margin-bottom: 20px; }
+        .button-group { display: flex; flex-direction: column; gap: 12px; margin-top: 20px; }
+        .btn-neon { padding: 12px; border-radius: 40px; font-weight: 600; text-align: center; cursor: pointer; transition: all 0.2s; border: none; font-size: 0.9rem; display: flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none; background: rgba(0, 255, 255, 0.1); border: 1px solid rgba(0, 255, 255, 0.5); color: #0ff; }
+        .btn-copy { background: linear-gradient(95deg, #a06eff, #0ff); color: #000; font-weight: 700; border: none; }
+        .btn-copy:hover { transform: scale(1.02); box-shadow: 0 0 20px #0ff; }
+        .btn-link:hover { background: rgba(0, 255, 255, 0.25); border-color: #0ff; }
+        .proxy-grid { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 20px; }
+        .proxy-item { background: rgba(0, 136, 204, 0.25); border: 1px solid rgba(0, 255, 255, 0.5); padding: 10px 22px; border-radius: 60px; color: #0ff; text-decoration: none; font-weight: 500; transition: 0.2s; display: inline-flex; align-items: center; gap: 8px; }
+        .proxy-item:hover { background: rgba(0, 255, 255, 0.4); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0, 136, 204, 0.3); }
+        .apps-grid { display: flex; flex-wrap: wrap; gap: 28px; justify-content: center; margin: 48px 0; }
+        .app-card { background: rgba(8, 12, 20, 0.85); backdrop-filter: blur(12px); border-radius: 24px; padding: 28px; width: 260px; text-align: center; border: 1px solid rgba(0, 255, 255, 0.3); transition: 0.3s; }
+        .app-card:hover { border-color: #0ff; transform: translateY(-5px); }
+        .app-icon { font-size: 48px; margin-bottom: 16px; color: #0ff; }
+        .app-card h3 { font-size: 1.3rem; margin-bottom: 20px; color: #fff; }
+        .app-links { display: flex; flex-direction: column; gap: 12px; }
+        .app-link { padding: 10px; border-radius: 40px; background: rgba(255,255,255,0.08); border: 1px solid rgba(0, 255, 255, 0.3); color: #e0e0e8; text-decoration: none; transition: 0.2s; }
+        .app-link:hover { background: rgba(0, 255, 255, 0.2); border-color: #0ff; }
+        footer { margin-top: 80px; padding: 40px 0; text-align: center; border-top: 1px solid rgba(0, 255, 255, 0.3); color: #c0d0e0; }
+        .footer-links a { color: #0ff; margin: 0 12px; font-size: 1.5rem; transition: 0.2s; }
+        .footer-links a:hover { text-shadow: 0 0 8px #0ff; }
+        @media (max-width: 800px) { .container { padding: 0 20px; } .configs-grid { grid-template-columns: 1fr; } .info-grid { flex-direction: column; } .section-title { font-size: 1.8rem; } }
     </style>
 </head>
 <body>
-
     <div class="sky-bg">
         <div class="cloud cloud1"></div>
         <div class="cloud cloud2"></div>
@@ -493,10 +120,7 @@
     <div class="glass-header">
         <div class="container">
             <div class="header-flex">
-                <div class="logo">
-                    <h1>🌐 Доступ к интернету</h1>
-                    <p>VPN · Свобода без границ</p>
-                </div>
+                <div class="logo"><h1>🌐 Доступ к интернету</h1><p>VPN · Свобода без границ</p></div>
                 <div class="social-links">
                     <a href="https://t.me/vlesstrojan" class="social-btn"><i class="fab fa-telegram"></i> VLESS & Trojan</a>
                     <a href="https://t.me/kibersosnew" class="social-btn"><i class="fab fa-telegram"></i> KiberSOS</a>
@@ -518,7 +142,7 @@
                     <li>Вставьте в приложение <span class="highlight">v2rayNG / NekoBox / v2rayN</span></li>
                     <li>Подпишитесь на Telegram-каналы для новых ключей</li>
                 </ul>
-                <div class="update-badge" id="update-badge"><i class="far fa-clock"></i> Обновление...</div>
+                <div class="update-badge" id="update-badge"><i class="far fa-clock"></i> Загрузка...</div>
             </div>
             <div class="info-card">
                 <div class="info-icon"><i class="fas fa-shield-alt"></i></div>
@@ -546,40 +170,16 @@
         <div class="section">
             <h2 class="section-title">📱 Скачать VPN-клиенты</h2>
             <div class="apps-grid">
-                <div class="app-card">
-                    <div class="app-icon"><i class="fab fa-android"></i></div>
-                    <h3>Android</h3>
-                    <div class="app-links">
-                        <a href="https://github.com/2dust/v2rayNG/releases/latest" class="app-link">v2rayNG</a>
-                        <a href="https://github.com/MatsuriDayo/NekoBoxForAndroid/releases/latest" class="app-link">NekoBox</a>
-                        <a href="https://www.happ.su/main" class="app-link">Happ</a>
-                        <a href="https://karing.app/en/download/" class="app-link">Karing</a>
-                    </div>
-                </div>
-                <div class="app-card">
-                    <div class="app-icon"><i class="fab fa-windows"></i></div>
-                    <h3>Windows</h3>
-                    <div class="app-links">
-                        <a href="https://github.com/2dust/v2rayN/releases/latest/download/v2rayN-windows-64.zip" class="app-link">v2rayN</a>
-                    </div>
-                </div>
-                <div class="app-card">
-                    <div class="app-icon"><i class="fab fa-apple"></i></div>
-                    <h3>iOS / macOS</h3>
-                    <div class="app-links">
-                        <a href="https://apps.apple.com/app/shadowrocket/id932747118" class="app-link">Shadowrocket</a>
-                    </div>
-                </div>
+                <div class="app-card"><div class="app-icon"><i class="fab fa-android"></i></div><h3>Android</h3><div class="app-links"><a href="https://github.com/2dust/v2rayNG/releases/latest" class="app-link">v2rayNG</a><a href="https://github.com/MatsuriDayo/NekoBoxForAndroid/releases/latest" class="app-link">NekoBox</a><a href="https://www.happ.su/main" class="app-link">Happ</a><a href="https://karing.app/en/download/" class="app-link">Karing</a></div></div>
+                <div class="app-card"><div class="app-icon"><i class="fab fa-windows"></i></div><h3>Windows</h3><div class="app-links"><a href="https://github.com/2dust/v2rayN/releases/latest/download/v2rayN-windows-64.zip" class="app-link">v2rayN</a></div></div>
+                <div class="app-card"><div class="app-icon"><i class="fab fa-apple"></i></div><h3>iOS / macOS</h3><div class="app-links"><a href="https://apps.apple.com/app/shadowrocket/id932747118" class="app-link">Shadowrocket</a></div></div>
             </div>
         </div>
     </main>
 
     <footer>
         <div class="container">
-            <div class="footer-links">
-                <a href="https://github.com/kort0881/vpn-checker-backend" target="_blank"><i class="fab fa-github"></i></a>
-                <a href="https://t.me/vlesstrojan" target="_blank"><i class="fab fa-telegram"></i></a>
-            </div>
+            <div class="footer-links"><a href="https://github.com/kort0881/vpn-checker-backend" target="_blank"><i class="fab fa-github"></i></a><a href="https://t.me/vlesstrojan" target="_blank"><i class="fab fa-telegram"></i></a></div>
             <div style="margin-top: 24px;">© 2026 Доступ к интернету</div>
         </div>
     </footer>
@@ -590,10 +190,7 @@
             navigator.clipboard.writeText(url).then(() => {
                 button.innerHTML = '<i class="fas fa-check"></i> Скопировано!';
                 button.style.background = 'linear-gradient(95deg, #00ff88, #00cc66)';
-                setTimeout(() => {
-                    button.innerHTML = original;
-                    button.style.background = '';
-                }, 2000);
+                setTimeout(() => { button.innerHTML = original; button.style.background = ''; }, 2000);
             }).catch(() => {
                 const textarea = document.createElement('textarea');
                 textarea.value = url;
@@ -602,10 +199,7 @@
                 document.execCommand('copy');
                 document.body.removeChild(textarea);
                 button.innerHTML = '<i class="fas fa-check"></i> Скопировано!';
-                setTimeout(() => {
-                    button.innerHTML = original;
-                    button.style.background = '';
-                }, 2000);
+                setTimeout(() => { button.innerHTML = original; button.style.background = ''; }, 2000);
             });
         }
 
@@ -618,10 +212,7 @@
                 if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
                 const text = await resp.text();
                 const lines = text.split('\n').map(l => l.trim()).filter(l => l && l.startsWith('https://t.me/proxy'));
-                if (lines.length === 0) {
-                    proxyContainer.innerHTML = '<div>Прокси пока нет</div>';
-                    return;
-                }
+                if (lines.length === 0) { proxyContainer.innerHTML = '<div>Прокси пока нет</div>'; return; }
                 proxyContainer.innerHTML = '';
                 lines.forEach((link, idx) => {
                     const a = document.createElement('a');
@@ -632,7 +223,7 @@
                     proxyContainer.appendChild(a);
                 });
             } catch (e) {
-                console.error('Ошибка загрузки прокси:', e);
+                console.error(e);
                 proxyContainer.innerHTML = '<div>Ошибка загрузки прокси</div>';
             }
         }
@@ -648,7 +239,6 @@
                 const content = atob(data.content);
                 const lines = content.split('\n');
                 
-                // Извлекаем WHITE-ссылки
                 const whiteUrls = [];
                 let inWhite = false;
                 for (let line of lines) {
@@ -657,7 +247,6 @@
                     else if (inWhite && line.trim().startsWith('http')) whiteUrls.push(line.trim());
                 }
                 
-                // Извлекаем дату генерации
                 let lastUpdate = '';
                 for (let line of lines) {
                     if (line.startsWith('# Generated:')) {
@@ -667,11 +256,8 @@
                     }
                 }
                 const badge = document.getElementById('update-badge');
-                if (lastUpdate) {
-                    badge.innerHTML = `<i class="far fa-clock"></i> Обновлено: ${lastUpdate.replace('T', ' ')} UTC`;
-                } else {
-                    badge.innerHTML = `<i class="far fa-clock"></i> Обновлено: сейчас`;
-                }
+                if (lastUpdate) badge.innerHTML = `<i class="far fa-clock"></i> Обновлено: ${lastUpdate.replace('T', ' ')} UTC`;
+                else badge.innerHTML = `<i class="far fa-clock"></i> Обновлено: сейчас`;
                 
                 if (whiteUrls.length === 0) {
                     container.innerHTML = '<div style="grid-column:1/-1;text-align:center;">Нет доступных конфигураций</div>';
@@ -717,8 +303,8 @@
                     container.appendChild(card);
                 });
             } catch (e) {
-                console.error('Ошибка загрузки конфигураций:', e);
-                container.innerHTML = '<div style="grid-column:1/-1;text-align:center;">Ошибка загрузки конфигураций. Попробуйте позже.</div>';
+                console.error(e);
+                container.innerHTML = '<div style="grid-column:1/-1;text-align:center;">Ошибка загрузки конфигураций</div>';
             }
         }
 
