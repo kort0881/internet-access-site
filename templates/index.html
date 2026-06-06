@@ -3,69 +3,492 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <meta name="google-site-verification" content="jHpcAMgKirVTtsqrIUrPzAFfA8vhcVAlBYtm9oBV__A" />
+    <meta name="yandex-verification" content="83bc89c155ecedc0" />
+
+    <!-- ===== МЕТА-ТЕГИ ДЛЯ ВСЕХ СОЦСЕТЕЙ ===== -->
+    <meta property="og:title" content="Доступ к интернету — VPN без границ">
+    <meta property="og:description" content="Бесплатные VPN-конфигурации: VLESS, WireGuard, Hysteria, Trojan. Обход блокировок в России. Рабочие ссылки каждый день.">
+    <meta property="og:image" content="https://kort0881.github.io/internet-access-site/cover_private.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:url" content="https://kort0881.github.io/internet-access-site/">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Доступ к интернету">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Доступ к интернету — VPN без границ">
+    <meta name="twitter:description" content="Бесплатные VPN-конфигурации: VLESS, WireGuard, Hysteria, Trojan. Обход блокировок в России.">
+    <meta name="twitter:image" content="https://kort0881.github.io/internet-access-site/cover_private.png">
+
     <title>Доступ к интернету — VPN без границ</title>
     <meta name="description" content="Бесплатные VPN-конфигурации: VLESS, WireGuard, Hysteria, Trojan. Обход блокировок в России.">
+    <meta name="keywords" content="vpn, wireguard, vless, hysteria, trojan, обход блокировок">
+
     <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌐</text></svg>">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Roboto+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
-        /* (оставьте ваши стили, они не меняются) */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Inter', system-ui, sans-serif; color: #e0f0ff; line-height: 1.5; min-height: 100vh; background: #000; position: relative; }
-        .gif-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; pointer-events: none; }
-        .dark-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(3px); z-index: 1; pointer-events: none; }
-        .container { position: relative; z-index: 2; max-width: 1400px; margin: 0 auto; padding: 0 24px; }
-        .glass-header { background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(0, 255, 255, 0.3); padding: 20px 0; position: sticky; top: 0; z-index: 100; }
-        .header-flex { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
-        .logo h1 { font-size: 2rem; font-weight: 800; background: linear-gradient(135deg, #0ff, #1e90ff); -webkit-background-clip: text; background-clip: text; color: transparent; }
-        .logo p { color: #0ff; opacity: 0.7; }
-        .social-links { display: flex; gap: 12px; flex-wrap: wrap; }
-        .social-btn { padding: 8px 18px; border-radius: 40px; text-decoration: none; color: white; font-size: 0.9rem; font-weight: 500; display: inline-flex; align-items: center; gap: 8px; background: rgba(0, 255, 255, 0.1); border: 1px solid rgba(0, 255, 255, 0.3); transition: all 0.25s; }
-        .social-btn:hover { background: rgba(0, 255, 255, 0.25); border-color: #0ff; transform: translateY(-2px); box-shadow: 0 0 12px rgba(0, 255, 255, 0.4); }
-        .section { margin: 48px 0 32px; }
-        .section-title { font-size: 2rem; font-weight: 700; background: linear-gradient(135deg, #fff, #0ff); -webkit-background-clip: text; background-clip: text; color: transparent; display: inline-block; border-left: 4px solid #0ff; padding-left: 20px; margin-bottom: 32px; }
-        .info-grid { display: flex; flex-wrap: wrap; gap: 24px; margin-bottom: 40px; }
-        .info-card { flex: 1; min-width: 260px; background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(8px); border-radius: 28px; padding: 28px; border: 1px solid rgba(0, 255, 255, 0.2); transition: all 0.3s; }
-        .info-card:hover { border-color: #0ff; box-shadow: 0 0 25px rgba(0, 255, 255, 0.2); transform: translateY(-3px); }
-        .info-icon { width: 56px; height: 56px; background: linear-gradient(135deg, #ff00ff, #0ff); border-radius: 18px; display: flex; align-items: center; justify-content: center; font-size: 28px; margin-bottom: 24px; }
-        .info-card h3 { font-size: 1.6rem; margin-bottom: 16px; color: #0ff; }
-        .step-list { list-style: none; counter-reset: step; }
-        .step-list li { counter-increment: step; margin-bottom: 12px; padding-left: 32px; position: relative; color: #ccc; }
-        .step-list li::before { content: counter(step); position: absolute; left: 0; top: 0; width: 22px; height: 22px; background: linear-gradient(135deg, #0ff, #0088ff); border-radius: 30px; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold; color: #000; }
-        .highlight { color: #0f0; font-weight: 600; }
-        .update-badge { display: inline-block; margin-top: 20px; padding: 6px 18px; background: rgba(0, 255, 255, 0.15); border-radius: 30px; font-size: 0.8rem; color: #0ff; }
-        .configs-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 28px; margin: 32px 0; }
-        .config-card { background: rgba(8, 20, 30, 0.8); backdrop-filter: blur(10px); border-radius: 28px; border: 1px solid rgba(0, 255, 255, 0.25); padding: 24px; transition: all 0.3s; position: relative; }
-        .config-card:hover { transform: translateY(-8px); border-color: #0ff; box-shadow: 0 20px 35px -12px rgba(0, 255, 255, 0.3); }
-        .recommended { border-color: #0f0; box-shadow: 0 0 15px rgba(0, 255, 0, 0.2); }
-        .rec-badge { position: absolute; top: 16px; right: 20px; background: linear-gradient(135deg, #0f0, #0c0); color: #000; font-weight: bold; font-size: 0.7rem; padding: 4px 12px; border-radius: 30px; }
-        .config-name { font-size: 1.5rem; font-weight: 700; color: #0ff; margin-bottom: 8px; }
-        .config-category { font-size: 0.85rem; color: #aaf; margin-bottom: 20px; }
-        .button-group { display: flex; flex-direction: column; gap: 12px; margin-top: 20px; }
-        .btn-neon { padding: 12px; border-radius: 40px; font-weight: 600; text-align: center; cursor: pointer; transition: all 0.2s; border: none; font-size: 0.9rem; display: flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none; }
-        .btn-copy { background: linear-gradient(95deg, #ff00cc, #ff00aa); color: white; }
-        .btn-copy:hover { transform: scale(1.02); box-shadow: 0 0 18px #ff00cc; }
-        .btn-link { background: rgba(0, 255, 255, 0.15); border: 1px solid rgba(0, 255, 255, 0.5); color: #0ff; }
-        .btn-link:hover { background: rgba(0, 255, 255, 0.3); border-color: #0ff; }
-        .proxy-grid { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 16px; }
-        .proxy-item { background: linear-gradient(135deg, #0088cc, #00aaff); padding: 10px 20px; border-radius: 60px; color: white; text-decoration: none; font-weight: 500; transition: 0.2s; display: inline-flex; align-items: center; gap: 8px; }
-        .proxy-item:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0, 136, 204, 0.5); }
-        .apps-grid { display: flex; flex-wrap: wrap; gap: 24px; justify-content: center; margin: 40px 0; }
-        .app-card { background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(8px); border-radius: 32px; padding: 24px; width: 260px; text-align: center; border: 1px solid rgba(0, 255, 255, 0.2); transition: 0.3s; }
-        .app-card:hover { border-color: #0ff; transform: translateY(-5px); }
-        .app-icon { font-size: 48px; margin-bottom: 16px; }
-        .app-card h3 { font-size: 1.4rem; margin-bottom: 20px; color: #0ff; }
-        .app-links { display: flex; flex-direction: column; gap: 10px; }
-        .app-link { padding: 10px; border-radius: 40px; background: rgba(255,255,255,0.1); color: white; text-decoration: none; transition: 0.2s; }
-        .app-link:hover { background: rgba(0, 255, 255, 0.2); }
-        footer { margin-top: 70px; padding: 40px 0; text-align: center; border-top: 1px solid rgba(0, 255, 255, 0.2); }
-        .footer-links a { color: #0ff; margin: 0 12px; font-size: 1.5rem; transition: 0.2s; }
-        .footer-links a:hover { text-shadow: 0 0 8px #0ff; }
-        @media (max-width: 800px) { .configs-grid { grid-template-columns: 1fr; } .info-grid { flex-direction: column; } }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+            color: #e0e0e8;
+            line-height: 1.5;
+            min-height: 100vh;
+            position: relative;
+            background: #7bc5ff;
+        }
+
+        .sky-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: linear-gradient(145deg, #6bc0ff 0%, #a8d8ff 100%);
+            overflow: hidden;
+        }
+
+        .cloud {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 1000px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            z-index: -1;
+        }
+        .cloud::before, .cloud::after {
+            content: '';
+            position: absolute;
+            background: inherit;
+            border-radius: 50%;
+        }
+        .cloud1 { width: 240px; height: 140px; top: 15%; left: -240px; }
+        .cloud1::before { width: 110px; height: 110px; top: -45px; left: 30px; }
+        .cloud1::after { width: 150px; height: 150px; top: -70px; left: 90px; }
+        .cloud2 { width: 320px; height: 170px; top: 45%; right: -320px; }
+        .cloud2::before { width: 140px; height: 140px; top: -55px; left: 30px; }
+        .cloud2::after { width: 180px; height: 180px; top: -90px; left: 110px; }
+        .cloud3 { width: 200px; height: 120px; bottom: 20%; left: -200px; }
+        .cloud3::before { width: 90px; height: 90px; top: -35px; left: 25px; }
+        .cloud3::after { width: 120px; height: 120px; top: -60px; left: 80px; }
+
+        @keyframes floatClouds {
+            from { transform: translateX(0); }
+            to { transform: translateX(calc(100vw + 300px)); }
+        }
+        .cloud1 { animation: floatClouds 35s linear infinite; }
+        .cloud2 { animation: floatClouds 45s linear infinite; }
+        .cloud3 { animation: floatClouds 55s linear infinite; }
+
+        .flying-cow {
+            position: absolute;
+            font-size: 72px;
+            filter: drop-shadow(2px 4px 8px rgba(0,0,0,0.2));
+            z-index: -1;
+            pointer-events: none;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+        }
+        .cow1 { top: 12%; animation: flyAcross 22s linear infinite; font-size: 68px; }
+        .cow2 { top: 35%; animation: flyAcross 28s linear infinite 3s; font-size: 58px; transform: scaleX(-1);}
+        .cow3 { top: 62%; animation: flyAcross 32s linear infinite 7s; font-size: 82px; }
+        .cow4 { top: 78%; animation: flyAcross 38s linear infinite 12s; font-size: 54px; transform: scaleX(-1);}
+        .cow5 { top: 25%; animation: flyAcross 42s linear infinite 18s; font-size: 64px; }
+
+        @keyframes flyAcross {
+            0% {
+                transform: translateX(-180px) translateY(0px) rotate(0deg);
+                opacity: 0;
+            }
+            12% {
+                opacity: 0.95;
+            }
+            88% {
+                opacity: 0.95;
+            }
+            100% {
+                transform: translateX(calc(100vw + 180px)) translateY(-50px) rotate(6deg);
+                opacity: 0;
+            }
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 28px;
+        }
+
+        .glass-header {
+            background: rgba(8, 10, 18, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0, 255, 255, 0.3);
+            padding: 18px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .header-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .logo h1 {
+            font-size: 1.9rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #fff, #0ff, #a06eff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -0.5px;
+        }
+        .logo p {
+            color: #c0d0e0;
+            font-size: 0.85rem;
+            margin-top: 4px;
+        }
+        .social-links {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .social-btn {
+            padding: 8px 20px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(0, 255, 255, 0.15);
+            border: 1px solid rgba(0, 255, 255, 0.35);
+            color: #e0e0e8;
+            transition: all 0.25s;
+        }
+        .social-btn:hover {
+            background: rgba(0, 255, 255, 0.3);
+            border-color: #0ff;
+            box-shadow: 0 0 12px rgba(0,255,255,0.4);
+            transform: translateY(-2px);
+        }
+
+        .section {
+            margin: 56px 0 40px;
+        }
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #fff, #0ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: inline-block;
+            border-left: 4px solid #0ff;
+            padding-left: 20px;
+            margin-bottom: 32px;
+            text-shadow: 0 0 5px rgba(0,0,0,0.3);
+        }
+
+        .corner-card {
+            background: rgba(12, 16, 24, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 255, 255, 0.25);
+            border-radius: 24px;
+            padding: 28px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .corner-card:hover {
+            border-color: #0ff;
+            box-shadow: 0 0 28px rgba(0, 255, 255, 0.2);
+            transform: translateY(-3px);
+        }
+
+        .info-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 28px;
+            margin-bottom: 48px;
+        }
+        .info-card {
+            flex: 1;
+            min-width: 260px;
+            background: rgba(12, 16, 24, 0.85);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            padding: 28px;
+            border: 1px solid rgba(0, 255, 255, 0.25);
+            transition: 0.25s;
+        }
+        .info-card:hover {
+            border-color: #0ff;
+            box-shadow: 0 8px 24px rgba(0,255,255,0.15);
+        }
+        .info-icon {
+            width: 54px;
+            height: 54px;
+            background: linear-gradient(135deg, #0ff, #a06eff);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            margin-bottom: 24px;
+        }
+        .info-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 16px;
+            color: #fff;
+            font-weight: 600;
+        }
+        .step-list {
+            list-style: none;
+            counter-reset: step;
+        }
+        .step-list li {
+            counter-increment: step;
+            margin-bottom: 12px;
+            padding-left: 32px;
+            position: relative;
+            color: #d0e0f0;
+        }
+        .step-list li::before {
+            content: counter(step);
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 22px;
+            height: 22px;
+            background: linear-gradient(135deg, #0ff, #0088ff);
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+            color: #000;
+        }
+        .highlight {
+            color: #0ff;
+            font-weight: 600;
+        }
+        .update-badge {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 6px 16px;
+            background: rgba(0, 255, 255, 0.2);
+            border-radius: 30px;
+            font-size: 0.8rem;
+            color: #0ff;
+            border: 1px solid rgba(0,255,255,0.4);
+        }
+
+        .configs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 28px;
+            margin: 32px 0;
+        }
+        .config-card {
+            background: rgba(8, 12, 20, 0.85);
+            backdrop-filter: blur(12px);
+            border-radius: 24px;
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            padding: 24px;
+            transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            position: relative;
+        }
+        .config-card:hover {
+            transform: translateY(-6px);
+            border-color: #0ff;
+            box-shadow: 0 16px 32px -12px rgba(0, 255, 255, 0.3);
+        }
+        .recommended {
+            border-color: #0f0;
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.2);
+        }
+        .rec-badge {
+            position: absolute;
+            top: 16px;
+            right: 20px;
+            background: linear-gradient(135deg, #0f0, #0a0);
+            color: #000;
+            font-weight: bold;
+            font-size: 0.7rem;
+            padding: 4px 12px;
+            border-radius: 30px;
+        }
+        .config-name {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #0ff;
+            margin-bottom: 8px;
+        }
+        .config-category {
+            font-size: 0.85rem;
+            color: #b0c0d0;
+            margin-bottom: 20px;
+        }
+        .button-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 20px;
+        }
+        .btn-neon {
+            padding: 12px;
+            border-radius: 40px;
+            font-weight: 600;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            text-decoration: none;
+            background: rgba(0, 255, 255, 0.1);
+            border: 1px solid rgba(0, 255, 255, 0.5);
+            color: #0ff;
+        }
+        .btn-copy {
+            background: linear-gradient(95deg, #a06eff, #0ff);
+            color: #000;
+            font-weight: 700;
+            border: none;
+        }
+        .btn-copy:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 20px #0ff;
+        }
+        .btn-link:hover {
+            background: rgba(0, 255, 255, 0.25);
+            border-color: #0ff;
+        }
+
+        .proxy-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-top: 20px;
+        }
+        .proxy-item {
+            background: rgba(0, 136, 204, 0.25);
+            border: 1px solid rgba(0, 255, 255, 0.5);
+            padding: 10px 22px;
+            border-radius: 60px;
+            color: #0ff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .proxy-item:hover {
+            background: rgba(0, 255, 255, 0.4);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 136, 204, 0.3);
+        }
+
+        .apps-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 28px;
+            justify-content: center;
+            margin: 48px 0;
+        }
+        .app-card {
+            background: rgba(8, 12, 20, 0.85);
+            backdrop-filter: blur(12px);
+            border-radius: 24px;
+            padding: 28px;
+            width: 260px;
+            text-align: center;
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            transition: 0.3s;
+        }
+        .app-card:hover {
+            border-color: #0ff;
+            transform: translateY(-5px);
+        }
+        .app-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+            color: #0ff;
+        }
+        .app-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+        .app-links {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .app-link {
+            padding: 10px;
+            border-radius: 40px;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            color: #e0e0e8;
+            text-decoration: none;
+            transition: 0.2s;
+        }
+        .app-link:hover {
+            background: rgba(0, 255, 255, 0.2);
+            border-color: #0ff;
+        }
+
+        footer {
+            margin-top: 80px;
+            padding: 40px 0;
+            text-align: center;
+            border-top: 1px solid rgba(0, 255, 255, 0.3);
+            color: #c0d0e0;
+        }
+        .footer-links a {
+            color: #0ff;
+            margin: 0 12px;
+            font-size: 1.5rem;
+            transition: 0.2s;
+        }
+        .footer-links a:hover {
+            text-shadow: 0 0 8px #0ff;
+        }
+        @media (max-width: 800px) {
+            .container { padding: 0 20px; }
+            .configs-grid { grid-template-columns: 1fr; }
+            .info-grid { flex-direction: column; }
+            .section-title { font-size: 1.8rem; }
+        }
     </style>
 </head>
 <body>
-    <img class="gif-bg" src="grok-video-ab2b232e-6e74-4ee3-9aa7-d8c988be0e78.gif" alt="background">
-    <div class="dark-overlay"></div>
+
+    <div class="sky-bg">
+        <div class="cloud cloud1"></div>
+        <div class="cloud cloud2"></div>
+        <div class="cloud cloud3"></div>
+        <div class="flying-cow cow1">🐄</div>
+        <div class="flying-cow cow2">🐮</div>
+        <div class="flying-cow cow3">🐄</div>
+        <div class="flying-cow cow4">🐮</div>
+        <div class="flying-cow cow5">🐄</div>
+    </div>
 
     <div class="glass-header">
         <div class="container">
@@ -104,9 +527,9 @@
             </div>
         </div>
 
-        <div class="info-card" style="margin-bottom: 40px;">
+        <div class="corner-card" style="margin-bottom: 40px;">
             <div class="info-icon"><i class="fas fa-globe"></i></div>
-            <h3>Бесплатные VPN-конфигурации для России</h3>
+            <h3 style="color:#fff; font-size:1.5rem; margin-bottom:16px;">Бесплатные VPN-конфигурации для России</h3>
             <p>Сайт собирает рабочие VPN-настройки: VLESS, V2Ray, Hysteria, Trojan, VMess, Shadowsocks. Быстрый доступ к заблокированным сайтам и мессенджерам.</p>
         </div>
 
@@ -123,17 +546,41 @@
         <div class="section">
             <h2 class="section-title">📱 Скачать VPN-клиенты</h2>
             <div class="apps-grid">
-                <div class="app-card"><div class="app-icon"><i class="fab fa-android" style="color:#3ddc84;"></i></div><h3>Android</h3><div class="app-links"><a href="https://github.com/2dust/v2rayNG/releases/latest" class="app-link">v2rayNG</a><a href="https://github.com/MatsuriDayo/NekoBoxForAndroid/releases/latest" class="app-link">NekoBox</a><a href="https://www.happ.su/main" class="app-link">Happ</a><a href="https://karing.app/en/download/" class="app-link">Karing</a></div></div>
-                <div class="app-card"><div class="app-icon"><i class="fab fa-windows" style="color:#00aaff;"></i></div><h3>Windows</h3><div class="app-links"><a href="https://github.com/2dust/v2rayN/releases/latest/download/v2rayN-windows-64.zip" class="app-link">v2rayN</a></div></div>
-                <div class="app-card"><div class="app-icon"><i class="fab fa-apple" style="color:#aaa;"></i></div><h3>iOS / macOS</h3><div class="app-links"><a href="https://apps.apple.com/app/shadowrocket/id932747118" class="app-link">Shadowrocket</a></div></div>
+                <div class="app-card">
+                    <div class="app-icon"><i class="fab fa-android"></i></div>
+                    <h3>Android</h3>
+                    <div class="app-links">
+                        <a href="https://github.com/2dust/v2rayNG/releases/latest" class="app-link">v2rayNG</a>
+                        <a href="https://github.com/MatsuriDayo/NekoBoxForAndroid/releases/latest" class="app-link">NekoBox</a>
+                        <a href="https://www.happ.su/main" class="app-link">Happ</a>
+                        <a href="https://karing.app/en/download/" class="app-link">Karing</a>
+                    </div>
+                </div>
+                <div class="app-card">
+                    <div class="app-icon"><i class="fab fa-windows"></i></div>
+                    <h3>Windows</h3>
+                    <div class="app-links">
+                        <a href="https://github.com/2dust/v2rayN/releases/latest/download/v2rayN-windows-64.zip" class="app-link">v2rayN</a>
+                    </div>
+                </div>
+                <div class="app-card">
+                    <div class="app-icon"><i class="fab fa-apple"></i></div>
+                    <h3>iOS / macOS</h3>
+                    <div class="app-links">
+                        <a href="https://apps.apple.com/app/shadowrocket/id932747118" class="app-link">Shadowrocket</a>
+                    </div>
+                </div>
             </div>
         </div>
     </main>
 
     <footer>
         <div class="container">
-            <div class="footer-links"><a href="https://github.com/kort0881/vpn-checker-backend" target="_blank"><i class="fab fa-github"></i></a><a href="https://t.me/vlesstrojan" target="_blank"><i class="fab fa-telegram"></i></a></div>
-            <div style="margin-top: 20px;">© 2026 Доступ к интернету</div>
+            <div class="footer-links">
+                <a href="https://github.com/kort0881/vpn-checker-backend" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://t.me/vlesstrojan" target="_blank"><i class="fab fa-telegram"></i></a>
+            </div>
+            <div style="margin-top: 24px;">© 2026 Доступ к интернету</div>
         </div>
     </footer>
 
@@ -143,7 +590,10 @@
             navigator.clipboard.writeText(url).then(() => {
                 button.innerHTML = '<i class="fas fa-check"></i> Скопировано!';
                 button.style.background = 'linear-gradient(95deg, #00ff88, #00cc66)';
-                setTimeout(() => { button.innerHTML = original; button.style.background = ''; }, 2000);
+                setTimeout(() => {
+                    button.innerHTML = original;
+                    button.style.background = '';
+                }, 2000);
             }).catch(() => {
                 const textarea = document.createElement('textarea');
                 textarea.value = url;
@@ -152,7 +602,10 @@
                 document.execCommand('copy');
                 document.body.removeChild(textarea);
                 button.innerHTML = '<i class="fas fa-check"></i> Скопировано!';
-                setTimeout(() => { button.innerHTML = original; button.style.background = ''; }, 2000);
+                setTimeout(() => {
+                    button.innerHTML = original;
+                    button.style.background = '';
+                }, 2000);
             });
         }
 
@@ -162,17 +615,26 @@
             try {
                 const url = 'https://raw.githubusercontent.com/kort0881/telegram-proxy-collector/main/verified/proxy_links_tme_clean.txt?ts=' + Date.now();
                 const resp = await fetch(url);
-                if (!resp.ok) throw new Error();
+                if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
                 const text = await resp.text();
                 const lines = text.split('\n').map(l => l.trim()).filter(l => l && l.startsWith('https://t.me/proxy'));
-                if (lines.length === 0) { proxyContainer.innerHTML = '<div>Прокси пока нет</div>'; return; }
+                if (lines.length === 0) {
+                    proxyContainer.innerHTML = '<div>Прокси пока нет</div>';
+                    return;
+                }
                 proxyContainer.innerHTML = '';
                 lines.forEach((link, idx) => {
                     const a = document.createElement('a');
-                    a.href = link; a.textContent = `🔌 Прокси #${idx+1}`; a.className = 'proxy-item'; a.target = '_blank';
+                    a.href = link;
+                    a.textContent = `🔌 Прокси #${idx+1}`;
+                    a.className = 'proxy-item';
+                    a.target = '_blank';
                     proxyContainer.appendChild(a);
                 });
-            } catch(e) { proxyContainer.innerHTML = '<div>Ошибка загрузки прокси</div>'; }
+            } catch (e) {
+                console.error('Ошибка загрузки прокси:', e);
+                proxyContainer.innerHTML = '<div>Ошибка загрузки прокси</div>';
+            }
         }
 
         async function loadConfigs() {
@@ -185,6 +647,8 @@
                 const data = await resp.json();
                 const content = atob(data.content);
                 const lines = content.split('\n');
+                
+                // Извлекаем WHITE-ссылки
                 const whiteUrls = [];
                 let inWhite = false;
                 for (let line of lines) {
@@ -192,6 +656,8 @@
                     else if (line.includes('=== ⚠️')) inWhite = false;
                     else if (inWhite && line.trim().startsWith('http')) whiteUrls.push(line.trim());
                 }
+                
+                // Извлекаем дату генерации
                 let lastUpdate = '';
                 for (let line of lines) {
                     if (line.startsWith('# Generated:')) {
@@ -201,15 +667,22 @@
                     }
                 }
                 const badge = document.getElementById('update-badge');
-                if (lastUpdate) badge.innerHTML = `<i class="far fa-clock"></i> Обновлено: ${lastUpdate.replace('T', ' ')} UTC`;
-                else badge.innerHTML = `<i class="far fa-clock"></i> Обновлено: сейчас`;
-
-                if (whiteUrls.length === 0) { container.innerHTML = '<div style="grid-column:1/-1;text-align:center;">Нет конфигураций</div>'; return; }
+                if (lastUpdate) {
+                    badge.innerHTML = `<i class="far fa-clock"></i> Обновлено: ${lastUpdate.replace('T', ' ')} UTC`;
+                } else {
+                    badge.innerHTML = `<i class="far fa-clock"></i> Обновлено: сейчас`;
+                }
+                
+                if (whiteUrls.length === 0) {
+                    container.innerHTML = '<div style="grid-column:1/-1;text-align:center;">Нет доступных конфигураций</div>';
+                    return;
+                }
+                
                 container.innerHTML = '';
                 whiteUrls.forEach((url, idx) => {
                     let name = url.split('/').pop().replace('.txt', '').replace(/_/g, ' ');
                     if (name.includes('WHITE')) name = 'WHITE список';
-                    const category = url.includes('RU_Best') ? 'Россия' : (url.includes('My_Euro') ? 'Европа' : 'Общий');
+                    const category = url.includes('RU_Best') ? '🇷🇺 Россия' : (url.includes('My_Euro') ? '🇪🇺 Европа' : '🌍 Общий');
                     const isRecommended = (idx === 0);
                     const card = document.createElement('div');
                     card.className = 'config-card' + (isRecommended ? ' recommended' : '');
@@ -220,26 +693,39 @@
                         card.appendChild(recBadge);
                     }
                     const nameDiv = document.createElement('div');
-                    nameDiv.className = 'config-name'; nameDiv.textContent = name; card.appendChild(nameDiv);
+                    nameDiv.className = 'config-name';
+                    nameDiv.textContent = name;
+                    card.appendChild(nameDiv);
                     const catDiv = document.createElement('div');
-                    catDiv.className = 'config-category'; catDiv.innerHTML = `<i class="fas fa-tag"></i> ${category}`; card.appendChild(catDiv);
-                    const btnGroup = document.createElement('div'); btnGroup.className = 'button-group';
+                    catDiv.className = 'config-category';
+                    catDiv.innerHTML = `<i class="fas fa-tag"></i> ${category}`;
+                    card.appendChild(catDiv);
+                    const btnGroup = document.createElement('div');
+                    btnGroup.className = 'button-group';
                     const copyBtn = document.createElement('button');
                     copyBtn.className = 'btn-neon btn-copy copy-btn';
                     copyBtn.innerHTML = '<i class="fas fa-copy"></i> Копировать ссылку';
                     copyBtn.onclick = () => copyToClipboard(copyBtn, url);
                     btnGroup.appendChild(copyBtn);
                     const openLink = document.createElement('a');
-                    openLink.href = url; openLink.target = '_blank'; openLink.className = 'btn-neon btn-link';
+                    openLink.href = url;
+                    openLink.target = '_blank';
+                    openLink.className = 'btn-neon btn-link';
                     openLink.innerHTML = '<i class="fas fa-external-link-alt"></i> Открыть';
                     btnGroup.appendChild(openLink);
                     card.appendChild(btnGroup);
                     container.appendChild(card);
                 });
-            } catch(e) { console.error(e); container.innerHTML = '<div style="grid-column:1/-1;text-align:center;">Ошибка загрузки</div>'; }
+            } catch (e) {
+                console.error('Ошибка загрузки конфигураций:', e);
+                container.innerHTML = '<div style="grid-column:1/-1;text-align:center;">Ошибка загрузки конфигураций. Попробуйте позже.</div>';
+            }
         }
 
-        document.addEventListener('DOMContentLoaded', () => { loadProxies(); loadConfigs(); });
+        document.addEventListener('DOMContentLoaded', () => {
+            loadProxies();
+            loadConfigs();
+        });
     </script>
 </body>
 </html>
