@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Roboto+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Все твои стили – оставляем без изменений, они уже есть */
+        /* Стили – те же самые, что у тебя были (скопированы из твоего последнего варианта) */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Inter', system-ui, sans-serif; color: #e0e0e8; line-height: 1.5; min-height: 100vh; background: #7bc5ff; position: relative; }
         .sky-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; background: linear-gradient(145deg, #6bc0ff 0%, #a8d8ff 100%); overflow: hidden; }
@@ -123,7 +123,7 @@
                     <li>Вставьте в приложение <span class="highlight">v2rayNG / NekoBox / v2rayN</span></li>
                     <li>Подпишитесь на Telegram-каналы для новых ключей</li>
                 </ul>
-                <div class="update-badge" id="update-badge"><i class="far fa-clock"></i> Загрузка...</div>
+                <div class="update-badge"><i class="far fa-clock"></i> Обновлено: 06.06.2026</div>
             </div>
             <div class="info-card">
                 <div class="info-icon"><i class="fas fa-shield-alt"></i></div>
@@ -145,7 +145,33 @@
 
         <div class="section">
             <h2 class="section-title">⚡ Актуальные конфигурации VPN (WHITE списки)</h2>
-            <div id="configs-grid" class="configs-grid">Загружаем конфигурации...</div>
+            <div class="configs-grid">
+                <div class="config-card recommended">
+                    <div class="rec-badge"><i class="fas fa-star"></i> Рекомендовано</div>
+                    <div class="config-name">WHITE Россия (ALL)</div>
+                    <div class="config-category"><i class="fas fa-tag"></i> 🇷🇺 Россия / VLESS, Trojan, SS</div>
+                    <div class="button-group">
+                        <button class="btn-neon btn-copy" onclick="copyToClipboard(this, 'https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/RU_Best/ru_white_all_WHITE.txt')">
+                            <i class="fas fa-copy"></i> Копировать ссылку
+                        </button>
+                        <a href="https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/RU_Best/ru_white_all_WHITE.txt" target="_blank" class="btn-neon btn-link">
+                            <i class="fas fa-external-link-alt"></i> Открыть
+                        </a>
+                    </div>
+                </div>
+                <div class="config-card">
+                    <div class="config-name">WHITE Европа (ALL)</div>
+                    <div class="config-category"><i class="fas fa-tag"></i> 🇪🇺 Европа / VLESS, Trojan, SS</div>
+                    <div class="button-group">
+                        <button class="btn-neon btn-copy" onclick="copyToClipboard(this, 'https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/My_Euro/my_euro_all_WHITE.txt')">
+                            <i class="fas fa-copy"></i> Копировать ссылку
+                        </button>
+                        <a href="https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/My_Euro/my_euro_all_WHITE.txt" target="_blank" class="btn-neon btn-link">
+                            <i class="fas fa-external-link-alt"></i> Открыть
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div class="section">
@@ -176,7 +202,6 @@
                     button.style.background = '';
                 }, 2000);
             }).catch(() => {
-                // fallback
                 const textarea = document.createElement('textarea');
                 textarea.value = url;
                 document.body.appendChild(textarea);
@@ -215,96 +240,8 @@
             }
         }
 
-        async function loadConfigs() {
-            const container = document.getElementById('configs-grid');
-            if (!container) return;
-            try {
-                const apiUrl = 'https://api.github.com/repos/kort0881/vpn-checker-backend/contents/checked/subscriptions_list.txt?ts=' + Date.now();
-                const resp = await fetch(apiUrl);
-                if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
-                const data = await resp.json();
-                const content = atob(data.content);
-                const lines = content.split('\n');
-                
-                // Ищем секции ✅ WHITE
-                const whiteUrls = [];
-                let inWhite = false;
-                for (let line of lines) {
-                    if (line.includes('✅ WHITE')) inWhite = true;
-                    else if (line.includes('=== ⚠️')) inWhite = false;
-                    else if (inWhite && line.trim().startsWith('http')) {
-                        whiteUrls.push(line.trim());
-                    }
-                }
-                
-                // Дата обновления
-                let lastUpdate = '';
-                for (let line of lines) {
-                    if (line.startsWith('# Generated:')) {
-                        const match = line.match(/# Generated: (.*?) UTC/);
-                        if (match) lastUpdate = match[1];
-                        break;
-                    }
-                }
-                const badge = document.getElementById('update-badge');
-                if (lastUpdate) badge.innerHTML = `<i class="far fa-clock"></i> Обновлено: ${lastUpdate.replace('T', ' ')} UTC`;
-                else badge.innerHTML = `<i class="far fa-clock"></i> Обновлено: сейчас`;
-                
-                if (whiteUrls.length === 0) {
-                    container.innerHTML = '<div style="grid-column:1/-1;text-align:center;">Нет WHITE-конфигураций</div>';
-                    return;
-                }
-                
-                container.innerHTML = '';
-                whiteUrls.forEach((url, idx) => {
-                    let name = url.split('/').pop().replace('.txt', '').replace(/_/g, ' ');
-                    if (name.includes('WHITE')) name = 'WHITE список';
-                    const category = url.includes('RU_Best') ? '🇷🇺 Россия' : (url.includes('My_Euro') ? '🇪🇺 Европа' : '🌍 Общий');
-                    const isRecommended = (idx === 0);
-                    const card = document.createElement('div');
-                    card.className = 'config-card' + (isRecommended ? ' recommended' : '');
-                    if (isRecommended) {
-                        const recBadge = document.createElement('div');
-                        recBadge.className = 'rec-badge';
-                        recBadge.innerHTML = '<i class="fas fa-star"></i> Рекомендовано';
-                        card.appendChild(recBadge);
-                    }
-                    const nameDiv = document.createElement('div');
-                    nameDiv.className = 'config-name';
-                    nameDiv.textContent = name;
-                    card.appendChild(nameDiv);
-                    const catDiv = document.createElement('div');
-                    catDiv.className = 'config-category';
-                    catDiv.innerHTML = `<i class="fas fa-tag"></i> ${category}`;
-                    card.appendChild(catDiv);
-                    const btnGroup = document.createElement('div');
-                    btnGroup.className = 'button-group';
-                    
-                    const copyBtn = document.createElement('button');
-                    copyBtn.className = 'btn-neon btn-copy';
-                    copyBtn.innerHTML = '<i class="fas fa-copy"></i> Копировать ссылку';
-                    copyBtn.onclick = () => copyToClipboard(copyBtn, url);
-                    btnGroup.appendChild(copyBtn);
-                    
-                    const openLink = document.createElement('a');
-                    openLink.href = url;
-                    openLink.target = '_blank';
-                    openLink.className = 'btn-neon btn-link';
-                    openLink.innerHTML = '<i class="fas fa-external-link-alt"></i> Открыть';
-                    btnGroup.appendChild(openLink);
-                    
-                    card.appendChild(btnGroup);
-                    container.appendChild(card);
-                });
-            } catch(e) {
-                console.error(e);
-                container.innerHTML = '<div style="grid-column:1/-1;text-align:center;">Ошибка загрузки конфигураций</div>';
-            }
-        }
-
         document.addEventListener('DOMContentLoaded', () => {
             loadProxies();
-            loadConfigs();
         });
     </script>
 </body>
