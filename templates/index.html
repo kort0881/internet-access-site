@@ -56,34 +56,38 @@
         .step-list li::before { content: counter(step); position: absolute; left: 0; top: 0; width: 22px; height: 22px; background: linear-gradient(135deg, #0ff, #0088ff); border-radius: 30px; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold; color: #000; }
         .highlight { color: #0ff; font-weight: 600; }
         .update-badge { display: inline-block; margin-top: 20px; padding: 6px 16px; background: rgba(0, 255, 255, 0.2); border-radius: 30px; font-size: 0.8rem; color: #0ff; border: 1px solid rgba(0,255,255,0.4); }
-        .configs-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 28px; margin: 32px 0; }
-        .config-card { background: rgba(8, 12, 20, 0.85); backdrop-filter: blur(12px); border-radius: 24px; border: 1px solid rgba(0, 255, 255, 0.3); padding: 24px; transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1); position: relative; }
-        .config-card:hover { transform: translateY(-6px); border-color: #0ff; box-shadow: 0 16px 32px -12px rgba(0, 255, 255, 0.3); }
-        .recommended { border-color: #0f0; box-shadow: 0 0 15px rgba(0, 255, 0, 0.2); }
-        .rec-badge { position: absolute; top: 16px; right: 20px; background: linear-gradient(135deg, #0f0, #0a0); color: #000; font-weight: bold; font-size: 0.7rem; padding: 4px 12px; border-radius: 30px; }
-        /* Обычная неоновая кнопка (сине-фиолетовая) */
-        .btn-neon { padding: 12px; border-radius: 40px; font-weight: 600; text-align: center; cursor: pointer; transition: all 0.2s; border: none; font-size: 0.9rem; display: flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none; background: linear-gradient(95deg, #a06eff, #0ff); color: #000; font-weight: 700; }
-        .btn-neon:hover { transform: scale(1.02); box-shadow: 0 0 20px #0ff; }
-        /* Чёрная кнопка (для BLACK) */
-        .btn-black { background: linear-gradient(95deg, #1a1a1a, #2a2a2a); color: #aaa; border: 1px solid #555; box-shadow: 0 0 5px rgba(0,0,0,0.5); }
-        .btn-black:hover { box-shadow: 0 0 15px #333; border-color: #888; color: #fff; }
-        .btn-link { background: rgba(0, 255, 255, 0.1); border: 1px solid rgba(0, 255, 255, 0.5); color: #0ff; background: transparent; color: #0ff; font-weight: 600; }
+        .configs-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px; margin: 32px 0; }
+        .config-card { background: rgba(8, 12, 20, 0.85); backdrop-filter: blur(12px); border-radius: 24px; border: 1px solid rgba(0, 255, 255, 0.3); padding: 20px; transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1); }
+        .config-card:hover { transform: translateY(-4px); border-color: #0ff; box-shadow: 0 12px 24px -12px rgba(0, 255, 255, 0.3); }
+        .config-name { font-size: 1.2rem; font-weight: 700; color: #0ff; margin-bottom: 6px; word-break: break-word; }
+        .config-category { font-size: 0.75rem; color: #b0c0d0; margin-bottom: 16px; }
+        .button-group { display: flex; flex-direction: column; gap: 10px; margin-top: 12px; }
+        .btn-neon { padding: 10px; border-radius: 40px; font-weight: 600; text-align: center; cursor: pointer; transition: all 0.2s; border: none; font-size: 0.85rem; display: flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none; background: linear-gradient(95deg, #a06eff, #0ff); color: #000; }
+        .btn-neon:hover { transform: scale(1.02); box-shadow: 0 0 12px #0ff; }
+        .btn-black { background: linear-gradient(95deg, #1a1a1a, #2a2a2a); color: #aaa; border: 1px solid #555; }
+        .btn-black:hover { box-shadow: 0 0 12px #333; border-color: #888; color: #fff; }
+        .btn-link { background: rgba(0, 255, 255, 0.1); border: 1px solid rgba(0, 255, 255, 0.5); color: #0ff; background: transparent; font-weight: 600; }
         .btn-link:hover { background: rgba(0, 255, 255, 0.25); border-color: #0ff; }
-        .proxy-grid { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 20px; }
-        .proxy-item { background: rgba(0, 136, 204, 0.25); border: 1px solid rgba(0, 255, 255, 0.5); padding: 10px 22px; border-radius: 60px; color: #0ff; text-decoration: none; font-weight: 500; transition: 0.2s; display: inline-flex; align-items: center; gap: 8px; }
+        .proxy-grid { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 16px; }
+        .proxy-item { background: rgba(0, 136, 204, 0.25); border: 1px solid rgba(0, 255, 255, 0.5); padding: 8px 18px; border-radius: 60px; color: #0ff; text-decoration: none; font-weight: 500; transition: 0.2s; display: inline-flex; align-items: center; gap: 8px; font-size: 0.85rem; }
         .proxy-item:hover { background: rgba(0, 255, 255, 0.4); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0, 136, 204, 0.3); }
-        .apps-grid { display: flex; flex-wrap: wrap; gap: 28px; justify-content: center; margin: 48px 0; }
-        .app-card { background: rgba(8, 12, 20, 0.85); backdrop-filter: blur(12px); border-radius: 24px; padding: 28px; width: 260px; text-align: center; border: 1px solid rgba(0, 255, 255, 0.3); transition: 0.3s; }
-        .app-card:hover { border-color: #0ff; transform: translateY(-5px); }
-        .app-icon { font-size: 48px; margin-bottom: 16px; color: #0ff; }
-        .app-card h3 { font-size: 1.3rem; margin-bottom: 20px; color: #fff; }
-        .app-links { display: flex; flex-direction: column; gap: 12px; }
-        .app-link { padding: 10px; border-radius: 40px; background: rgba(255,255,255,0.08); border: 1px solid rgba(0, 255, 255, 0.3); color: #e0e0e8; text-decoration: none; transition: 0.2s; }
+        .apps-grid { display: flex; flex-wrap: wrap; gap: 24px; justify-content: center; margin: 40px 0; }
+        .app-card { background: rgba(8, 12, 20, 0.85); backdrop-filter: blur(12px); border-radius: 24px; padding: 24px; width: 240px; text-align: center; border: 1px solid rgba(0, 255, 255, 0.3); transition: 0.3s; }
+        .app-card:hover { border-color: #0ff; transform: translateY(-4px); }
+        .app-icon { font-size: 42px; margin-bottom: 12px; color: #0ff; }
+        .app-card h3 { font-size: 1.2rem; margin-bottom: 16px; color: #fff; }
+        .app-links { display: flex; flex-direction: column; gap: 10px; }
+        .app-link { padding: 8px; border-radius: 40px; background: rgba(255,255,255,0.08); border: 1px solid rgba(0, 255, 255, 0.3); color: #e0e0e8; text-decoration: none; transition: 0.2s; font-size: 0.85rem; }
         .app-link:hover { background: rgba(0, 255, 255, 0.2); border-color: #0ff; }
-        footer { margin-top: 80px; padding: 40px 0; text-align: center; border-top: 1px solid rgba(0, 255, 255, 0.3); color: #c0d0e0; }
-        .footer-links a { color: #0ff; margin: 0 12px; font-size: 1.5rem; transition: 0.2s; }
+        footer { margin-top: 70px; padding: 30px 0; text-align: center; border-top: 1px solid rgba(0, 255, 255, 0.3); color: #c0d0e0; }
+        .footer-links a { color: #0ff; margin: 0 12px; font-size: 1.4rem; transition: 0.2s; }
         .footer-links a:hover { text-shadow: 0 0 8px #0ff; }
-        @media (max-width: 800px) { .container { padding: 0 20px; } .configs-grid { grid-template-columns: 1fr; } .info-grid { flex-direction: column; } .section-title { font-size: 1.8rem; } }
+        @media (max-width: 800px) {
+            .container { padding: 0 20px; }
+            .configs-grid { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
+            .info-grid { flex-direction: column; }
+            .section-title { font-size: 1.8rem; }
+        }
     </style>
 </head>
 <body>
@@ -134,8 +138,8 @@
 
         <div class="corner-card" style="margin-bottom: 40px;">
             <div class="info-icon"><i class="fas fa-globe"></i></div>
-            <h3 style="color:#fff; font-size:1.5rem; margin-bottom:16px;">Бесплатные VPN-конфигурации для России</h3>
-            <p>Сайт собирает рабочие VPN-настройки: VLESS, V2Ray, Hysteria, Trojan, VMess, Shadowsocks. Быстрый доступ к заблокированным сайтам и мессенджерам.</p>
+            <h3 style="color:#fff; font-size:1.4rem; margin-bottom:12px;">Бесплатные VPN-конфигурации для России</h3>
+            <p style="font-size:0.9rem;">Сайт собирает рабочие VPN-настройки: VLESS, V2Ray, Hysteria, Trojan, VMess, Shadowsocks. Быстрый доступ к заблокированным сайтам и мессенджерам.</p>
         </div>
 
         <div class="section">
@@ -144,7 +148,7 @@
         </div>
 
         <div class="section">
-            <h2 class="section-title">⚡ ВСЕ КОНФИГУРАЦИИ (включая BLACK)</h2>
+            <h2 class="section-title">⚡ Конфигурации VPN</h2>
             <div id="configs-grid" class="configs-grid">Загружаем конфигурации...</div>
         </div>
 
@@ -161,7 +165,7 @@
     <footer>
         <div class="container">
             <div class="footer-links"><a href="https://github.com/kort0881/vpn-checker-backend" target="_blank"><i class="fab fa-github"></i></a><a href="https://t.me/vlesstrojan" target="_blank"><i class="fab fa-telegram"></i></a></div>
-            <div style="margin-top: 24px;">© 2026 Доступ к интернету</div>
+            <div style="margin-top: 20px;">© 2026 Доступ к интернету</div>
         </div>
     </footer>
 
@@ -178,7 +182,7 @@
                     } else {
                         button.style.background = '';
                     }
-                }, 2000);
+                }, 1500);
             }).catch(() => {
                 const textarea = document.createElement('textarea');
                 textarea.value = url;
@@ -194,7 +198,7 @@
                     } else {
                         button.style.background = '';
                     }
-                }, 2000);
+                }, 1500);
             });
         }
 
@@ -233,21 +237,19 @@
                 const content = atob(data.content);
                 const lines = content.split('\n');
                 
-                // Парсим все секции и ссылки
-                const sections = [];
+                // Собираем все URL ссылки из всех секций (включая BLACK)
+                const allUrls = [];
                 let currentSection = null;
                 for (let line of lines) {
                     line = line.trim();
                     if (line.startsWith('===') && line.includes('===')) {
-                        if (currentSection) sections.push(currentSection);
-                        currentSection = { title: line, urls: [] };
+                        currentSection = line;
                     } else if (currentSection && line.startsWith('http')) {
-                        currentSection.urls.push(line);
+                        allUrls.push({ url: line, section: currentSection });
                     }
                 }
-                if (currentSection) sections.push(currentSection);
                 
-                // Получаем дату обновления
+                // Извлекаем дату
                 let lastUpdate = '';
                 for (let line of lines) {
                     if (line.startsWith('# Generated:')) {
@@ -260,65 +262,53 @@
                 if (lastUpdate) badge.innerHTML = `<i class="far fa-clock"></i> Обновлено: ${lastUpdate.replace('T', ' ')} UTC`;
                 else badge.innerHTML = `<i class="far fa-clock"></i> Обновлено: сейчас`;
                 
-                if (sections.length === 0 || sections.every(s => s.urls.length === 0)) {
+                if (allUrls.length === 0) {
                     container.innerHTML = '<div style="grid-column:1/-1;text-align:center;">Нет конфигураций</div>';
                     return;
                 }
                 
                 container.innerHTML = '';
-                let globalIdx = 0;
-                for (let section of sections) {
-                    if (section.urls.length === 0) continue;
-                    // Заголовок секции
-                    const sectionTitle = document.createElement('div');
-                    sectionTitle.style.gridColumn = '1/-1';
-                    sectionTitle.style.marginTop = '20px';
-                    sectionTitle.style.marginBottom = '10px';
-                    sectionTitle.style.fontSize = '1.3rem';
-                    sectionTitle.style.fontWeight = 'bold';
-                    sectionTitle.style.color = section.title.includes('BLACK') || section.title.includes('⚠️') ? '#888' : '#0ff';
-                    sectionTitle.style.borderLeft = `3px solid ${section.title.includes('BLACK') || section.title.includes('⚠️') ? '#888' : '#0ff'}`;
-                    sectionTitle.style.paddingLeft = '15px';
-                    sectionTitle.innerHTML = section.title.replace(/===/g, '').trim();
-                    container.appendChild(sectionTitle);
+                allUrls.forEach((item) => {
+                    const url = item.url;
+                    const section = item.section;
+                    let name = url.split('/').pop().replace('.txt', '').replace(/_/g, ' ');
+                    // Упрощаем названия для читаемости
+                    name = name.replace('ru white all ', '').replace('ru white ', '').replace('my euro all ', '').replace('my euro ', '');
+                    if (name.includes('WHITE')) name = '✨ ' + name;
+                    if (name.includes('BLACK')) name = '⬛ ' + name;
+                    const isBlack = section.includes('BLACK') || section.includes('⚠️');
+                    const category = url.includes('RU_Best') ? '🇷🇺 Россия' : (url.includes('My_Euro') ? '🇪🇺 Европа' : '🌍 Общий');
                     
-                    for (let url of section.urls) {
-                        globalIdx++;
-                        let name = url.split('/').pop().replace('.txt', '').replace(/_/g, ' ');
-                        const isBlack = section.title.includes('BLACK') || section.title.includes('⚠️');
-                        const category = url.includes('RU_Best') ? '🇷🇺 Россия' : (url.includes('My_Euro') ? '🇪🇺 Европа' : '🌍 Общий');
-                        const card = document.createElement('div');
-                        card.className = 'config-card';
-                        if (globalIdx === 1 && !isBlack) card.classList.add('recommended');
-                        const nameDiv = document.createElement('div');
-                        nameDiv.className = 'config-name';
-                        nameDiv.textContent = name;
-                        card.appendChild(nameDiv);
-                        const catDiv = document.createElement('div');
-                        catDiv.className = 'config-category';
-                        catDiv.innerHTML = `<i class="fas fa-tag"></i> ${category}`;
-                        card.appendChild(catDiv);
-                        const btnGroup = document.createElement('div');
-                        btnGroup.className = 'button-group';
-                        
-                        const copyBtn = document.createElement('button');
-                        copyBtn.className = 'btn-neon';
-                        if (isBlack) copyBtn.classList.add('btn-black');
-                        copyBtn.innerHTML = '<i class="fas fa-copy"></i> Копировать ссылку (сотни ключей)';
-                        copyBtn.onclick = () => copyToClipboard(copyBtn, url);
-                        btnGroup.appendChild(copyBtn);
-                        
-                        const openLink = document.createElement('a');
-                        openLink.href = url;
-                        openLink.target = '_blank';
-                        openLink.className = 'btn-neon btn-link';
-                        openLink.innerHTML = '<i class="fas fa-external-link-alt"></i> Открыть';
-                        btnGroup.appendChild(openLink);
-                        
-                        card.appendChild(btnGroup);
-                        container.appendChild(card);
-                    }
-                }
+                    const card = document.createElement('div');
+                    card.className = 'config-card';
+                    const nameDiv = document.createElement('div');
+                    nameDiv.className = 'config-name';
+                    nameDiv.textContent = name;
+                    card.appendChild(nameDiv);
+                    const catDiv = document.createElement('div');
+                    catDiv.className = 'config-category';
+                    catDiv.innerHTML = `<i class="fas fa-tag"></i> ${category}`;
+                    card.appendChild(catDiv);
+                    const btnGroup = document.createElement('div');
+                    btnGroup.className = 'button-group';
+                    
+                    const copyBtn = document.createElement('button');
+                    copyBtn.className = 'btn-neon';
+                    if (isBlack) copyBtn.classList.add('btn-black');
+                    copyBtn.innerHTML = '<i class="fas fa-copy"></i> Копировать ссылку';
+                    copyBtn.onclick = () => copyToClipboard(copyBtn, url);
+                    btnGroup.appendChild(copyBtn);
+                    
+                    const openLink = document.createElement('a');
+                    openLink.href = url;
+                    openLink.target = '_blank';
+                    openLink.className = 'btn-neon btn-link';
+                    openLink.innerHTML = '<i class="fas fa-external-link-alt"></i> Открыть';
+                    btnGroup.appendChild(openLink);
+                    
+                    card.appendChild(btnGroup);
+                    container.appendChild(card);
+                });
             } catch(e) {
                 console.error(e);
                 container.innerHTML = '<div style="grid-column:1/-1;text-align:center;">Ошибка загрузки конфигураций</div>';
