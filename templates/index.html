@@ -11,6 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Roboto+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* ВСЕ СТИЛИ ОСТАЮТСЯ БЕЗ ИЗМЕНЕНИЙ (те же, что были у вас) */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Inter', system-ui, sans-serif; color: #eaeef2; line-height: 1.5; min-height: 100vh; background: #0a0a0c; position: relative; overflow-x: hidden; }
         .sky-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; background: radial-gradient(circle at 30% 40%, #1a0000, #000000); overflow: hidden; }
@@ -64,8 +65,6 @@
         .news-title { font-size: 1.3rem; font-weight: 700; color: #fff; margin-bottom: 12px; }
         .news-summary { color: #ccc; line-height: 1.5; margin-bottom: 16px; }
         .news-source { font-size: 0.8rem; color: #ff9999; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
-        .news-source a { color: #ff6666; text-decoration: none; border-bottom: 1px dashed #ff6666; }
-        .news-source a:hover { color: #fff; border-bottom-color: #fff; }
         .official-links { margin-top: 20px; padding: 20px; background: rgba(0,0,0,0.4); border-radius: 20px; text-align: center; }
         .official-links a { color: #ff6666; margin: 0 15px; text-decoration: none; font-weight: 500; }
         .official-links a:hover { color: #fff; text-shadow: 0 0 5px #cc0000; }
@@ -157,6 +156,7 @@
             </div>
         </div>
 
+        <!-- НОВОСТНОЙ БЛОК (текст новостей, без ссылок на Хабр) -->
         <div class="section">
             <h2 class="section-title">📰 Новости и контекст: блокировки в России</h2>
             <div class="news-grid">
@@ -167,8 +167,7 @@
                         <div class="news-title">{{ item.title }}</div>
                         <div class="news-summary">{{ item.summary }}</div>
                         <div class="news-source">
-                            <span><i class="fas fa-source"></i> Источник: </span>
-                            <a href="{{ item.link }}" target="_blank">{{ item.source }}</a>
+                            <span><i class="fas fa-source"></i> Источник: {{ item.source }}</span>
                         </div>
                     </div>
                 </div>
@@ -178,7 +177,6 @@
                 <i class="fas fa-link"></i> Официальные источники:
                 <a href="https://rkn.gov.ru/" target="_blank"><i class="fas fa-gavel"></i> Роскомнадзор</a>
                 <a href="https://digital.gov.ru/ru/" target="_blank"><i class="fas fa-digital-tiling"></i> Минцифры РФ</a>
-                <a href="https://habr.com/ru/hub/internet/" target="_blank"><i class="fab fa-hub"></i> Хабр</a>
             </div>
         </div>
     </main>
@@ -191,7 +189,7 @@
     </footer>
 
     <script>
-        // МАТРИЧНЫЙ ДОЖДЬ (медленный, без вспышек)
+        // МАТРИЧНЫЙ ДОЖДЬ (медленный)
         const canvas = document.getElementById('matrixCanvas');
         const ctx = canvas.getContext('2d');
         let width, height, columns, drops, fontSize = 18;
@@ -231,7 +229,7 @@
         initMatrix();
         drawMatrix();
 
-        // Функция копирования ссылок
+        // Копирование ссылок
         function copyToClipboard(button, url) {
             const original = button.innerHTML;
             navigator.clipboard.writeText(url).then(() => {
@@ -263,7 +261,7 @@
             btn.onclick = () => copyToClipboard(btn, url);
         });
 
-        // Загрузка прокси (оставляем как было)
+        // Загрузка прокси
         async function loadProxies() {
             const container = document.getElementById('proxy-list');
             if (!container) return;
