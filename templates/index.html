@@ -13,14 +13,13 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Inter', system-ui, sans-serif; color: #eaeef2; line-height: 1.5; min-height: 100vh; background: #0a0a0c; position: relative; overflow-x: hidden; }
         
-        /* Основной фон с радиальным градиентом */
         .sky-bg { 
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; 
             background: radial-gradient(circle at 30% 40%, #1a0000, #000000); 
             overflow: hidden; 
         }
         
-        /* Canvas для матричного дождя */
+        /* Canvas для матричного дождя (медленное движение) */
         #matrixCanvas {
             position: fixed;
             top: 0;
@@ -29,20 +28,7 @@
             height: 100%;
             z-index: -1;
             display: block;
-            opacity: 0.65;
-        }
-        
-        /* Вспышка (неон) */
-        .neon-flash {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1000;
-            background: rgba(204, 0, 0, 0);
-            transition: background 0.08s linear;
+            opacity: 0.6;
         }
         
         .container { position: relative; z-index: 2; max-width: 1400px; margin: 0 auto; padding: 0 28px; }
@@ -227,6 +213,13 @@
             text-shadow: 0 0 5px #cc0000;
         }
         
+        .note-muted {
+            font-size: 0.8rem;
+            color: #aaa;
+            text-align: center;
+            margin-top: 15px;
+        }
+        
         footer { margin-top: 70px; padding: 30px 0; text-align: center; border-top: 1px solid rgba(204, 0, 0, 0.6); color: #aaa; }
         .footer-links a { color: #ff6666; margin: 0 12px; font-size: 1.4rem; transition: 0.2s; }
         .footer-links a:hover { text-shadow: 0 0 8px #cc0000; color: #ff9999; }
@@ -241,12 +234,8 @@
     </style>
 </head>
 <body>
-    <!-- Фон с радиальным градиентом -->
     <div class="sky-bg"></div>
-    <!-- Canvas для матричного эффекта -->
     <canvas id="matrixCanvas"></canvas>
-    <!-- Элемент для вспышек -->
-    <div id="neonFlash" class="neon-flash"></div>
 
     <div class="glass-header">
         <div class="container">
@@ -307,86 +296,64 @@
             </div>
         </div>
 
-        <!-- НОВОСТНОЙ БЛОК: выжимки + ссылки на официальные источники -->
+        <!-- НОВОСТНОЙ БЛОК (обновляется вручную, без жёстких дат) -->
         <div class="section">
             <h2 class="section-title">📰 Новости и контекст: блокировки в России</h2>
-            
-            <div class="news-grid" id="newsGrid">
-                <!-- Новость 1 -->
+            <div class="news-grid">
                 <div class="news-card">
                     <div style="flex:1;">
-                        <div class="news-date"><i class="far fa-calendar-alt"></i> 3 июня 2026</div>
-                        <div class="news-title">РКН подтвердил технические эксперименты с блокировкой протокола VLESS</div>
+                        <div class="news-date"><i class="far fa-calendar-alt"></i> Июнь 2026</div>
+                        <div class="news-title">РКН тестирует новые методы обнаружения VPN-трафика</div>
                         <div class="news-summary">
-                            Федеральная служба по надзору в сфере связи, информационных технологий и массовых коммуникаций (РКН) сообщила о проведении тестовых мероприятий по ограничению доступа к серверам, использующим протокол VLESS. 
-                            Ведомство отмечает, что это часть работы по противодействию средствам обхода блокировок. Эксперты полагают, что массового внедрения технологии пока не ожидается.
+                            По сообщениям профильных СМИ, Роскомнадзор экспериментирует с глубоким анализом пакетов (DPI) для выявления протоколов VLESS и Hysteria. 
+                            Пока блокировки носят точечный характер, но эксперты рекомендуют использовать актуальные конфигурации из белых списков.
                         </div>
                         <div class="news-source">
-                            <span><i class="fas fa-source"></i> Источник: </span>
-                            <a href="https://rkn.gov.ru/" target="_blank">Официальный сайт РКН</a>
-                            <a href="https://habr.com/ru/search/?q=VLESS+блокировка" target="_blank">Обсуждение на Habr</a>
+                            <span><i class="fas fa-source"></i> Актуально на: </span>
+                            <a href="https://rkn.gov.ru/" target="_blank">РКН</a>
+                            <a href="https://habr.com/ru/hub/internet/" target="_blank">Хабр</a>
                         </div>
                     </div>
                 </div>
-                
-                <!-- Новость 2 -->
                 <div class="news-card">
                     <div style="flex:1;">
-                        <div class="news-date"><i class="far fa-calendar-alt"></i> 28 мая 2026</div>
-                        <div class="news-title">Минцифры представило законопроект о маркировке VPN-сервисов</div>
+                        <div class="news-date"><i class="far fa-calendar-alt"></i> Июнь 2026</div>
+                        <div class="news-title">Минцифры: регулирование VPN без тотальных запретов</div>
                         <div class="news-summary">
-                            Министерство цифрового развития вынесло на общественное обсуждение проект поправок, обязывающий владельцев VPN-сервисов маркировать свой софт и предоставлять данные о серверах. 
-                            Цель — отсечь недобросовестные сервисы, но при этом сохранить доступ к легальным VPN для корпоративного сектора. Общественное обсуждение продлится до 20 июля.
+                            В министерстве заявили, что готовят законопроект о маркировке VPN-сервисов, но полной блокировки всех средств обхода не планируется. 
+                            Корпоративные VPN и технологии для защиты персональных данных останутся доступны.
                         </div>
                         <div class="news-source">
-                            <span><i class="fas fa-source"></i> Источник: </span>
-                            <a href="https://digital.gov.ru/ru/" target="_blank">Минцифры России</a>
-                            <a href="https://www.rbc.ru/" target="_blank">РБК</a>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Новость 3 -->
-                <div class="news-card">
-                    <div style="flex:1;">
-                        <div class="news-date"><i class="far fa-calendar-alt"></i> 15 мая 2026</div>
-                        <div class="news-title">Роскомнадзор начал блокировку «зеркал» запрещённых мессенджеров через DPI</div>
-                        <div class="news-summary">
-                            Ведомство зафиксировало новые технические средства для фильтрации трафика — Deep Packet Inspection (DPI) теперь используется для обнаружения и блокировки альтернативных зеркал Telegram и других мессенджеров. 
-                            Пользователи сообщают о сбоях в работе некоторых прокси-серверов, но обходные решения остаются работоспособными.
-                        </div>
-                        <div class="news-source">
-                            <span><i class="fas fa-source"></i> Источник: </span>
-                            <a href="https://rkn.gov.ru/" target="_blank">Роскомнадзор</a>
+                            <span><i class="fas fa-source"></i> Официально: </span>
+                            <a href="https://digital.gov.ru/ru/" target="_blank">Минцифры РФ</a>
                             <a href="https://tass.ru/" target="_blank">ТАСС</a>
                         </div>
                     </div>
                 </div>
-                
-                <!-- Новость 4 -->
                 <div class="news-card">
                     <div style="flex:1;">
-                        <div class="news-date"><i class="far fa-calendar-alt"></i> 2 мая 2026</div>
-                        <div class="news-title">Минцифры: тотальной блокировки всех VPN в России не планируется</div>
+                        <div class="news-date"><i class="far fa-calendar-alt"></i> Обновляется регулярно</div>
+                        <div class="news-title">Списки заблокированных ресурсов для настройки маршрутизации</div>
                         <div class="news-summary">
-                            Замминистра цифрового развития заявил, что ведомство не намерено вводить полный запрет на использование VPN-технологий. Планируется лишь точечная работа с сервисами, которые нарушают законодательство. 
-                            Граждане по-прежнему смогут использовать легальные средства защиты трафика и корпоративные решения.
+                            Для тонкой настройки обхода блокировок используйте автоматически обновляемые GeoIP/GeoSite списки от сообщества. 
+                            Они помогут направить только заблокированные сайты через VPN, а остальной трафик пустить напрямую.
                         </div>
                         <div class="news-source">
-                            <span><i class="fas fa-source"></i> Источник: </span>
-                            <a href="https://digital.gov.ru/ru/" target="_blank">Минцифры России</a>
-                            <a href="https://3dnews.ru/" target="_blank">3DNews</a>
+                            <span><i class="fas fa-link"></i> Полезные ссылки: </span>
+                            <a href="https://github.com/runetfreedom/russia-blocked-geoip" target="_blank">runetfreedom/russia-blocked-geoip</a>
+                            <a href="https://github.com/Nidelon/ru-block-v2ray-rules" target="_blank">Nidelon/ru-block-v2ray-rules</a>
                         </div>
                     </div>
                 </div>
             </div>
-            
-            <!-- Постоянные ссылки на официальные источники -->
             <div class="official-links">
-                <i class="fas fa-link"></i> Постоянные источники информации:
-                <a href="https://rkn.gov.ru/" target="_blank"><i class="fas fa-gavel"></i> Роскомнадзор (РКН)</a>
+                <i class="fas fa-link"></i> Официальные источники для мониторинга:
+                <a href="https://rkn.gov.ru/" target="_blank"><i class="fas fa-gavel"></i> Роскомнадзор</a>
                 <a href="https://digital.gov.ru/ru/" target="_blank"><i class="fas fa-digital-tiling"></i> Минцифры РФ</a>
-                <a href="https://habr.com/ru/hub/internet/" target="_blank"><i class="fab fa-hub"></i> Хабр (блоги о блокировках)</a>
+                <a href="https://habr.com/ru/hub/internet/" target="_blank"><i class="fab fa-hub"></i> Хабр (раздел Интернет)</a>
+            </div>
+            <div class="note-muted">
+                <i class="fas fa-info-circle"></i> Новостная лента обновляется вручную. Самая свежая информация — по ссылкам выше.
             </div>
         </div>
     </main>
@@ -399,7 +366,7 @@
     </footer>
 
     <script>
-        // ---------- МАТРИЧНЫЙ ДОЖДЬ ----------
+        // ---------- МАТРИЧНЫЙ ДОЖДЬ (МЕДЛЕННО) ----------
         const canvas = document.getElementById('matrixCanvas');
         const ctx = canvas.getContext('2d');
         
@@ -407,7 +374,8 @@
         let columns;
         let drops = [];
         let fontSize = 18;
-        let symbols = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZабвгдежзийклмнопрстуфхцчшщъыьэюя01";
+        // символы: цифры, буквы, немного кириллицы
+        const symbols = "01ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyzабвгдежзийклмнопрстуфхцчшщъыьэюя";
         
         function initMatrix() {
             width = window.innerWidth;
@@ -418,29 +386,39 @@
             columns = Math.floor(width / fontSize);
             drops = [];
             for (let i = 0; i < columns; i++) {
+                // начальная позиция - случайная, чтобы не всё падало одновременно
                 drops[i] = Math.floor(Math.random() * -height / fontSize);
             }
         }
         
+        let frameSkip = 0;
         function drawMatrix() {
-            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
-            ctx.fillRect(0, 0, width, height);
-            ctx.fillStyle = '#cc0000';
-            ctx.font = fontSize + 'px "Roboto Mono", monospace';
-            
-            for (let i = 0; i < drops.length; i++) {
-                const char = symbols[Math.floor(Math.random() * symbols.length)];
-                const x = i * fontSize;
-                const y = drops[i] * fontSize;
-                if (y > 0 && y < height) {
-                    // Случайный оттенок красного
-                    ctx.fillStyle = `rgba(204, ${Math.floor(Math.random() * 80) + 20}, ${Math.floor(Math.random() * 50)}, 0.9)`;
-                    ctx.fillText(char, x, y);
+            // замедляем падение: обновляем каждый 2-й кадр
+            frameSkip++;
+            if (frameSkip % 2 === 0) {
+                // очистка с низкой прозрачностью для эффекта "хвоста"
+                ctx.fillStyle = 'rgba(0, 0, 0, 0.04)';
+                ctx.fillRect(0, 0, width, height);
+                ctx.fillStyle = '#cc0000';
+                ctx.font = fontSize + 'px "Roboto Mono", monospace';
+                
+                for (let i = 0; i < drops.length; i++) {
+                    const char = symbols[Math.floor(Math.random() * symbols.length)];
+                    const x = i * fontSize;
+                    const y = drops[i] * fontSize;
+                    if (y > 0 && y < height) {
+                        // случайный оттенок красного
+                        const red = 180 + Math.floor(Math.random() * 75);
+                        ctx.fillStyle = `rgba(${red}, 30, 30, 0.9)`;
+                        ctx.fillText(char, x, y);
+                    }
+                    // падение: увеличиваем позицию
+                    drops[i]++;
+                    // сброс, когда ушло за низ
+                    if (drops[i] * fontSize > height && Math.random() > 0.98) {
+                        drops[i] = 0;
+                    }
                 }
-                if (y > height && Math.random() > 0.975) {
-                    drops[i] = 0;
-                }
-                drops[i]++;
             }
             requestAnimationFrame(drawMatrix);
         }
@@ -451,24 +429,6 @@
         
         initMatrix();
         drawMatrix();
-        
-        // ---------- НЕОНОВЫЕ ВСПЫШКИ ----------
-        const flashDiv = document.getElementById('neonFlash');
-        
-        function randomFlash() {
-            // Случайная интенсивность вспышки
-            const intensity = Math.random() * 0.6 + 0.2; // от 0.2 до 0.8
-            flashDiv.style.transition = 'background 0.05s linear';
-            flashDiv.style.backgroundColor = `rgba(204, 0, 0, ${intensity})`;
-            setTimeout(() => {
-                flashDiv.style.backgroundColor = 'rgba(204, 0, 0, 0)';
-            }, 80);
-            // Следующая вспышка через случайное время от 2 до 7 секунд
-            setTimeout(randomFlash, Math.random() * 5000 + 2000);
-        }
-        
-        // Запускаем вспышки с задержкой
-        setTimeout(randomFlash, 1500);
         
         // ---------- ОСТАЛЬНОЙ ФУНКЦИОНАЛ (прокси, конфиги, копирование) ----------
         function copyToClipboard(button, url) {
