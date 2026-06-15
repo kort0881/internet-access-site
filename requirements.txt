@@ -2,3 +2,4 @@ flask
 waitress
 requests
 jinja2
+feedparser
