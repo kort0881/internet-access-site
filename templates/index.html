@@ -11,9 +11,21 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Inter', system-ui, sans-serif; color: #e0e0e8; line-height: 1.5; min-height: 100vh; background: #7bc5ff; position: relative; }
-        .sky-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; background: linear-gradient(145deg, #6bc0ff 0%, #a8d8ff 100%); overflow: hidden; }
-        .cloud { position: absolute; background: rgba(255, 255, 255, 0.95); border-radius: 1000px; box-shadow: 0 8px 20px rgba(0,0,0,0.1); z-index: -1; }
+        body { font-family: 'Inter', system-ui, sans-serif; color: #eaeef2; line-height: 1.5; min-height: 100vh; background: #0a0a0c; position: relative; }
+        
+        /* Чёрно-красно-белая цветовая схема */
+        .sky-bg { 
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; 
+            background: radial-gradient(circle at 30% 40%, #1a0000, #000000); 
+            overflow: hidden; 
+        }
+        .cloud { 
+            position: absolute; 
+            background: rgba(40, 40, 45, 0.85); 
+            border-radius: 1000px; 
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4); 
+            z-index: -1; 
+        }
         .cloud::before, .cloud::after { content: ''; position: absolute; background: inherit; border-radius: 50%; }
         .cloud1 { width: 240px; height: 140px; top: 15%; left: -240px; }
         .cloud1::before { width: 110px; height: 110px; top: -45px; left: 30px; }
@@ -28,61 +40,132 @@
         .cloud1 { animation: floatClouds 35s linear infinite; }
         .cloud2 { animation: floatClouds 45s linear infinite; }
         .cloud3 { animation: floatClouds 55s linear infinite; }
-        .flying-cow { position: absolute; font-size: 72px; filter: drop-shadow(2px 4px 8px rgba(0,0,0,0.2)); z-index: -1; pointer-events: none; animation-timing-function: linear; animation-iteration-count: infinite; }
+        
+        .flying-cow { position: absolute; font-size: 72px; filter: drop-shadow(2px 4px 8px rgba(0,0,0,0.5)); z-index: -1; pointer-events: none; animation-timing-function: linear; animation-iteration-count: infinite; }
         .cow1 { top: 12%; animation: flyAcross 22s linear infinite; font-size: 68px; }
         .cow2 { top: 35%; animation: flyAcross 28s linear infinite 3s; font-size: 58px; transform: scaleX(-1);}
         .cow3 { top: 62%; animation: flyAcross 32s linear infinite 7s; font-size: 82px; }
         .cow4 { top: 78%; animation: flyAcross 38s linear infinite 12s; font-size: 54px; transform: scaleX(-1);}
         .cow5 { top: 25%; animation: flyAcross 42s linear infinite 18s; font-size: 64px; }
         @keyframes flyAcross { 0% { transform: translateX(-180px) translateY(0px) rotate(0deg); opacity: 0; } 12% { opacity: 0.95; } 88% { opacity: 0.95; } 100% { transform: translateX(calc(100vw + 180px)) translateY(-50px) rotate(6deg); opacity: 0; } }
+        
         .container { position: relative; z-index: 2; max-width: 1400px; margin: 0 auto; padding: 0 28px; }
-        .glass-header { background: rgba(8, 10, 18, 0.85); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(0, 255, 255, 0.3); padding: 18px 0; position: sticky; top: 0; z-index: 100; }
+        
+        .glass-header { 
+            background: rgba(0, 0, 0, 0.92); 
+            backdrop-filter: blur(12px); 
+            border-bottom: 2px solid #cc0000; 
+            padding: 18px 0; 
+            position: sticky; 
+            top: 0; 
+            z-index: 100; 
+        }
         .header-flex { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
-        .logo h1 { font-size: 1.9rem; font-weight: 700; background: linear-gradient(135deg, #fff, #0ff, #a06eff); -webkit-background-clip: text; background-clip: text; color: transparent; letter-spacing: -0.5px; }
-        .logo p { color: #c0d0e0; font-size: 0.85rem; margin-top: 4px; }
+        .logo h1 { 
+            font-size: 1.9rem; font-weight: 700; 
+            background: linear-gradient(135deg, #fff, #ff4d4d, #cc0000); 
+            -webkit-background-clip: text; background-clip: text; color: transparent; 
+            letter-spacing: -0.5px; 
+        }
+        .logo p { color: #bbbbbb; font-size: 0.85rem; margin-top: 4px; }
         .social-links { display: flex; gap: 12px; flex-wrap: wrap; }
-        .social-btn { padding: 8px 20px; border-radius: 40px; text-decoration: none; font-size: 0.85rem; font-weight: 500; display: inline-flex; align-items: center; gap: 8px; background: rgba(0, 255, 255, 0.15); border: 1px solid rgba(0, 255, 255, 0.35); color: #e0e0e8; transition: all 0.25s; }
-        .social-btn:hover { background: rgba(0, 255, 255, 0.3); border-color: #0ff; box-shadow: 0 0 12px rgba(0,255,255,0.4); transform: translateY(-2px); }
+        .social-btn { 
+            padding: 8px 20px; border-radius: 40px; text-decoration: none; font-size: 0.85rem; font-weight: 500; 
+            display: inline-flex; align-items: center; gap: 8px; 
+            background: rgba(204, 0, 0, 0.15); border: 1px solid rgba(204, 0, 0, 0.6); 
+            color: #f0f0f0; transition: all 0.25s; 
+        }
+        .social-btn:hover { background: rgba(204, 0, 0, 0.4); border-color: #ff3333; box-shadow: 0 0 12px rgba(204,0,0,0.6); transform: translateY(-2px); color: #fff; }
+        
         .section { margin: 56px 0 40px; }
-        .section-title { font-size: 2.2rem; font-weight: 700; background: linear-gradient(135deg, #fff, #0ff); -webkit-background-clip: text; background-clip: text; color: transparent; display: inline-block; border-left: 4px solid #0ff; padding-left: 20px; margin-bottom: 32px; text-shadow: 0 0 5px rgba(0,0,0,0.3); }
-        .corner-card { background: rgba(12, 16, 24, 0.85); backdrop-filter: blur(12px); border: 1px solid rgba(0, 255, 255, 0.25); border-radius: 24px; padding: 28px; transition: all 0.3s ease; position: relative; }
-        .corner-card:hover { border-color: #0ff; box-shadow: 0 0 28px rgba(0, 255, 255, 0.2); transform: translateY(-3px); }
-        .info-grid { display: flex; flex-wrap: wrap; gap: 28px; margin-bottom: 48px; }
-        .info-card { flex: 1; min-width: 260px; background: rgba(12, 16, 24, 0.85); backdrop-filter: blur(10px); border-radius: 24px; padding: 28px; border: 1px solid rgba(0, 255, 255, 0.25); transition: 0.25s; }
-        .info-card:hover { border-color: #0ff; box-shadow: 0 8px 24px rgba(0,255,255,0.15); }
-        .info-icon { width: 54px; height: 54px; background: linear-gradient(135deg, #0ff, #a06eff); border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 28px; margin-bottom: 24px; }
+        .section-title { 
+            font-size: 2.2rem; font-weight: 700; 
+            background: linear-gradient(135deg, #fff, #ff4d4d); 
+            -webkit-background-clip: text; background-clip: text; color: transparent; 
+            display: inline-block; border-left: 4px solid #cc0000; 
+            padding-left: 20px; margin-bottom: 32px; 
+            text-shadow: 0 0 5px rgba(0,0,0,0.5); 
+        }
+        
+        .corner-card, .info-card, .config-card, .app-card { 
+            background: rgba(10, 10, 12, 0.92); 
+            backdrop-filter: blur(10px); 
+            border: 1px solid rgba(204, 0, 0, 0.45); 
+            border-radius: 24px; 
+            transition: all 0.3s ease; 
+        }
+        .corner-card { padding: 28px; position: relative; }
+        .corner-card:hover, .info-card:hover, .config-card:hover, .app-card:hover { 
+            border-color: #ff3333; 
+            box-shadow: 0 0 28px rgba(204, 0, 0, 0.3); 
+            transform: translateY(-3px); 
+        }
+        .info-card { flex: 1; min-width: 260px; padding: 28px; }
+        .info-icon { 
+            width: 54px; height: 54px; 
+            background: linear-gradient(135deg, #cc0000, #990000); 
+            border-radius: 16px; 
+            display: flex; align-items: center; justify-content: center; 
+            font-size: 28px; margin-bottom: 24px; 
+            color: white;
+        }
         .info-card h3 { font-size: 1.5rem; margin-bottom: 16px; color: #fff; font-weight: 600; }
         .step-list { list-style: none; counter-reset: step; }
-        .step-list li { counter-increment: step; margin-bottom: 12px; padding-left: 32px; position: relative; color: #d0e0f0; }
-        .step-list li::before { content: counter(step); position: absolute; left: 0; top: 0; width: 22px; height: 22px; background: linear-gradient(135deg, #0ff, #0088ff); border-radius: 30px; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold; color: #000; }
-        .highlight { color: #0ff; font-weight: 600; }
-        .update-badge { display: inline-block; margin-top: 20px; padding: 6px 16px; background: rgba(0, 255, 255, 0.2); border-radius: 30px; font-size: 0.8rem; color: #0ff; border: 1px solid rgba(0,255,255,0.4); }
+        .step-list li { counter-increment: step; margin-bottom: 12px; padding-left: 32px; position: relative; color: #ddd; }
+        .step-list li::before { 
+            content: counter(step); position: absolute; left: 0; top: 0; width: 22px; height: 22px; 
+            background: linear-gradient(135deg, #cc0000, #990000); border-radius: 30px; 
+            display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold; color: #fff; 
+        }
+        .highlight { color: #ff6666; font-weight: 600; }
+        .update-badge { 
+            display: inline-block; margin-top: 20px; padding: 6px 16px; 
+            background: rgba(204, 0, 0, 0.25); border-radius: 30px; font-size: 0.8rem; 
+            color: #ff9999; border: 1px solid rgba(204,0,0,0.6); 
+        }
+        .info-grid { display: flex; flex-wrap: wrap; gap: 28px; margin-bottom: 48px; }
+        
         .configs-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px; margin: 32px 0; }
-        .config-card { background: rgba(8, 12, 20, 0.85); backdrop-filter: blur(12px); border-radius: 24px; border: 1px solid rgba(0, 255, 255, 0.3); padding: 20px; transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1); }
-        .config-card:hover { transform: translateY(-4px); border-color: #0ff; box-shadow: 0 12px 24px -12px rgba(0, 255, 255, 0.3); }
-        .config-name { font-size: 1.2rem; font-weight: 700; color: #0ff; margin-bottom: 6px; word-break: break-word; }
-        .config-category { font-size: 0.75rem; color: #b0c0d0; margin-bottom: 16px; }
+        .config-card { padding: 20px; }
+        .config-name { font-size: 1.2rem; font-weight: 700; color: #ff6666; margin-bottom: 6px; word-break: break-word; }
+        .config-category { font-size: 0.75rem; color: #aaa; margin-bottom: 16px; }
         .button-group { display: flex; flex-direction: column; gap: 10px; margin-top: 12px; }
-        .btn-neon { padding: 10px; border-radius: 40px; font-weight: 600; text-align: center; cursor: pointer; transition: all 0.2s; border: none; font-size: 0.85rem; display: flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none; background: linear-gradient(95deg, #a06eff, #0ff); color: #000; }
-        .btn-neon:hover { transform: scale(1.02); box-shadow: 0 0 12px #0ff; }
-        .btn-black { background: linear-gradient(95deg, #1a1a1a, #2a2a2a); color: #aaa; border: 1px solid #555; }
-        .btn-black:hover { box-shadow: 0 0 12px #333; border-color: #888; color: #fff; }
-        .btn-link { background: rgba(0, 255, 255, 0.1); border: 1px solid rgba(0, 255, 255, 0.5); color: #0ff; background: transparent; font-weight: 600; }
-        .btn-link:hover { background: rgba(0, 255, 255, 0.25); border-color: #0ff; }
+        
+        .btn-neon { 
+            padding: 10px; border-radius: 40px; font-weight: 600; text-align: center; cursor: pointer; 
+            transition: all 0.2s; border: none; font-size: 0.85rem; display: flex; align-items: center; 
+            justify-content: center; gap: 8px; text-decoration: none; 
+            background: linear-gradient(95deg, #cc0000, #990000); color: #fff; 
+        }
+        .btn-neon:hover { transform: scale(1.02); box-shadow: 0 0 12px #cc0000; background: linear-gradient(95deg, #ff1a1a, #b30000); }
+        .btn-black { background: #1a1a1a; color: #eee; border: 1px solid #555; }
+        .btn-black:hover { box-shadow: 0 0 12px #660000; border-color: #cc0000; background: #2a2a2a; }
+        .btn-link { background: rgba(204, 0, 0, 0.1); border: 1px solid rgba(204, 0, 0, 0.7); color: #ff9999; background: transparent; font-weight: 600; }
+        .btn-link:hover { background: rgba(204, 0, 0, 0.3); border-color: #ff3333; color: #fff; }
+        
         .proxy-grid { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 16px; }
-        .proxy-item { background: rgba(0, 136, 204, 0.25); border: 1px solid rgba(0, 255, 255, 0.5); padding: 8px 18px; border-radius: 60px; color: #0ff; text-decoration: none; font-weight: 500; transition: 0.2s; display: inline-flex; align-items: center; gap: 8px; font-size: 0.85rem; }
-        .proxy-item:hover { background: rgba(0, 255, 255, 0.4); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0, 136, 204, 0.3); }
+        .proxy-item { 
+            background: rgba(160, 0, 0, 0.25); border: 1px solid rgba(204, 0, 0, 0.7); padding: 8px 18px; 
+            border-radius: 60px; color: #ff8888; text-decoration: none; font-weight: 500; 
+            transition: 0.2s; display: inline-flex; align-items: center; gap: 8px; font-size: 0.85rem; 
+        }
+        .proxy-item:hover { background: rgba(204, 0, 0, 0.5); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(204, 0, 0, 0.4); color: #fff; }
+        
         .apps-grid { display: flex; flex-wrap: wrap; gap: 24px; justify-content: center; margin: 40px 0; }
-        .app-card { background: rgba(8, 12, 20, 0.85); backdrop-filter: blur(12px); border-radius: 24px; padding: 24px; width: 240px; text-align: center; border: 1px solid rgba(0, 255, 255, 0.3); transition: 0.3s; }
-        .app-card:hover { border-color: #0ff; transform: translateY(-4px); }
-        .app-icon { font-size: 42px; margin-bottom: 12px; color: #0ff; }
+        .app-card { padding: 24px; width: 240px; text-align: center; }
+        .app-icon { font-size: 42px; margin-bottom: 12px; color: #ff6666; }
         .app-card h3 { font-size: 1.2rem; margin-bottom: 16px; color: #fff; }
         .app-links { display: flex; flex-direction: column; gap: 10px; }
-        .app-link { padding: 8px; border-radius: 40px; background: rgba(255,255,255,0.08); border: 1px solid rgba(0, 255, 255, 0.3); color: #e0e0e8; text-decoration: none; transition: 0.2s; font-size: 0.85rem; }
-        .app-link:hover { background: rgba(0, 255, 255, 0.2); border-color: #0ff; }
-        footer { margin-top: 70px; padding: 30px 0; text-align: center; border-top: 1px solid rgba(0, 255, 255, 0.3); color: #c0d0e0; }
-        .footer-links a { color: #0ff; margin: 0 12px; font-size: 1.4rem; transition: 0.2s; }
-        .footer-links a:hover { text-shadow: 0 0 8px #0ff; }
+        .app-link { 
+            padding: 8px; border-radius: 40px; background: rgba(255,255,255,0.05); 
+            border: 1px solid rgba(204, 0, 0, 0.5); color: #dddddd; text-decoration: none; transition: 0.2s; font-size: 0.85rem; 
+        }
+        .app-link:hover { background: rgba(204, 0, 0, 0.25); border-color: #ff3333; color: #fff; }
+        
+        footer { margin-top: 70px; padding: 30px 0; text-align: center; border-top: 1px solid rgba(204, 0, 0, 0.6); color: #aaa; }
+        .footer-links a { color: #ff6666; margin: 0 12px; font-size: 1.4rem; transition: 0.2s; }
+        .footer-links a:hover { text-shadow: 0 0 8px #cc0000; color: #ff9999; }
+        
         @media (max-width: 800px) {
             .container { padding: 0 20px; }
             .configs-grid { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
@@ -161,6 +244,33 @@
                 <div class="app-card"><div class="app-icon"><i class="fab fa-apple"></i></div><h3>iOS / macOS</h3><div class="app-links"><a href="https://apps.apple.com/app/shadowrocket/id932747118" class="app-link">Shadowrocket</a></div></div>
             </div>
         </div>
+
+        <!-- НОВЫЙ БЛОК: Новости и контекст о блокировках в России -->
+        <div class="section">
+            <h2 class="section-title">📰 Новости и контекст: блокировки в России</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <div class="info-icon"><i class="fas fa-database"></i></div>
+                    <h3>Списки заблокированных ресурсов</h3>
+                    <p>Технические данные для настройки правил маршрутизации в форматах GeoIP, GeoSite, mmdb и других.</p>
+                    <div class="proxy-grid" style="margin-top: 20px;">
+                        <a href="https://github.com/Nidelon/ru-block-v2ray-rules" class="proxy-item" target="_blank"><i class="fab fa-github"></i> Nidelon/ru-block-v2ray-rules</a>
+                        <a href="https://github.com/runetfreedom/russia-blocked-geoip" class="proxy-item" target="_blank"><i class="fab fa-github"></i> runetfreedom/russia-blocked-geoip</a>
+                    </div>
+                </div>
+                <div class="info-card">
+                    <div class="info-icon"><i class="fas fa-newspaper"></i></div>
+                    <h3>Регулярно обновляемые статьи и новости</h3>
+                    <p>Актуальная информация о блокировках, действиях РКН и новых инициативах.</p>
+                    <div class="proxy-grid" style="margin-top: 20px;">
+                        <a href="https://www.tadviser.ru/" class="proxy-item" target="_blank"><i class="fas fa-building"></i> TAdviser</a>
+                        <a href="https://3dnews.ru/" class="proxy-item" target="_blank"><i class="fas fa-cube"></i> 3DNews</a>
+                        <a href="https://www.rbc.ru/" class="proxy-item" target="_blank"><i class="fas fa-chart-line"></i> РБК</a>
+                        <a href="https://tass.ru/" class="proxy-item" target="_blank"><i class="fas fa-globe"></i> ТАСС</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
 
     <footer>
@@ -175,13 +285,16 @@
             const original = button.innerHTML;
             navigator.clipboard.writeText(url).then(() => {
                 button.innerHTML = '<i class="fas fa-check"></i> Скопировано!';
-                button.style.background = 'linear-gradient(95deg, #00ff88, #00cc66)';
+                button.style.background = 'linear-gradient(95deg, #cc0000, #990000)';
+                button.style.color = '#fff';
                 setTimeout(() => {
                     button.innerHTML = original;
                     if (button.classList.contains('btn-black')) {
-                        button.style.background = 'linear-gradient(95deg, #1a1a1a, #2a2a2a)';
+                        button.style.background = '#1a1a1a';
+                        button.style.color = '#eee';
                     } else {
-                        button.style.background = '';
+                        button.style.background = 'linear-gradient(95deg, #cc0000, #990000)';
+                        button.style.color = '#fff';
                     }
                 }, 1500);
             }).catch(() => {
@@ -195,9 +308,11 @@
                 setTimeout(() => {
                     button.innerHTML = original;
                     if (button.classList.contains('btn-black')) {
-                        button.style.background = 'linear-gradient(95deg, #1a1a1a, #2a2a2a)';
+                        button.style.background = '#1a1a1a';
+                        button.style.color = '#eee';
                     } else {
-                        button.style.background = '';
+                        button.style.background = 'linear-gradient(95deg, #cc0000, #990000)';
+                        button.style.color = '#fff';
                     }
                 }, 1500);
             });
@@ -238,7 +353,6 @@
                 const content = atob(data.content);
                 const lines = content.split('\n');
                 
-                // Собираем все URL ссылки из всех секций (включая BLACK)
                 const allUrls = [];
                 let currentSection = null;
                 for (let line of lines) {
@@ -250,7 +364,6 @@
                     }
                 }
                 
-                // Извлекаем дату
                 let lastUpdate = '';
                 for (let line of lines) {
                     if (line.startsWith('# Generated:')) {
@@ -273,7 +386,6 @@
                     const url = item.url;
                     const section = item.section;
                     let name = url.split('/').pop().replace('.txt', '').replace(/_/g, ' ');
-                    // Упрощаем названия для читаемости
                     name = name.replace('ru white all ', '').replace('ru white ', '').replace('my euro all ', '').replace('my euro ', '');
                     if (name.includes('WHITE')) name = '✨ ' + name;
                     if (name.includes('BLACK')) name = '⬛ ' + name;
