@@ -4,226 +4,74 @@
     <meta charset="UTF-8">
     <link rel="canonical" href="https://kort0881.github.io/internet-access-site/" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Доступ к интернету — VPN без границ</title>
-    <meta name="description" content="Бесплатные VPN-конфигурации: VLESS, WireGuard, Hysteria, Trojan. Обход блокировок в России.">
+    <title>{{ meta_title }}</title>
+    <meta name="description" content="{{ meta_description }}">
+    <meta name="keywords" content="{{ meta_keywords }}">
     <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌐</text></svg>">
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Roboto+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Inter', system-ui, sans-serif; color: #eaeef2; line-height: 1.5; min-height: 100vh; background: #0a0a0c; position: relative; overflow-x: hidden; }
-        
-        .sky-bg { 
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; 
-            background: radial-gradient(circle at 30% 40%, #1a0000, #000000); 
-            overflow: hidden; 
-        }
-        
-        /* Canvas для матричного дождя (медленное движение) */
-        #matrixCanvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            display: block;
-            opacity: 0.6;
-        }
-        
+        .sky-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; background: radial-gradient(circle at 30% 40%, #1a0000, #000000); overflow: hidden; }
+        #matrixCanvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; display: block; opacity: 0.6; }
         .container { position: relative; z-index: 2; max-width: 1400px; margin: 0 auto; padding: 0 28px; }
-        
-        .glass-header { 
-            background: rgba(0, 0, 0, 0.92); 
-            backdrop-filter: blur(12px); 
-            border-bottom: 2px solid #cc0000; 
-            padding: 18px 0; 
-            position: sticky; 
-            top: 0; 
-            z-index: 100; 
-        }
+        .glass-header { background: rgba(0, 0, 0, 0.92); backdrop-filter: blur(12px); border-bottom: 2px solid #cc0000; padding: 18px 0; position: sticky; top: 0; z-index: 100; }
         .header-flex { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
-        .logo h1 { 
-            font-size: 1.9rem; font-weight: 700; 
-            background: linear-gradient(135deg, #fff, #ff4d4d, #cc0000); 
-            -webkit-background-clip: text; background-clip: text; color: transparent; 
-            letter-spacing: -0.5px; 
-        }
+        .logo h1 { font-size: 1.9rem; font-weight: 700; background: linear-gradient(135deg, #fff, #ff4d4d, #cc0000); -webkit-background-clip: text; background-clip: text; color: transparent; letter-spacing: -0.5px; }
         .logo p { color: #bbbbbb; font-size: 0.85rem; margin-top: 4px; }
         .social-links { display: flex; gap: 12px; flex-wrap: wrap; }
-        .social-btn { 
-            padding: 8px 20px; border-radius: 40px; text-decoration: none; font-size: 0.85rem; font-weight: 500; 
-            display: inline-flex; align-items: center; gap: 8px; 
-            background: rgba(204, 0, 0, 0.15); border: 1px solid rgba(204, 0, 0, 0.6); 
-            color: #f0f0f0; transition: all 0.25s; 
-        }
+        .social-btn { padding: 8px 20px; border-radius: 40px; text-decoration: none; font-size: 0.85rem; font-weight: 500; display: inline-flex; align-items: center; gap: 8px; background: rgba(204, 0, 0, 0.15); border: 1px solid rgba(204, 0, 0, 0.6); color: #f0f0f0; transition: all 0.25s; }
         .social-btn:hover { background: rgba(204, 0, 0, 0.4); border-color: #ff3333; box-shadow: 0 0 12px rgba(204,0,0,0.6); transform: translateY(-2px); color: #fff; }
-        
         .section { margin: 56px 0 40px; }
-        .section-title { 
-            font-size: 2.2rem; font-weight: 700; 
-            background: linear-gradient(135deg, #fff, #ff4d4d); 
-            -webkit-background-clip: text; background-clip: text; color: transparent; 
-            display: inline-block; border-left: 4px solid #cc0000; 
-            padding-left: 20px; margin-bottom: 32px; 
-            text-shadow: 0 0 5px rgba(0,0,0,0.5); 
-        }
-        
-        .corner-card, .info-card, .config-card, .app-card, .news-card { 
-            background: rgba(10, 10, 12, 0.92); 
-            backdrop-filter: blur(10px); 
-            border: 1px solid rgba(204, 0, 0, 0.45); 
-            border-radius: 24px; 
-            transition: all 0.3s ease; 
-        }
+        .section-title { font-size: 2.2rem; font-weight: 700; background: linear-gradient(135deg, #fff, #ff4d4d); -webkit-background-clip: text; background-clip: text; color: transparent; display: inline-block; border-left: 4px solid #cc0000; padding-left: 20px; margin-bottom: 32px; text-shadow: 0 0 5px rgba(0,0,0,0.5); }
+        .corner-card, .info-card, .config-card, .app-card, .news-card { background: rgba(10, 10, 12, 0.92); backdrop-filter: blur(10px); border: 1px solid rgba(204, 0, 0, 0.45); border-radius: 24px; transition: all 0.3s ease; }
         .corner-card { padding: 28px; position: relative; }
-        .corner-card:hover, .info-card:hover, .config-card:hover, .app-card:hover, .news-card:hover { 
-            border-color: #ff3333; 
-            box-shadow: 0 0 28px rgba(204, 0, 0, 0.3); 
-            transform: translateY(-3px); 
-        }
+        .corner-card:hover, .info-card:hover, .config-card:hover, .app-card:hover, .news-card:hover { border-color: #ff3333; box-shadow: 0 0 28px rgba(204, 0, 0, 0.3); transform: translateY(-3px); }
         .info-card { flex: 1; min-width: 260px; padding: 28px; }
-        .info-icon { 
-            width: 54px; height: 54px; 
-            background: linear-gradient(135deg, #cc0000, #990000); 
-            border-radius: 16px; 
-            display: flex; align-items: center; justify-content: center; 
-            font-size: 28px; margin-bottom: 24px; 
-            color: white;
-        }
+        .info-icon { width: 54px; height: 54px; background: linear-gradient(135deg, #cc0000, #990000); border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 28px; margin-bottom: 24px; color: white; }
         .info-card h3 { font-size: 1.5rem; margin-bottom: 16px; color: #fff; font-weight: 600; }
         .step-list { list-style: none; counter-reset: step; }
         .step-list li { counter-increment: step; margin-bottom: 12px; padding-left: 32px; position: relative; color: #ddd; }
-        .step-list li::before { 
-            content: counter(step); position: absolute; left: 0; top: 0; width: 22px; height: 22px; 
-            background: linear-gradient(135deg, #cc0000, #990000); border-radius: 30px; 
-            display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold; color: #fff; 
-        }
+        .step-list li::before { content: counter(step); position: absolute; left: 0; top: 0; width: 22px; height: 22px; background: linear-gradient(135deg, #cc0000, #990000); border-radius: 30px; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold; color: #fff; }
         .highlight { color: #ff6666; font-weight: 600; }
-        .update-badge { 
-            display: inline-block; margin-top: 20px; padding: 6px 16px; 
-            background: rgba(204, 0, 0, 0.25); border-radius: 30px; font-size: 0.8rem; 
-            color: #ff9999; border: 1px solid rgba(204,0,0,0.6); 
-        }
+        .update-badge { display: inline-block; margin-top: 20px; padding: 6px 16px; background: rgba(204, 0, 0, 0.25); border-radius: 30px; font-size: 0.8rem; color: #ff9999; border: 1px solid rgba(204,0,0,0.6); }
         .info-grid { display: flex; flex-wrap: wrap; gap: 28px; margin-bottom: 48px; }
-        
         .configs-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px; margin: 32px 0; }
         .config-card { padding: 20px; }
         .config-name { font-size: 1.2rem; font-weight: 700; color: #ff6666; margin-bottom: 6px; word-break: break-word; }
         .config-category { font-size: 0.75rem; color: #aaa; margin-bottom: 16px; }
         .button-group { display: flex; flex-direction: column; gap: 10px; margin-top: 12px; }
-        
-        .btn-neon { 
-            padding: 10px; border-radius: 40px; font-weight: 600; text-align: center; cursor: pointer; 
-            transition: all 0.2s; border: none; font-size: 0.85rem; display: flex; align-items: center; 
-            justify-content: center; gap: 8px; text-decoration: none; 
-            background: linear-gradient(95deg, #cc0000, #990000); color: #fff; 
-        }
+        .btn-neon { padding: 10px; border-radius: 40px; font-weight: 600; text-align: center; cursor: pointer; transition: all 0.2s; border: none; font-size: 0.85rem; display: flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none; background: linear-gradient(95deg, #cc0000, #990000); color: #fff; }
         .btn-neon:hover { transform: scale(1.02); box-shadow: 0 0 12px #cc0000; background: linear-gradient(95deg, #ff1a1a, #b30000); }
         .btn-black { background: #1a1a1a; color: #eee; border: 1px solid #555; }
         .btn-black:hover { box-shadow: 0 0 12px #660000; border-color: #cc0000; background: #2a2a2a; }
         .btn-link { background: rgba(204, 0, 0, 0.1); border: 1px solid rgba(204, 0, 0, 0.7); color: #ff9999; background: transparent; font-weight: 600; }
         .btn-link:hover { background: rgba(204, 0, 0, 0.3); border-color: #ff3333; color: #fff; }
-        
         .proxy-grid { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 16px; }
-        .proxy-item { 
-            background: rgba(160, 0, 0, 0.25); border: 1px solid rgba(204, 0, 0, 0.7); padding: 8px 18px; 
-            border-radius: 60px; color: #ff8888; text-decoration: none; font-weight: 500; 
-            transition: 0.2s; display: inline-flex; align-items: center; gap: 8px; font-size: 0.85rem; 
-        }
+        .proxy-item { background: rgba(160, 0, 0, 0.25); border: 1px solid rgba(204, 0, 0, 0.7); padding: 8px 18px; border-radius: 60px; color: #ff8888; text-decoration: none; font-weight: 500; transition: 0.2s; display: inline-flex; align-items: center; gap: 8px; font-size: 0.85rem; }
         .proxy-item:hover { background: rgba(204, 0, 0, 0.5); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(204, 0, 0, 0.4); color: #fff; }
-        
         .apps-grid { display: flex; flex-wrap: wrap; gap: 24px; justify-content: center; margin: 40px 0; }
         .app-card { padding: 24px; width: 240px; text-align: center; }
         .app-icon { font-size: 42px; margin-bottom: 12px; color: #ff6666; }
         .app-card h3 { font-size: 1.2rem; margin-bottom: 16px; color: #fff; }
         .app-links { display: flex; flex-direction: column; gap: 10px; }
-        .app-link { 
-            padding: 8px; border-radius: 40px; background: rgba(255,255,255,0.05); 
-            border: 1px solid rgba(204, 0, 0, 0.5); color: #dddddd; text-decoration: none; transition: 0.2s; font-size: 0.85rem; 
-        }
+        .app-link { padding: 8px; border-radius: 40px; background: rgba(255,255,255,0.05); border: 1px solid rgba(204, 0, 0, 0.5); color: #dddddd; text-decoration: none; transition: 0.2s; font-size: 0.85rem; }
         .app-link:hover { background: rgba(204, 0, 0, 0.25); border-color: #ff3333; color: #fff; }
-        
-        /* Стили для новостных карточек */
-        .news-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 24px;
-            margin: 32px 0;
-        }
-        .news-card {
-            padding: 24px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            align-items: flex-start;
-        }
-        .news-date {
-            font-size: 0.8rem;
-            color: #ff8888;
-            background: rgba(204, 0, 0, 0.2);
-            padding: 4px 12px;
-            border-radius: 20px;
-            display: inline-block;
-            margin-bottom: 12px;
-        }
-        .news-title {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: #fff;
-            margin-bottom: 12px;
-        }
-        .news-summary {
-            color: #ccc;
-            line-height: 1.5;
-            margin-bottom: 16px;
-        }
-        .news-source {
-            font-size: 0.8rem;
-            color: #ff9999;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-        .news-source a {
-            color: #ff6666;
-            text-decoration: none;
-            border-bottom: 1px dashed #ff6666;
-        }
-        .news-source a:hover {
-            color: #fff;
-            border-bottom-color: #fff;
-        }
-        .official-links {
-            margin-top: 20px;
-            padding: 20px;
-            background: rgba(0,0,0,0.4);
-            border-radius: 20px;
-            text-align: center;
-        }
-        .official-links a {
-            color: #ff6666;
-            margin: 0 15px;
-            text-decoration: none;
-            font-weight: 500;
-        }
-        .official-links a:hover {
-            color: #fff;
-            text-shadow: 0 0 5px #cc0000;
-        }
-        
-        .note-muted {
-            font-size: 0.8rem;
-            color: #aaa;
-            text-align: center;
-            margin-top: 15px;
-        }
-        
+        .news-grid { display: flex; flex-direction: column; gap: 24px; margin: 32px 0; }
+        .news-card { padding: 24px; display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start; }
+        .news-date { font-size: 0.8rem; color: #ff8888; background: rgba(204, 0, 0, 0.2); padding: 4px 12px; border-radius: 20px; display: inline-block; margin-bottom: 12px; }
+        .news-title { font-size: 1.3rem; font-weight: 700; color: #fff; margin-bottom: 12px; }
+        .news-summary { color: #ccc; line-height: 1.5; margin-bottom: 16px; }
+        .news-source { font-size: 0.8rem; color: #ff9999; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+        .news-source a { color: #ff6666; text-decoration: none; border-bottom: 1px dashed #ff6666; }
+        .news-source a:hover { color: #fff; border-bottom-color: #fff; }
+        .official-links { margin-top: 20px; padding: 20px; background: rgba(0,0,0,0.4); border-radius: 20px; text-align: center; }
+        .official-links a { color: #ff6666; margin: 0 15px; text-decoration: none; font-weight: 500; }
+        .official-links a:hover { color: #fff; text-shadow: 0 0 5px #cc0000; }
         footer { margin-top: 70px; padding: 30px 0; text-align: center; border-top: 1px solid rgba(204, 0, 0, 0.6); color: #aaa; }
         .footer-links a { color: #ff6666; margin: 0 12px; font-size: 1.4rem; transition: 0.2s; }
         .footer-links a:hover { text-shadow: 0 0 8px #cc0000; color: #ff9999; }
-        
         @media (max-width: 800px) {
             .container { padding: 0 20px; }
             .configs-grid { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
@@ -262,7 +110,7 @@
                     <li>Вставьте в приложение <span class="highlight">v2rayNG / NekoBox / v2rayN</span></li>
                     <li>Подпишитесь на Telegram-каналы для новых ключей</li>
                 </ul>
-                <div class="update-badge" id="update-badge"><i class="far fa-clock"></i> Загрузка...</div>
+                <div class="update-badge"><i class="far fa-clock"></i> Обновлено: {{ last_update }}</div>
             </div>
             <div class="info-card">
                 <div class="info-icon"><i class="fas fa-shield-alt"></i></div>
@@ -284,7 +132,20 @@
 
         <div class="section">
             <h2 class="section-title">⚡ Конфигурации VPN</h2>
-            <div id="configs-grid" class="configs-grid">Загружаем конфигурации...</div>
+            <div class="configs-grid">
+                {% for cfg in configs %}
+                <div class="config-card">
+                    <div class="config-name">{{ cfg.name }}</div>
+                    <div class="config-category"><i class="fas fa-tag"></i> {{ cfg.category }}</div>
+                    <div class="button-group">
+                        <button class="btn-neon {% if cfg.is_black %}btn-black{% endif %}" data-url="{{ cfg.url }}"><i class="fas fa-copy"></i> Копировать ссылку</button>
+                        <a href="{{ cfg.url }}" target="_blank" class="btn-neon btn-link"><i class="fas fa-external-link-alt"></i> Открыть</a>
+                    </div>
+                </div>
+                {% else %}
+                <div>Конфигурации временно недоступны</div>
+                {% endfor %}
+            </div>
         </div>
 
         <div class="section">
@@ -296,64 +157,28 @@
             </div>
         </div>
 
-        <!-- НОВОСТНОЙ БЛОК (обновляется вручную, без жёстких дат) -->
         <div class="section">
             <h2 class="section-title">📰 Новости и контекст: блокировки в России</h2>
             <div class="news-grid">
+                {% for item in news %}
                 <div class="news-card">
                     <div style="flex:1;">
-                        <div class="news-date"><i class="far fa-calendar-alt"></i> Июнь 2026</div>
-                        <div class="news-title">РКН тестирует новые методы обнаружения VPN-трафика</div>
-                        <div class="news-summary">
-                            По сообщениям профильных СМИ, Роскомнадзор экспериментирует с глубоким анализом пакетов (DPI) для выявления протоколов VLESS и Hysteria. 
-                            Пока блокировки носят точечный характер, но эксперты рекомендуют использовать актуальные конфигурации из белых списков.
-                        </div>
+                        <div class="news-date"><i class="far fa-calendar-alt"></i> {{ item.date }}</div>
+                        <div class="news-title">{{ item.title }}</div>
+                        <div class="news-summary">{{ item.summary }}</div>
                         <div class="news-source">
-                            <span><i class="fas fa-source"></i> Актуально на: </span>
-                            <a href="https://rkn.gov.ru/" target="_blank">РКН</a>
-                            <a href="https://habr.com/ru/hub/internet/" target="_blank">Хабр</a>
+                            <span><i class="fas fa-source"></i> Источник: </span>
+                            <a href="{{ item.link }}" target="_blank">{{ item.source }}</a>
                         </div>
                     </div>
                 </div>
-                <div class="news-card">
-                    <div style="flex:1;">
-                        <div class="news-date"><i class="far fa-calendar-alt"></i> Июнь 2026</div>
-                        <div class="news-title">Минцифры: регулирование VPN без тотальных запретов</div>
-                        <div class="news-summary">
-                            В министерстве заявили, что готовят законопроект о маркировке VPN-сервисов, но полной блокировки всех средств обхода не планируется. 
-                            Корпоративные VPN и технологии для защиты персональных данных останутся доступны.
-                        </div>
-                        <div class="news-source">
-                            <span><i class="fas fa-source"></i> Официально: </span>
-                            <a href="https://digital.gov.ru/ru/" target="_blank">Минцифры РФ</a>
-                            <a href="https://tass.ru/" target="_blank">ТАСС</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="news-card">
-                    <div style="flex:1;">
-                        <div class="news-date"><i class="far fa-calendar-alt"></i> Обновляется регулярно</div>
-                        <div class="news-title">Списки заблокированных ресурсов для настройки маршрутизации</div>
-                        <div class="news-summary">
-                            Для тонкой настройки обхода блокировок используйте автоматически обновляемые GeoIP/GeoSite списки от сообщества. 
-                            Они помогут направить только заблокированные сайты через VPN, а остальной трафик пустить напрямую.
-                        </div>
-                        <div class="news-source">
-                            <span><i class="fas fa-link"></i> Полезные ссылки: </span>
-                            <a href="https://github.com/runetfreedom/russia-blocked-geoip" target="_blank">runetfreedom/russia-blocked-geoip</a>
-                            <a href="https://github.com/Nidelon/ru-block-v2ray-rules" target="_blank">Nidelon/ru-block-v2ray-rules</a>
-                        </div>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
             <div class="official-links">
-                <i class="fas fa-link"></i> Официальные источники для мониторинга:
+                <i class="fas fa-link"></i> Официальные источники:
                 <a href="https://rkn.gov.ru/" target="_blank"><i class="fas fa-gavel"></i> Роскомнадзор</a>
                 <a href="https://digital.gov.ru/ru/" target="_blank"><i class="fas fa-digital-tiling"></i> Минцифры РФ</a>
-                <a href="https://habr.com/ru/hub/internet/" target="_blank"><i class="fab fa-hub"></i> Хабр (раздел Интернет)</a>
-            </div>
-            <div class="note-muted">
-                <i class="fas fa-info-circle"></i> Новостная лента обновляется вручную. Самая свежая информация — по ссылкам выше.
+                <a href="https://habr.com/ru/hub/internet/" target="_blank"><i class="fab fa-hub"></i> Хабр</a>
             </div>
         </div>
     </main>
@@ -366,86 +191,56 @@
     </footer>
 
     <script>
-        // ---------- МАТРИЧНЫЙ ДОЖДЬ (МЕДЛЕННО) ----------
+        // МАТРИЧНЫЙ ДОЖДЬ (медленный, без вспышек)
         const canvas = document.getElementById('matrixCanvas');
         const ctx = canvas.getContext('2d');
-        
-        let width, height;
-        let columns;
-        let drops = [];
-        let fontSize = 18;
-        // символы: цифры, буквы, немного кириллицы
+        let width, height, columns, drops, fontSize = 18;
         const symbols = "01ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyzабвгдежзийклмнопрстуфхцчшщъыьэюя";
-        
         function initMatrix() {
             width = window.innerWidth;
             height = window.innerHeight;
             canvas.width = width;
             canvas.height = height;
-            
             columns = Math.floor(width / fontSize);
             drops = [];
-            for (let i = 0; i < columns; i++) {
-                // начальная позиция - случайная, чтобы не всё падало одновременно
-                drops[i] = Math.floor(Math.random() * -height / fontSize);
-            }
+            for (let i = 0; i < columns; i++) drops[i] = Math.floor(Math.random() * -height / fontSize);
         }
-        
         let frameSkip = 0;
         function drawMatrix() {
-            // замедляем падение: обновляем каждый 2-й кадр
             frameSkip++;
             if (frameSkip % 2 === 0) {
-                // очистка с низкой прозрачностью для эффекта "хвоста"
                 ctx.fillStyle = 'rgba(0, 0, 0, 0.04)';
                 ctx.fillRect(0, 0, width, height);
-                ctx.fillStyle = '#cc0000';
                 ctx.font = fontSize + 'px "Roboto Mono", monospace';
-                
                 for (let i = 0; i < drops.length; i++) {
                     const char = symbols[Math.floor(Math.random() * symbols.length)];
                     const x = i * fontSize;
                     const y = drops[i] * fontSize;
                     if (y > 0 && y < height) {
-                        // случайный оттенок красного
                         const red = 180 + Math.floor(Math.random() * 75);
                         ctx.fillStyle = `rgba(${red}, 30, 30, 0.9)`;
                         ctx.fillText(char, x, y);
                     }
-                    // падение: увеличиваем позицию
                     drops[i]++;
-                    // сброс, когда ушло за низ
-                    if (drops[i] * fontSize > height && Math.random() > 0.98) {
-                        drops[i] = 0;
-                    }
+                    if (drops[i] * fontSize > height && Math.random() > 0.98) drops[i] = 0;
                 }
             }
             requestAnimationFrame(drawMatrix);
         }
-        
-        window.addEventListener('resize', () => {
-            initMatrix();
-        });
-        
+        window.addEventListener('resize', () => initMatrix());
         initMatrix();
         drawMatrix();
-        
-        // ---------- ОСТАЛЬНОЙ ФУНКЦИОНАЛ (прокси, конфиги, копирование) ----------
+
+        // Функция копирования ссылок
         function copyToClipboard(button, url) {
             const original = button.innerHTML;
             navigator.clipboard.writeText(url).then(() => {
                 button.innerHTML = '<i class="fas fa-check"></i> Скопировано!';
                 button.style.background = 'linear-gradient(95deg, #cc0000, #990000)';
-                button.style.color = '#fff';
                 setTimeout(() => {
                     button.innerHTML = original;
-                    if (button.classList.contains('btn-black')) {
-                        button.style.background = '#1a1a1a';
-                        button.style.color = '#eee';
-                    } else {
-                        button.style.background = 'linear-gradient(95deg, #cc0000, #990000)';
-                        button.style.color = '#fff';
-                    }
+                    if (button.classList.contains('btn-black')) button.style.background = '#1a1a1a';
+                    else button.style.background = 'linear-gradient(95deg, #cc0000, #990000)';
                 }, 1500);
             }).catch(() => {
                 const textarea = document.createElement('textarea');
@@ -457,17 +252,18 @@
                 button.innerHTML = '<i class="fas fa-check"></i> Скопировано!';
                 setTimeout(() => {
                     button.innerHTML = original;
-                    if (button.classList.contains('btn-black')) {
-                        button.style.background = '#1a1a1a';
-                        button.style.color = '#eee';
-                    } else {
-                        button.style.background = 'linear-gradient(95deg, #cc0000, #990000)';
-                        button.style.color = '#fff';
-                    }
+                    if (button.classList.contains('btn-black')) button.style.background = '#1a1a1a';
+                    else button.style.background = 'linear-gradient(95deg, #cc0000, #990000)';
                 }, 1500);
             });
         }
 
+        document.querySelectorAll('.btn-neon[data-url]').forEach(btn => {
+            const url = btn.getAttribute('data-url');
+            btn.onclick = () => copyToClipboard(btn, url);
+        });
+
+        // Загрузка прокси (оставляем как было)
         async function loadProxies() {
             const container = document.getElementById('proxy-list');
             if (!container) return;
@@ -491,97 +287,7 @@
                 container.innerHTML = '<div>Ошибка загрузки прокси</div>';
             }
         }
-
-        async function loadConfigs() {
-            const container = document.getElementById('configs-grid');
-            if (!container) return;
-            try {
-                const apiUrl = 'https://api.github.com/repos/kort0881/vpn-checker-backend/contents/checked/subscriptions_list.txt?ts=' + Date.now();
-                const resp = await fetch(apiUrl);
-                if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
-                const data = await resp.json();
-                const content = atob(data.content);
-                const lines = content.split('\n');
-                
-                const allUrls = [];
-                let currentSection = null;
-                for (let line of lines) {
-                    line = line.trim();
-                    if (line.startsWith('===') && line.includes('===')) {
-                        currentSection = line;
-                    } else if (currentSection && line.startsWith('http')) {
-                        allUrls.push({ url: line, section: currentSection });
-                    }
-                }
-                
-                let lastUpdate = '';
-                for (let line of lines) {
-                    if (line.startsWith('# Generated:')) {
-                        const match = line.match(/# Generated: (.*?) UTC/);
-                        if (match) lastUpdate = match[1];
-                        break;
-                    }
-                }
-                const badge = document.getElementById('update-badge');
-                if (lastUpdate) badge.innerHTML = `<i class="far fa-clock"></i> Обновлено: ${lastUpdate.replace('T', ' ')} UTC`;
-                else badge.innerHTML = `<i class="far fa-clock"></i> Обновлено: сейчас`;
-                
-                if (allUrls.length === 0) {
-                    container.innerHTML = '<div style="grid-column:1/-1;text-align:center;">Нет конфигураций</div>';
-                    return;
-                }
-                
-                container.innerHTML = '';
-                allUrls.forEach((item) => {
-                    const url = item.url;
-                    const section = item.section;
-                    let name = url.split('/').pop().replace('.txt', '').replace(/_/g, ' ');
-                    name = name.replace('ru white all ', '').replace('ru white ', '').replace('my euro all ', '').replace('my euro ', '');
-                    if (name.includes('WHITE')) name = '✨ ' + name;
-                    if (name.includes('BLACK')) name = '⬛ ' + name;
-                    const isBlack = section.includes('BLACK') || section.includes('⚠️');
-                    const category = url.includes('RU_Best') ? '🇷🇺 Россия' : (url.includes('My_Euro') ? '🇪🇺 Европа' : '🌍 Общий');
-                    
-                    const card = document.createElement('div');
-                    card.className = 'config-card';
-                    const nameDiv = document.createElement('div');
-                    nameDiv.className = 'config-name';
-                    nameDiv.textContent = name;
-                    card.appendChild(nameDiv);
-                    const catDiv = document.createElement('div');
-                    catDiv.className = 'config-category';
-                    catDiv.innerHTML = `<i class="fas fa-tag"></i> ${category}`;
-                    card.appendChild(catDiv);
-                    const btnGroup = document.createElement('div');
-                    btnGroup.className = 'button-group';
-                    
-                    const copyBtn = document.createElement('button');
-                    copyBtn.className = 'btn-neon';
-                    if (isBlack) copyBtn.classList.add('btn-black');
-                    copyBtn.innerHTML = '<i class="fas fa-copy"></i> Копировать ссылку';
-                    copyBtn.onclick = () => copyToClipboard(copyBtn, url);
-                    btnGroup.appendChild(copyBtn);
-                    
-                    const openLink = document.createElement('a');
-                    openLink.href = url;
-                    openLink.target = '_blank';
-                    openLink.className = 'btn-neon btn-link';
-                    openLink.innerHTML = '<i class="fas fa-external-link-alt"></i> Открыть';
-                    btnGroup.appendChild(openLink);
-                    
-                    card.appendChild(btnGroup);
-                    container.appendChild(card);
-                });
-            } catch(e) {
-                console.error(e);
-                container.innerHTML = '<div style="grid-column:1/-1;text-align:center;">Ошибка загрузки конфигураций</div>';
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            loadProxies();
-            loadConfigs();
-        });
+        loadProxies();
     </script>
 </body>
 </html>
