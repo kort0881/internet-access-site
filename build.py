@@ -4,8 +4,10 @@
 import os
 import shutil
 from pathlib import Path
+from datetime import datetime
 from jinja2 import Environment, FileSystemLoader
 from services import get_vpn_configs, get_last_update_time
+import feedparser
 
 # Конфигурация
 DIST_DIR = Path('dist')
@@ -20,6 +22,40 @@ META_DESCRIPTION = (
 )
 META_KEYWORDS = "vpn, vless, v2ray, shadowsocks, hysteria, trojan, vmess, reality, free vpn, доступ к интернету"
 SITE_URL = "https://kort0881.github.io/internet-access-site/"
+
+def fetch_news():
+    """Парсит новости с Хабра (раздел Интернет) по ключевым словам."""
+    news = []
+    habr_url = 'https://habr.com/ru/rss/hub/internet/all/?fl=ru'
+    keywords = ['блокировк', 'ркн', 'роскомнадзор', 'впн', 'vpn', 'запрет', 'ограничени', 'dpi']
+    try:
+        feed = feedparser.parse(habr_url)
+        for entry in feed.entries[:10]:
+            title_lower = entry.title.lower()
+            if any(kw in title_lower for kw in keywords):
+                summary = entry.summary
+                if len(summary) > 300:
+                    summary = summary[:300] + '...'
+                news.append({
+                    'title': entry.title,
+                    'summary': summary,
+                    'link': entry.link,
+                    'date': datetime(*entry.published_parsed[:6]).strftime('%d %B %Y'),
+                    'source': 'Хабр'
+                })
+    except Exception as e:
+        print(f"⚠️ Ошибка парсинга новостей: {e}")
+
+    # Если новостей нет – добавляем информационную запись
+    if not news:
+        news.append({
+            'title': 'Актуальные новости о блокировках',
+            'summary': 'Следите за официальными заявлениями Роскомнадзора и Минцифры.',
+            'link': 'https://rkn.gov.ru/',
+            'date': datetime.now().strftime('%d %B %Y'),
+            'source': 'РКН'
+        })
+    return news
 
 def clean_dist():
     """Очистка папки dist."""
@@ -47,14 +83,18 @@ def copy_og_image():
 
 def build_html():
     """Генерация HTML из шаблонов."""
-    print("\n🛠️  Сборка HTML...")
+    print("\n🛠️ Сборка HTML...")
     
     # Получаем данные
     print("📥 Загрузка VPN конфигураций...")
     configs = get_vpn_configs()
     last_update = get_last_update_time()
     
+    print("📰 Загрузка новостей...")
+    news = fetch_news()
+    
     print(f"✅ Найдено конфигураций: {len(configs)}")
+    print(f"✅ Загружено новостей: {len(news)}")
     if last_update:
         print(f"⏰ Последнее обновление: {last_update}")
     
@@ -66,6 +106,7 @@ def build_html():
     html = template.render(
         configs=configs,
         last_update=last_update,
+        news=news,
         site_url=SITE_URL,
         meta_title=META_TITLE,
         meta_description=META_DESCRIPTION,
