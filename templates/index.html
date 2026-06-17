@@ -97,11 +97,13 @@
               "item": {
                 "@type": "NewsArticle",
                 "headline": "{{ item.title }}",
-                "datePublished": "{{ item.date }}",
+                "datePublished": "{{ item.date }}T00:00:00+03:00",
                 "description": "{{ item.summary }}",
+                "image": "https://kort0881.github.io/internet-access-site/favicon.ico",
                 "author": {
                   "@type": "Organization",
-                  "name": "{{ item.source }}"
+                  "name": "{{ item.source }}",
+                  "url": "https://{{ item.source | lower | replace(' ', '') }}.ru"
                 }
               }
             }{% if not loop.last %},{% endif %}
@@ -126,7 +128,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Roboto+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Все стили остаются без изменений – те же, что и ранее */
+        /* Все стили без изменений (те же, что и ранее) */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Inter', system-ui, sans-serif; color: #eaeef2; line-height: 1.5; min-height: 100vh; background: #0a0a0c; position: relative; overflow-x: hidden; }
         .sky-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; background: radial-gradient(circle at 30% 40%, #1a0000, #000000); overflow: hidden; }
@@ -193,7 +195,6 @@
             .section-title { font-size: 1.8rem; }
             .news-card { flex-direction: column; }
         }
-        /* Дополнительный стиль для FAQ-карточек (без микроразметки) */
         .faq-item h3 { color: #ff6666; font-size: 1.2rem; margin-bottom: 8px; }
         .faq-item p { color: #ddd; line-height: 1.6; }
     </style>
@@ -217,7 +218,7 @@
     </div>
 
     <main class="container">
-        <!-- Блок "Как использовать" (оставлен без изменений) -->
+        <!-- Блок "Как использовать" -->
         <div class="info-grid">
             <div class="info-card">
                 <div class="info-icon"><i class="fas fa-compass"></i></div>
@@ -237,18 +238,16 @@
             </div>
         </div>
 
-        <!-- Главный баннер -->
         <div class="corner-card" style="margin-bottom: 40px;">
             <div class="info-icon"><i class="fas fa-globe"></i></div>
             <h3 style="color:#fff; font-size:1.4rem; margin-bottom:12px;">Бесплатные VPN-конфигурации для России</h3>
             <p style="font-size:0.9rem;">Сайт собирает рабочие VPN-настройки: VLESS, V2Ray, Hysteria, Trojan, VMess, Shadowsocks. Быстрый доступ к заблокированным сайтам и мессенджерам.</p>
         </div>
 
-        <!-- MTProto ПРОКСИ (динамическая загрузка) -->
+        <!-- MTProto ПРОКСИ -->
         <div class="section">
             <h2 class="section-title">📡 Где взять рабочие MTProto прокси для Telegram?</h2>
             <div id="proxy-list" class="proxy-grid">Загружаем прокси...</div>
-            <!-- ТЕКСТ-ЗАГЛУШКА (всегда виден) -->
             <p style="color:#aaa; margin-top:12px; font-size:0.85rem;">
                 Прокси обновляются каждые 5 минут. Если список пуст – проверьте 
                 <a href="https://t.me/vlesstrojan" style="color:#ff6666;">Telegram-канал</a>.
@@ -284,7 +283,7 @@
             </div>
         </div>
 
-        <!-- ===== БЛОК FAQ (без микроразметки, только для пользователей) ===== -->
+        <!-- БЛОК FAQ (без микроразметки) -->
         <div class="section">
             <h2 class="section-title">❓ Частые вопросы о VPN в России</h2>
             <div class="info-grid">
@@ -340,7 +339,7 @@
     </footer>
 
     <script>
-        // ===== МАТРИЧНЫЙ ДОЖДЬ (без изменений) =====
+        // Матричный дождь (без изменений)
         const canvas = document.getElementById('matrixCanvas');
         const ctx = canvas.getContext('2d');
         let width, height, columns, drops, fontSize = 18;
@@ -380,7 +379,7 @@
         initMatrix();
         drawMatrix();
 
-        // ===== КОПИРОВАНИЕ ССЫЛОК =====
+        // Копирование ссылок
         function copyToClipboard(button, url) {
             const original = button.innerHTML;
             navigator.clipboard.writeText(url).then(() => {
@@ -412,7 +411,7 @@
             btn.onclick = () => copyToClipboard(btn, url);
         });
 
-        // ===== ЗАГРУЗКА ПРОКСИ =====
+        // Загрузка прокси
         async function loadProxies() {
             const container = document.getElementById('proxy-list');
             if (!container) return;
