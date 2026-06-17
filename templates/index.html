@@ -1,12 +1,117 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+    <!-- ===== СТРУКТУРИРОВАННЫЕ ДАННЫЕ ДЛЯ AI-ПОИСКОВИКОВ ===== -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "name": "Доступ к интернету – VPN и прокси для России",
+          "description": "Бесплатные VPN-конфигурации для обхода блокировок: VLESS, WireGuard, Hysteria, Trojan, MTProto прокси. Инструкции, новости, клиенты.",
+          "url": "https://kort0881.github.io/internet-access-site/"
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "Как использовать VPN-конфигурации с этого сайта?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Выберите конфигурацию (белые версии самые стабильные), скопируйте ссылку на подписку, вставьте в приложение v2rayNG / NekoBox / v2rayN, затем подпишитесь на Telegram-каналы для новых ключей."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Почему эти конфигурации работают в России?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Протоколы VLESS, WireGuard, Hysteria маскируют трафик и обходят блокировки Роскомнадзора. Настройки обновляются автоматически."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Где скачать клиенты для Android, Windows и iOS?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Для Android: v2rayNG, NekoBox, Happ, Karing. Для Windows: v2rayN. Для iOS/macOS: Shadowrocket. Ссылки на скачивание есть на сайте."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Как часто обновляются конфигурации?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Конфигурации обновляются ежедневно, мы публикуем новые ссылки в Telegram-каналах. На сайте отображаются самые свежие."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Можно ли использовать эти настройки на iPhone?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Да, через приложение Shadowrocket (доступно в App Store). Скопируйте ссылку и импортируйте её в приложение."
+              }
+            }
+          ]
+        },
+        {
+          "@type": "ItemList",
+          "itemListElement": [
+            {% for cfg in configs %}
+            {
+              "@type": "ListItem",
+              "position": {{ loop.index }},
+              "item": {
+                "@type": "CreativeWork",
+                "name": "{{ cfg.name }}",
+                "description": "Категория: {{ cfg.category }}",
+                "url": "{{ cfg.url }}"
+              }
+            }{% if not loop.last %},{% endif %}
+            {% endfor %}
+          ]
+        }
+        {% if news %}
+        ,
+        {
+          "@type": "ItemList",
+          "itemListElement": [
+            {% for item in news %}
+            {
+              "@type": "ListItem",
+              "position": {{ loop.index }},
+              "item": {
+                "@type": "NewsArticle",
+                "headline": "{{ item.title }}",
+                "datePublished": "{{ item.date }}",
+                "description": "{{ item.summary }}",
+                "author": {
+                  "@type": "Organization",
+                  "name": "{{ item.source }}"
+                }
+              }
+            }{% if not loop.last %},{% endif %}
+            {% endfor %}
+          ]
+        }
+        {% endif %}
+      ]
+    }
+    </script>
+    <!-- ==================================================== -->
+
     <meta charset="UTF-8">
     <link rel="canonical" href="https://kort0881.github.io/internet-access-site/" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>{{ meta_title }}</title>
-    <meta name="description" content="{{ meta_description }}">
-    <meta name="keywords" content="{{ meta_keywords }}">
+    
+    <!-- Улучшенные мета-теги для AI-поиска -->
+    <title>Бесплатные VPN и прокси для обхода блокировок в России – 2026</title>
+    <meta name="description" content="Свежие конфигурации VLESS, WireGuard, Hysteria, Trojan, MTProto. Как настроить VPN на Android, Windows, iOS. Инструкции и новости о блокировках.">
+    <meta name="keywords" content="VPN Россия, обход блокировок, VLESS, WireGuard, Hysteria, Trojan, MTProto прокси, v2rayNG, NekoBox, бесплатный VPN, доступ к интернету">
+    
     <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌐</text></svg>">
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Roboto+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -78,6 +183,10 @@
             .section-title { font-size: 1.8rem; }
             .news-card { flex-direction: column; }
         }
+        /* Стили для FAQ-блока */
+        .faq-item { margin-bottom: 24px; }
+        .faq-item h3 { color: #ff6666; font-size: 1.2rem; margin-bottom: 8px; }
+        .faq-item p { color: #ddd; line-height: 1.6; }
     </style>
 </head>
 <body>
@@ -99,10 +208,11 @@
     </div>
 
     <main class="container">
+        <!-- Блок "Как использовать" (оставлен как есть) -->
         <div class="info-grid">
             <div class="info-card">
                 <div class="info-icon"><i class="fas fa-compass"></i></div>
-                <h3>Как использовать</h3>
+                <h3>Как использовать VPN-конфигурации</h3>
                 <ul class="step-list">
                     <li>Выберите конфигурацию <span class="highlight">(white версии самые стабильные)</span></li>
                     <li>Скопируйте ссылку на подписку</li>
@@ -124,13 +234,16 @@
             <p style="font-size:0.9rem;">Сайт собирает рабочие VPN-настройки: VLESS, V2Ray, Hysteria, Trojan, VMess, Shadowsocks. Быстрый доступ к заблокированным сайтам и мессенджерам.</p>
         </div>
 
+        <!-- ===== MTProto ПРОКСИ (динамическая загрузка) ===== -->
         <div class="section">
-            <h2 class="section-title">📡 MTProto прокси для Telegram</h2>
+            <h2 class="section-title">📡 Где взять рабочие MTProto прокси для Telegram?</h2>
             <div id="proxy-list" class="proxy-grid">Загружаем прокси...</div>
+            <p style="color:#aaa; margin-top:12px; font-size:0.85rem;">Прокси обновляются каждые 5 минут. Если список пуст – проверьте <a href="https://t.me/vlesstrojan" style="color:#ff6666;">Telegram-канал</a>.</p>
         </div>
 
+        <!-- ===== КОНФИГУРАЦИИ ===== -->
         <div class="section">
-            <h2 class="section-title">⚡ Конфигурации VPN</h2>
+            <h2 class="section-title">⚡ Актуальные VPN‑конфигурации для обхода блокировок</h2>
             <div class="configs-grid">
                 {% for cfg in configs %}
                 <div class="config-card">
@@ -147,8 +260,9 @@
             </div>
         </div>
 
+        <!-- ===== КЛИЕНТЫ ===== -->
         <div class="section">
-            <h2 class="section-title">📱 Скачать VPN-клиенты</h2>
+            <h2 class="section-title">📱 Какие VPN‑клиенты скачать для Android, Windows и iOS?</h2>
             <div class="apps-grid">
                 <div class="app-card"><div class="app-icon"><i class="fab fa-android"></i></div><h3>Android</h3><div class="app-links"><a href="https://github.com/2dust/v2rayNG/releases/latest" class="app-link">v2rayNG</a><a href="https://github.com/MatsuriDayo/NekoBoxForAndroid/releases/latest" class="app-link">NekoBox</a><a href="https://www.happ.su/main" class="app-link">Happ</a><a href="https://karing.app/en/download/" class="app-link">Karing</a></div></div>
                 <div class="app-card"><div class="app-icon"><i class="fab fa-windows"></i></div><h3>Windows</h3><div class="app-links"><a href="https://github.com/2dust/v2rayN/releases/latest/download/v2rayN-windows-64.zip" class="app-link">v2rayN</a></div></div>
@@ -156,7 +270,38 @@
             </div>
         </div>
 
-        <!-- НОВОСТНОЙ БЛОК (текст новостей, без ссылок на Хабр) -->
+        <!-- ===== ЯВНЫЙ FAQ-БЛОК (дублирует JSON‑LD) ===== -->
+        <div class="section" itemscope itemtype="https://schema.org/FAQPage">
+            <h2 class="section-title">❓ Частые вопросы о VPN в России</h2>
+            <div class="info-grid">
+                <div class="info-card faq-item" itemprop="mainEntity" itemtype="https://schema.org/Question">
+                    <h3 itemprop="name">Как часто обновляются конфигурации?</h3>
+                    <div itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                        <p itemprop="text">Конфигурации обновляются ежедневно, мы публикуем новые ссылки в Telegram-каналах. На сайте отображаются самые свежие.</p>
+                    </div>
+                </div>
+                <div class="info-card faq-item" itemprop="mainEntity" itemtype="https://schema.org/Question">
+                    <h3 itemprop="name">Можно ли использовать эти настройки на iPhone?</h3>
+                    <div itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                        <p itemprop="text">Да, через приложение Shadowrocket (доступно в App Store). Скопируйте ссылку и импортируйте её в приложение.</p>
+                    </div>
+                </div>
+                <div class="info-card faq-item" itemprop="mainEntity" itemtype="https://schema.org/Question">
+                    <h3 itemprop="name">Что делать, если конфигурация перестала работать?</h3>
+                    <div itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                        <p itemprop="text">Попробуйте обновить подписку в приложении или выберите другую конфигурацию. Мы регулярно добавляем новые рабочие ссылки.</p>
+                    </div>
+                </div>
+                <div class="info-card faq-item" itemprop="mainEntity" itemtype="https://schema.org/Question">
+                    <h3 itemprop="name">Безопасно ли использовать эти VPN?</h3>
+                    <div itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                        <p itemprop="text">Все конфигурации взяты из открытых источников и проверены сообществом. Для максимальной безопасности используйте официальные клиенты и не передавайте личные данные.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== НОВОСТИ ===== -->
         <div class="section">
             <h2 class="section-title">📰 Новости и контекст: блокировки в России</h2>
             <div class="news-grid">
@@ -189,7 +334,7 @@
     </footer>
 
     <script>
-        // МАТРИЧНЫЙ ДОЖДЬ (медленный)
+        // МАТРИЧНЫЙ ДОЖДЬ (медленный) – без изменений
         const canvas = document.getElementById('matrixCanvas');
         const ctx = canvas.getContext('2d');
         let width, height, columns, drops, fontSize = 18;
@@ -229,7 +374,7 @@
         initMatrix();
         drawMatrix();
 
-        // Копирование ссылок
+        // Копирование ссылок (без изменений)
         function copyToClipboard(button, url) {
             const original = button.innerHTML;
             navigator.clipboard.writeText(url).then(() => {
@@ -261,7 +406,7 @@
             btn.onclick = () => copyToClipboard(btn, url);
         });
 
-        // Загрузка прокси
+        // Загрузка прокси (без изменений)
         async function loadProxies() {
             const container = document.getElementById('proxy-list');
             if (!container) return;
