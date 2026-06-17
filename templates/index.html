@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <!-- ===== СТРУКТУРИРОВАННЫЕ ДАННЫЕ ДЛЯ AI-ПОИСКОВИКОВ ===== -->
+    <!-- ===== СТРУКТУРИРОВАННЫЕ ДАННЫЕ (исправленная версия) ===== -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -10,10 +10,20 @@
           "@type": "WebSite",
           "name": "Доступ к интернету – VPN и прокси для России",
           "description": "Бесплатные VPN-конфигурации для обхода блокировок: VLESS, WireGuard, Hysteria, Trojan, MTProto прокси. Инструкции, новости, клиенты.",
-          "url": "https://kort0881.github.io/internet-access-site/"
+          "url": "https://kort0881.github.io/internet-access-site/",
+          "inLanguage": "ru-RU"
         },
         {
           "@type": "FAQPage",
+          "about": {
+            "@type": "Thing",
+            "name": "VPN и прокси для обхода блокировок в России"
+          },
+          "inLanguage": "ru-RU",
+          "author": {
+            "@type": "Organization",
+            "name": "Доступ к интернету"
+          },
           "mainEntity": [
             {
               "@type": "Question",
@@ -59,6 +69,7 @@
         },
         {
           "@type": "ItemList",
+          "itemListOrder": "https://schema.org/ItemListOrderAscending",
           "itemListElement": [
             {% for cfg in configs %}
             {
@@ -73,11 +84,11 @@
             }{% if not loop.last %},{% endif %}
             {% endfor %}
           ]
-        }
+        },
         {% if news %}
-        ,
         {
           "@type": "ItemList",
+          "itemListOrder": "https://schema.org/ItemListOrderDescending",
           "itemListElement": [
             {% for item in news %}
             {
@@ -107,7 +118,6 @@
     <link rel="canonical" href="https://kort0881.github.io/internet-access-site/" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     
-    <!-- Улучшенные мета-теги для AI-поиска -->
     <title>Бесплатные VPN и прокси для обхода блокировок в России – 2026</title>
     <meta name="description" content="Свежие конфигурации VLESS, WireGuard, Hysteria, Trojan, MTProto. Как настроить VPN на Android, Windows, iOS. Инструкции и новости о блокировках.">
     <meta name="keywords" content="VPN Россия, обход блокировок, VLESS, WireGuard, Hysteria, Trojan, MTProto прокси, v2rayNG, NekoBox, бесплатный VPN, доступ к интернету">
@@ -116,7 +126,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Roboto+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* ВСЕ СТИЛИ ОСТАЮТСЯ БЕЗ ИЗМЕНЕНИЙ (те же, что были у вас) */
+        /* Все стили остаются без изменений – те же, что и ранее */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Inter', system-ui, sans-serif; color: #eaeef2; line-height: 1.5; min-height: 100vh; background: #0a0a0c; position: relative; overflow-x: hidden; }
         .sky-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; background: radial-gradient(circle at 30% 40%, #1a0000, #000000); overflow: hidden; }
@@ -183,8 +193,7 @@
             .section-title { font-size: 1.8rem; }
             .news-card { flex-direction: column; }
         }
-        /* Стили для FAQ-блока */
-        .faq-item { margin-bottom: 24px; }
+        /* Дополнительный стиль для FAQ-карточек (без микроразметки) */
         .faq-item h3 { color: #ff6666; font-size: 1.2rem; margin-bottom: 8px; }
         .faq-item p { color: #ddd; line-height: 1.6; }
     </style>
@@ -208,7 +217,7 @@
     </div>
 
     <main class="container">
-        <!-- Блок "Как использовать" (оставлен как есть) -->
+        <!-- Блок "Как использовать" (оставлен без изменений) -->
         <div class="info-grid">
             <div class="info-card">
                 <div class="info-icon"><i class="fas fa-compass"></i></div>
@@ -228,20 +237,25 @@
             </div>
         </div>
 
+        <!-- Главный баннер -->
         <div class="corner-card" style="margin-bottom: 40px;">
             <div class="info-icon"><i class="fas fa-globe"></i></div>
             <h3 style="color:#fff; font-size:1.4rem; margin-bottom:12px;">Бесплатные VPN-конфигурации для России</h3>
             <p style="font-size:0.9rem;">Сайт собирает рабочие VPN-настройки: VLESS, V2Ray, Hysteria, Trojan, VMess, Shadowsocks. Быстрый доступ к заблокированным сайтам и мессенджерам.</p>
         </div>
 
-        <!-- ===== MTProto ПРОКСИ (динамическая загрузка) ===== -->
+        <!-- MTProto ПРОКСИ (динамическая загрузка) -->
         <div class="section">
             <h2 class="section-title">📡 Где взять рабочие MTProto прокси для Telegram?</h2>
             <div id="proxy-list" class="proxy-grid">Загружаем прокси...</div>
-            <p style="color:#aaa; margin-top:12px; font-size:0.85rem;">Прокси обновляются каждые 5 минут. Если список пуст – проверьте <a href="https://t.me/vlesstrojan" style="color:#ff6666;">Telegram-канал</a>.</p>
+            <!-- ТЕКСТ-ЗАГЛУШКА (всегда виден) -->
+            <p style="color:#aaa; margin-top:12px; font-size:0.85rem;">
+                Прокси обновляются каждые 5 минут. Если список пуст – проверьте 
+                <a href="https://t.me/vlesstrojan" style="color:#ff6666;">Telegram-канал</a>.
+            </p>
         </div>
 
-        <!-- ===== КОНФИГУРАЦИИ ===== -->
+        <!-- КОНФИГУРАЦИИ -->
         <div class="section">
             <h2 class="section-title">⚡ Актуальные VPN‑конфигурации для обхода блокировок</h2>
             <div class="configs-grid">
@@ -260,7 +274,7 @@
             </div>
         </div>
 
-        <!-- ===== КЛИЕНТЫ ===== -->
+        <!-- КЛИЕНТЫ -->
         <div class="section">
             <h2 class="section-title">📱 Какие VPN‑клиенты скачать для Android, Windows и iOS?</h2>
             <div class="apps-grid">
@@ -270,38 +284,30 @@
             </div>
         </div>
 
-        <!-- ===== ЯВНЫЙ FAQ-БЛОК (дублирует JSON‑LD) ===== -->
-        <div class="section" itemscope itemtype="https://schema.org/FAQPage">
+        <!-- ===== БЛОК FAQ (без микроразметки, только для пользователей) ===== -->
+        <div class="section">
             <h2 class="section-title">❓ Частые вопросы о VPN в России</h2>
             <div class="info-grid">
-                <div class="info-card faq-item" itemprop="mainEntity" itemtype="https://schema.org/Question">
-                    <h3 itemprop="name">Как часто обновляются конфигурации?</h3>
-                    <div itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-                        <p itemprop="text">Конфигурации обновляются ежедневно, мы публикуем новые ссылки в Telegram-каналах. На сайте отображаются самые свежие.</p>
-                    </div>
+                <div class="info-card faq-item">
+                    <h3>Как часто обновляются конфигурации?</h3>
+                    <p>Конфигурации обновляются ежедневно, мы публикуем новые ссылки в Telegram-каналах. На сайте отображаются самые свежие.</p>
                 </div>
-                <div class="info-card faq-item" itemprop="mainEntity" itemtype="https://schema.org/Question">
-                    <h3 itemprop="name">Можно ли использовать эти настройки на iPhone?</h3>
-                    <div itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-                        <p itemprop="text">Да, через приложение Shadowrocket (доступно в App Store). Скопируйте ссылку и импортируйте её в приложение.</p>
-                    </div>
+                <div class="info-card faq-item">
+                    <h3>Можно ли использовать эти настройки на iPhone?</h3>
+                    <p>Да, через приложение Shadowrocket (доступно в App Store). Скопируйте ссылку и импортируйте её в приложение.</p>
                 </div>
-                <div class="info-card faq-item" itemprop="mainEntity" itemtype="https://schema.org/Question">
-                    <h3 itemprop="name">Что делать, если конфигурация перестала работать?</h3>
-                    <div itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-                        <p itemprop="text">Попробуйте обновить подписку в приложении или выберите другую конфигурацию. Мы регулярно добавляем новые рабочие ссылки.</p>
-                    </div>
+                <div class="info-card faq-item">
+                    <h3>Что делать, если конфигурация перестала работать?</h3>
+                    <p>Попробуйте обновить подписку в приложении или выберите другую конфигурацию. Мы регулярно добавляем новые рабочие ссылки.</p>
                 </div>
-                <div class="info-card faq-item" itemprop="mainEntity" itemtype="https://schema.org/Question">
-                    <h3 itemprop="name">Безопасно ли использовать эти VPN?</h3>
-                    <div itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-                        <p itemprop="text">Все конфигурации взяты из открытых источников и проверены сообществом. Для максимальной безопасности используйте официальные клиенты и не передавайте личные данные.</p>
-                    </div>
+                <div class="info-card faq-item">
+                    <h3>Безопасно ли использовать эти VPN?</h3>
+                    <p>Все конфигурации взяты из открытых источников и проверены сообществом. Для максимальной безопасности используйте официальные клиенты и не передавайте личные данные.</p>
                 </div>
             </div>
         </div>
 
-        <!-- ===== НОВОСТИ ===== -->
+        <!-- НОВОСТИ -->
         <div class="section">
             <h2 class="section-title">📰 Новости и контекст: блокировки в России</h2>
             <div class="news-grid">
@@ -334,7 +340,7 @@
     </footer>
 
     <script>
-        // МАТРИЧНЫЙ ДОЖДЬ (медленный) – без изменений
+        // ===== МАТРИЧНЫЙ ДОЖДЬ (без изменений) =====
         const canvas = document.getElementById('matrixCanvas');
         const ctx = canvas.getContext('2d');
         let width, height, columns, drops, fontSize = 18;
@@ -374,7 +380,7 @@
         initMatrix();
         drawMatrix();
 
-        // Копирование ссылок (без изменений)
+        // ===== КОПИРОВАНИЕ ССЫЛОК =====
         function copyToClipboard(button, url) {
             const original = button.innerHTML;
             navigator.clipboard.writeText(url).then(() => {
@@ -406,7 +412,7 @@
             btn.onclick = () => copyToClipboard(btn, url);
         });
 
-        // Загрузка прокси (без изменений)
+        // ===== ЗАГРУЗКА ПРОКСИ =====
         async function loadProxies() {
             const container = document.getElementById('proxy-list');
             if (!container) return;
