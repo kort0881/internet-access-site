@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <link rel="canonical" href="{{ site_url or 'https://kort0881.github.io/internet-access-site/' }}" />
+    <link rel="canonical" href="https://kort0881.github.io/internet-access-site/" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>{{ meta_title }}</title>
     <meta name="description" content="{{ meta_description }}">
@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Roboto+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* ===== ВАШИ СТИЛИ (без изменений) ===== */
+        /* ===== ВАШИ СТИЛИ (матрица, фон, шапка, карточки) ===== */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Inter', system-ui, sans-serif; color: #eaeef2; line-height: 1.5; min-height: 100vh; background: #0a0a0c; position: relative; overflow-x: hidden; }
         .sky-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; background: radial-gradient(circle at 30% 40%, #1a0000, #000000); overflow: hidden; }
@@ -80,12 +80,291 @@
         }
         .faq-item h3 { color: #ff6666; font-size: 1.2rem; margin-bottom: 8px; }
         .faq-item p { color: #ddd; line-height: 1.6; }
+
+        /* ===== ДОПОЛНИТЕЛЬНЫЕ СТИЛИ ДЛЯ ФУНКЦИЙ ИЗ SCARLETDEVIL ===== */
+        .btn-primary {
+            background: linear-gradient(135deg, #e11d48, #9f1239);
+            color: #fff;
+            border: 1px solid rgba(225, 29, 72, 0.5);
+            padding: 16px 32px;
+            border-radius: 16px;
+            font-weight: 800;
+            font-size: 1rem;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 10px 30px rgba(225, 29, 72, 0.2);
+            width: 100%;
+            max-width: 320px;
+        }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(225, 29, 72, 0.5); filter: brightness(1.1); }
+
+        .btn-secondary {
+            background: rgba(0,0,0,0.3);
+            border: 1px solid rgba(225, 29, 72, 0.15);
+            color: #eaeef2;
+            padding: 14px 24px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+            width: 100%;
+        }
+        @media (min-width: 480px) { .btn-secondary { width: auto; } }
+        .btn-secondary:hover { background: rgba(56, 22, 38, 0.85); border-color: #e11d48; color: #fff; }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+            padding: 15px;
+        }
+        .modal-overlay.active { opacity: 1; pointer-events: all; }
+        .modal {
+            background: #0f0508;
+            border: 1px solid rgba(244, 114, 182, 0.3);
+            border-radius: 20px;
+            width: 100%;
+            max-width: 500px;
+            transform: translateY(30px) scale(0.95);
+            transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+            box-shadow: 0 40px 80px rgba(0,0,0,0.8), 0 0 0 1px rgba(225, 29, 72, 0.2) inset;
+            display: flex;
+            flex-direction: column;
+            max-height: 85vh;
+        }
+        .modal-wide { max-width: 620px; }
+        .modal-overlay.active .modal { transform: translateY(0) scale(1); }
+        .modal-header {
+            padding: 20px;
+            border-bottom: 1px solid rgba(225, 29, 72, 0.15);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(225, 29, 72, 0.05);
+            border-radius: 20px 20px 0 0;
+        }
+        .modal-title { font-size: clamp(1rem, 4vw, 1.1rem); font-weight: 800; display: flex; align-items: center; gap: 10px; color: #fff; text-transform: uppercase; letter-spacing: -0.5px; }
+        .btn-close {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(225, 29, 72, 0.15);
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            color: #cbd5e1;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-shrink: 0;
+        }
+        .btn-close:hover { background: #e11d48; color: #fff; border-color: #e11d48; transform: rotate(90deg); }
+        .modal-body { padding: 20px; overflow-y: auto; }
+
+        .sub-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+        @media (min-width: 500px) { .sub-grid { grid-template-columns: 1fr 1fr; } }
+        .sub-card {
+            background: rgba(0,0,0,0.4);
+            border: 1px solid rgba(225, 29, 72, 0.15);
+            border-left: 4px solid transparent;
+            border-radius: 16px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            position: relative;
+            overflow: visible;
+        }
+        .sub-card::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            border-radius: 17px;
+            background: conic-gradient(from 0deg, #e11d48, #946cf8, #f472b6, #38bdf8, #e11d48);
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            animation: border-spin 4s linear infinite;
+            animation-play-state: paused;
+        }
+        .sub-card::after {
+            content: '';
+            position: absolute;
+            inset: 1px;
+            border-radius: 15px;
+            background: #0a0306;
+            z-index: -1;
+        }
+        .sub-card:hover { transform: translateX(5px); background: rgba(255,255,255,0.02); }
+        .sub-card:hover::before { opacity: 0.8; animation-play-state: running; }
+        @keyframes border-spin { 100% { transform: rotate(360deg); } }
+
+        .sub-card.reality { border-color: rgba(139, 92, 246, 0.3); border-left-color: #946cf8; }
+        .sub-card.fast { border-color: rgba(16, 185, 129, 0.3); border-left-color: #10b981; }
+        .sub-card.mix { border-color: rgba(225, 29, 72, 0.3); border-left-color: #e11d48; }
+        .sub-card.vless { border-color: rgba(139, 92, 246, 0.3); border-left-color: #946cf8; }
+        .sub-card.vmess { border-color: rgba(56, 189, 248, 0.3); border-left-color: #38bdf8; }
+        .sub-card.trojan { border-color: rgba(250, 204, 21, 0.3); border-left-color: #facc15; }
+        .sub-card.ss { border-color: rgba(16, 185, 129, 0.3); border-left-color: #10b981; }
+        .sub-card.hy2 { border-color: rgba(244, 114, 182, 0.3); border-left-color: #f472b6; }
+
+        .sub-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; flex-wrap: wrap; position: relative; z-index: 1; }
+        .sub-title { font-weight: 800; font-size: 1.1rem; color: #fff; display: flex; align-items: center; gap: 8px; position: relative; z-index: 1; }
+        .sub-badge { font-size: 0.6rem; padding: 4px 8px; border-radius: 6px; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; white-space: nowrap; position: relative; z-index: 1; }
+        .badge-reality { background: rgba(139, 92, 246, 0.15); color: #c4b5fd; border: 1px solid rgba(139, 92, 246, 0.3); }
+        .badge-fast { background: rgba(16, 185, 129, 0.15); color: #6ee7b7; border: 1px solid rgba(16, 185, 129, 0.3); }
+        .badge-mix { background: rgba(225, 29, 72, 0.15); color: #fda4af; border: 1px solid rgba(225, 29, 72, 0.3); }
+        .badge-vless { background: rgba(139, 92, 246, 0.15); color: #c4b5fd; border: 1px solid rgba(139, 92, 246, 0.3); }
+        .badge-vmess { background: rgba(56, 189, 248, 0.15); color: #7dd3fc; border: 1px solid rgba(56, 189, 248, 0.3); }
+        .badge-trojan { background: rgba(250, 204, 21, 0.15); color: #fde047; border: 1px solid rgba(250, 204, 21, 0.3); }
+        .badge-ss { background: rgba(16, 185, 129, 0.15); color: #6ee7b7; border: 1px solid rgba(16, 185, 129, 0.3); }
+        .badge-hy2 { background: rgba(244, 114, 182, 0.15); color: #f9a8d4; border: 1px solid rgba(244, 114, 182, 0.3); }
+
+        .sub-desc { font-size: 0.85rem; color: #cbd5e1; line-height: 1.4; position: relative; z-index: 1; }
+        .sub-tech { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: #71717a; margin-top: 4px; font-weight: 700; position: relative; z-index: 1; }
+        .sub-actions { display: flex; gap: 10px; margin-top: 6px; flex-wrap: wrap; }
+        .sub-action-btn {
+            flex: 1;
+            min-width: 120px;
+            padding: 10px 16px;
+            border-radius: 10px;
+            border: 1px solid rgba(225, 29, 72, 0.15);
+            background: rgba(0,0,0,0.35);
+            color: #cbd5e1;
+            font-weight: 700;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+        }
+        .sub-action-btn:hover { transform: translateY(-2px); color: #fff; }
+        .sub-action-btn.copy-btn:hover { background: rgba(56, 189, 248, 0.15); border-color: #38bdf8; box-shadow: 0 4px 15px rgba(56, 189, 248, 0.2); }
+        .sub-action-btn.qr-btn:hover { background: rgba(139, 92, 246, 0.15); border-color: #946cf8; box-shadow: 0 4px 15px rgba(139, 92, 246, 0.2); }
+
+        .qr-display { display: none; flex-direction: column; align-items: center; padding: 10px 0; }
+        .qr-display.active { display: flex; }
+        .qr-back-btn {
+            align-self: flex-start;
+            background: rgba(0,0,0,0.3);
+            border: 1px solid rgba(225, 29, 72, 0.15);
+            color: #cbd5e1;
+            padding: 8px 16px;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 0.82rem;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+        .qr-back-btn:hover { background: rgba(225, 29, 72, 0.1); border-color: #e11d48; color: #fff; }
+        .qr-label { font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; font-weight: 700; color: #f472b6; margin-bottom: 16px; text-align: center; text-transform: uppercase; letter-spacing: 1px; }
+        .qr-container { background: #ffffff; border-radius: 16px; padding: 12px; box-shadow: 0 0 30px rgba(225, 29, 72, 0.15); display: inline-block; line-height: 0; }
+        .qr-container canvas { display: block; border-radius: 4px; }
+
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #e11d48;
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 100px;
+            font-weight: 800;
+            font-size: 0.9rem;
+            border: 1px solid rgba(255,255,255,0.2);
+            box-shadow: 0 10px 30px rgba(225, 29, 72, 0.4);
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            z-index: 2000;
+            opacity: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            white-space: nowrap;
+        }
+        .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+
+        .config-tabs {
+            display: flex;
+            background: rgba(0,0,0,0.4);
+            padding: 5px;
+            border-radius: 12px;
+            border: 1px solid rgba(225, 29, 72, 0.15);
+            margin-bottom: 20px;
+            gap: 4px;
+        }
+        .config-tab-btn {
+            flex: 1;
+            background: transparent;
+            border: 1px solid transparent;
+            color: #cbd5e1;
+            padding: 11px 16px;
+            border-radius: 10px;
+            font-weight: 800;
+            font-size: 0.82rem;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .config-tab-btn:hover { background: rgba(225, 29, 72, 0.08); color: #fff; }
+        .config-tab-btn.active { background: rgba(225, 29, 72, 0.2); color: #fff; border-color: #e11d48; box-shadow: 0 0 12px rgba(225, 29, 72, 0.15); }
+
+        .rule-list { display: flex; flex-direction: column; gap: 12px; margin-bottom: 24px; }
+        .rule-item { display: flex; align-items: flex-start; gap: 16px; background: rgba(0,0,0,0.3); padding: 16px; border-radius: 16px; border: 1px solid rgba(225, 29, 72, 0.15); }
+        .rule-icon { font-size: 1.3rem; margin-top: 2px; }
+        .rule-item h4 { color: #fff; font-size: 0.95rem; margin-bottom: 6px; line-height: 1.2; }
+        .rule-item p { color: #cbd5e1; font-size: 0.85rem; line-height: 1.4; }
+
+        .hero-actions { display: flex; flex-direction: column; gap: 14px; align-items: stretch; }
+        @media (min-width: 768px) { .hero-actions { flex-direction: row; flex-wrap: wrap; align-items: center; justify-content: center; } .hero-actions .btn-primary { width: auto; } }
     </style>
 </head>
 <body>
     <div class="sky-bg"></div>
     <canvas id="matrixCanvas"></canvas>
 
+    <!-- ===== ШАПКА (ВАША) ===== -->
     <div class="glass-header">
         <div class="container">
             <div class="header-flex">
@@ -101,7 +380,8 @@
     </div>
 
     <main class="container">
-        <div class="info-grid">
+        <!-- ===== HERO С КНОПКАМИ (ВАШ ДИЗАЙН + ФУНКЦИИ SCARLETDEVIL) ===== -->
+        <div class="info-grid" style="margin-top: 40px;">
             <div class="info-card">
                 <div class="info-icon"><i class="fas fa-compass"></i></div>
                 <h3>Как использовать</h3>
@@ -117,6 +397,11 @@
                 <div class="info-icon"><i class="fas fa-shield-alt"></i></div>
                 <h3>Почему это работает</h3>
                 <p>Современные протоколы (VLESS, WireGuard, Hysteria) маскируют трафик и обходят блокировки. Наши конфигурации обновляются автоматически.</p>
+                <div class="hero-actions" style="margin-top: 20px;">
+                    <button class="btn-primary" onclick="openModal('rules-modal')">
+                        <i class="fa-solid fa-key"></i> Получить доступ
+                    </button>
+                </div>
             </div>
         </div>
 
@@ -126,6 +411,7 @@
             <p style="font-size:0.9rem;">Сайт собирает рабочие VPN-настройки: VLESS, V2Ray, Hysteria, Trojan, VMess, Shadowsocks. Быстрый доступ к заблокированным сайтам и мессенджерам.</p>
         </div>
 
+        <!-- ===== MTProto ПРОКСИ (ВАШЕ) ===== -->
         <div class="section">
             <h2 class="section-title">📡 MTProto прокси для Telegram</h2>
             <div id="proxy-list" class="proxy-grid">Загружаем прокси...</div>
@@ -135,6 +421,7 @@
             </p>
         </div>
 
+        <!-- ===== КОНФИГУРАЦИИ VPN (ВАШИ С ВАШИМИ ССЫЛКАМИ) ===== -->
         <div class="section">
             <h2 class="section-title">⚡ Конфигурации VPN</h2>
             <div class="configs-grid">
@@ -153,6 +440,7 @@
             </div>
         </div>
 
+        <!-- ===== КЛИЕНТЫ (ВАШИ) ===== -->
         <div class="section">
             <h2 class="section-title">📱 Скачать VPN-клиенты</h2>
             <div class="apps-grid">
@@ -162,6 +450,7 @@
             </div>
         </div>
 
+        <!-- ===== СТАТЬИ / НОВОСТИ (ИЗ SCARLETDEVIL) ===== -->
         <div class="section">
             <h2 class="section-title">📰 Новости и контекст: блокировки в России</h2>
             <div class="news-grid">
@@ -184,8 +473,47 @@
                 <a href="https://digital.gov.ru/ru/" target="_blank"><i class="fas fa-digital-tiling"></i> Минцифры РФ</a>
             </div>
         </div>
+
+        <!-- ===== FAQ (ИЗ SCARLETDEVIL) ===== -->
+        <div class="section">
+            <h2 class="section-title">❓ Частые вопросы</h2>
+            <div class="info-grid">
+                <div class="info-card faq-item">
+                    <h3>Что такое Доступ к интернету?</h3>
+                    <p>Это независимый агрегатор, который собирает публичные конфигурации из открытых источников, прогоняет их через многоступенчатую проверку и публикует только рабочие. Мы не VPN-провайдер и не держим собственных серверов.</p>
+                </div>
+                <div class="info-card faq-item">
+                    <h3>Это бесплатно?</h3>
+                    <p>Да, полностью бесплатно. Подписки — это публичные конфигурации, которые мы собираем и проверяем. Нет аккаунтов, регистрации и оплаты.</p>
+                </div>
+                <div class="info-card faq-item">
+                    <h3>Как часто обновляются конфигурации?</h3>
+                    <p>Полный цикл сбора и верификации запускается каждые 4–6 часов. Настройте автообновление подписки в вашем клиенте с интервалом 4–6 часов.</p>
+                </div>
+                <div class="info-card faq-item">
+                    <h3>Безопасно ли использовать публичные конфигурации?</h3>
+                    <p>Публичные конфигурации — это компромисс между доступностью и риском. Не передавайте конфиденциальные данные через незнакомые серверы, используйте HTTPS-сайты и включайте DNS-over-HTTPS в браузере.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== ГЛОССАРИЙ (ИЗ SCARLETDEVIL) ===== -->
+        <div class="section">
+            <h2 class="section-title">📖 Глоссарий</h2>
+            <div class="corner-card">
+                <ul style="color: #ddd; line-height: 2; list-style: none; padding: 0;">
+                    <li><b>DPI</b> — глубокая инспекция трафика, оборудование, распознающее и блокирующее «подозрительные» протоколы.</li>
+                    <li><b>ТСПУ</b> — технические средства противодействия угрозам, государственные DPI-узлы у операторов связи в РФ.</li>
+                    <li><b>SNI</b> — имя домена, уходящее открытым текстом в начале TLS-рукопожатия. Именно по нему работает блокировка сайтов.</li>
+                    <li><b>Обфускация</b> — маскировка трафика под легитимный HTTPS, чтобы DPI не отличил туннель от обычного соединения.</li>
+                    <li><b>VLESS Reality</b> — протокол с маскировкой под реальный крупный сайт, подменяет SNI и сертификат «на лету».</li>
+                    <li><b>Hysteria2</b> — протокол поверх UDP/QUIC, очень быстрый, но UDP легче заблокировать.</li>
+                </ul>
+            </div>
+        </div>
     </main>
 
+    <!-- ===== ФУТЕР (ВАШ) ===== -->
     <footer>
         <div class="container">
             <div class="footer-links"><a href="https://github.com/kort0881/vpn-checker-backend" target="_blank"><i class="fab fa-github"></i></a><a href="https://t.me/vlesstrojan" target="_blank"><i class="fab fa-telegram"></i></a></div>
@@ -193,8 +521,230 @@
         </div>
     </footer>
 
+    <!-- ===== МОДАЛЬНОЕ ОКНО "УСЛОВИЯ" (ИЗ SCARLETDEVIL) ===== -->
+    <div class="modal-overlay" id="rules-modal">
+        <div class="modal">
+            <div class="modal-header">
+                <div class="modal-title"><i class="fa-solid fa-shield-halved" style="color: #f472b6;"></i> Условия использования</div>
+                <button class="btn-close" onclick="closeModal('rules-modal')"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="modal-body">
+                <p style="color: #cbd5e1; font-size: 0.9rem; margin-bottom: 20px;">Ознакомьтесь с правилами сети. Нарушение приводит к бану серверов на магистралях (ТСПУ).</p>
+                <div class="rule-list">
+                    <div class="rule-item">
+                        <i class="fa-solid fa-ban rule-icon" style="color: #e11d48;"></i>
+                        <div>
+                            <h4>Строго без торрентов (P2P)</h4>
+                            <p>Скачивание торрентов через прокси моментально палит сервер и приводит к его бану у хостера.</p>
+                        </div>
+                    </div>
+                    <div class="rule-item">
+                        <i class="fa-solid fa-building-columns rule-icon" style="color: #38bdf8;"></i>
+                        <div>
+                            <h4>Банки и Гос. сервисы</h4>
+                            <p>Отключайте VPN при входе в банки. Алгоритмы безопасности могут временно заблокировать ваш аккаунт.</p>
+                        </div>
+                    </div>
+                    <div class="rule-item">
+                        <i class="fa-solid fa-rotate rule-icon" style="color: #10b981;"></i>
+                        <div>
+                            <h4>Автообновление</h4>
+                            <p>Конфиги обновляются регулярно. Настройте автоматическое обновление подписки раз в 4-6 часов.</p>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn-primary" style="width: 100%; max-width: 100%;" onclick="acceptRules()">
+                    <i class="fa-solid fa-check"></i> Активировать доступ
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== МОДАЛЬНОЕ ОКНО "ВЫБОР МАРШРУТА" (ИЗ SCARLETDEVIL) ===== -->
+    <div class="modal-overlay" id="configs-modal">
+        <div class="modal modal-wide">
+            <div class="modal-header">
+                <div class="modal-title"><i class="fa-solid fa-network-wired" style="color: #fb3b5c;"></i> Выбор маршрута</div>
+                <button class="btn-close" onclick="closeModal('configs-modal')"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="config-tabs">
+                    <button class="config-tab-btn active" id="config-tab-class" onclick="switchConfigTab('class')">
+                        <i class="fa-solid fa-layer-group"></i> По классу
+                    </button>
+                    <button class="config-tab-btn" id="config-tab-protocol" onclick="switchConfigTab('protocol')">
+                        <i class="fa-solid fa-code-branch"></i> По протоколу
+                    </button>
+                </div>
+
+                <div id="qr-display" class="qr-display">
+                    <button class="qr-back-btn" onclick="hideQR()">
+                        <i class="fa-solid fa-arrow-left"></i> Назад к подпискам
+                    </button>
+                    <div class="qr-label" id="qr-label">Sub</div>
+                    <div id="qr-container" class="qr-container"></div>
+                </div>
+
+                <!-- По классу -->
+                <div class="config-tab-content" id="config-tab-class-content">
+                    <p style="color: #cbd5e1; font-size: 0.85rem; margin-bottom: 20px;">Выберите класс маршрута:</p>
+                    <div class="sub-grid">
+                        <!-- White (БС) -->
+                        <div class="sub-card reality">
+                            <div class="sub-header">
+                                <div class="sub-title"><i class="fa-solid fa-mask" style="color: #c4b5fd;"></i> White (БС)</div>
+                                <div class="sub-badge badge-reality">Reality</div>
+                            </div>
+                            <div class="sub-desc">Для жёстких блокировок. VLESS Reality, максимальная маскировка под HTTPS.</div>
+                            <div class="sub-tech">PROTO: VLESS REALITY</div>
+                            <div class="sub-actions">
+                                <button class="sub-action-btn copy-btn" onclick="event.stopPropagation(); copySub('https://kort0881.github.io/internet-access-site/sub1', 'White (БС)')">
+                                    <i class="fa-solid fa-copy"></i> Копировать URL
+                                </button>
+                                <button class="sub-action-btn qr-btn" onclick="event.stopPropagation(); showQR('https://kort0881.github.io/internet-access-site/sub1', 'White (БС)')">
+                                    <i class="fa-solid fa-qrcode"></i> QR
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Fast (ЧС) -->
+                        <div class="sub-card fast">
+                            <div class="sub-header">
+                                <div class="sub-title"><i class="fa-solid fa-jet-fighter" style="color: #6ee7b7;"></i> Fast (ЧС)</div>
+                                <div class="sub-badge badge-fast">Hysteria2</div>
+                            </div>
+                            <div class="sub-desc">Для стандартного интернета. Максимальная скорость для стриминга и загрузок.</div>
+                            <div class="sub-tech">PROTO: HYSTERIA2, SS, VMESS</div>
+                            <div class="sub-actions">
+                                <button class="sub-action-btn copy-btn" onclick="event.stopPropagation(); copySub('https://kort0881.github.io/internet-access-site/sub2', 'Fast (ЧС)')">
+                                    <i class="fa-solid fa-copy"></i> Копировать URL
+                                </button>
+                                <button class="sub-action-btn qr-btn" onclick="event.stopPropagation(); showQR('https://kort0881.github.io/internet-access-site/sub2', 'Fast (ЧС)')">
+                                    <i class="fa-solid fa-qrcode"></i> QR
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Mix -->
+                        <div class="sub-card mix">
+                            <div class="sub-header">
+                                <div class="sub-title"><i class="fa-solid fa-infinity" style="color: #fda4af;"></i> Mix</div>
+                                <div class="sub-badge badge-mix">Все протоколы</div>
+                            </div>
+                            <div class="sub-desc">Полный список всех живых узлов. Идеально для клиентов с авто-тестом.</div>
+                            <div class="sub-tech">PROTO: ALL</div>
+                            <div class="sub-actions">
+                                <button class="sub-action-btn copy-btn" onclick="event.stopPropagation(); copySub('https://kort0881.github.io/internet-access-site/sub', 'Mix')">
+                                    <i class="fa-solid fa-copy"></i> Копировать URL
+                                </button>
+                                <button class="sub-action-btn qr-btn" onclick="event.stopPropagation(); showQR('https://kort0881.github.io/internet-access-site/sub', 'Mix')">
+                                    <i class="fa-solid fa-qrcode"></i> QR
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- По протоколу -->
+                <div class="config-tab-content" id="config-tab-protocol-content" style="display:none;">
+                    <p style="color: #cbd5e1; font-size: 0.85rem; margin-bottom: 20px;">Отфильтровано по протоколу:</p>
+                    <div class="sub-grid">
+                        <div class="sub-card vless">
+                            <div class="sub-header">
+                                <div class="sub-title"><i class="fa-solid fa-ghost" style="color: #c4b5fd;"></i> VLESS</div>
+                                <div class="sub-badge badge-vless">VLESS</div>
+                            </div>
+                            <div class="sub-desc">Только VLESS Reality узлы.</div>
+                            <div class="sub-tech">PROTO: VLESS</div>
+                            <div class="sub-actions">
+                                <button class="sub-action-btn copy-btn" onclick="event.stopPropagation(); copySub('https://kort0881.github.io/internet-access-site/sub/vless', 'VLESS')">
+                                    <i class="fa-solid fa-copy"></i> Копировать URL
+                                </button>
+                                <button class="sub-action-btn qr-btn" onclick="event.stopPropagation(); showQR('https://kort0881.github.io/internet-access-site/sub/vless', 'VLESS')">
+                                    <i class="fa-solid fa-qrcode"></i> QR
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="sub-card vmess">
+                            <div class="sub-header">
+                                <div class="sub-title"><i class="fa-solid fa-shield-halved" style="color: #7dd3fc;"></i> VMess</div>
+                                <div class="sub-badge badge-vmess">VMess</div>
+                            </div>
+                            <div class="sub-desc">Только VMess узлы.</div>
+                            <div class="sub-tech">PROTO: VMESS</div>
+                            <div class="sub-actions">
+                                <button class="sub-action-btn copy-btn" onclick="event.stopPropagation(); copySub('https://kort0881.github.io/internet-access-site/sub/vmess', 'VMess')">
+                                    <i class="fa-solid fa-copy"></i> Копировать URL
+                                </button>
+                                <button class="sub-action-btn qr-btn" onclick="event.stopPropagation(); showQR('https://kort0881.github.io/internet-access-site/sub/vmess', 'VMess')">
+                                    <i class="fa-solid fa-qrcode"></i> QR
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="sub-card trojan">
+                            <div class="sub-header">
+                                <div class="sub-title"><i class="fa-solid fa-horse-head" style="color: #fde047;"></i> Trojan</div>
+                                <div class="sub-badge badge-trojan">Trojan</div>
+                            </div>
+                            <div class="sub-desc">Только Trojan узлы.</div>
+                            <div class="sub-tech">PROTO: TROJAN</div>
+                            <div class="sub-actions">
+                                <button class="sub-action-btn copy-btn" onclick="event.stopPropagation(); copySub('https://kort0881.github.io/internet-access-site/sub/trojan', 'Trojan')">
+                                    <i class="fa-solid fa-copy"></i> Копировать URL
+                                </button>
+                                <button class="sub-action-btn qr-btn" onclick="event.stopPropagation(); showQR('https://kort0881.github.io/internet-access-site/sub/trojan', 'Trojan')">
+                                    <i class="fa-solid fa-qrcode"></i> QR
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="sub-card ss">
+                            <div class="sub-header">
+                                <div class="sub-title"><i class="fa-solid fa-feather" style="color: #6ee7b7;"></i> Shadowsocks</div>
+                                <div class="sub-badge badge-ss">SS</div>
+                            </div>
+                            <div class="sub-desc">Только Shadowsocks узлы.</div>
+                            <div class="sub-tech">PROTO: SHADOWSOCKS</div>
+                            <div class="sub-actions">
+                                <button class="sub-action-btn copy-btn" onclick="event.stopPropagation(); copySub('https://kort0881.github.io/internet-access-site/sub/ss', 'Shadowsocks')">
+                                    <i class="fa-solid fa-copy"></i> Копировать URL
+                                </button>
+                                <button class="sub-action-btn qr-btn" onclick="event.stopPropagation(); showQR('https://kort0881.github.io/internet-access-site/sub/ss', 'Shadowsocks')">
+                                    <i class="fa-solid fa-qrcode"></i> QR
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="sub-card hy2">
+                            <div class="sub-header">
+                                <div class="sub-title"><i class="fa-solid fa-bolt" style="color: #f9a8d4;"></i> Hysteria2</div>
+                                <div class="sub-badge badge-hy2">HY2</div>
+                            </div>
+                            <div class="sub-desc">Только Hysteria2 узлы.</div>
+                            <div class="sub-tech">PROTO: HYSTERIA2</div>
+                            <div class="sub-actions">
+                                <button class="sub-action-btn copy-btn" onclick="event.stopPropagation(); copySub('https://kort0881.github.io/internet-access-site/sub/hy2', 'Hysteria2')">
+                                    <i class="fa-solid fa-copy"></i> Копировать URL
+                                </button>
+                                <button class="sub-action-btn qr-btn" onclick="event.stopPropagation(); showQR('https://kort0881.github.io/internet-access-site/sub/hy2', 'Hysteria2')">
+                                    <i class="fa-solid fa-qrcode"></i> QR
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== TOAST (УВЕДОМЛЕНИЕ) ===== -->
+    <div id="toast" class="toast"><i class="fa-solid fa-circle-check"></i> <span id="toast-text">Скопировано!</span></div>
+
+    <!-- ===== JAVASCRIPT ===== -->
     <script>
-        // ===== МАТРИЧНЫЙ ДОЖДЬ =====
+        // ===== МАТРИЧНЫЙ ДОЖДЬ (ВАШ) =====
         const canvas = document.getElementById('matrixCanvas');
         const ctx = canvas.getContext('2d');
         let width, height, columns, drops, fontSize = 18;
@@ -234,7 +784,7 @@
         initMatrix();
         drawMatrix();
 
-        // ===== КОПИРОВАНИЕ ССЫЛОК =====
+        // ===== КОПИРОВАНИЕ ССЫЛОК (ВАШЕ) =====
         function copyToClipboard(button, url) {
             const original = button.innerHTML;
             navigator.clipboard.writeText(url).then(() => {
@@ -266,7 +816,7 @@
             btn.onclick = () => copyToClipboard(btn, url);
         });
 
-        // ===== ЗАГРУЗКА ПРОКСИ =====
+        // ===== ЗАГРУЗКА ПРОКСИ (ВАШЕ) =====
         async function loadProxies() {
             const container = document.getElementById('proxy-list');
             if (!container) return;
@@ -291,6 +841,463 @@
             }
         }
         loadProxies();
+
+        // ===== ФУНКЦИИ ИЗ SCARLETDEVIL =====
+        function openModal(id) {
+            document.getElementById(id).classList.add('active');
+            if (id === 'configs-modal') {
+                switchConfigTab('class');
+            }
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).classList.remove('active');
+            const qrDiv = document.getElementById('qr-display');
+            if (qrDiv) qrDiv.classList.remove('active');
+            const tabContents = document.querySelectorAll('.config-tab-content');
+            tabContents.forEach(tc => tc.style.display = '');
+        }
+
+        function acceptRules() {
+            closeModal('rules-modal');
+            setTimeout(() => openModal('configs-modal'), 300);
+        }
+
+        function switchConfigTab(tab) {
+            document.querySelectorAll('.config-tab-btn').forEach(btn => btn.classList.remove('active'));
+            const activeBtn = document.getElementById(`config-tab-${tab}`);
+            if (activeBtn) activeBtn.classList.add('active');
+
+            document.querySelectorAll('.config-tab-content').forEach(ct => ct.style.display = 'none');
+            const activeContent = document.getElementById(`config-tab-${tab}-content`);
+            if (activeContent) activeContent.style.display = '';
+
+            const qrDiv = document.getElementById('qr-display');
+            if (qrDiv) qrDiv.classList.remove('active');
+        }
+
+        function copySub(url, name) {
+            const doCopy = function(text) {
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    return navigator.clipboard.writeText(text);
+                }
+                return new Promise(function(resolve, reject) {
+                    const textarea = document.createElement('textarea');
+                    textarea.value = text;
+                    textarea.style.position = 'fixed';
+                    textarea.style.left = '-9999px';
+                    textarea.style.top = '-9999px';
+                    document.body.appendChild(textarea);
+                    textarea.focus();
+                    textarea.select();
+                    try {
+                        const ok = document.execCommand('copy');
+                        document.body.removeChild(textarea);
+                        if (ok) resolve();
+                        else reject(new Error('execCommand failed'));
+                    } catch (e) {
+                        document.body.removeChild(textarea);
+                        reject(e);
+                    }
+                });
+            };
+
+            doCopy(url).then(function() {
+                closeModal('configs-modal');
+                var toast = document.getElementById('toast');
+                document.getElementById('toast-text').innerText = 'Ссылка [' + name + '] скопирована!';
+                toast.classList.add('show');
+                setTimeout(function() { toast.classList.remove('show'); }, 3500);
+            }).catch(function() {
+                var toast = document.getElementById('toast');
+                document.getElementById('toast-text').innerText = 'URL: ' + url;
+                toast.classList.add('show');
+                setTimeout(function() { toast.classList.remove('show'); }, 8000);
+                prompt('Скопируйте ссылку вручную (Ctrl+C):', url);
+            });
+        }
+
+        function showQR(url, name) {
+            const qrDisplay = document.getElementById('qr-display');
+            const qrLabel = document.getElementById('qr-label');
+            const qrContainer = document.getElementById('qr-container');
+
+            qrLabel.innerText = name;
+            qrContainer.innerHTML = '';
+
+            try {
+                const canvas = QR.toCanvas(url, 5);
+                canvas.style.maxWidth = '100%';
+                canvas.style.height = 'auto';
+                qrContainer.appendChild(canvas);
+            } catch (e) {
+                qrContainer.innerHTML = '<p style="color: #e11d48;">Ошибка генерации QR-кода</p>';
+            }
+
+            document.querySelectorAll('.config-tab-content').forEach(function(ct) { ct.style.display = 'none'; });
+            document.querySelectorAll('.config-tab-btn').forEach(function(btn) { btn.style.pointerEvents = 'none'; btn.style.opacity = '0.4'; });
+            qrDisplay.classList.add('active');
+        }
+
+        function hideQR() {
+            const qrDisplay = document.getElementById('qr-display');
+            qrDisplay.classList.remove('active');
+            document.querySelectorAll('.config-tab-btn').forEach(function(btn) { btn.style.pointerEvents = ''; btn.style.opacity = ''; });
+            var activeTab = document.querySelector('.config-tab-btn.active');
+            if (activeTab) {
+                var tabName = activeTab.id.replace('config-tab-', '');
+                var content = document.getElementById('config-tab-' + tabName + '-content');
+                if (content) content.style.display = '';
+            }
+        }
+
+        // ===== QR CODE GENERATOR (из ScarletDevil) =====
+        const QR = (function() {
+            const EXP = new Int32Array(512);
+            const LOG = new Int32Array(256);
+
+            (function initGF() {
+                let v = 1;
+                for (let i = 0; i < 256; i++) {
+                    EXP[i] = v;
+                    LOG[v] = i;
+                    v <<= 1;
+                    if (v & 256) v ^= 285;
+                }
+                for (let i = 256; i < 512; i++) EXP[i] = EXP[i - 255];
+                LOG[1] = 0;
+            })();
+
+            const EC_INFO = [
+                null,
+                { total: 26,  ecPerBlock: 7,  blocks: 1, dataPerBlock: 19  },
+                { total: 44,  ecPerBlock: 10, blocks: 1, dataPerBlock: 34  },
+                { total: 70,  ecPerBlock: 15, blocks: 1, dataPerBlock: 55  },
+                { total: 100, ecPerBlock: 20, blocks: 1, dataPerBlock: 80  },
+                { total: 134, ecPerBlock: 26, blocks: 1, dataPerBlock: 108 },
+                { total: 172, ecPerBlock: 18, blocks: 2, dataPerBlock: 68  },
+            ];
+
+            const ALIGNMENT_POS = [
+                [], [], [6,18], [6,22], [6,26], [6,30], [6,34]
+            ];
+
+            const FORMAT_INFO = [0x77C4, 0x72F3, 0x7DAA, 0x789D, 0x662F, 0x6318, 0x6C41, 0x6976];
+
+            function gfMul(a, b) {
+                if (a === 0 || b === 0) return 0;
+                return EXP[LOG[a] + LOG[b]];
+            }
+
+            function gfInv(a) {
+                return EXP[255 - LOG[a]];
+            }
+
+            function polyMul(a, b) {
+                const r = new Array(a.length + b.length - 1).fill(0);
+                for (let i = 0; i < a.length; i++)
+                    for (let j = 0; j < b.length; j++)
+                        r[i + j] ^= gfMul(a[i], b[j]);
+                return r;
+            }
+
+            function generatorPoly(degree) {
+                let g = [1];
+                for (let i = 0; i < degree; i++)
+                    g = polyMul(g, [1, EXP[i]]);
+                return g;
+            }
+
+            function computeEC(data, ecCount) {
+                const gen = generatorPoly(ecCount);
+                const msg = data.concat(new Array(ecCount).fill(0));
+                const invG0 = gfInv(gen[0]);
+                for (let i = 0; i < data.length; i++) {
+                    if (msg[i] === 0) continue;
+                    const factor = gfMul(msg[i], invG0);
+                    for (let j = 0; j < gen.length; j++)
+                        msg[i + j] ^= gfMul(gen[j], factor);
+                }
+                return msg.slice(data.length);
+            }
+
+            function selectVersion(dataLen) {
+                const bits = 4 + 8 + dataLen * 8 + 4;
+                const cwNeeded = Math.ceil(bits / 8);
+                for (let v = 1; v <= 6; v++)
+                    if (EC_INFO[v].dataPerBlock * EC_INFO[v].blocks >= cwNeeded) return v;
+                return 6;
+            }
+
+            function encodeByteMode(text, version) {
+                const info = EC_INFO[version];
+                const totalDataCW = info.dataPerBlock * info.blocks;
+                const bits = [];
+
+                bits.push(0, 1, 0, 0);
+                const len = text.length;
+                for (let i = 7; i >= 0; i--) bits.push((len >> i) & 1);
+                for (let i = 0; i < len; i++) {
+                    const c = text.charCodeAt(i);
+                    for (let j = 7; j >= 0; j--) bits.push((c >> j) & 1);
+                }
+                const termLen = Math.min(4, totalDataCW * 8 - bits.length);
+                for (let i = 0; i < termLen; i++) bits.push(0);
+                while (bits.length % 8) bits.push(0);
+                const padBytes = [0xEC, 0x11];
+                let pi = 0;
+                while (bits.length < totalDataCW * 8) {
+                    const b = padBytes[pi % 2]; pi++;
+                    for (let j = 7; j >= 0; j--) bits.push((b >> j) & 1);
+                }
+                const cw = [];
+                for (let i = 0; i < totalDataCW; i++) {
+                    let val = 0;
+                    for (let j = 0; j < 8; j++) val = (val << 1) | bits[i * 8 + j];
+                    cw.push(val);
+                }
+                return cw;
+            }
+
+            function formatLocations(size) {
+                const locA = [[8,0],[8,1],[8,2],[8,3],[8,4],[8,5],[8,7],[8,8],
+                              [7,8],[5,8],[4,8],[3,8],[2,8],[1,8],[0,8]];
+                const locB = [[size-1,8],[size-2,8],[size-3,8],[size-4,8],[size-5,8],[size-6,8],[size-7,8],
+                              [8,size-8],[8,size-7],[8,size-6],[8,size-5],[8,size-4],[8,size-3],[8,size-2],[8,size-1]];
+                return { locA, locB };
+            }
+
+            function placeFunctionPatterns(modules, reserved, version) {
+                const size = version * 4 + 17;
+
+                function setFinder(r, c) {
+                    for (let i = -1; i <= 7; i++) {
+                        for (let j = -1; j <= 7; j++) {
+                            const rr = r + i, cc = c + j;
+                            if (rr < 0 || rr >= size || cc < 0 || cc >= size) continue;
+                            reserved[rr][cc] = 1;
+                            if (i >= 0 && i <= 6 && j >= 0 && j <= 6) {
+                                modules[rr][cc] = (
+                                    i === 0 || i === 6 || j === 0 || j === 6 ||
+                                    (i >= 2 && i <= 4 && j >= 2 && j <= 4)
+                                ) ? 1 : 0;
+                            } else {
+                                modules[rr][cc] = 0;
+                            }
+                        }
+                    }
+                }
+                setFinder(0, 0);
+                setFinder(0, size - 7);
+                setFinder(size - 7, 0);
+
+                for (let i = 8; i < size - 8; i++) {
+                    const v = (i % 2 === 0) ? 1 : 0;
+                    if (!reserved[6][i]) { modules[6][i] = v; reserved[6][i] = 1; }
+                    if (!reserved[i][6]) { modules[i][6] = v; reserved[i][6] = 1; }
+                }
+
+                const apos = ALIGNMENT_POS[version];
+                for (const ar of apos) {
+                    for (const ac of apos) {
+                        if (reserved[ar][ac]) continue;
+                        for (let i = -2; i <= 2; i++) {
+                            for (let j = -2; j <= 2; j++) {
+                                modules[ar + i][ac + j] = (
+                                    i === -2 || i === 2 || j === -2 || j === 2 || (i === 0 && j === 0)
+                                ) ? 1 : 0;
+                                reserved[ar + i][ac + j] = 1;
+                            }
+                        }
+                    }
+                }
+
+                modules[size - 8][8] = 1;
+                reserved[size - 8][8] = 1;
+                const { locA, locB } = formatLocations(size);
+                for (const [r, c] of locA) reserved[r][c] = 1;
+                for (const [r, c] of locB) reserved[r][c] = 1;
+            }
+
+            function placeData(modules, reserved, allBits, version) {
+                const size = version * 4 + 17;
+                let bitIdx = 0;
+                let up = true;
+                for (let col = size - 1; col >= 0; col -= 2) {
+                    if (col === 6) col = 5;
+                    for (let row = up ? size - 1 : 0; up ? row >= 0 : row < size; row += up ? -1 : 1) {
+                        for (const c of [col, col - 1]) {
+                            if (c < 0) continue;
+                            if (!reserved[row][c]) {
+                                modules[row][c] = (bitIdx < allBits.length) ? allBits[bitIdx] : 0;
+                                bitIdx++;
+                            }
+                        }
+                    }
+                    up = !up;
+                }
+            }
+
+            function applyMaskPattern(row, col, mask) {
+                switch (mask) {
+                    case 0: return (row + col) % 2 === 0;
+                    case 1: return row % 2 === 0;
+                    case 2: return col % 3 === 0;
+                    case 3: return (row + col) % 3 === 0;
+                    case 4: return (Math.floor(row / 2) + Math.floor(col / 3)) % 2 === 0;
+                    case 5: return (row * col) % 2 + (row * col) % 3 === 0;
+                    case 6: return ((row * col) % 2 + (row * col) % 3) % 2 === 0;
+                    case 7: return ((row + col) % 2 + (row * col) % 3) % 2 === 0;
+                }
+                return false;
+            }
+
+            function evalPenalty(m, size) {
+                let penalty = 0;
+                for (let r = 0; r < size; r++) {
+                    let run = 1;
+                    for (let c = 1; c < size; c++) {
+                        if (m[r][c] === m[r][c - 1]) { run++; }
+                        else { if (run >= 5) penalty += run - 2; run = 1; }
+                    }
+                    if (run >= 5) penalty += run - 2;
+                }
+                for (let c = 0; c < size; c++) {
+                    let run = 1;
+                    for (let r = 1; r < size; r++) {
+                        if (m[r][c] === m[r - 1][c]) { run++; }
+                        else { if (run >= 5) penalty += run - 2; run = 1; }
+                    }
+                    if (run >= 5) penalty += run - 2;
+                }
+                for (let r = 0; r < size - 1; r++)
+                    for (let c = 0; c < size - 1; c++)
+                        if (m[r][c] === m[r+1][c] && m[r][c] === m[r][c+1] && m[r][c] === m[r+1][c+1])
+                            penalty += 3;
+                const PAT = [1,0,1,1,1,0,1];
+                for (let r = 0; r < size; r++) {
+                    for (let c = 0; c <= size - 7; c++) {
+                        let match = true;
+                        for (let k = 0; k < 7; k++)
+                            if (m[r][c+k] !== PAT[k]) { match = false; break; }
+                        if (match) penalty += 40;
+                    }
+                }
+                for (let c = 0; c < size; c++) {
+                    for (let r = 0; r <= size - 7; r++) {
+                        let match = true;
+                        for (let k = 0; k < 7; k++)
+                            if (m[r+k][c] !== PAT[k]) { match = false; break; }
+                        if (match) penalty += 40;
+                    }
+                }
+                let dark = 0;
+                for (let r = 0; r < size; r++)
+                    for (let c = 0; c < size; c++)
+                        if (m[r][c]) dark++;
+                const ratio = (dark / (size * size)) * 100;
+                const dev = Math.abs(Math.round(ratio / 5) * 5 - 50) / 5;
+                penalty += dev * 10;
+                return penalty;
+            }
+
+            function placeFormat(m, size, mask) {
+                const fi = FORMAT_INFO[mask];
+                const { locA, locB } = formatLocations(size);
+                for (let i = 0; i < 15; i++) {
+                    const bit = (fi >> (14 - i)) & 1;
+                    m[locA[i][0]][locA[i][1]] = bit;
+                    m[locB[i][0]][locB[i][1]] = bit;
+                }
+            }
+
+            function generateMatrix(text) {
+                const version = selectVersion(text.length);
+                const info = EC_INFO[version];
+                const size = version * 4 + 17;
+                const encoded = encodeByteMode(text, version);
+
+                const dataBlocks = [], ecBlocks = [];
+                for (let b = 0; b < info.blocks; b++) {
+                    const blockData = encoded.slice(b * info.dataPerBlock, (b + 1) * info.dataPerBlock);
+                    dataBlocks.push(blockData);
+                    ecBlocks.push(computeEC(blockData, info.ecPerBlock));
+                }
+                const finalCW = [];
+                for (let i = 0; i < info.dataPerBlock; i++)
+                    for (let b = 0; b < info.blocks; b++)
+                        finalCW.push(dataBlocks[b][i]);
+                for (let i = 0; i < info.ecPerBlock; i++)
+                    for (let b = 0; b < info.blocks; b++)
+                        finalCW.push(ecBlocks[b][i]);
+
+                const allBits = [];
+                for (const cw of finalCW)
+                    for (let j = 7; j >= 0; j--) allBits.push((cw >> j) & 1);
+
+                const baseMod = Array.from({length: size}, () => new Int32Array(size));
+                const reserved = Array.from({length: size}, () => new Int32Array(size));
+                placeFunctionPatterns(baseMod, reserved, version);
+                placeData(baseMod, reserved, allBits, version);
+
+                let bestPenalty = Infinity, bestMatrix = null;
+                for (let mask = 0; mask < 8; mask++) {
+                    const m = Array.from({length: size}, (_, r) => Int32Array.from(baseMod[r]));
+                    for (let r = 0; r < size; r++)
+                        for (let c = 0; c < size; c++)
+                            if (!reserved[r][c] && applyMaskPattern(r, c, mask))
+                                m[r][c] ^= 1;
+                    placeFormat(m, size, mask);
+                    const penalty = evalPenalty(m, size);
+                    if (penalty < bestPenalty) {
+                        bestPenalty = penalty;
+                        bestMatrix = m;
+                    }
+                }
+                return { matrix: bestMatrix, size };
+            }
+
+            function toCanvas(text, moduleSize) {
+                const { matrix, size } = generateMatrix(text);
+                const pixSize = moduleSize || 6;
+                const padding = pixSize * 4;
+                const total = size * pixSize + padding * 2;
+
+                const canvas = document.createElement('canvas');
+                canvas.width = canvas.height = total;
+                const ctx = canvas.getContext('2d');
+
+                ctx.fillStyle = '#ffffff';
+                ctx.fillRect(0, 0, total, total);
+
+                ctx.fillStyle = '#000000';
+                for (let r = 0; r < size; r++) {
+                    for (let c = 0; c < size; c++) {
+                        if (matrix[r][c]) {
+                            ctx.fillRect(padding + c * pixSize, padding + r * pixSize, pixSize, pixSize);
+                        }
+                    }
+                }
+                return canvas;
+            }
+
+            return { toCanvas };
+        })();
+
+        // Закрытие модалок по клику на фон
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('modal-overlay') && e.target.classList.contains('active')) {
+                closeModal(e.target.id);
+            }
+        });
+
+        // Закрытие по Escape
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                const activeModals = document.querySelectorAll('.modal-overlay.active');
+                activeModals.forEach(m => closeModal(m.id));
+            }
+        });
     </script>
 </body>
 </html>
