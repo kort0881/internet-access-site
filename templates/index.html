@@ -2,795 +2,271 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="canonical" href="{{ site_url or 'https://kort0881.github.io/internet-access-site/' }}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>{{ meta_title }}</title>
     <meta name="description" content="{{ meta_description }}">
     <meta name="keywords" content="{{ meta_keywords }}">
-    <meta property="og:title" content="{{ meta_title }}">
-    <meta property="og:description" content="{{ meta_description }}">
-    <meta property="og:type" content="website">
-    <meta property="og:image" content="https://kort0881.github.io/internet-access-site/favicon.svg">
-    <meta property="og:url" content="https://kort0881.github.io/internet-access-site/">
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="{{ meta_title }}">
-    <meta name="twitter:description" content="{{ meta_description }}">
-    <title>{{ meta_title }}</title>
-
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌐</text></svg>">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;800;900&family=Manrope:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap&subset=cyrillic,cyrillic-ext,latin" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌐</text></svg>">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Roboto+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <!-- ===== СТРУКТУРИРОВАННЫЕ ДАННЫЕ (ваши реальные пути) ===== -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@graph": [
-        {
-          "@type": "WebSite",
-          "name": "Доступ к интернету – VPN и прокси для России",
-          "description": "{{ meta_description }}",
-          "url": "https://kort0881.github.io/internet-access-site/",
-          "inLanguage": "ru-RU"
-        },
-        {
-          "@type": "FAQPage",
-          "about": {
-            "@type": "Thing",
-            "name": "VPN и прокси для обхода блокировок в России"
-          },
-          "inLanguage": "ru-RU",
-          "author": {
-            "@type": "Organization",
-            "name": "Доступ к интернету"
-          },
-          "mainEntity": [
-            {
-              "@type": "Question",
-              "name": "Как использовать VPN-конфигурации с этого сайта?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Выберите конфигурацию (белые версии самые стабильные), скопируйте ссылку на подписку, вставьте в приложение v2rayNG / NekoBox / v2rayN, затем подпишитесь на Telegram-каналы для новых ключей."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "Почему эти конфигурации работают в России?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Протоколы VLESS, WireGuard, Hysteria маскируют трафик и обходят блокировки Роскомнадзора. Настройки обновляются автоматически."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "Где скачать клиенты для Android, Windows и iOS?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Для Android: v2rayNG, NekoBox, Happ, Karing. Для Windows: v2rayN. Для iOS/macOS: Shadowrocket. Ссылки на скачивание есть на сайте."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "Как часто обновляются конфигурации?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Конфигурации обновляются ежедневно, мы публикуем новые ссылки в Telegram-каналах. На сайте отображаются самые свежие."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "Можно ли использовать эти настройки на iPhone?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Да, через приложение Shadowrocket (доступно в App Store). Скопируйте ссылку и импортируйте её в приложение."
-              }
-            }
-          ]
-        },
-        {
-          "@type": "ItemList",
-          "itemListOrder": "https://schema.org/ItemListOrderAscending",
-          "itemListElement": [
-            {% for cfg in configs %}
-            {
-              "@type": "ListItem",
-              "position": {{ loop.index }},
-              "item": {
-                "@type": "CreativeWork",
-                "name": "{{ cfg.name }}",
-                "description": "Категория: {{ cfg.category }}",
-                "url": "{{ cfg.url }}"
-              }
-            }{% if not loop.last %},{% endif %}
-            {% endfor %}
-          ]
-        }
-      ]
-    }
-    </script>
-
     <style>
-        /* ===== ПОЛНЫЙ CSS из Scarlet Devil (сокращённо, чтобы влезло) ===== */
-        /* В реальном файле здесь должен быть весь CSS, я укажу его в конце сообщения отдельно */
-        /* Для краткости я оставлю заглушку, но вы можете скопировать полный CSS из предыдущего ответа */
-        /* (Я предоставлю полный код в конце) */
-        /* Пожалуйста, используйте полный CSS из моего предыдущего сообщения, он уже адаптирован под ваш бренд */
-        /* Я вставлю его позже в полном ответе */
+        /* ===== ВАШИ СТИЛИ (без изменений) ===== */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', system-ui, sans-serif; color: #eaeef2; line-height: 1.5; min-height: 100vh; background: #0a0a0c; position: relative; overflow-x: hidden; }
+        .sky-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; background: radial-gradient(circle at 30% 40%, #1a0000, #000000); overflow: hidden; }
+        #matrixCanvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; display: block; opacity: 0.6; }
+        .container { position: relative; z-index: 2; max-width: 1400px; margin: 0 auto; padding: 0 28px; }
+        .glass-header { background: rgba(0, 0, 0, 0.92); backdrop-filter: blur(12px); border-bottom: 2px solid #cc0000; padding: 18px 0; position: sticky; top: 0; z-index: 100; }
+        .header-flex { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .logo h1 { font-size: 1.9rem; font-weight: 700; background: linear-gradient(135deg, #fff, #ff4d4d, #cc0000); -webkit-background-clip: text; background-clip: text; color: transparent; letter-spacing: -0.5px; }
+        .logo p { color: #bbbbbb; font-size: 0.85rem; margin-top: 4px; }
+        .social-links { display: flex; gap: 12px; flex-wrap: wrap; }
+        .social-btn { padding: 8px 20px; border-radius: 40px; text-decoration: none; font-size: 0.85rem; font-weight: 500; display: inline-flex; align-items: center; gap: 8px; background: rgba(204, 0, 0, 0.15); border: 1px solid rgba(204, 0, 0, 0.6); color: #f0f0f0; transition: all 0.25s; }
+        .social-btn:hover { background: rgba(204, 0, 0, 0.4); border-color: #ff3333; box-shadow: 0 0 12px rgba(204,0,0,0.6); transform: translateY(-2px); color: #fff; }
+        .section { margin: 56px 0 40px; }
+        .section-title { font-size: 2.2rem; font-weight: 700; background: linear-gradient(135deg, #fff, #ff4d4d); -webkit-background-clip: text; background-clip: text; color: transparent; display: inline-block; border-left: 4px solid #cc0000; padding-left: 20px; margin-bottom: 32px; text-shadow: 0 0 5px rgba(0,0,0,0.5); }
+        .corner-card, .info-card, .config-card, .app-card, .news-card { background: rgba(10, 10, 12, 0.92); backdrop-filter: blur(10px); border: 1px solid rgba(204, 0, 0, 0.45); border-radius: 24px; transition: all 0.3s ease; }
+        .corner-card { padding: 28px; position: relative; }
+        .corner-card:hover, .info-card:hover, .config-card:hover, .app-card:hover, .news-card:hover { border-color: #ff3333; box-shadow: 0 0 28px rgba(204, 0, 0, 0.3); transform: translateY(-3px); }
+        .info-card { flex: 1; min-width: 260px; padding: 28px; }
+        .info-icon { width: 54px; height: 54px; background: linear-gradient(135deg, #cc0000, #990000); border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 28px; margin-bottom: 24px; color: white; }
+        .info-card h3 { font-size: 1.5rem; margin-bottom: 16px; color: #fff; font-weight: 600; }
+        .step-list { list-style: none; counter-reset: step; }
+        .step-list li { counter-increment: step; margin-bottom: 12px; padding-left: 32px; position: relative; color: #ddd; }
+        .step-list li::before { content: counter(step); position: absolute; left: 0; top: 0; width: 22px; height: 22px; background: linear-gradient(135deg, #cc0000, #990000); border-radius: 30px; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold; color: #fff; }
+        .highlight { color: #ff6666; font-weight: 600; }
+        .update-badge { display: inline-block; margin-top: 20px; padding: 6px 16px; background: rgba(204, 0, 0, 0.25); border-radius: 30px; font-size: 0.8rem; color: #ff9999; border: 1px solid rgba(204,0,0,0.6); }
+        .info-grid { display: flex; flex-wrap: wrap; gap: 28px; margin-bottom: 48px; }
+        .configs-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px; margin: 32px 0; }
+        .config-card { padding: 20px; }
+        .config-name { font-size: 1.2rem; font-weight: 700; color: #ff6666; margin-bottom: 6px; word-break: break-word; }
+        .config-category { font-size: 0.75rem; color: #aaa; margin-bottom: 16px; }
+        .button-group { display: flex; flex-direction: column; gap: 10px; margin-top: 12px; }
+        .btn-neon { padding: 10px; border-radius: 40px; font-weight: 600; text-align: center; cursor: pointer; transition: all 0.2s; border: none; font-size: 0.85rem; display: flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none; background: linear-gradient(95deg, #cc0000, #990000); color: #fff; }
+        .btn-neon:hover { transform: scale(1.02); box-shadow: 0 0 12px #cc0000; background: linear-gradient(95deg, #ff1a1a, #b30000); }
+        .btn-black { background: #1a1a1a; color: #eee; border: 1px solid #555; }
+        .btn-black:hover { box-shadow: 0 0 12px #660000; border-color: #cc0000; background: #2a2a2a; }
+        .btn-link { background: rgba(204, 0, 0, 0.1); border: 1px solid rgba(204, 0, 0, 0.7); color: #ff9999; background: transparent; font-weight: 600; }
+        .btn-link:hover { background: rgba(204, 0, 0, 0.3); border-color: #ff3333; color: #fff; }
+        .proxy-grid { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 16px; }
+        .proxy-item { background: rgba(160, 0, 0, 0.25); border: 1px solid rgba(204, 0, 0, 0.7); padding: 8px 18px; border-radius: 60px; color: #ff8888; text-decoration: none; font-weight: 500; transition: 0.2s; display: inline-flex; align-items: center; gap: 8px; font-size: 0.85rem; }
+        .proxy-item:hover { background: rgba(204, 0, 0, 0.5); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(204, 0, 0, 0.4); color: #fff; }
+        .apps-grid { display: flex; flex-wrap: wrap; gap: 24px; justify-content: center; margin: 40px 0; }
+        .app-card { padding: 24px; width: 240px; text-align: center; }
+        .app-icon { font-size: 42px; margin-bottom: 12px; color: #ff6666; }
+        .app-card h3 { font-size: 1.2rem; margin-bottom: 16px; color: #fff; }
+        .app-links { display: flex; flex-direction: column; gap: 10px; }
+        .app-link { padding: 8px; border-radius: 40px; background: rgba(255,255,255,0.05); border: 1px solid rgba(204, 0, 0, 0.5); color: #dddddd; text-decoration: none; transition: 0.2s; font-size: 0.85rem; }
+        .app-link:hover { background: rgba(204, 0, 0, 0.25); border-color: #ff3333; color: #fff; }
+        .news-grid { display: flex; flex-direction: column; gap: 24px; margin: 32px 0; }
+        .news-card { padding: 24px; display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start; }
+        .news-date { font-size: 0.8rem; color: #ff8888; background: rgba(204, 0, 0, 0.2); padding: 4px 12px; border-radius: 20px; display: inline-block; margin-bottom: 12px; }
+        .news-title { font-size: 1.3rem; font-weight: 700; color: #fff; margin-bottom: 12px; }
+        .news-summary { color: #ccc; line-height: 1.5; margin-bottom: 16px; }
+        .news-source { font-size: 0.8rem; color: #ff9999; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+        .official-links { margin-top: 20px; padding: 20px; background: rgba(0,0,0,0.4); border-radius: 20px; text-align: center; }
+        .official-links a { color: #ff6666; margin: 0 15px; text-decoration: none; font-weight: 500; }
+        .official-links a:hover { color: #fff; text-shadow: 0 0 5px #cc0000; }
+        footer { margin-top: 70px; padding: 30px 0; text-align: center; border-top: 1px solid rgba(204, 0, 0, 0.6); color: #aaa; }
+        .footer-links a { color: #ff6666; margin: 0 12px; font-size: 1.4rem; transition: 0.2s; }
+        .footer-links a:hover { text-shadow: 0 0 8px #cc0000; color: #ff9999; }
+        @media (max-width: 800px) {
+            .container { padding: 0 20px; }
+            .configs-grid { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
+            .info-grid { flex-direction: column; }
+            .section-title { font-size: 1.8rem; }
+            .news-card { flex-direction: column; }
+        }
+        .faq-item h3 { color: #ff6666; font-size: 1.2rem; margin-bottom: 8px; }
+        .faq-item p { color: #ddd; line-height: 1.6; }
     </style>
 </head>
-<body class="fx-extreme">
+<body>
+    <div class="sky-bg"></div>
+    <canvas id="matrixCanvas"></canvas>
 
-    <!-- SKIP LINK -->
-    <a href="#main-content" class="skip-link" aria-label="Пропустить навигацию">Пропустить навигацию →</a>
-
-    <!-- ЭФФЕКТЫ -->
-    <div id="mist-layer" class="scarlet-mist-layer"></div>
-    <div id="scanline-overlay" class="scanline-overlay"></div>
-    <canvas id="stardust-canvas" class="stardust-canvas"></canvas>
-
-    <!-- БОКОВАЯ НАВИГАЦИЯ -->
-    <nav class="side-nav">
-        <button class="nav-btn active" data-target="home" aria-label="Главная"><span class="nav-label">Nexus</span><div class="nav-dot"></div></button>
-        <button class="nav-btn" data-target="about" aria-label="О проекте"><span class="nav-label">О проекте</span><div class="nav-dot"></div></button>
-        <button class="nav-btn" data-target="guide" aria-label="Гайд"><span class="nav-label">Гайд</span><div class="nav-dot"></div></button>
-        <button class="nav-btn" data-target="theory_bs" aria-label="БС vs ЧС"><span class="nav-label">БС vs ЧС</span><div class="nav-dot"></div></button>
-        <button class="nav-btn" data-target="theory_isp" aria-label="Приватность"><span class="nav-label">Приватность</span><div class="nav-dot"></div></button>
-        <button class="nav-btn" data-target="news" aria-label="Новости"><span class="nav-label">Новости</span><div class="nav-dot"></div></button>
-        <button class="nav-btn" data-target="protocols" aria-label="Протоколы"><span class="nav-label">Протоколы</span><div class="nav-dot"></div></button>
-        <button class="nav-btn" data-target="faq" aria-label="FAQ"><span class="nav-label">FAQ</span><div class="nav-dot"></div></button>
-        <button class="nav-btn" data-target="glossary" aria-label="Глоссарий"><span class="nav-label">Глоссарий</span><div class="nav-dot"></div></button>
-        <button class="nav-btn" data-target="contacts" aria-label="Контакты"><span class="nav-label">Контакты</span><div class="nav-dot"></div></button>
-    </nav>
-
-    <!-- ПАНЕЛЬ ЭФФЕКТОВ -->
-    <div class="fun-panel reveal">
-        <button id="btn-mist" class="fun-btn" title="Алый туман"><i class="fa-solid fa-cloud"></i></button>
-        <button id="btn-stardust" class="fun-btn" title="Звёздная пыль"><i class="fa-solid fa-wand-magic-sparkles"></i></button>
-    </div>
-
-    <!-- HAMBURGER (мобильное меню) -->
-    <button class="hamburger-btn" id="hamburger-btn"><span></span><span></span><span></span></button>
-
-    <!-- МОБИЛЬНАЯ НАВИГАЦИЯ -->
-    <div class="mobile-nav-overlay" id="mobile-nav-overlay">
-        <div class="mobile-nav-panel">
-            <div class="mobile-nav-header">
-                <span class="mobile-nav-title"><i class="fa-solid fa-broom"></i> Доступ к интернету</span>
-                <button class="mobile-nav-close" id="mobile-nav-close"><i class="fa-solid fa-xmark"></i></button>
-            </div>
-            <div class="mobile-nav-links">
-                <button class="mobile-nav-link" data-target="home">Nexus</button>
-                <button class="mobile-nav-link" data-target="about">О проекте</button>
-                <button class="mobile-nav-link" data-target="guide">Гайд</button>
-                <button class="mobile-nav-link" data-target="theory_bs">БС vs ЧС</button>
-                <button class="mobile-nav-link" data-target="theory_isp">Приватность</button>
-                <button class="mobile-nav-link" data-target="news">Новости</button>
-                <button class="mobile-nav-link" data-target="protocols">Протоколы</button>
-                <button class="mobile-nav-link" data-target="faq">FAQ</button>
-                <button class="mobile-nav-link" data-target="glossary">Глоссарий</button>
-                <button class="mobile-nav-link" data-target="contacts">Контакты</button>
-            </div>
-            <div class="mobile-nav-fun">
-                <span class="mobile-nav-fun-label">Эффекты</span>
-                <div class="mobile-nav-fun-btns">
-                    <button id="btn-mist-mobile" class="fun-btn-mobile" title="Алый туман"><i class="fa-solid fa-cloud"></i></button>
-                    <button id="btn-stardust-mobile" class="fun-btn-mobile" title="Звёздная пыль"><i class="fa-solid fa-wand-magic-sparkles"></i></button>
+    <div class="glass-header">
+        <div class="container">
+            <div class="header-flex">
+                <div class="logo"><h1>🌐 Доступ к интернету</h1><p>VPN · Свобода без границ</p></div>
+                <div class="social-links">
+                    <a href="https://t.me/vlesstrojan" class="social-btn"><i class="fab fa-telegram"></i> VLESS & Trojan</a>
+                    <a href="https://t.me/kibersosnew" class="social-btn"><i class="fab fa-telegram"></i> KiberSOS</a>
+                    <a href="https://t.me/+aukDHGFAhE41NWQy" class="social-btn"><i class="fab fa-telegram"></i> Доступ</a>
+                    <a href="https://t.me/vlessbots_bot" class="social-btn"><i class="fas fa-robot"></i> @vlessbots_bot</a>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="container" id="main-content">
-
-        <!-- HERO -->
-        <section id="home">
-            <div class="hero reveal active">
-                <div class="status-badge"><div class="dot"></div> Доступ к интернету: Активен</div>
-                <h1>Доступ к <span>Интернету</span></h1>
-                <span class="lore-caption">Свобода без границ</span>
-                <p>Свежие конфигурации для обхода блокировок: VLESS, WireGuard, Hysteria, Trojan, Shadowsocks. Мы собираем и проверяем лучшие настройки, чтобы ваш доступ в интернет оставался бесперебойным.</p>
-                <div class="hero-actions">
-                    <button class="btn-primary" onclick="openModal('rules-modal')"><i class="fa-solid fa-key"></i> Получить доступ</button>
-                    <div class="wizard-cta-wrap">
-                        <button class="btn-secondary btn-wizard" onclick="openWizard()"><i class="fa-solid fa-hat-wizard"></i> Быстрая настройка</button>
-                        <div class="onboard-bubble" id="wizard-hint-bubble"><i class="fa-solid fa-wand-magic-sparkles"></i> Впервые здесь? Пройдите мастер настройки за 3 шага.</div>
-                    </div>
-                </div>
+    <main class="container">
+        <div class="info-grid">
+            <div class="info-card">
+                <div class="info-icon"><i class="fas fa-compass"></i></div>
+                <h3>Как использовать</h3>
+                <ul class="step-list">
+                    <li>Выберите конфигурацию <span class="highlight">(white версии самые стабильные)</span></li>
+                    <li>Скопируйте ссылку на подписку</li>
+                    <li>Вставьте в приложение <span class="highlight">v2rayNG / NekoBox / v2rayN</span></li>
+                    <li>Подпишитесь на Telegram-каналы для новых ключей</li>
+                </ul>
+                <div class="update-badge"><i class="far fa-clock"></i> Обновлено: {{ last_update }}</div>
             </div>
-
-            <!-- БЛОК КОНФИГУРАЦИЙ (из вашего первого кода) -->
-            <div class="section" style="margin-top: 20px;">
-                <h2 class="section-title" style="font-size: 1.8rem; border-left: 4px solid #cc0000; padding-left: 20px; background: linear-gradient(135deg, #fff, #ff4d4d); -webkit-background-clip: text; background-clip: text; color: transparent;">⚡ Актуальные VPN‑конфигурации</h2>
-                <div class="configs-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px; margin: 32px 0;">
-                    {% for cfg in configs %}
-                    <div class="config-card" style="background: rgba(10, 10, 12, 0.92); backdrop-filter: blur(10px); border: 1px solid rgba(204, 0, 0, 0.45); border-radius: 24px; padding: 20px; transition: all 0.3s ease;">
-                        <div class="config-name" style="font-size: 1.2rem; font-weight: 700; color: #ff6666; margin-bottom: 6px;">{{ cfg.name }}</div>
-                        <div class="config-category" style="font-size: 0.75rem; color: #aaa; margin-bottom: 16px;"><i class="fas fa-tag"></i> {{ cfg.category }}</div>
-                        <div class="button-group" style="display: flex; flex-direction: column; gap: 10px; margin-top: 12px;">
-                            <button class="btn-neon" onclick="copyToClipboard(this, '{{ cfg.url }}')" style="padding: 10px; border-radius: 40px; font-weight: 600; text-align: center; cursor: pointer; border: none; font-size: 0.85rem; background: linear-gradient(95deg, #cc0000, #990000); color: #fff;"><i class="fas fa-copy"></i> Копировать ссылку</button>
-                            <a href="{{ cfg.url }}" target="_blank" class="btn-neon" style="padding: 10px; border-radius: 40px; font-weight: 600; text-align: center; cursor: pointer; border: none; font-size: 0.85rem; background: rgba(204, 0, 0, 0.1); border: 1px solid rgba(204, 0, 0, 0.7); color: #ff9999; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 8px;"><i class="fas fa-external-link-alt"></i> Открыть</a>
-                        </div>
-                    </div>
-                    {% endfor %}
-                </div>
-            </div>
-
-            <!-- MTProto ПРОКСИ -->
-            <div class="section">
-                <h2 class="section-title" style="font-size: 1.8rem; border-left: 4px solid #cc0000; padding-left: 20px; background: linear-gradient(135deg, #fff, #ff4d4d); -webkit-background-clip: text; background-clip: text; color: transparent;">📡 Где взять рабочие MTProto прокси для Telegram?</h2>
-                <div id="proxy-list" class="proxy-grid" style="display: flex; flex-wrap: wrap; gap: 12px; margin-top: 16px;">Загружаем прокси...</div>
-                <p style="color: #aaa; margin-top: 12px; font-size: 0.85rem;">Прокси обновляются каждые 5 минут. Если список пуст – проверьте <a href="https://t.me/vlesstrojan" style="color: #ff6666;">Telegram-канал</a>.</p>
-            </div>
-
-            <!-- КЛИЕНТЫ -->
-            <div class="section">
-                <h2 class="section-title" style="font-size: 1.8rem; border-left: 4px solid #cc0000; padding-left: 20px; background: linear-gradient(135deg, #fff, #ff4d4d); -webkit-background-clip: text; background-clip: text; color: transparent;">📱 Какие VPN‑клиенты скачать для Android, Windows и iOS?</h2>
-                <div class="apps-grid" style="display: flex; flex-wrap: wrap; gap: 24px; justify-content: center; margin: 40px 0;">
-                    <div class="app-card" style="background: rgba(10, 10, 12, 0.92); backdrop-filter: blur(10px); border: 1px solid rgba(204, 0, 0, 0.45); border-radius: 24px; padding: 24px; width: 240px; text-align: center; transition: all 0.3s ease;">
-                        <div class="app-icon" style="font-size: 42px; margin-bottom: 12px; color: #ff6666;"><i class="fab fa-android"></i></div>
-                        <h3 style="font-size: 1.2rem; margin-bottom: 16px; color: #fff;">Android</h3>
-                        <div class="app-links" style="display: flex; flex-direction: column; gap: 10px;">
-                            <a href="https://github.com/2dust/v2rayNG/releases/latest" class="app-link" style="padding: 8px; border-radius: 40px; background: rgba(255,255,255,0.05); border: 1px solid rgba(204, 0, 0, 0.5); color: #dddddd; text-decoration: none; transition: 0.2s; font-size: 0.85rem;">v2rayNG</a>
-                            <a href="https://github.com/MatsuriDayo/NekoBoxForAndroid/releases/latest" class="app-link">NekoBox</a>
-                            <a href="https://www.happ.su/main" class="app-link">Happ</a>
-                            <a href="https://karing.app/en/download/" class="app-link">Karing</a>
-                        </div>
-                    </div>
-                    <div class="app-card"><div class="app-icon"><i class="fab fa-windows"></i></div><h3>Windows</h3><div class="app-links"><a href="https://github.com/2dust/v2rayN/releases/latest/download/v2rayN-windows-64.zip" class="app-link">v2rayN</a></div></div>
-                    <div class="app-card"><div class="app-icon"><i class="fab fa-apple"></i></div><h3>iOS / macOS</h3><div class="app-links"><a href="https://apps.apple.com/app/shadowrocket/id932747118" class="app-link">Shadowrocket</a></div></div>
-                </div>
-            </div>
-        </section>
-
-        <!-- О ПРОЕКТЕ -->
-        <section id="about" class="content-section reveal">
-            <div class="glass-card">
-                <h2><i class="fa-solid fa-circle-info"></i> О проекте</h2>
-                <div class="text-block">
-                    <p><b>Доступ к интернету</b> — независимый агрегатор, который непрерывно ищет, проверяет и публикует рабочие конфигурации для обхода сетевых барьеров (DPI и ТСПУ). Мы не держим собственных серверов и не видим ваш трафик — мы лишь отбираем из открытых источников то, что реально работает прямо сейчас.</p>
-                    <p><b>Как это устроено.</b> Наш движок собирает десятки тысяч узлов — <code>VLESS Reality</code>, <code>VMess</code>, <code>Trojan</code>, <code>Shadowsocks</code>, <code>Hysteria2</code> — и прогоняет каждый через три барьера проверки:</p>
-                    <ul>
-                        <li><b>L4 — связь.</b> TCP-рукопожатие с повтором и тайм-аутами. Отсекаются мёртвые адреса и подменные IP.</li>
-                        <li><b>L7 — туннель.</b> Узел поднимается в <code>sing-box</code>, и через него выполняется реальный HTTPS-запрос.</li>
-                        <li><b>Скорость.</b> Замер пропускной способности для сортировки по реальной скорости.</li>
-                    </ul>
-                    <p>В подписки попадают только те, кто прошёл все три барьера. Коллекция пересобирается автоматически примерно каждые <b>4 часа</b>.</p>
-                    <p><b>Почему именно так.</b> Классические VPN сегодня вычисляются по сигнатуре трафика за секунды. Мы делаем ставку на маскировку — прежде всего на <code>VLESS Reality</code>, чей трафик неотличим от обычного захода на крупный сайт.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- ГАЙД -->
-        <section id="guide" class="content-section reveal">
-            <div class="glass-card">
-                <h2><i class="fa-solid fa-terminal"></i> Инструкция по эксплуатации</h2>
-                <div class="text-block">
-                    <p>От нуля до защищённого соединения — четыре шага. Настраивать вручную почти ничего не нужно: достаточно вставить одну ссылку.</p>
-                    <p><b>Шаг 1. Возьмите подписку.</b><br>Нажмите <b>«Получить доступ»</b> вверху и скопируйте ссылку нужного класса: <b>Mix</b> — все живые узлы сразу, <b>White (БС)</b> — максимальная маскировка, <b>Fast (ЧС)</b> — максимальная скорость.</p>
-                    <p><b>Шаг 2. Импортируйте в клиент.</b><br>Подойдёт любой современный клиент — v2rayNG, Hiddify, NekoBox, Streisand и др. Добавьте подписку по ссылке.</p>
-                    <p><b>Шаг 3. Включите автообновление.</b><br>Публичные узлы живут от нескольких часов до пары дней. В настройках подписки задайте обновление каждые <b>4–6 часов</b>.</p>
-                    <p><b>Шаг 4. Выберите узел по тесту задержки.</b><br>Запустите в клиенте <b>URL / Latency Test</b> и сортируйте по результату — берите зелёные значения.</p>
-                    <blockquote><i class="fa-solid fa-circle-info"></i> Обычный TCP/ICMP-пинг показывает лишь отклик «железа», но не то, проходит ли через узел реальный трафик. Доверяйте только HTTP-тесту (запрос <code>generate_204</code>).</blockquote>
-                    <p><i>Подсказка: если задача — обойти лишь точечные блокировки, не обязательно держать зарубежный узел с высоким пингом. Иногда достаточно ближнего быстрого узла класса ЧС.</i></p>
-                </div>
-            </div>
-        </section>
-
-        <!-- БС vs ЧС -->
-        <section id="theory_bs" class="content-section reveal">
-            <div class="glass-card">
-                <h2><i class="fa-solid fa-yin-yang" style="color: var(--touhou-red);"></i> Граница Фантазии: БС vs ЧС</h2>
-                <div class="text-block">
-                    <p>Прежде чем выбирать подписку, определите, какой барьер стоит между вами и сетью. Сначала проверка связи: откройте <i>Госуслуги</i>, <i>Яндекс</i> или <i>ВК</i>. Если не грузятся даже они — канал перекрыт физически, и здесь не поможет никакой протокол.</p>
-                    <p>Если локальные сайты открываются, барьер избирательный. Определите его тип — и выберите маршрут:</p>
-                    <div class="table-responsive">
-                        <table class="cyber-table">
-                            <tr>
-                                <th style="color: var(--touhou-sakura); border-bottom: 2px solid var(--touhou-sakura);">ЧЁРНЫЕ СПИСКИ (ЧС)</th>
-                                <th style="color: var(--touhou-purple); border-bottom: 2px solid var(--touhou-purple);">БЕЛЫЕ СПИСКИ (БС)</th>
-                            </tr>
-                            <tr>
-                                <td><b>Принцип:</b> «Запрещено только перечисленное». Открыто всё, кроме отдельных заблокированных ресурсов.</td>
-                                <td><b>Принцип:</b> «Разрешено только перечисленное». Доступны лишь одобренные сайты, остальное закрыто по умолчанию.</td>
-                            </tr>
-                            <tr>
-                                <td><b>Когда это вы:</b> домашний/проводной или мобильный интернет без тотальных блокировок.</td>
-                                <td><b>Когда это вы:</b> режим жёсткой изоляции (часто на мобильных сетях в отдельных регионах).</td>
-                            </tr>
-                            <tr>
-                                <td><b>Задача:</b> вернуть скорость для тяжёлого трафика — YouTube/4K, стриминг, загрузки.</td>
-                                <td><b>Задача:</b> незаметно пробить барьер — открыть мессенджер, почту или нужный сайт.</td>
-                            </tr>
-                            <tr>
-                                <td><b>Что брать:</b> <code>Hysteria2</code>, <code>Shadowsocks</code>, <code>VMess</code>, <code>VLESS</code> — приоритет на чистую мощность.</td>
-                                <td><b>Что брать:</b> только <code>VLESS Reality</code> — трафик маскируется под обычный заход на крупный сайт.</td>
-                            </tr>
-                        </table>
-                    </div>
-                    <blockquote><i class="fa-solid fa-wand-magic-sparkles"></i> <b>Совет:</b> не жгите Reality-узлы (БС) на повседневное видео, если жёстких ограничений у вас нет. Это самый ценный и дефицитный ресурс — берегите его для случаев настоящей изоляции, а для скорости берите ЧС или Mix.</blockquote>
-                </div>
-            </div>
-        </section>
-
-        <!-- ПРИВАТНОСТЬ -->
-        <section id="theory_isp" class="content-section reveal">
-            <div class="glass-card">
-                <h2><i class="fa-solid fa-eye-slash" style="color: var(--touhou-purple);"></i> Иллюзия наблюдения: что видит провайдер?</h2>
-                <div class="text-block">
-                    <p>«Провайдер видит всё» — устойчивый миф. Благодаря повсеместному шифрованию <b>HTTPS (TLS)</b> содержимое вашего трафика для него закрыто. Видна лишь «обёртка» — метаданные соединения, а не то, что внутри.</p>
-                    <p><b>Что провайдер действительно видит:</b></p>
-                    <ul>
-                        <li><b>IP-адрес назначения:</b> с каким сервером вы соединяетесь.</li>
-                        <li><b>Имя домена через SNI:</b> на старте TLS-рукопожатия адрес сайта (например, <code>google.com</code>) уходит открытым текстом. Именно по SNI работает блокировка по спискам.</li>
-                        <li><b>Объём и тайминги:</b> «вес» и ритм передачи данных — но не их содержимое.</li>
-                    </ul>
-                    <p><b>Чего он не видит:</b> конкретные страницы внутри сайта, поисковые запросы, сообщения в чатах, просматриваемое видео. Для него это зашифрованный чёрный ящик.</p>
-                    <p><b>Где здесь Reality.</b> Слабое место обычного HTTPS — открытый SNI. <code>VLESS Reality</code> закрывает именно его: для наблюдателя соединение выглядит как заход на настоящий крупный сайт, чьё имя и сертификат подставляются на лету. Виден «обычный визит на популярный домен», а не туннель — поэтому блокировать его по SNI бессмысленно.</p>
-                    <p style="margin-top: 25px;"><b><i class="fa-solid fa-scroll"></i> Гримуар DNS-over-HTTPS (DoH)</b></p>
-                    <p>Обычный DNS — это как открытая записка: "Я хочу пойти на сайт X". Провайдер перехватывает её и блокирует доступ. <b>DoH</b> прячет этот запрос внутрь стандартного HTTPS, делая ваш выбор домена невидимым для локального цензора.</p>
-                    <p><b>Проверенные серверы DoH для настройки в браузере или системе:</b></p>
-                    <ul>
-                        <li><code>https://dns.quad9.net/dns-query</code> — <b>Quad9:</b> Максимальная приватность (Швейцария) + автоматическая фильтрация вредоносных узлов.</li>
-                        <li><code>https://dns.adguard-dns.com/dns-query</code> — <b>AdGuard:</b> Защитник, который на лету вырезает рекламные трекеры и шпионские скрипты.</li>
-                        <li><code>https://dns.cloudflare.com/dns-query</code> — <b>Cloudflare:</b> Самый быстрый и стабильный вариант.</li>
-                    </ul>
-                    <p style="margin-top: 25px;"><b><i class="fa-solid fa-user-ninja"></i> Приватные браузеры: уход от телеметрии</b></p>
-                    <p>Даже если ваш канал зашифрован, сам браузер может передавать телеметрию создателям. Для максимальной безопасности используйте инструменты с открытым исходным кодом (Open-Source):</p>
-                    <ol>
-                        <li><b>Librewolf</b> — Мощно кастомизированный Firefox. Из него вырезаны все модули слежки, а блокировщик <i>uBlock Origin</i> встроен прямо в ядро.</li>
-                        <li><b>Ungoogled Chromium</b> — Тот же привычный Chrome, но из которого хирургическим путем удалили все связи с Google и модули сбора данных.</li>
-                        <li><b>Cromite</b> — Обязательный артефакт для Android. Позволяет не только блокировать рекламу, но и скрывать "цифровой отпечаток" вашего устройства.</li>
-                    </ol>
-                    <blockquote><i class="fa-solid fa-circle-exclamation"></i> <b>Важно:</b> Никогда не используйте браузеры от крупных корпораций с сомнительной репутацией. Они являются прямым инструментом сбора данных и анализа вашего трафика.</blockquote>
-                </div>
-            </div>
-        </section>
-
-        <!-- НОВОСТИ (статические, но можно заменить на динамические) -->
-        <section id="news" class="content-section reveal">
-            <div class="glass-card">
-                <h2><i class="fa-solid fa-newspaper" style="color: var(--touhou-sakura);"></i> Новости и контекст: блокировки в России</h2>
-                <div class="text-block">
-                    <p>Актуальные события в области сетевых ограничений.</p>
-                </div>
-                <div class="news-grid" style="display: flex; flex-direction: column; gap: 24px; margin: 32px 0;">
-                    <!-- Пример новости (замените на свой цикл) -->
-                    <div class="news-card" style="background: rgba(10, 10, 12, 0.92); backdrop-filter: blur(10px); border: 1px solid rgba(204, 0, 0, 0.45); border-radius: 24px; padding: 24px; transition: all 0.3s ease;">
-                        <div style="flex:1;">
-                            <div class="news-date" style="font-size: 0.8rem; color: #ff8888; background: rgba(204, 0, 0, 0.2); padding: 4px 12px; border-radius: 20px; display: inline-block; margin-bottom: 12px;"><i class="far fa-calendar-alt"></i> 18 июня 2026</div>
-                            <div class="news-title" style="font-size: 1.3rem; font-weight: 700; color: #fff; margin-bottom: 12px;">Роскомнадзор расширил список блокируемых ресурсов</div>
-                            <div class="news-summary" style="color: #ccc; line-height: 1.5; margin-bottom: 16px;">В реестр добавлены новые VPN-сервисы и мессенджеры. Ожидается усиление DPI-фильтрации.</div>
-                            <div class="news-source" style="font-size: 0.8rem; color: #ff9999; display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
-                                <span><i class="fas fa-source"></i> Источник: РКН</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Если хотите динамические новости из Flask, раскомментируйте этот блок и передавайте переменную news -->
-                    <!--
-                    {% for item in news %}
-                    <div class="news-card">
-                        <div style="flex:1;">
-                            <div class="news-date"><i class="far fa-calendar-alt"></i> {{ item.date }}</div>
-                            <div class="news-title">{{ item.title }}</div>
-                            <div class="news-summary">{{ item.summary }}</div>
-                            <div class="news-source"><span><i class="fas fa-source"></i> Источник: {{ item.source }}</span></div>
-                        </div>
-                    </div>
-                    {% endfor %}
-                    -->
-                </div>
-                <div class="official-links" style="margin-top: 20px; padding: 20px; background: rgba(0,0,0,0.4); border-radius: 20px; text-align: center;">
-                    <i class="fas fa-link"></i> Официальные источники:
-                    <a href="https://rkn.gov.ru/" target="_blank"><i class="fas fa-gavel"></i> Роскомнадзор</a>
-                    <a href="https://digital.gov.ru/ru/" target="_blank"><i class="fas fa-digital-tiling"></i> Минцифры РФ</a>
-                </div>
-            </div>
-        </section>
-
-        <!-- ПРОТОКОЛЫ -->
-        <section id="protocols" class="content-section reveal">
-            <div class="glass-card">
-                <h2><i class="fa-solid fa-scale-balanced" style="color: var(--accent);"></i> Сравнение протоколов</h2>
-                <div class="text-block">
-                    <p>Каждый протокол имеет свои сильные и слабые стороны. Выберите подходящий под вашу сеть и задачи.</p>
-                </div>
-                <div class="table-responsive">
-                    <table class="cyber-table protocol-table">
-                        <thead>
-                            <tr>
-                                <th>Протокол</th>
-                                <th>Скорость</th>
-                                <th>Обфускация</th>
-                                <th>Стабильность</th>
-                                <th>Рекомендация</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><span class="proto-label proto-vless">VLESS Reality</span><span class="proto-sub">XTLS-Vision + REALITY</span></td>
-                                <td><span class="rating rating-high">★★★★☆</span></td>
-                                <td><span class="rating rating-max">★★★★★</span><br><span class="rating-detail">Полная маскировка под реальный HTTPS-сайт</span></td>
-                                <td><span class="rating rating-high">★★★★☆</span><br><span class="rating-detail">Высокая, особенно на выделенных серверах</span></td>
-                                <td class="rec-cell"><span class="rec-badge rec-best">Лучший для БС</span><br><span class="rec-detail">Идеален для жёстких блокировок. Единственный протокол для мобильных сетей с тотальной фильтрацией.</span></td>
-                            </tr>
-                            <tr>
-                                <td><span class="proto-label proto-vmess">VMess</span><span class="proto-sub">WebSocket / gRPC / TCP</span></td>
-                                <td><span class="rating rating-mid">★★★☆☆</span></td>
-                                <td><span class="rating rating-mid">★★★☆☆</span><br><span class="rating-detail">Базовая обфускация через WebSocket</span></td>
-                                <td><span class="rating rating-high">★★★★☆</span><br><span class="rating-detail">Широкая поддержка клиентами</span></td>
-                                <td class="rec-cell"><span class="rec-badge rec-good">Универсальный</span><br><span class="rec-detail">Хорош для повседневного использования. Совместим практически со всеми клиентами.</span></td>
-                            </tr>
-                            <tr>
-                                <td><span class="proto-label proto-trojan">Trojan</span><span class="proto-sub">TLS + WebSocket</span></td>
-                                <td><span class="rating rating-high">★★★★☆</span></td>
-                                <td><span class="rating rating-high">★★★★☆</span><br><span class="rating-detail">Миникрия под HTTPS, TLS-сертификат</span></td>
-                                <td><span class="rating rating-high">★★★★☆</span><br><span class="rating-detail">Проверенный, зрелый протокол</span></td>
-                                <td class="rec-cell"><span class="rec-badge rec-good">Надёжный</span><br><span class="rec-detail">Стабильный выбор. Работает на большинстве сетей, простая настройка.</span></td>
-                            </tr>
-                            <tr>
-                                <td><span class="proto-label proto-ss">Shadowsocks</span><span class="proto-sub">AEAD-шифры (2022)</span></td>
-                                <td><span class="rating rating-max">★★★★★</span></td>
-                                <td><span class="rating rating-low">★★☆☆☆</span><br><span class="rating-detail">Без маскировки, легко детектируется</span></td>
-                                <td><span class="rating rating-mid">★★★☆☆</span><br><span class="rating-detail">Зависит от провайдера</span></td>
-                                <td class="rec-cell"><span class="rec-badge rec-niche">Нишевый</span><br><span class="rec-detail">Максимальная скорость для стриминга. Только для сетей без глубокой инспекции трафика.</span></td>
-                            </tr>
-                            <tr>
-                                <td><span class="proto-label proto-hy2">Hysteria2</span><span class="proto-sub">QUIC (UDP) + Brutal</span></td>
-                                <td><span class="rating rating-max">★★★★★</span></td>
-                                <td><span class="rating rating-mid">★★★☆☆</span><br><span class="rating-detail">QUIC-трафик маскируется, но UDP заметен</span></td>
-                                <td><span class="rating rating-mid">★★★☆☆</span><br><span class="rating-detail">Чувствителен к потере пакетов</span></td>
-                                <td class="rec-cell"><span class="rec-badge rec-speed">Скорость</span><br><span class="rec-detail">Лучший для видео 4K и больших загрузок на стабильных сетях. Не для жёсткого DPI.</span></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </section>
-
-        <!-- FAQ -->
-        <section id="faq" class="content-section reveal">
-            <div class="glass-card">
-                <h2><i class="fa-solid fa-circle-question" style="color: var(--touhou-purple);"></i> Часто задаваемые вопросы</h2>
-                <div class="text-block">
-                    <div class="faq-list">
-                        <details class="faq-item">
-                            <summary class="faq-question"><span class="faq-q-mark"><i class="fa-solid fa-q"></i></span> Что такое Доступ к интернету?<i class="fa-solid fa-chevron-down faq-arrow"></i></summary>
-                            <div class="faq-answer"><p>Это независимый движок, который собирает публичные конфигурации из открытых источников, прогоняет каждую через многоступенчатую проверку и публикует только выжившие. Мы не VPN-провайдер и не держим собственных серверов — мы фильтруем чужие узлы и отдаём вам список того, что реально работает прямо сейчас.</p></div>
-                        </details>
-                        <details class="faq-item">
-                            <summary class="faq-question"><span class="faq-q-mark"><i class="fa-solid fa-q"></i></span> Это бесплатно? В чём подвох?<i class="fa-solid fa-chevron-down faq-arrow"></i></summary>
-                            <div class="faq-answer"><p>Да, полностью бесплатно, и «подвоха» в виде платы нет. Подписки — это публичные конфигурации, которые мы лишь собираем и проверяем; нет аккаунтов, регистрации и оплаты. Честный нюанс другой: это <b>чужие публичные серверы</b>. Они нестабильны, могут исчезать, а их владельцы вам неизвестны — поэтому относитесь к ним как к удобному, но не доверенному транспорту.</p></div>
-                        </details>
-                        <details class="faq-item">
-                            <summary class="faq-question"><span class="faq-q-mark"><i class="fa-solid fa-q"></i></span> Вы храните логи или видите мой трафик?<i class="fa-solid fa-chevron-down faq-arrow"></i></summary>
-                            <div class="faq-answer"><p><b>Нет.</b> Сайт — это статическая страница и текстовые файлы подписок; здесь нет аккаунтов, серверной аналитики вашего трафика и логов подключений. Ваш трафик идёт <b>напрямую</b> от клиента к выбранному узлу — не через нас. Технически мы физически не можем его видеть.</p></div>
-                        </details>
-                        <details class="faq-item">
-                            <summary class="faq-question"><span class="faq-q-mark"><i class="fa-solid fa-q"></i></span> Как часто обновляются конфигурации?<i class="fa-solid fa-chevron-down faq-arrow"></i></summary>
-                            <div class="faq-answer"><p>Полный цикл сбора и верификации запускается каждые 4–6 часов. Публичные серверы нестабильны по природе — среднее время жизни узла от нескольких часов до пары дней. Мы рекомендуем настроить <b>автообновление подписки</b> в вашем клиенте с интервалом 4–6 часов.</p></div>
-                        </details>
-                        <details class="faq-item">
-                            <summary class="faq-question"><span class="faq-q-mark"><i class="fa-solid fa-q"></i></span> Как выбрать подходящий клиент для моего устройства?<i class="fa-solid fa-chevron-down faq-arrow"></i></summary>
-                            <div class="faq-answer"><p>Выбор клиента зависит от платформы и протокола: Windows — NekoRay, FlClash; Android — v2rayNG, SagerNet, FoXray; iOS — Shadowrocket, Streisand, Stash; Роутер — Sing-box CLI на OpenWRT. Перейдите в раздел <b>«Гайд»</b> на главной странице — там подобраны приложения под каждую платформу.</p></div>
-                        </details>
-                        <details class="faq-item">
-                            <summary class="faq-question"><span class="faq-q-mark"><i class="fa-solid fa-q"></i></span> Нужно ли включать «Allow Insecure» в настройках клиента?<i class="fa-solid fa-chevron-down faq-arrow"></i></summary>
-                            <div class="faq-answer"><p><b>Да, рекомендуется.</b> Многие рабочие серверы используют самоподписанные SSL-сертификаты. Без опции «Разрешить небезопасные» (Allow Insecure / Skip Certificate Verify) клиент будет обрывать соединение с такими серверами, и вы потеряете значительную часть доступных узлов.</p></div>
-                        </details>
-                        <details class="faq-item">
-                            <summary class="faq-question"><span class="faq-q-mark"><i class="fa-solid fa-q"></i></span> Безопасно ли использовать публичные конфигурации?<i class="fa-solid fa-chevron-down faq-arrow"></i></summary>
-                            <div class="faq-answer"><p>Публичные конфигурации — это компромисс между доступностью и риском. Основные правила безопасности:</p><ul><li><b>Не передавайте конфиденциальные данные</b> (пароли, банковские данные) через незнакомые серверы.</li><li>Используйте <b>HTTPS-сайты</b> — они обеспечивают end-to-end шифрование даже через чужой сервер.</li><li>Включайте <b>DNS-over-HTTPS</b> в браузере.</li><li>Для максимальной безопасности рассмотрите <b>аренду собственного VPS</b> с настроенным VLESS Reality — это стоит от 300₽/мес.</li></ul></div>
-                        </details>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ГЛОССАРИЙ -->
-        <section id="glossary" class="content-section reveal">
-            <div class="glass-card">
-                <h2><i class="fa-solid fa-book"></i> Глоссарий</h2>
-                <span class="lore-caption">用語集 ~ Lexicon of the Barrier</span>
-                <div class="text-block">
-                    <p>Короткий словарь терминов, которые встречаются в подписках, клиентах и на этом сайте.</p>
-                    <ul>
-                        <li><b>DPI</b> (Deep Packet Inspection) — глубокая инспекция трафика: оборудование, распознающее и режущее «подозрительные» протоколы по их сигнатурам.</li>
-                        <li><b>ТСПУ</b> — технические средства противодействия угрозам: государственные DPI-узлы, установленные у операторов связи в РФ.</li>
-                        <li><b>SNI</b> — имя домена, уходящее открытым текстом в начале TLS-рукопожатия. Именно по нему работает блокировка сайтов «по списку».</li>
-                        <li><b>Обфускация</b> — маскировка трафика под легитимный (обычный HTTPS), чтобы DPI не отличил туннель от повседневного соединения.</li>
-                        <li><b>VLESS Reality</b> — протокол с маскировкой под реальный крупный сайт: подменяет SNI и сертификат «на лету», не требует собственного домена. Текущий золотой стандарт обхода DPI.</li>
-                        <li><b>XTLS-Vision</b> — оптимизация TLS внутри VLESS: меньше накладных расходов, выше скорость.</li>
-                        <li><b>Hysteria2 / QUIC</b> — протокол поверх UDP/QUIC с агрессивным контролем перегрузки: очень быстрый и устойчивый к потерям, но UDP легче заблокировать.</li>
-                        <li><b>Trojan</b> — туннель, неотличимый от обычного HTTPS; простой и «тихий».</li>
-                        <li><b>Shadowsocks / VMess</b> — классические протоколы с шифрованием; гибкие, но без маскировки уровня Reality.</li>
-                        <li><b>DoH</b> (DNS-over-HTTPS) — шифрование DNS-запросов внутри HTTPS, чтобы провайдер не видел и не подменял, какие домены вы открываете.</li>
-                        <li><b>Узел (node)</b> — отдельный прокси-сервер из подписки. <b>Подписка</b> — ссылка со списком узлов, который клиент обновляет автоматически.</li>
-                        <li><b>БС / ЧС / Mix</b> — классы подписок: БС (White, Reality) — для жёсткой фильтрации, ЧС (Fast) — для скорости, Mix — всё вместе.</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <!-- КОНТАКТЫ -->
-        <section id="contacts" class="content-section reveal">
-            <div class="glass-card">
-                <h2><i class="fa-brands fa-telegram" style="color: var(--cyber-blue);"></i> Сообщество и Контакты</h2>
-                <div class="text-block text-center py-4">
-                    <p>Присоединяйтесь к нашему Telegram-форуму для обсуждения работы, получения помощи по настройке клиентов и общения с другими участниками.</p>
-                    <a href="https://t.me/vlesstrojan" target="_blank" rel="noopener noreferrer" class="btn-primary" style="margin-top: 15px;">
-                        <i class="fa-solid fa-paper-plane"></i> Перейти в Telegram
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <!-- ЮРИДИЧЕСКОЕ УВЕДОМЛЕНИЕ -->
-        <div class="legal-wrapper reveal">
-            <div class="disclaimer-block">
-                <h4>Юридическое уведомление и отказ от ответственности</h4>
-                <p>1. <b>Статус ресурса:</b> Данный сайт представляет собой автоматизированный программный парсер (агрегатор метаданных). Владелец ресурса не является владельцем, оператором или провайдером VPN-серверов, конфигурации которых здесь публикуются. Вся информация собирается скриптом в автоматическом режиме из открытых, общедоступных источников.</p>
-                <p>2. <b>Цель проекта:</b> Весь материал, включая текстовые инструкции и технические данные, предоставляется исключительно в ознакомительных, исследовательских и образовательных целях. Проект не является коммерческим сервисом и не занимается рекламой VPN-провайдеров.</p>
-                <p>3. <b>Отказ от ответственности:</b> Автор проекта не несет никакой юридической или финансовой ответственности за последствия использования предоставленной информации. Использование представленных конфигураций осуществляется пользователем добровольно, на свой страх и риск.</p>
-                <p>4. <b>Допустимое использование:</b> Мы настоятельно рекомендуем применять данные технологии исключительно для легитимных целей: защиты персональных данных при подключении к открытым сетям Wi-Fi, обеспечения информационной безопасности устройств и корпоративного удаленного доступа.</p>
-                <br>
-                <p><b>ВНИМАНИЕ:</b> Находясь на данном сайте и используя его материалы, вы автоматически подтверждаете свое согласие с данными условиями. Если вы не согласны с изложенными правилами, вам следует немедленно покинуть данный ресурс.</p>
+            <div class="info-card">
+                <div class="info-icon"><i class="fas fa-shield-alt"></i></div>
+                <h3>Почему это работает</h3>
+                <p>Современные протоколы (VLESS, WireGuard, Hysteria) маскируют трафик и обходят блокировки. Наши конфигурации обновляются автоматически.</p>
             </div>
         </div>
 
-        <div class="footer reveal">
-            Created by <a href="https://t.me/vlesstrojan" target="_blank" rel="noopener noreferrer">Доступ к интернету</a> • 2026<br>
-            <span style="font-size: 0.7rem; color: var(--border-light); margin-top: 5px; display: inline-block;">Свобода без границ</span>
+        <div class="corner-card" style="margin-bottom: 40px;">
+            <div class="info-icon"><i class="fas fa-globe"></i></div>
+            <h3 style="color:#fff; font-size:1.4rem; margin-bottom:12px;">Бесплатные VPN-конфигурации для России</h3>
+            <p style="font-size:0.9rem;">Сайт собирает рабочие VPN-настройки: VLESS, V2Ray, Hysteria, Trojan, VMess, Shadowsocks. Быстрый доступ к заблокированным сайтам и мессенджерам.</p>
         </div>
-    </div>
 
-    <!-- МОДАЛЬНОЕ ОКНО "УСЛОВИЯ" -->
-    <div class="modal-overlay" id="rules-modal">
-        <div class="modal">
-            <div class="modal-header">
-                <div class="modal-title"><i class="fa-solid fa-shield-halved" style="color: var(--touhou-sakura);"></i> Условия использования</div>
-                <button class="btn-close" onclick="closeModal('rules-modal')"><i class="fa-solid fa-xmark"></i></button>
-            </div>
-            <div class="modal-body">
-                <p style="color: var(--text-dim); font-size: 0.9rem; margin-bottom: 20px;">Ознакомьтесь с правилами сети. Нарушение приводит к бану серверов на магистралях (ТСПУ).</p>
-                <div class="rule-list">
-                    <div class="rule-item"><i class="fa-solid fa-ban rule-icon" style="color: var(--touhou-red);"></i><div><h4>Строго без торрентов (P2P)</h4><p>Скачивание торрентов через прокси моментально палит сервер и приводит к его бану у хостера. Уважайте труд сообщества.</p></div></div>
-                    <div class="rule-item"><i class="fa-solid fa-building-columns rule-icon" style="color: var(--cyber-blue);"></i><div><h4>Банки и Гос. сервисы</h4><p>Отключайте VPN при входе в банки. Алгоритмы безопасности могут временно заблокировать ваш аккаунт за вход с иностранного IP.</p></div></div>
-                    <div class="rule-item"><i class="fa-solid fa-rotate rule-icon" style="color: var(--cyber-green);"></i><div><h4>Автообновление</h4><p>Конфиги обновляются регулярно. Обязательно настройте в вашем клиенте автоматическое обновление подписки раз в 4-6 часов.</p></div></div>
+        <div class="section">
+            <h2 class="section-title">📡 MTProto прокси для Telegram</h2>
+            <div id="proxy-list" class="proxy-grid">Загружаем прокси...</div>
+            <p style="color:#aaa; margin-top:12px; font-size:0.85rem;">
+                Прокси обновляются каждые 5 минут. Если список пуст – проверьте 
+                <a href="https://t.me/vlesstrojan" style="color:#ff6666;">Telegram-канал</a>.
+            </p>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">⚡ Конфигурации VPN</h2>
+            <div class="configs-grid">
+                {% for cfg in configs %}
+                <div class="config-card">
+                    <div class="config-name">{{ cfg.name }}</div>
+                    <div class="config-category"><i class="fas fa-tag"></i> {{ cfg.category }}</div>
+                    <div class="button-group">
+                        <button class="btn-neon {% if cfg.is_black %}btn-black{% endif %}" data-url="{{ cfg.url }}"><i class="fas fa-copy"></i> Копировать ссылку</button>
+                        <a href="{{ cfg.url }}" target="_blank" class="btn-neon btn-link"><i class="fas fa-external-link-alt"></i> Открыть</a>
+                    </div>
                 </div>
-                <button class="btn-primary" style="width: 100%; max-width: 100%;" onclick="acceptRules()">
-                    <i class="fa-solid fa-check"></i> Активировать доступ
-                </button>
+                {% else %}
+                <div>Конфигурации временно недоступны</div>
+                {% endfor %}
             </div>
         </div>
-    </div>
 
-    <!-- МОДАЛЬНОЕ ОКНО "ВЫБОР МАРШРУТА" (С РЕАЛЬНЫМИ URL) -->
-    <div class="modal-overlay" id="configs-modal">
-        <div class="modal modal-wide">
-            <div class="modal-header">
-                <div class="modal-title"><i class="fa-solid fa-network-wired" style="color: var(--accent);"></i> Выбор маршрута</div>
-                <button class="btn-close" onclick="closeModal('configs-modal')"><i class="fa-solid fa-xmark"></i></button>
+        <div class="section">
+            <h2 class="section-title">📱 Скачать VPN-клиенты</h2>
+            <div class="apps-grid">
+                <div class="app-card"><div class="app-icon"><i class="fab fa-android"></i></div><h3>Android</h3><div class="app-links"><a href="https://github.com/2dust/v2rayNG/releases/latest" class="app-link">v2rayNG</a><a href="https://github.com/MatsuriDayo/NekoBoxForAndroid/releases/latest" class="app-link">NekoBox</a><a href="https://www.happ.su/main" class="app-link">Happ</a><a href="https://karing.app/en/download/" class="app-link">Karing</a></div></div>
+                <div class="app-card"><div class="app-icon"><i class="fab fa-windows"></i></div><h3>Windows</h3><div class="app-links"><a href="https://github.com/2dust/v2rayN/releases/latest/download/v2rayN-windows-64.zip" class="app-link">v2rayN</a></div></div>
+                <div class="app-card"><div class="app-icon"><i class="fab fa-apple"></i></div><h3>iOS / macOS</h3><div class="app-links"><a href="https://apps.apple.com/app/shadowrocket/id932747118" class="app-link">Shadowrocket</a></div></div>
             </div>
-            <div class="modal-body">
-                <div class="config-tabs">
-                    <button class="config-tab-btn active" id="config-tab-class" onclick="switchConfigTab('class')"><i class="fa-solid fa-layer-group"></i> По классу</button>
-                    <button class="config-tab-btn" id="config-tab-protocol" onclick="switchConfigTab('protocol')"><i class="fa-solid fa-code-branch"></i> По протоколу</button>
-                </div>
-                <div id="qr-display" class="qr-display">
-                    <button class="qr-back-btn" onclick="hideQR()"><i class="fa-solid fa-arrow-left"></i> Назад к подпискам</button>
-                    <div class="qr-label" id="qr-label">Sub</div>
-                    <div id="qr-container" class="qr-container"></div>
-                </div>
+        </div>
 
-                <!-- По классу -->
-                <div class="config-tab-content" id="config-tab-class-content">
-                    <p style="color: var(--text-dim); font-size: 0.85rem; margin-bottom: 20px;">Выберите класс маршрута:</p>
-                    <div class="sub-grid">
-                        <div class="sub-card reality">
-                            <div class="sub-header">
-                                <div class="sub-title"><i class="fa-solid fa-mask" style="color: #c4b5fd;"></i> White (БС)</div>
-                                <div class="sub-badge badge-reality">Reality</div>
-                            </div>
-                            <div class="sub-desc">Для жёстких блокировок. VLESS Reality, максимальная маскировка под HTTPS.</div>
-                            <div class="sub-tech">PROTO: VLESS REALITY</div>
-                            <div class="sub-actions">
-                                <button class="sub-action-btn copy-btn" onclick="event.stopPropagation(); copySub('https://kort0881.github.io/internet-access-site/sub1', 'White (БС)')">
-                                    <i class="fa-solid fa-copy"></i> Копировать URL
-                                </button>
-                                <button class="sub-action-btn qr-btn" onclick="event.stopPropagation(); showQR('https://kort0881.github.io/internet-access-site/sub1', 'White (БС)')">
-                                    <i class="fa-solid fa-qrcode"></i> QR
-                                </button>
-                            </div>
-                        </div>
-                        <div class="sub-card fast">
-                            <div class="sub-header">
-                                <div class="sub-title"><i class="fa-solid fa-jet-fighter" style="color: #6ee7b7;"></i> Fast (ЧС)</div>
-                                <div class="sub-badge badge-fast">Hysteria2</div>
-                            </div>
-                            <div class="sub-desc">Для стандартного интернета. Максимальная скорость для стриминга и загрузок.</div>
-                            <div class="sub-tech">PROTO: HYSTERIA2, SS, VMESS</div>
-                            <div class="sub-actions">
-                                <button class="sub-action-btn copy-btn" onclick="event.stopPropagation(); copySub('https://kort0881.github.io/internet-access-site/sub2', 'Fast (ЧС)')">
-                                    <i class="fa-solid fa-copy"></i> Копировать URL
-                                </button>
-                                <button class="sub-action-btn qr-btn" onclick="event.stopPropagation(); showQR('https://kort0881.github.io/internet-access-site/sub2', 'Fast (ЧС)')">
-                                    <i class="fa-solid fa-qrcode"></i> QR
-                                </button>
-                            </div>
-                        </div>
-                        <div class="sub-card mix">
-                            <div class="sub-header">
-                                <div class="sub-title"><i class="fa-solid fa-infinity" style="color: #fda4af;"></i> Mix</div>
-                                <div class="sub-badge badge-mix">Все протоколы</div>
-                            </div>
-                            <div class="sub-desc">Полный список всех живых узлов. Идеально для клиентов с авто-тестом.</div>
-                            <div class="sub-tech">PROTO: ALL</div>
-                            <div class="sub-actions">
-                                <button class="sub-action-btn copy-btn" onclick="event.stopPropagation(); copySub('https://kort0881.github.io/internet-access-site/sub', 'Mix')">
-                                    <i class="fa-solid fa-copy"></i> Копировать URL
-                                </button>
-                                <button class="sub-action-btn qr-btn" onclick="event.stopPropagation(); showQR('https://kort0881.github.io/internet-access-site/sub', 'Mix')">
-                                    <i class="fa-solid fa-qrcode"></i> QR
-                                </button>
-                            </div>
+        <div class="section">
+            <h2 class="section-title">📰 Новости и контекст: блокировки в России</h2>
+            <div class="news-grid">
+                {% for item in news %}
+                <div class="news-card">
+                    <div style="flex:1;">
+                        <div class="news-date"><i class="far fa-calendar-alt"></i> {{ item.date }}</div>
+                        <div class="news-title">{{ item.title }}</div>
+                        <div class="news-summary">{{ item.summary }}</div>
+                        <div class="news-source">
+                            <span><i class="fas fa-source"></i> Источник: {{ item.source }}</span>
                         </div>
                     </div>
                 </div>
-
-                <!-- По протоколу -->
-                <div class="config-tab-content" id="config-tab-protocol-content" style="display:none;">
-                    <p style="color: var(--text-dim); font-size: 0.85rem; margin-bottom: 20px;">Отфильтровано по протоколу:</p>
-                    <div class="sub-grid">
-                        <div class="sub-card vless">
-                            <div class="sub-header">
-                                <div class="sub-title"><i class="fa-solid fa-ghost" style="color: #c4b5fd;"></i> VLESS</div>
-                                <div class="sub-badge badge-vless">VLESS</div>
-                            </div>
-                            <div class="sub-desc">Только VLESS Reality узлы.</div>
-                            <div class="sub-tech">PROTO: VLESS</div>
-                            <div class="sub-actions">
-                                <button class="sub-action-btn copy-btn" onclick="event.stopPropagation(); copySub('https://kort0881.github.io/internet-access-site/sub/vless', 'VLESS')">
-                                    <i class="fa-solid fa-copy"></i> Копировать URL
-                                </button>
-                                <button class="sub-action-btn qr-btn" onclick="event.stopPropagation(); showQR('https://kort0881.github.io/internet-access-site/sub/vless', 'VLESS')">
-                                    <i class="fa-solid fa-qrcode"></i> QR
-                                </button>
-                            </div>
-                        </div>
-                        <div class="sub-card vmess">
-                            <div class="sub-header">
-                                <div class="sub-title"><i class="fa-solid fa-shield-halved" style="color: #7dd3fc;"></i> VMess</div>
-                                <div class="sub-badge badge-vmess">VMess</div>
-                            </div>
-                            <div class="sub-desc">Только VMess узлы.</div>
-                            <div class="sub-tech">PROTO: VMESS</div>
-                            <div class="sub-actions">
-                                <button class="sub-action-btn copy-btn" onclick="event.stopPropagation(); copySub('https://kort0881.github.io/internet-access-site/sub/vmess', 'VMess')">
-                                    <i class="fa-solid fa-copy"></i> Копировать URL
-                                </button>
-                                <button class="sub-action-btn qr-btn" onclick="event.stopPropagation(); showQR('https://kort0881.github.io/internet-access-site/sub/vmess', 'VMess')">
-                                    <i class="fa-solid fa-qrcode"></i> QR
-                                </button>
-                            </div>
-                        </div>
-                        <div class="sub-card trojan">
-                            <div class="sub-header">
-                                <div class="sub-title"><i class="fa-solid fa-horse-head" style="color: #fde047;"></i> Trojan</div>
-                                <div class="sub-badge badge-trojan">Trojan</div>
-                            </div>
-                            <div class="sub-desc">Только Trojan узлы.</div>
-                            <div class="sub-tech">PROTO: TROJAN</div>
-                            <div class="sub-actions">
-                                <button class="sub-action-btn copy-btn" onclick="event.stopPropagation(); copySub('https://kort0881.github.io/internet-access-site/sub/trojan', 'Trojan')">
-                                    <i class="fa-solid fa-copy"></i> Копировать URL
-                                </button>
-                                <button class="sub-action-btn qr-btn" onclick="event.stopPropagation(); showQR('https://kort0881.github.io/internet-access-site/sub/trojan', 'Trojan')">
-                                    <i class="fa-solid fa-qrcode"></i> QR
-                                </button>
-                            </div>
-                        </div>
-                        <div class="sub-card ss">
-                            <div class="sub-header">
-                                <div class="sub-title"><i class="fa-solid fa-feather" style="color: #6ee7b7;"></i> Shadowsocks</div>
-                                <div class="sub-badge badge-ss">SS</div>
-                            </div>
-                            <div class="sub-desc">Только Shadowsocks узлы.</div>
-                            <div class="sub-tech">PROTO: SHADOWSOCKS</div>
-                            <div class="sub-actions">
-                                <button class="sub-action-btn copy-btn" onclick="event.stopPropagation(); copySub('https://kort0881.github.io/internet-access-site/sub/ss', 'Shadowsocks')">
-                                    <i class="fa-solid fa-copy"></i> Копировать URL
-                                </button>
-                                <button class="sub-action-btn qr-btn" onclick="event.stopPropagation(); showQR('https://kort0881.github.io/internet-access-site/sub/ss', 'Shadowsocks')">
-                                    <i class="fa-solid fa-qrcode"></i> QR
-                                </button>
-                            </div>
-                        </div>
-                        <div class="sub-card hy2">
-                            <div class="sub-header">
-                                <div class="sub-title"><i class="fa-solid fa-bolt" style="color: #f9a8d4;"></i> Hysteria2</div>
-                                <div class="sub-badge badge-hy2">HY2</div>
-                            </div>
-                            <div class="sub-desc">Только Hysteria2 узлы.</div>
-                            <div class="sub-tech">PROTO: HYSTERIA2</div>
-                            <div class="sub-actions">
-                                <button class="sub-action-btn copy-btn" onclick="event.stopPropagation(); copySub('https://kort0881.github.io/internet-access-site/sub/hy2', 'Hysteria2')">
-                                    <i class="fa-solid fa-copy"></i> Копировать URL
-                                </button>
-                                <button class="sub-action-btn qr-btn" onclick="event.stopPropagation(); showQR('https://kort0881.github.io/internet-access-site/sub/hy2', 'Hysteria2')">
-                                    <i class="fa-solid fa-qrcode"></i> QR
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                {% endfor %}
+            </div>
+            <div class="official-links">
+                <i class="fas fa-link"></i> Официальные источники:
+                <a href="https://rkn.gov.ru/" target="_blank"><i class="fas fa-gavel"></i> Роскомнадзор</a>
+                <a href="https://digital.gov.ru/ru/" target="_blank"><i class="fas fa-digital-tiling"></i> Минцифры РФ</a>
             </div>
         </div>
-    </div>
+    </main>
 
-    <!-- TOAST -->
-    <div id="toast" class="toast"><i class="fa-solid fa-circle-check"></i> <span id="toast-text">Скопировано!</span></div>
-
-    <!-- WIZARD MODAL -->
-    <div class="modal-overlay" id="wizard-modal">
-        <div class="modal modal-wide">
-            <div class="modal-header">
-                <div class="modal-title"><i class="fa-solid fa-hat-wizard" style="color: var(--touhou-sakura);"></i> Быстрая настройка</div>
-                <button class="btn-close" onclick="closeModal('wizard-modal')"><i class="fa-solid fa-xmark"></i></button>
-            </div>
-            <div class="modal-body">
-                <div class="wizard-progress">
-                    <div class="wizard-steps">
-                        <div class="wizard-step-dot active" data-step="1"><span>1</span><label>Платформа</label></div>
-                        <div class="wizard-step-line"></div>
-                        <div class="wizard-step-dot" data-step="2"><span>2</span><label>Клиент</label></div>
-                        <div class="wizard-step-line"></div>
-                        <div class="wizard-step-dot" data-step="3"><span>3</span><label>Готово</label></div>
-                    </div>
-                    <div class="wizard-progress-text" id="wizard-progress-text">Шаг 1/3</div>
-                </div>
-                <div class="wizard-pane" id="wizard-pane-1">
-                    <p class="wizard-hint">Выберите устройство, на котором будете настраивать подключение:</p>
-                    <div class="app-grid wizard-platform-grid" id="wizard-platform-grid"></div>
-                </div>
-                <div class="wizard-pane" id="wizard-pane-2" style="display:none;">
-                    <p class="wizard-hint">Рекомендованные клиенты для <b id="wizard-platform-name">—</b>. Выберите один:</p>
-                    <div class="app-grid wizard-app-grid" id="wizard-app-grid"></div>
-                </div>
-                <div class="wizard-pane" id="wizard-pane-3" style="display:none;">
-                    <div class="wizard-final-head">
-                        <i id="wizard-final-icon" class="fa-solid fa-rocket"></i>
-                        <div>
-                            <div class="wizard-final-name" id="wizard-final-name">App</div>
-                            <div class="wizard-final-protos protocol-badges" id="wizard-final-protos"></div>
-                        </div>
-                    </div>
-                    <a href="#" target="_blank" rel="noopener noreferrer" id="wizard-download-btn" class="btn-secondary" style="width: 100%; margin-bottom: 16px; border-color: var(--border-light);">
-                        <span><i class="fa-solid fa-download" style="margin-right: 8px; color: var(--touhou-sakura)"></i> Скачать <b id="wizard-final-dl">App</b></span>
-                    </a>
-                    <h3 style="font-size: 1rem; margin-bottom: 12px;">Импорт и запуск</h3>
-                    <div class="wizard-guide" id="wizard-guide"></div>
-                </div>
-                <div class="wizard-nav">
-                    <button class="btn-secondary wizard-back-btn" id="wizard-back-btn" onclick="wizardBack()" style="display:none;">
-                        <i class="fa-solid fa-arrow-left"></i> Назад
-                    </button>
-                    <button class="btn-primary wizard-finish-btn" id="wizard-finish-btn" onclick="wizardFinish()" style="display:none;">
-                        <i class="fa-solid fa-check"></i> Завершить — получить подписку
-                    </button>
-                </div>
-            </div>
+    <footer>
+        <div class="container">
+            <div class="footer-links"><a href="https://github.com/kort0881/vpn-checker-backend" target="_blank"><i class="fab fa-github"></i></a><a href="https://t.me/vlesstrojan" target="_blank"><i class="fab fa-telegram"></i></a></div>
+            <div style="margin-top: 20px;">© 2026 Доступ к интернету</div>
         </div>
-    </div>
+    </footer>
 
-    <!-- ===== JAVASCRIPT (ПОЛНОСТЬЮ ИЗ SCARLET DEVIL, АДАПТИРОВАН) ===== -->
     <script>
-        // (здесь должен быть весь JS из Scarlet Devil, я приведу его в конце)
-        // Он включает: APP_DATABASE, PLATFORMS, функцию copySub, showQR, и т.д.
-        // Я не копирую его сюда для краткости, но в финальном файле он будет.
-        // Пожалуйста, возьмите полный JS из моего предыдущего ответа (он уже адаптирован).
-    </script>
+        // ===== МАТРИЧНЫЙ ДОЖДЬ =====
+        const canvas = document.getElementById('matrixCanvas');
+        const ctx = canvas.getContext('2d');
+        let width, height, columns, drops, fontSize = 18;
+        const symbols = "01ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyzабвгдежзийклмнопрстуфхцчшщъыьэюя";
+        function initMatrix() {
+            width = window.innerWidth;
+            height = window.innerHeight;
+            canvas.width = width;
+            canvas.height = height;
+            columns = Math.floor(width / fontSize);
+            drops = [];
+            for (let i = 0; i < columns; i++) drops[i] = Math.floor(Math.random() * -height / fontSize);
+        }
+        let frameSkip = 0;
+        function drawMatrix() {
+            frameSkip++;
+            if (frameSkip % 2 === 0) {
+                ctx.fillStyle = 'rgba(0, 0, 0, 0.04)';
+                ctx.fillRect(0, 0, width, height);
+                ctx.font = fontSize + 'px "Roboto Mono", monospace';
+                for (let i = 0; i < drops.length; i++) {
+                    const char = symbols[Math.floor(Math.random() * symbols.length)];
+                    const x = i * fontSize;
+                    const y = drops[i] * fontSize;
+                    if (y > 0 && y < height) {
+                        const red = 180 + Math.floor(Math.random() * 75);
+                        ctx.fillStyle = `rgba(${red}, 30, 30, 0.9)`;
+                        ctx.fillText(char, x, y);
+                    }
+                    drops[i]++;
+                    if (drops[i] * fontSize > height && Math.random() > 0.98) drops[i] = 0;
+                }
+            }
+            requestAnimationFrame(drawMatrix);
+        }
+        window.addEventListener('resize', () => initMatrix());
+        initMatrix();
+        drawMatrix();
 
-    <!-- ЗАГРУЗКА ПРОКСИ (ваша функция) -->
-    <script>
+        // ===== КОПИРОВАНИЕ ССЫЛОК =====
+        function copyToClipboard(button, url) {
+            const original = button.innerHTML;
+            navigator.clipboard.writeText(url).then(() => {
+                button.innerHTML = '<i class="fas fa-check"></i> Скопировано!';
+                button.style.background = 'linear-gradient(95deg, #cc0000, #990000)';
+                setTimeout(() => {
+                    button.innerHTML = original;
+                    if (button.classList.contains('btn-black')) button.style.background = '#1a1a1a';
+                    else button.style.background = 'linear-gradient(95deg, #cc0000, #990000)';
+                }, 1500);
+            }).catch(() => {
+                const textarea = document.createElement('textarea');
+                textarea.value = url;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+                button.innerHTML = '<i class="fas fa-check"></i> Скопировано!';
+                setTimeout(() => {
+                    button.innerHTML = original;
+                    if (button.classList.contains('btn-black')) button.style.background = '#1a1a1a';
+                    else button.style.background = 'linear-gradient(95deg, #cc0000, #990000)';
+                }, 1500);
+            });
+        }
+
+        document.querySelectorAll('.btn-neon[data-url]').forEach(btn => {
+            const url = btn.getAttribute('data-url');
+            btn.onclick = () => copyToClipboard(btn, url);
+        });
+
+        // ===== ЗАГРУЗКА ПРОКСИ =====
         async function loadProxies() {
             const container = document.getElementById('proxy-list');
             if (!container) return;
@@ -815,33 +291,6 @@
             }
         }
         loadProxies();
-    </script>
-
-    <!-- КОПИРОВАНИЕ ССЫЛОК (из вашего первого кода) -->
-    <script>
-        function copyToClipboard(button, url) {
-            const original = button.innerHTML;
-            navigator.clipboard.writeText(url).then(() => {
-                button.innerHTML = '<i class="fas fa-check"></i> Скопировано!';
-                button.style.background = 'linear-gradient(95deg, #cc0000, #990000)';
-                setTimeout(() => {
-                    button.innerHTML = original;
-                    button.style.background = 'linear-gradient(95deg, #cc0000, #990000)';
-                }, 1500);
-            }).catch(() => {
-                const textarea = document.createElement('textarea');
-                textarea.value = url;
-                document.body.appendChild(textarea);
-                textarea.select();
-                document.execCommand('copy');
-                document.body.removeChild(textarea);
-                button.innerHTML = '<i class="fas fa-check"></i> Скопировано!';
-                setTimeout(() => {
-                    button.innerHTML = original;
-                    button.style.background = 'linear-gradient(95deg, #cc0000, #990000)';
-                }, 1500);
-            });
-        }
     </script>
 </body>
 </html>
