@@ -49,9 +49,16 @@
         .btn-black:hover { box-shadow: 0 0 12px #660000; border-color: #cc0000; background: #2a2a2a; }
         .btn-link { background: rgba(204, 0, 0, 0.1); border: 1px solid rgba(204, 0, 0, 0.7); color: #ff9999; background: transparent; font-weight: 600; }
         .btn-link:hover { background: rgba(204, 0, 0, 0.3); border-color: #ff3333; color: #fff; }
-        .proxy-grid { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 16px; }
-        .proxy-item { background: rgba(160, 0, 0, 0.25); border: 1px solid rgba(204, 0, 0, 0.7); padding: 8px 18px; border-radius: 60px; color: #ff8888; text-decoration: none; font-weight: 500; transition: 0.2s; display: inline-flex; align-items: center; gap: 8px; font-size: 0.85rem; }
+        .proxy-grid { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 16px; max-height: 400px; overflow-y: auto; padding-right: 8px; }
+        .proxy-grid::-webkit-scrollbar { width: 6px; }
+        .proxy-grid::-webkit-scrollbar-track { background: rgba(255,255,255,0.05); border-radius: 10px; }
+        .proxy-grid::-webkit-scrollbar-thumb { background: #cc0000; border-radius: 10px; }
+        .proxy-item { background: rgba(160, 0, 0, 0.25); border: 1px solid rgba(204, 0, 0, 0.7); padding: 8px 18px; border-radius: 60px; color: #ff8888; text-decoration: none; font-weight: 500; transition: 0.2s; display: inline-flex; align-items: center; gap: 8px; font-size: 0.85rem; word-break: break-all; }
         .proxy-item:hover { background: rgba(204, 0, 0, 0.5); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(204, 0, 0, 0.4); color: #fff; }
+        .proxy-region-block { margin-bottom: 32px; }
+        .proxy-region-title { font-size: 1.3rem; font-weight: 600; color: #ff9999; margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
+        .proxy-region-title i { font-size: 1.1rem; }
+        .proxy-count { font-size: 0.8rem; color: #aaa; font-weight: 400; margin-left: 8px; }
         .apps-grid { display: flex; flex-wrap: wrap; gap: 24px; justify-content: center; margin: 40px 0; }
         .app-card { padding: 24px; width: 240px; text-align: center; }
         .app-icon { font-size: 42px; margin-bottom: 12px; color: #ff6666; }
@@ -80,6 +87,8 @@
         }
         .faq-item h3 { color: #ff6666; font-size: 1.2rem; margin-bottom: 8px; }
         .faq-item p { color: #ddd; line-height: 1.6; }
+        .proxy-loading { color: #aaa; font-style: italic; }
+        .proxy-error { color: #ff6666; }
     </style>
 </head>
 <body>
@@ -126,13 +135,31 @@
             <p style="font-size:0.9rem;">Сайт собирает рабочие VPN-настройки: VLESS, V2Ray, Hysteria, Trojan, VMess, Shadowsocks. Быстрый доступ к заблокированным сайтам и мессенджерам.</p>
         </div>
 
+        <!-- ===== MTProto ПРОКСИ ===== -->
         <div class="section">
             <h2 class="section-title">📡 MTProto прокси для Telegram</h2>
-            <div id="proxy-list" class="proxy-grid">Загружаем прокси...</div>
-            <p style="color:#aaa; margin-top:12px; font-size:0.85rem;">
-                Прокси обновляются каждые 5 минут. Если список пуст – проверьте 
+            <p style="color:#aaa; margin-bottom:16px; font-size:0.9rem;">
+                Прокси обновляются автоматически из репозитория. Если список пуст — проверьте 
                 <a href="https://t.me/vlesstrojan" style="color:#ff6666;">Telegram-канал</a>.
             </p>
+
+            <!-- RU -->
+            <div class="proxy-region-block">
+                <div class="proxy-region-title">
+                    <i class="fas fa-flag"></i> Россия
+                    <span class="proxy-count" id="ru-count"></span>
+                </div>
+                <div id="proxy-ru" class="proxy-grid"><span class="proxy-loading">Загружаем прокси для России...</span></div>
+            </div>
+
+            <!-- EU -->
+            <div class="proxy-region-block">
+                <div class="proxy-region-title">
+                    <i class="fas fa-flag"></i> Европа
+                    <span class="proxy-count" id="eu-count"></span>
+                </div>
+                <div id="proxy-eu" class="proxy-grid"><span class="proxy-loading">Загружаем прокси для Европы...</span></div>
+            </div>
         </div>
 
         <div class="section">
@@ -266,30 +293,71 @@
             btn.onclick = () => copyToClipboard(btn, url);
         });
 
-        // ===== ЗАГРУЗКА ПРОКСИ =====
+        // ===== ЗАГРУЗКА ПРОКСИ (НОВАЯ ВЕРСИЯ) =====
         async function loadProxies() {
-            const container = document.getElementById('proxy-list');
-            if (!container) return;
-            try {
-                const url = 'https://raw.githubusercontent.com/kort0881/telegram-proxy-collector/main/verified/proxy_links_tme_clean.txt?ts=' + Date.now();
-                const resp = await fetch(url);
-                if (!resp.ok) throw new Error();
-                const text = await resp.text();
-                const lines = text.split('\n').map(l => l.trim()).filter(l => l && l.startsWith('https://t.me/proxy'));
-                if (lines.length === 0) { container.innerHTML = '<div>Прокси пока нет</div>'; return; }
-                container.innerHTML = '';
-                lines.forEach((link, idx) => {
-                    const a = document.createElement('a');
-                    a.href = link;
-                    a.textContent = `🔌 Прокси #${idx+1}`;
-                    a.className = 'proxy-item';
-                    a.target = '_blank';
-                    container.appendChild(a);
-                });
-            } catch(e) {
-                container.innerHTML = '<div>Ошибка загрузки прокси</div>';
+            const ruContainer = document.getElementById('proxy-ru');
+            const euContainer = document.getElementById('proxy-eu');
+            const ruCount = document.getElementById('ru-count');
+            const euCount = document.getElementById('eu-count');
+
+            // Файлы для загрузки
+            const sources = [
+                {
+                    url: 'https://raw.githubusercontent.com/kort0881/telegram-proxy-collector/main/verified/proxy_ru_verified.txt',
+                    container: ruContainer,
+                    countEl: ruCount,
+                    label: 'Россия'
+                },
+                {
+                    url: 'https://raw.githubusercontent.com/kort0881/telegram-proxy-collector/main/verified/proxy_eu_verified.txt',
+                    container: euContainer,
+                    countEl: euCount,
+                    label: 'Европа'
+                }
+            ];
+
+            for (const src of sources) {
+                try {
+                    const resp = await fetch(src.url + '?ts=' + Date.now());
+                    if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+                    const text = await resp.text();
+
+                    // Извлекаем все ссылки tg://proxy из текста
+                    const matches = text.match(/tg:\/\/proxy\?[^\s]+/g);
+                    const links = matches ? matches.filter(l => l.startsWith('tg://proxy')) : [];
+
+                    src.container.innerHTML = '';
+                    if (links.length === 0) {
+                        src.container.innerHTML = '<span class="proxy-error">😕 Прокси для этого региона пока нет</span>';
+                        if (src.countEl) src.countEl.textContent = '(0)';
+                        continue;
+                    }
+
+                    // Показываем ссылки как кликабельные элементы
+                    links.forEach((link, idx) => {
+                        const a = document.createElement('a');
+                        a.href = link;
+                        a.textContent = `🔌 Прокси #${idx + 1}`;
+                        a.className = 'proxy-item';
+                        a.target = '_blank';
+                        // Добавляем всплывающую подсказку с полной ссылкой
+                        a.title = link;
+                        src.container.appendChild(a);
+                    });
+
+                    if (src.countEl) {
+                        src.countEl.textContent = `(${links.length})`;
+                    }
+
+                } catch (e) {
+                    console.error('Ошибка загрузки прокси для', src.label, e);
+                    src.container.innerHTML = `<span class="proxy-error">⚠️ Ошибка загрузки прокси для ${src.label}</span>`;
+                    if (src.countEl) src.countEl.textContent = '(ошибка)';
+                }
             }
         }
+
+        // Запускаем загрузку при открытии страницы
         loadProxies();
     </script>
 </body>
