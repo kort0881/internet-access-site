@@ -9,10 +9,8 @@
     <meta name="description" content="{{ meta_description | default("Рабочие VPN-конфигурации (VLESS, V2Ray, Hysteria, Trojan) и MTProto-прокси для обхода блокировок в России. Обновляются автоматически.") }}">
     <meta name="keywords" content="{{ meta_keywords | default("VPN, VLESS, V2Ray, Hysteria, Trojan, MTProto, прокси, обход блокировок, Россия, бесплатно") }}">
 
-    <!-- Канонический URL -->
     <link rel="canonical" href="https://kort0881.github.io/internet-access-site/">
 
-    <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://kort0881.github.io/internet-access-site/">
     <meta property="og:title" content="{{ meta_title | default("Доступ к интернету — бесплатные VPN для России") }}">
@@ -21,22 +19,18 @@
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
 
-    <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="{{ meta_title | default("Доступ к интернету — бесплатные VPN для России") }}">
     <meta name="twitter:description" content="{{ meta_description | default("Рабочие VPN-конфигурации и MTProto-прокси для обхода блокировок.") }}">
     <meta name="twitter:image" content="https://kort0881.github.io/internet-access-site/preview.png">
 
-    <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌐</text></svg>">
 
-    <!-- Preconnect для шрифтов -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Roboto+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <!-- Структурированные данные -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -59,497 +53,81 @@
     </script>
 
     <style>
-        /* ===== СТИЛИ (без изменений, все улучшения сохранены) ===== */
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
-            color: #eaeef2;
-            line-height: 1.6;
-            min-height: 100vh;
-            background: #0a0a0c;
-            position: relative;
-            overflow-x: hidden;
-        }
-        .sky-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -2;
-            background: radial-gradient(circle at 30% 40%, #1a0000, #000000);
-            overflow: hidden;
-        }
-        #matrixCanvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            display: block;
-            opacity: 0.5;
-        }
-        .container {
-            position: relative;
-            z-index: 2;
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 28px;
-        }
-        .glass-header {
-            background: rgba(0, 0, 0, 0.92);
-            backdrop-filter: blur(12px);
-            border-bottom: 2px solid #cc0000;
-            padding: 18px 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-        .header-flex {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-        .logo h1 {
-            font-size: 1.9rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, #fff, #ff4d4d, #cc0000);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            letter-spacing: -0.5px;
-        }
-        .logo p {
-            color: #bbbbbb;
-            font-size: 0.85rem;
-            margin-top: 4px;
-        }
-        .social-links {
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-        .social-btn {
-            padding: 8px 20px;
-            border-radius: 40px;
-            text-decoration: none;
-            font-size: 0.85rem;
-            font-weight: 500;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(204, 0, 0, 0.15);
-            border: 1px solid rgba(204, 0, 0, 0.6);
-            color: #f0f0f0;
-            transition: all 0.25s;
-        }
-        .social-btn:hover {
-            background: rgba(204, 0, 0, 0.4);
-            border-color: #ff3333;
-            box-shadow: 0 0 12px rgba(204,0,0,0.6);
-            transform: translateY(-2px);
-            color: #fff;
-        }
-        .section {
-            margin: 56px 0 40px;
-        }
-        .section-title {
-            font-size: 2.2rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, #fff, #ff4d4d);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            display: inline-block;
-            border-left: 4px solid #cc0000;
-            padding-left: 20px;
-            margin-bottom: 32px;
-            text-shadow: 0 0 5px rgba(0,0,0,0.5);
-        }
-        .corner-card, .info-card, .config-card, .app-card, .news-card {
-            background: rgba(10, 10, 12, 0.92);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(204, 0, 0, 0.45);
-            border-radius: 24px;
-            transition: all 0.3s ease;
-        }
-        .corner-card {
-            padding: 28px;
-            position: relative;
-        }
-        .corner-card:hover, .info-card:hover, .config-card:hover, .app-card:hover, .news-card:hover {
-            border-color: #ff3333;
-            box-shadow: 0 0 28px rgba(204, 0, 0, 0.3);
-            transform: translateY(-3px);
-        }
-        .info-card {
-            flex: 1;
-            min-width: 260px;
-            padding: 28px;
-        }
-        .info-icon {
-            width: 54px;
-            height: 54px;
-            background: linear-gradient(135deg, #cc0000, #990000);
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 28px;
-            margin-bottom: 24px;
-            color: white;
-        }
-        .info-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 16px;
-            color: #fff;
-            font-weight: 600;
-        }
-        .step-list {
-            list-style: none;
-            counter-reset: step;
-        }
-        .step-list li {
-            counter-increment: step;
-            margin-bottom: 12px;
-            padding-left: 32px;
-            position: relative;
-            color: #ddd;
-        }
-        .step-list li::before {
-            content: counter(step);
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 22px;
-            height: 22px;
-            background: linear-gradient(135deg, #cc0000, #990000);
-            border-radius: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 12px;
-            font-weight: bold;
-            color: #fff;
-        }
-        .highlight {
-            color: #ff6666;
-            font-weight: 600;
-        }
-        .update-badge {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 6px 16px;
-            background: rgba(204, 0, 0, 0.25);
-            border-radius: 30px;
-            font-size: 0.8rem;
-            color: #ff9999;
-            border: 1px solid rgba(204,0,0,0.6);
-        }
-        .info-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 28px;
-            margin-bottom: 48px;
-        }
-        .configs-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 24px;
-            margin: 32px 0;
-        }
-        .config-card {
-            padding: 20px;
-        }
-        .config-name {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: #ff6666;
-            margin-bottom: 6px;
-            word-break: break-word;
-        }
-        .config-category {
-            font-size: 0.75rem;
-            color: #aaa;
-            margin-bottom: 16px;
-        }
-        .button-group {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin-top: 12px;
-        }
-        .btn-neon {
-            padding: 10px;
-            border-radius: 40px;
-            font-weight: 600;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.2s;
-            border: none;
-            font-size: 0.85rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            text-decoration: none;
-            background: linear-gradient(95deg, #cc0000, #990000);
-            color: #fff;
-        }
-        .btn-neon:hover {
-            transform: scale(1.02);
-            box-shadow: 0 0 12px #cc0000;
-            background: linear-gradient(95deg, #ff1a1a, #b30000);
-        }
-        .btn-black {
-            background: #1a1a1a;
-            color: #eee;
-            border: 1px solid #555;
-        }
-        .btn-black:hover {
-            box-shadow: 0 0 12px #660000;
-            border-color: #cc0000;
-            background: #2a2a2a;
-        }
-        .btn-link {
-            background: rgba(204, 0, 0, 0.1);
-            border: 1px solid rgba(204, 0, 0, 0.7);
-            color: #ff9999;
-            background: transparent;
-            font-weight: 600;
-        }
-        .btn-link:hover {
-            background: rgba(204, 0, 0, 0.3);
-            border-color: #ff3333;
-            color: #fff;
-        }
-        .proxy-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            margin-top: 16px;
-            max-height: 400px;
-            overflow-y: auto;
-            padding-right: 8px;
-        }
-        .proxy-grid::-webkit-scrollbar {
-            width: 6px;
-        }
-        .proxy-grid::-webkit-scrollbar-track {
-            background: rgba(255,255,255,0.05);
-            border-radius: 10px;
-        }
-        .proxy-grid::-webkit-scrollbar-thumb {
-            background: #cc0000;
-            border-radius: 10px;
-        }
-        .proxy-item-wrapper {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(160, 0, 0, 0.25);
-            border: 1px solid rgba(204, 0, 0, 0.7);
-            padding: 4px 12px 4px 18px;
-            border-radius: 60px;
-            transition: 0.2s;
-            flex-wrap: wrap;
-        }
-        .proxy-item-wrapper:hover {
-            background: rgba(204, 0, 0, 0.5);
-            box-shadow: 0 8px 20px rgba(204, 0, 0, 0.4);
-        }
-        .proxy-item-wrapper a {
-            color: #ff8888;
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 0.85rem;
-            word-break: break-all;
-            flex: 1;
-        }
-        .proxy-item-wrapper a:hover {
-            color: #fff;
-        }
-        .proxy-copy-btn {
-            background: transparent;
-            border: none;
-            color: #ff9999;
-            cursor: pointer;
-            font-size: 0.9rem;
-            padding: 4px 6px;
-            border-radius: 20px;
-            transition: 0.2s;
-            display: inline-flex;
-            align-items: center;
-        }
-        .proxy-copy-btn:hover {
-            color: #fff;
-            background: rgba(204,0,0,0.3);
-        }
-        .proxy-region-block {
-            margin-bottom: 32px;
-        }
-        .proxy-region-title {
-            font-size: 1.3rem;
-            font-weight: 600;
-            color: #ff9999;
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .proxy-count {
-            font-size: 0.8rem;
-            color: #aaa;
-            font-weight: 400;
-            margin-left: 8px;
-        }
-        .proxy-loading, .proxy-error {
-            font-style: italic;
-            color: #aaa;
-        }
-        .proxy-error {
-            color: #ff6666;
-        }
-        .apps-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 24px;
-            justify-content: center;
-            margin: 40px 0;
-        }
-        .app-card {
-            padding: 24px;
-            width: 240px;
-            text-align: center;
-        }
-        .app-icon {
-            font-size: 42px;
-            margin-bottom: 12px;
-            color: #ff6666;
-        }
-        .app-card h3 {
-            font-size: 1.2rem;
-            margin-bottom: 16px;
-            color: #fff;
-        }
-        .app-links {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        .app-link {
-            padding: 8px;
-            border-radius: 40px;
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(204, 0, 0, 0.5);
-            color: #dddddd;
-            text-decoration: none;
-            transition: 0.2s;
-            font-size: 0.85rem;
-        }
-        .app-link:hover {
-            background: rgba(204, 0, 0, 0.25);
-            border-color: #ff3333;
-            color: #fff;
-        }
-        .news-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 24px;
-            margin: 32px 0;
-        }
-        .news-card {
-            padding: 24px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            align-items: flex-start;
-        }
-        .news-date {
-            font-size: 0.8rem;
-            color: #ff8888;
-            background: rgba(204, 0, 0, 0.2);
-            padding: 4px 12px;
-            border-radius: 20px;
-            display: inline-block;
-            margin-bottom: 12px;
-        }
-        .news-title {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: #fff;
-            margin-bottom: 12px;
-        }
-        .news-summary {
-            color: #ccc;
-            line-height: 1.5;
-            margin-bottom: 16px;
-        }
-        .news-source {
-            font-size: 0.8rem;
-            color: #ff9999;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-        .official-links {
-            margin-top: 20px;
-            padding: 20px;
-            background: rgba(0,0,0,0.4);
-            border-radius: 20px;
-            text-align: center;
-        }
-        .official-links a {
-            color: #ff6666;
-            margin: 0 15px;
-            text-decoration: none;
-            font-weight: 500;
-        }
-        .official-links a:hover {
-            color: #fff;
-            text-shadow: 0 0 5px #cc0000;
-        }
-        footer {
-            margin-top: 70px;
-            padding: 30px 0;
-            text-align: center;
-            border-top: 1px solid rgba(204, 0, 0, 0.6);
-            color: #aaa;
-        }
-        .footer-links a {
-            color: #ff6666;
-            margin: 0 12px;
-            font-size: 1.4rem;
-            transition: 0.2s;
-        }
-        .footer-links a:hover {
-            text-shadow: 0 0 8px #cc0000;
-            color: #ff9999;
-        }
-        @media (max-width: 800px) {
-            .container { padding: 0 20px; }
-            .configs-grid { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
-            .info-grid { flex-direction: column; }
-            .section-title { font-size: 1.8rem; }
-            .news-card { flex-direction: column; }
-        }
+        body { font-family: 'Inter', system-ui, -apple-system, sans-serif; color: #eaeef2; line-height: 1.6; min-height: 100vh; background: #0a0a0c; position: relative; overflow-x: hidden; }
+        .sky-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; background: radial-gradient(circle at 30% 40%, #1a0000, #000000); overflow: hidden; }
+        #matrixCanvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; display: block; opacity: 0.5; }
+        .container { position: relative; z-index: 2; max-width: 1400px; margin: 0 auto; padding: 0 28px; }
+        .glass-header { background: rgba(0, 0, 0, 0.92); backdrop-filter: blur(12px); border-bottom: 2px solid #cc0000; padding: 18px 0; position: sticky; top: 0; z-index: 100; }
+        .header-flex { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .logo h1 { font-size: 1.9rem; font-weight: 700; background: linear-gradient(135deg, #fff, #ff4d4d, #cc0000); -webkit-background-clip: text; background-clip: text; color: transparent; letter-spacing: -0.5px; }
+        .logo p { color: #bbbbbb; font-size: 0.85rem; margin-top: 4px; }
+        .social-links { display: flex; gap: 12px; flex-wrap: wrap; }
+        .social-btn { padding: 8px 20px; border-radius: 40px; text-decoration: none; font-size: 0.85rem; font-weight: 500; display: inline-flex; align-items: center; gap: 8px; background: rgba(204, 0, 0, 0.15); border: 1px solid rgba(204, 0, 0, 0.6); color: #f0f0f0; transition: all 0.25s; }
+        .social-btn:hover { background: rgba(204, 0, 0, 0.4); border-color: #ff3333; box-shadow: 0 0 12px rgba(204,0,0,0.6); transform: translateY(-2px); color: #fff; }
+        .section { margin: 56px 0 40px; }
+        .section-title { font-size: 2.2rem; font-weight: 700; background: linear-gradient(135deg, #fff, #ff4d4d); -webkit-background-clip: text; background-clip: text; color: transparent; display: inline-block; border-left: 4px solid #cc0000; padding-left: 20px; margin-bottom: 32px; text-shadow: 0 0 5px rgba(0,0,0,0.5); }
+        .corner-card, .info-card, .config-card, .app-card, .news-card { background: rgba(10, 10, 12, 0.92); backdrop-filter: blur(10px); border: 1px solid rgba(204, 0, 0, 0.45); border-radius: 24px; transition: all 0.3s ease; }
+        .corner-card { padding: 28px; position: relative; }
+        .corner-card:hover, .info-card:hover, .config-card:hover, .app-card:hover, .news-card:hover { border-color: #ff3333; box-shadow: 0 0 28px rgba(204, 0, 0, 0.3); transform: translateY(-3px); }
+        .info-card { flex: 1; min-width: 260px; padding: 28px; }
+        .info-icon { width: 54px; height: 54px; background: linear-gradient(135deg, #cc0000, #990000); border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 28px; margin-bottom: 24px; color: white; }
+        .info-card h3 { font-size: 1.5rem; margin-bottom: 16px; color: #fff; font-weight: 600; }
+        .step-list { list-style: none; counter-reset: step; }
+        .step-list li { counter-increment: step; margin-bottom: 12px; padding-left: 32px; position: relative; color: #ddd; }
+        .step-list li::before { content: counter(step); position: absolute; left: 0; top: 0; width: 22px; height: 22px; background: linear-gradient(135deg, #cc0000, #990000); border-radius: 30px; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold; color: #fff; }
+        .highlight { color: #ff6666; font-weight: 600; }
+        .update-badge { display: inline-block; margin-top: 20px; padding: 6px 16px; background: rgba(204, 0, 0, 0.25); border-radius: 30px; font-size: 0.8rem; color: #ff9999; border: 1px solid rgba(204,0,0,0.6); }
+        .info-grid { display: flex; flex-wrap: wrap; gap: 28px; margin-bottom: 48px; }
+        .configs-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px; margin: 32px 0; }
+        .config-card { padding: 20px; }
+        .config-name { font-size: 1.2rem; font-weight: 700; color: #ff6666; margin-bottom: 6px; word-break: break-word; }
+        .config-category { font-size: 0.75rem; color: #aaa; margin-bottom: 16px; }
+        .button-group { display: flex; flex-direction: column; gap: 10px; margin-top: 12px; }
+        .btn-neon { padding: 10px; border-radius: 40px; font-weight: 600; text-align: center; cursor: pointer; transition: all 0.2s; border: none; font-size: 0.85rem; display: flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none; background: linear-gradient(95deg, #cc0000, #990000); color: #fff; }
+        .btn-neon:hover { transform: scale(1.02); box-shadow: 0 0 12px #cc0000; background: linear-gradient(95deg, #ff1a1a, #b30000); }
+        .btn-black { background: #1a1a1a; color: #eee; border: 1px solid #555; }
+        .btn-black:hover { box-shadow: 0 0 12px #660000; border-color: #cc0000; background: #2a2a2a; }
+        .btn-link { background: rgba(204, 0, 0, 0.1); border: 1px solid rgba(204, 0, 0, 0.7); color: #ff9999; background: transparent; font-weight: 600; }
+        .btn-link:hover { background: rgba(204, 0, 0, 0.3); border-color: #ff3333; color: #fff; }
+        .proxy-grid { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 16px; max-height: 400px; overflow-y: auto; padding-right: 8px; }
+        .proxy-grid::-webkit-scrollbar { width: 6px; }
+        .proxy-grid::-webkit-scrollbar-track { background: rgba(255,255,255,0.05); border-radius: 10px; }
+        .proxy-grid::-webkit-scrollbar-thumb { background: #cc0000; border-radius: 10px; }
+        .proxy-item-wrapper { display: flex; align-items: center; gap: 8px; background: rgba(160, 0, 0, 0.25); border: 1px solid rgba(204, 0, 0, 0.7); padding: 4px 12px 4px 18px; border-radius: 60px; transition: 0.2s; flex-wrap: wrap; }
+        .proxy-item-wrapper:hover { background: rgba(204, 0, 0, 0.5); box-shadow: 0 8px 20px rgba(204, 0, 0, 0.4); }
+        .proxy-item-wrapper a { color: #ff8888; text-decoration: none; font-weight: 500; font-size: 0.85rem; word-break: break-all; flex: 1; }
+        .proxy-item-wrapper a:hover { color: #fff; }
+        .proxy-copy-btn { background: transparent; border: none; color: #ff9999; cursor: pointer; font-size: 0.9rem; padding: 4px 6px; border-radius: 20px; transition: 0.2s; display: inline-flex; align-items: center; }
+        .proxy-copy-btn:hover { color: #fff; background: rgba(204,0,0,0.3); }
+        .proxy-region-block { margin-bottom: 32px; }
+        .proxy-region-title { font-size: 1.3rem; font-weight: 600; color: #ff9999; margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
+        .proxy-count { font-size: 0.8rem; color: #aaa; font-weight: 400; margin-left: 8px; }
+        .proxy-loading, .proxy-error { font-style: italic; color: #aaa; }
+        .proxy-error { color: #ff6666; }
+        .apps-grid { display: flex; flex-wrap: wrap; gap: 24px; justify-content: center; margin: 40px 0; }
+        .app-card { padding: 24px; width: 240px; text-align: center; }
+        .app-icon { font-size: 42px; margin-bottom: 12px; color: #ff6666; }
+        .app-card h3 { font-size: 1.2rem; margin-bottom: 16px; color: #fff; }
+        .app-links { display: flex; flex-direction: column; gap: 10px; }
+        .app-link { padding: 8px; border-radius: 40px; background: rgba(255,255,255,0.05); border: 1px solid rgba(204, 0, 0, 0.5); color: #dddddd; text-decoration: none; transition: 0.2s; font-size: 0.85rem; }
+        .app-link:hover { background: rgba(204, 0, 0, 0.25); border-color: #ff3333; color: #fff; }
+        .news-grid { display: flex; flex-direction: column; gap: 24px; margin: 32px 0; }
+        .news-card { padding: 24px; display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start; }
+        .news-date { font-size: 0.8rem; color: #ff8888; background: rgba(204, 0, 0, 0.2); padding: 4px 12px; border-radius: 20px; display: inline-block; margin-bottom: 12px; }
+        .news-title { font-size: 1.3rem; font-weight: 700; color: #fff; margin-bottom: 12px; }
+        .news-summary { color: #ccc; line-height: 1.5; margin-bottom: 16px; }
+        .news-source { font-size: 0.8rem; color: #ff9999; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+        .official-links { margin-top: 20px; padding: 20px; background: rgba(0,0,0,0.4); border-radius: 20px; text-align: center; }
+        .official-links a { color: #ff6666; margin: 0 15px; text-decoration: none; font-weight: 500; }
+        .official-links a:hover { color: #fff; text-shadow: 0 0 5px #cc0000; }
+        footer { margin-top: 70px; padding: 30px 0; text-align: center; border-top: 1px solid rgba(204, 0, 0, 0.6); color: #aaa; }
+        .footer-links a { color: #ff6666; margin: 0 12px; font-size: 1.4rem; transition: 0.2s; }
+        .footer-links a:hover { text-shadow: 0 0 8px #cc0000; color: #ff9999; }
+        @media (max-width: 800px) { .container { padding: 0 20px; } .configs-grid { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; } .info-grid { flex-direction: column; } .section-title { font-size: 1.8rem; } .news-card { flex-direction: column; } }
         .faq-item h3 { color: #ff6666; font-size: 1.2rem; margin-bottom: 8px; }
         .faq-item p { color: #ddd; line-height: 1.6; }
-        .spinner {
-            display: inline-block;
-            width: 16px;
-            height: 16px;
-            border: 2px solid rgba(255,255,255,0.3);
-            border-top: 2px solid #ff6666;
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-            vertical-align: middle;
-            margin-right: 8px;
-        }
+        .spinner { display: inline-block; width: 16px; height: 16px; border: 2px solid rgba(255,255,255,0.3); border-top: 2px solid #ff6666; border-radius: 50%; animation: spin 0.8s linear infinite; vertical-align: middle; margin-right: 8px; }
         @keyframes spin { to { transform: rotate(360deg); } }
     </style>
 </head>
@@ -560,10 +138,7 @@
     <div class="glass-header">
         <div class="container">
             <div class="header-flex">
-                <div class="logo">
-                    <h1>🌐 Доступ к интернету</h1>
-                    <p>VPN · Свобода без границ</p>
-                </div>
+                <div class="logo"><h1>🌐 Доступ к интернету</h1><p>VPN · Свобода без границ</p></div>
                 <div class="social-links">
                     <a href="https://t.me/vlesstrojan" class="social-btn" aria-label="Telegram VLESS & Trojan"><i class="fab fa-telegram"></i> VLESS & Trojan</a>
                     <a href="https://t.me/kibersosnew" class="social-btn" aria-label="Telegram KiberSOS"><i class="fab fa-telegram"></i> KiberSOS</a>
@@ -575,7 +150,6 @@
     </div>
 
     <main class="container">
-        <!-- Инфо-блоки -->
         <div class="info-grid">
             <div class="info-card">
                 <div class="info-icon"><i class="fas fa-compass"></i></div>
@@ -595,14 +169,12 @@
             </div>
         </div>
 
-        <!-- Баннер -->
         <div class="corner-card" style="margin-bottom: 40px;">
             <div class="info-icon"><i class="fas fa-globe"></i></div>
             <h3 style="color:#fff; font-size:1.4rem; margin-bottom:12px;">Бесплатные VPN-конфигурации для России</h3>
             <p style="font-size:0.9rem;">Сайт собирает рабочие VPN-настройки: VLESS, V2Ray, Hysteria, Trojan, VMess, Shadowsocks. Быстрый доступ к заблокированным сайтам и мессенджерам.</p>
         </div>
 
-        <!-- MTProto прокси -->
         <div class="section">
             <h2 class="section-title">📡 MTProto прокси для Telegram</h2>
             <p style="color:#aaa; margin-bottom:16px; font-size:0.9rem;">
@@ -610,44 +182,24 @@
                 <a href="https://t.me/vlesstrojan" style="color:#ff6666;">Telegram-канал</a>.
             </p>
 
-            <!-- Россия -->
             <div class="proxy-region-block">
-                <div class="proxy-region-title">
-                    <i class="fas fa-flag"></i> Россия
-                    <span class="proxy-count" id="ru-count"></span>
-                </div>
+                <div class="proxy-region-title"><i class="fas fa-flag"></i> Россия <span class="proxy-count" id="ru-count"></span></div>
                 <div id="proxy-ru" class="proxy-grid"><span class="proxy-loading"><span class="spinner"></span> Загружаем прокси для России...</span></div>
             </div>
-
-            <!-- Европа -->
             <div class="proxy-region-block">
-                <div class="proxy-region-title">
-                    <i class="fas fa-flag"></i> Европа
-                    <span class="proxy-count" id="eu-count"></span>
-                </div>
+                <div class="proxy-region-title"><i class="fas fa-flag"></i> Европа <span class="proxy-count" id="eu-count"></span></div>
                 <div id="proxy-eu" class="proxy-grid"><span class="proxy-loading"><span class="spinner"></span> Загружаем прокси для Европы...</span></div>
             </div>
-
-            <!-- США (НОВЫЙ РЕГИОН) -->
             <div class="proxy-region-block">
-                <div class="proxy-region-title">
-                    🇺🇸 США
-                    <span class="proxy-count" id="us-count"></span>
-                </div>
+                <div class="proxy-region-title">🇺🇸 США <span class="proxy-count" id="us-count"></span></div>
                 <div id="proxy-us" class="proxy-grid"><span class="proxy-loading"><span class="spinner"></span> Загружаем прокси для США...</span></div>
             </div>
-
-            <!-- Азия (НОВЫЙ РЕГИОН) -->
             <div class="proxy-region-block">
-                <div class="proxy-region-title">
-                    🌏 Азия
-                    <span class="proxy-count" id="asia-count"></span>
-                </div>
+                <div class="proxy-region-title">🌏 Азия <span class="proxy-count" id="asia-count"></span></div>
                 <div id="proxy-asia" class="proxy-grid"><span class="proxy-loading"><span class="spinner"></span> Загружаем прокси для Азии...</span></div>
             </div>
         </div>
 
-        <!-- Конфигурации VPN -->
         <div class="section">
             <h2 class="section-title">⚡ Конфигурации VPN</h2>
             <div class="configs-grid">
@@ -666,7 +218,6 @@
             </div>
         </div>
 
-        <!-- Клиенты -->
         <div class="section">
             <h2 class="section-title">📱 Скачать VPN-клиенты</h2>
             <div class="apps-grid">
@@ -676,7 +227,6 @@
             </div>
         </div>
 
-        <!-- Новости -->
         <div class="section">
             <h2 class="section-title">📰 Новости и контекст: блокировки в России</h2>
             <div class="news-grid">
@@ -686,9 +236,7 @@
                         <div class="news-date"><i class="far fa-calendar-alt"></i> {{ item.date }}</div>
                         <div class="news-title">{{ item.title }}</div>
                         <div class="news-summary">{{ item.summary }}</div>
-                        <div class="news-source">
-                            <span><i class="fas fa-source"></i> Источник: {{ item.source }}</span>
-                        </div>
+                        <div class="news-source"><span><i class="fas fa-source"></i> Источник: {{ item.source }}</span></div>
                     </div>
                 </div>
                 {% endfor %}
@@ -712,16 +260,13 @@
     </footer>
 
     <script>
-        // ===== МАТРИЧНЫЙ ДОЖДЬ =====
         const canvas = document.getElementById('matrixCanvas');
         const ctx = canvas.getContext('2d');
         let width, height, columns, drops, fontSize = 18;
         const symbols = "01ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyzабвгдежзийклмнопрстуфхцчшщъыьэюя";
         function initMatrix() {
-            width = window.innerWidth;
-            height = window.innerHeight;
-            canvas.width = width;
-            canvas.height = height;
+            width = window.innerWidth; height = window.innerHeight;
+            canvas.width = width; canvas.height = height;
             columns = Math.floor(width / fontSize);
             drops = [];
             for (let i = 0; i < columns; i++) drops[i] = Math.floor(Math.random() * -height / fontSize);
@@ -752,7 +297,6 @@
         initMatrix();
         drawMatrix();
 
-        // ===== КОПИРОВАНИЕ ССЫЛОК (для конфигураций) =====
         function copyToClipboard(button, url) {
             const original = button.innerHTML;
             navigator.clipboard.writeText(url).then(() => {
@@ -784,7 +328,6 @@
             btn.onclick = () => copyToClipboard(btn, url);
         });
 
-        // ===== ЗАГРУЗКА ПРОКСИ (4 региона) =====
         async function loadProxies() {
             const containers = {
                 ru: document.getElementById('proxy-ru'),
@@ -798,34 +341,12 @@
                 us: document.getElementById('us-count'),
                 asia: document.getElementById('asia-count')
             };
-
             const sources = [
-                {
-                    url: 'https://raw.githubusercontent.com/kort0881/telegram-proxy-collector/main/verified/proxy_ru_verified.txt',
-                    container: containers.ru,
-                    countEl: counts.ru,
-                    label: 'Россия'
-                },
-                {
-                    url: 'https://raw.githubusercontent.com/kort0881/telegram-proxy-collector/main/verified/proxy_eu_verified.txt',
-                    container: containers.eu,
-                    countEl: counts.eu,
-                    label: 'Европа'
-                },
-                {
-                    url: 'https://raw.githubusercontent.com/kort0881/telegram-proxy-collector/main/verified/proxy_us_verified.txt',
-                    container: containers.us,
-                    countEl: counts.us,
-                    label: 'США'
-                },
-                {
-                    url: 'https://raw.githubusercontent.com/kort0881/telegram-proxy-collector/main/verified/proxy_asia_verified.txt',
-                    container: containers.asia,
-                    countEl: counts.asia,
-                    label: 'Азия'
-                }
+                { url: 'https://raw.githubusercontent.com/kort0881/telegram-proxy-collector/main/verified/proxy_ru_verified.txt', container: containers.ru, countEl: counts.ru, label: 'Россия' },
+                { url: 'https://raw.githubusercontent.com/kort0881/telegram-proxy-collector/main/verified/proxy_eu_verified.txt', container: containers.eu, countEl: counts.eu, label: 'Европа' },
+                { url: 'https://raw.githubusercontent.com/kort0881/telegram-proxy-collector/main/verified/proxy_us_verified.txt', container: containers.us, countEl: counts.us, label: 'США' },
+                { url: 'https://raw.githubusercontent.com/kort0881/telegram-proxy-collector/main/verified/proxy_asia_verified.txt', container: containers.asia, countEl: counts.asia, label: 'Азия' }
             ];
-
             for (const src of sources) {
                 try {
                     const resp = await fetch(src.url + '?ts=' + Date.now());
@@ -833,25 +354,21 @@
                     const text = await resp.text();
                     const matches = text.match(/tg:\/\/proxy\?[^\s]+/g);
                     const links = matches ? matches.filter(l => l.startsWith('tg://proxy')) : [];
-
                     src.container.innerHTML = '';
                     if (links.length === 0) {
                         src.container.innerHTML = '<span class="proxy-error">😕 Прокси для этого региона пока нет</span>';
                         if (src.countEl) src.countEl.textContent = '(0)';
                         continue;
                     }
-
                     links.forEach((link, idx) => {
                         const wrapper = document.createElement('div');
                         wrapper.className = 'proxy-item-wrapper';
-
                         const a = document.createElement('a');
                         a.href = link;
                         a.textContent = `🔌 Прокси #${idx + 1}`;
                         a.target = '_blank';
                         a.title = link;
                         wrapper.appendChild(a);
-
                         const copyBtn = document.createElement('button');
                         copyBtn.className = 'proxy-copy-btn';
                         copyBtn.innerHTML = '<i class="fas fa-copy"></i>';
@@ -861,12 +378,9 @@
                             copyToClipboard(copyBtn, link);
                         };
                         wrapper.appendChild(copyBtn);
-
                         src.container.appendChild(wrapper);
                     });
-
                     if (src.countEl) src.countEl.textContent = `(${links.length})`;
-
                 } catch (e) {
                     console.error('Ошибка загрузки прокси для', src.label, e);
                     src.container.innerHTML = `<span class="proxy-error">⚠️ Ошибка загрузки прокси для ${src.label}</span>`;
@@ -874,15 +388,9 @@
                 }
             }
         }
-
-        // Загружаем сразу и затем каждые 10 минут
         loadProxies();
         setInterval(loadProxies, 600000);
-
-        // Обновляем дату последнего обновления
-        document.getElementById('lastUpdate').textContent = new Date().toLocaleDateString('ru-RU', {
-            day: 'numeric', month: 'long', year: 'numeric'
-        });
+        document.getElementById('lastUpdate').textContent = new Date().toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' });
     </script>
 </body>
 </html>
