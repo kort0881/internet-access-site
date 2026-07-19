@@ -8,8 +8,13 @@
     <meta name="description" content="{{ meta_description | default("Рабочие VPN-конфигурации (VLESS, V2Ray, Hysteria, Trojan) и MTProto-прокси для обхода блокировок в России. Обновляются автоматически.") }}" />
     <meta name="keywords" content="{{ meta_keywords | default("VPN, VLESS, V2Ray, Hysteria, Trojan, MTProto, прокси, обход блокировок, Россия, бесплатно") }}" />
 
+    <!-- Канонический URL -->
     <link rel="canonical" href="https://kort0881.github.io/internet-access-site/" />
 
+    <!-- Pinterest верификация -->
+    <meta name="p:domain_verify" content="5cb2efcf7a168002d8361a48c34dec69" />
+
+    <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://kort0881.github.io/internet-access-site/" />
     <meta property="og:title" content="{{ meta_title | default("Доступ к интернету — бесплатные VPN для России") }}" />
@@ -17,15 +22,20 @@
     <meta property="og:image" content="https://kort0881.github.io/internet-access-site/preview.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
+
+    <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
 
+    <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌐</text></svg>" />
 
+    <!-- Шрифты -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
+    <!-- JSON-LD -->
     <script type="application/ld+json">
         {
             "@context": "https://schema.org",
@@ -52,7 +62,6 @@
             font-family: 'Geist', system-ui, -apple-system, sans-serif;
             color: #171717;
             line-height: 1.6;
-            /* КОФЕЙНЫЙ ФОН вместо белого */
             background: #E0CDBB;
             -webkit-font-smoothing: antialiased;
             overflow-x: hidden;
@@ -65,7 +74,6 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            /* фон перекрывается GIF + оверлеем, но на всякий случай */
             background: #E0CDBB;
             overflow: hidden;
         }
@@ -88,7 +96,6 @@
             opacity: 0.75;
         }
 
-        /* Оверлей снизу — плавный переход к кофейному фону */
         .hero-overlay {
             position: absolute;
             top: 0;
@@ -96,13 +103,11 @@
             width: 100%;
             height: 100%;
             z-index: 1;
-            /* белый → кофейный */
             background: linear-gradient(180deg,
                     rgba(224, 205, 187, 0) 50%,
                     #E0CDBB 100%);
         }
 
-        /* Оверлей сверху — тоже кофейный */
         .hero-overlay-top {
             position: absolute;
             top: 0;
@@ -110,7 +115,6 @@
             width: 100%;
             height: 120px;
             z-index: 1;
-            /* белый → кофейный */
             background: linear-gradient(0deg,
                     rgba(224, 205, 187, 0) 0%,
                     #E0CDBB 100%);
@@ -261,12 +265,11 @@
             padding: 0 28px;
         }
 
-        /* ---------- НАВИГАЦИЯ (sticky) ---------- */
+        /* ---------- НАВИГАЦИЯ ---------- */
         .nav {
             position: sticky;
             top: 0;
             z-index: 100;
-            /* белый → кофейный с прозрачностью */
             background: rgba(224, 205, 187, 0.92);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
@@ -355,7 +358,7 @@
             line-height: 1.6;
         }
 
-        /* ---------- КАРТОЧКИ (информационные) ---------- */
+        /* ---------- КАРТОЧКИ ---------- */
         .info-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -867,7 +870,6 @@
     <!-- HERO -->
     <section class="hero">
         <div class="hero-bg">
-            <!-- GIF остаётся без изменений -->
             <img src="static/background.gif" alt="Background" aria-hidden="true" />
         </div>
         <div class="hero-overlay-top"></div>
