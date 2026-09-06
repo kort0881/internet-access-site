@@ -1,0 +1,1544 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Доступ к интернету - Бесплатные VPN конфигурации</title>
+    <meta name="description" content="Автоматические VPN-конфиги для V2Ray, VLESS, Hysteria, Trojan, VMess, Reality и Shadowsocks. Регулярное обновление, удобные ссылки." />
+    <meta name="keywords" content="vpn, vless, v2ray, shadowsocks, hysteria, trojan, vmess, reality, free vpn, доступ к интернету" />
+
+    <!-- Канонический URL -->
+    <link rel="canonical" href="https://kort0881.github.io/internet-access-site/" />
+
+    <!-- Pinterest верификация -->
+    <meta name="p:domain_verify" content="5cb2efcf7a168002d8361a48c34dec69" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://kort0881.github.io/internet-access-site/" />
+    <meta property="og:title" content="Доступ к интернету - Бесплатные VPN конфигурации" />
+    <meta property="og:description" content="Автоматические VPN-конфиги для V2Ray, VLESS, Hysteria, Trojan, VMess, Reality и Shadowsocks. Регулярное обновление, удобные ссылки." />
+    <meta property="og:image" content="https://kort0881.github.io/internet-access-site/preview.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌐</text></svg>" />
+
+    <!-- Шрифты -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+    <!-- JSON-LD -->
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            "name": "Доступ к интернету",
+            "url": "https://kort0881.github.io/internet-access-site/",
+            "description": "Бесплатные VPN-конфигурации и прокси для обхода блокировок в России.",
+            "publisher": {
+                "@type": "Organization",
+                "name": "Доступ к интернету"
+            }
+        }
+    </script>
+
+    <style>
+        /* ---------- ОБЩЕЕ ---------- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Geist', system-ui, -apple-system, sans-serif;
+            color: #171717;
+            line-height: 1.6;
+            background: #E0CDBB;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        /* ---------- HERO ---------- */
+        .hero {
+            position: relative;
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #E0CDBB;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .hero-bg video,
+        .hero-bg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.75;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            background: linear-gradient(180deg,
+                    rgba(224, 205, 187, 0) 50%,
+                    #E0CDBB 100%);
+        }
+
+        .hero-overlay-top {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 120px;
+            z-index: 1;
+            background: linear-gradient(0deg,
+                    rgba(224, 205, 187, 0) 0%,
+                    #E0CDBB 100%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 720px;
+            padding: 60px 28px 100px;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #ebf5ff;
+            color: #0068d6;
+            font-size: 0.75rem;
+            font-weight: 500;
+            padding: 4px 14px;
+            border-radius: 9999px;
+            letter-spacing: 0.02em;
+            margin-bottom: 32px;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 600;
+            line-height: 1.1;
+            letter-spacing: -0.04em;
+            color: #171717;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(135deg, #171717 40%, #666666 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.125rem;
+            color: #4d4d4d;
+            line-height: 1.6;
+            max-width: 560px;
+            margin: 0 auto 32px;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* ---------- КНОПКИ ---------- */
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 24px;
+            background: #171717;
+            color: #ffffff;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+        .btn-primary:hover {
+            background: #333333;
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 24px;
+            background: #ffffff;
+            color: #171717;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.2s;
+            box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.08);
+            border: none;
+            cursor: pointer;
+        }
+        .btn-secondary:hover {
+            box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.15), 0px 2px 4px rgba(0, 0, 0, 0.04);
+            transform: translateY(-1px);
+        }
+
+        .btn-primary-sm,
+        .btn-copy {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 16px;
+            background: #171717;
+            color: #ffffff;
+            border-radius: 6px;
+            font-size: 0.8125rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.15s;
+            border: none;
+            cursor: pointer;
+            font-family: inherit;
+        }
+        .btn-primary-sm:hover {
+            background: #333333;
+        }
+
+        .btn-ghost {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 16px;
+            background: transparent;
+            color: #4d4d4d;
+            border-radius: 6px;
+            font-size: 0.8125rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.15s;
+            box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.08);
+            border: none;
+            cursor: pointer;
+            font-family: inherit;
+        }
+        .btn-ghost:hover {
+            color: #171717;
+            box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.15);
+        }
+
+        /* ---------- КОНТЕЙНЕР ---------- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 28px;
+        }
+
+        /* ---------- НАВИГАЦИЯ ---------- */
+        .nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(224, 205, 187, 0.92);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+        }
+
+        .nav-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 0;
+            gap: 20px;
+        }
+
+        .nav-logo {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #171717;
+            text-decoration: none;
+            letter-spacing: -0.03em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-logo-text {
+            font-size: 0.9rem;
+            color: #666;
+            font-weight: 400;
+            letter-spacing: 0;
+            margin-left: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-link {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #4d4d4d;
+            text-decoration: none;
+            padding: 6px 14px;
+            border-radius: 6px;
+            transition: all 0.15s;
+        }
+        .nav-link:hover {
+            color: #171717;
+            background: rgba(0, 0, 0, 0.06);
+        }
+
+        /* ---------- СЕКЦИИ ---------- */
+        .section {
+            padding: 80px 0;
+        }
+        .section:not(:last-child) {
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+        }
+
+        .section-label {
+            font-family: 'Geist Mono', monospace;
+            font-size: 0.75rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #666;
+            margin-bottom: 12px;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 600;
+            letter-spacing: -0.04em;
+            color: #171717;
+            margin-bottom: 12px;
+        }
+
+        .section-desc {
+            font-size: 1rem;
+            color: #3d3d3d;
+            max-width: 600px;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        /* ---------- КАРТОЧКИ ---------- */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+
+        .info-card {
+            padding: 32px;
+            border-radius: 8px;
+            background: #ffffff;
+            box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.08),
+                0px 2px 2px rgba(0, 0, 0, 0.04),
+                0px 8px 8px -8px rgba(0, 0, 0, 0.04);
+            transition: all 0.2s;
+        }
+        .info-card:hover {
+            box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.12),
+                0px 4px 8px rgba(0, 0, 0, 0.06),
+                0px 16px 16px -8px rgba(0, 0, 0, 0.06);
+            transform: translateY(-2px);
+        }
+
+        .info-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 8px;
+            background: #f5f5f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: #171717;
+            margin-bottom: 20px;
+        }
+
+        .info-card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            color: #171717;
+            margin-bottom: 12px;
+        }
+
+        .info-card p,
+        .info-card li {
+            font-size: 0.9375rem;
+            color: #4d4d4d;
+            line-height: 1.6;
+        }
+
+        .step-list {
+            list-style: none;
+            counter-reset: step;
+        }
+        .step-list li {
+            counter-increment: step;
+            margin-bottom: 10px;
+            padding-left: 28px;
+            position: relative;
+        }
+        .step-list li::before {
+            content: counter(step);
+            position: absolute;
+            left: 0;
+            top: 1px;
+            width: 20px;
+            height: 20px;
+            background: #f0f0f0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: #666;
+        }
+
+        .highlight {
+            color: #171717;
+            font-weight: 600;
+        }
+
+        .update-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 20px;
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        /* ---------- УВЕДОМЛЕНИЕ ---------- */
+        .notice-card {
+            padding: 24px 32px;
+            border-radius: 8px;
+            background: #fafafa;
+            box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.08);
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+        .notice-card p {
+            font-size: 0.9375rem;
+            color: #4d4d4d;
+            flex: 1;
+        }
+        .notice-card a {
+            color: #0072f5;
+            text-decoration: underline;
+        }
+
+        /* ---------- КАРТОЧКИ КОНФИГОВ ---------- */
+        .configs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 24px 0;
+        }
+
+        .config-card {
+            padding: 24px;
+            border-radius: 8px;
+            background: #ffffff;
+            box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.08);
+            transition: all 0.2s;
+        }
+        .config-card:hover {
+            box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.12),
+                0px 4px 8px rgba(0, 0, 0, 0.06);
+            transform: translateY(-2px);
+        }
+        .config-card.recommended {
+            box-shadow: 0px 0px 0px 1px #171717,
+                0px 2px 2px rgba(0, 0, 0, 0.04);
+        }
+
+        .config-name {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: #171717;
+            letter-spacing: -0.02em;
+            margin-bottom: 4px;
+            word-break: break-word;
+        }
+
+        .config-category {
+            font-size: 0.8125rem;
+            font-family: 'Geist Mono', monospace;
+            color: #666;
+            margin-bottom: 16px;
+        }
+
+        .config-actions {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        /* ---------- ПРОКСИ ---------- */
+        .proxy-region-block {
+            margin-bottom: 40px;
+        }
+
+        .proxy-region-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #171717;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .proxy-count {
+            font-family: 'Geist Mono', monospace;
+            font-size: 0.8rem;
+            color: #666;
+            font-weight: 400;
+        }
+
+        .proxy-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            max-height: 400px;
+            overflow-y: auto;
+            padding-right: 4px;
+        }
+        .proxy-grid::-webkit-scrollbar {
+            width: 4px;
+        }
+        .proxy-grid::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .proxy-grid::-webkit-scrollbar-thumb {
+            background: #d0d0d0;
+            border-radius: 4px;
+        }
+
+        .proxy-item-wrapper {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: #fafafa;
+            border: 1px solid #ebebeb;
+            padding: 4px 12px 4px 14px;
+            border-radius: 6px;
+            transition: all 0.15s;
+        }
+        .proxy-item-wrapper:hover {
+            background: #f0f0f0;
+            border-color: #d0d0d0;
+        }
+        .proxy-item-wrapper a {
+            color: #4d4d4d;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            word-break: break-all;
+        }
+        .proxy-item-wrapper a:hover {
+            color: #171717;
+        }
+
+        .proxy-copy-btn {
+            background: transparent;
+            border: none;
+            color: #808080;
+            cursor: pointer;
+            font-size: 0.8rem;
+            padding: 2px 4px;
+            border-radius: 4px;
+            transition: 0.15s;
+            display: inline-flex;
+            align-items: center;
+        }
+        .proxy-copy-btn:hover {
+            color: #171717;
+            background: #e5e5e5;
+        }
+
+        .proxy-loading,
+        .proxy-error {
+            font-size: 0.85rem;
+            color: #666;
+        }
+        .proxy-empty {
+            font-size: 0.85rem;
+            color: #666;
+            font-style: italic;
+        }
+
+        /* ---------- ПРИЛОЖЕНИЯ ---------- */
+        .apps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+        }
+
+        .app-card {
+            padding: 24px;
+            border-radius: 8px;
+            background: #ffffff;
+            box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.08);
+            text-align: center;
+            transition: all 0.2s;
+        }
+        .app-card:hover {
+            box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.12),
+                0px 4px 8px rgba(0, 0, 0, 0.06);
+            transform: translateY(-2px);
+        }
+
+        .app-icon {
+            font-size: 2rem;
+            margin-bottom: 12px;
+            color: #666;
+        }
+
+        .app-card h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #171717;
+            margin-bottom: 16px;
+        }
+
+        .app-links {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .app-link {
+            padding: 8px;
+            border-radius: 6px;
+            background: #fafafa;
+            border: 1px solid #ebebeb;
+            color: #4d4d4d;
+            text-decoration: none;
+            transition: 0.15s;
+            font-size: 0.85rem;
+        }
+        .app-link:hover {
+            background: #f0f0f0;
+            border-color: #d0d0d0;
+            color: #171717;
+        }
+
+        /* ---------- НОВОСТИ ---------- */
+        .news-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .news-item {
+            padding: 24px;
+            border-radius: 8px;
+            background: #ffffff;
+            box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.08);
+            transition: all 0.15s;
+        }
+        .news-item:hover {
+            box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.12),
+                0px 4px 8px rgba(0, 0, 0, 0.06);
+        }
+
+        .news-date {
+            font-size: 0.8rem;
+            font-family: 'Geist Mono', monospace;
+            color: #666;
+            margin-bottom: 8px;
+        }
+
+        .news-title {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: #171717;
+            letter-spacing: -0.02em;
+            margin-bottom: 8px;
+        }
+
+        .news-summary {
+            font-size: 0.9375rem;
+            color: #4d4d4d;
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+
+        .news-source {
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        .official-links {
+            margin-top: 28px;
+            padding: 20px;
+            background: #fafafa;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        .official-links a {
+            color: #0072f5;
+            text-decoration: none;
+            margin: 0 12px;
+            font-weight: 500;
+        }
+        .official-links a:hover {
+            text-decoration: underline;
+        }
+
+        /* ---------- FAQ ---------- */
+        .faq-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .faq-item h3 {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: #171717;
+            margin-bottom: 6px;
+        }
+        .faq-item p {
+            font-size: 0.9375rem;
+            color: #4d4d4d;
+            line-height: 1.6;
+        }
+
+        /* ---------- ФУТЕР ---------- */
+        footer {
+            padding: 48px 0 32px;
+            text-align: center;
+            border-top: 1px solid rgba(0, 0, 0, 0.08);
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-bottom: 20px;
+        }
+        .footer-links a {
+            color: #666;
+            font-size: 1.3rem;
+            transition: 0.15s;
+        }
+        .footer-links a:hover {
+            color: #171717;
+        }
+
+        .footer-copy {
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        /* ---------- АНИМАЦИЯ ---------- */
+        .spinner {
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            border: 2px solid #d0d0d0;
+            border-top: 2px solid #171717;
+            border-radius: 50%;
+            animation: spin 0.7s linear infinite;
+            vertical-align: middle;
+            margin-right: 6px;
+        }
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* ---------- АДАПТИВ ---------- */
+        @media (max-width: 800px) {
+            .container {
+                padding: 0 20px;
+            }
+            .section {
+                padding: 48px 0;
+            }
+            .section-title {
+                font-size: 1.5rem;
+            }
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+            .configs-grid {
+                grid-template-columns: 1fr;
+            }
+            .apps-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .hero-content {
+                padding: 40px 20px 80px;
+            }
+            .nav-inner {
+                flex-direction: column;
+                gap: 12px;
+            }
+            .nav-links {
+                width: 100%;
+                justify-content: center;
+            }
+            .notice-card {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .apps-grid {
+                grid-template-columns: 1fr;
+            }
+            .hero h1 {
+                letter-spacing: -0.03em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- НАВИГАЦИЯ -->
+    <div class="nav">
+        <div class="container">
+            <div class="nav-inner">
+                <a href="#" class="nav-logo">
+                    🌐 Доступ к интернету
+                    <span class="nav-logo-text">VPN</span>
+                </a>
+                <div class="nav-links">
+                    <a href="#configs" class="nav-link">Конфиги</a>
+                    <a href="#proxies" class="nav-link">Прокси</a>
+                    <a href="#apps" class="nav-link">Клиенты</a>
+                    <a href="#news" class="nav-link">Новости</a>
+                    <a href="https://t.me/vlesstrojan" class="nav-link" target="_blank">
+                        <i class="fab fa-telegram"></i> @vlesstrojan
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-bg">
+            <img src="static/background.gif" alt="Background" aria-hidden="true" />
+        </div>
+        <div class="hero-overlay-top"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <div class="hero-badge"><i class="fas fa-shield-halved"></i> Бесплатно · Обновляется автоматически</div>
+            <h1>Доступ к <span>интернету</span><br />без границ</h1>
+            <p>Рабочие VPN-конфигурации VLESS, V2Ray, Hysteria, Trojan и MTProto-прокси для обхода блокировок в России.</p>
+            <div class="hero-actions">
+                <a href="#configs" class="btn-primary"><i class="fas fa-download"></i> Конфигурации</a>
+                <a href="#proxies" class="btn-secondary"><i class="fas fa-plug"></i> MTProto прокси</a>
+            </div>
+        </div>
+    </section>
+
+    <main>
+        <!-- HOW-TO + WHY -->
+        <div class="section">
+            <div class="container">
+                <div class="info-grid">
+                    <div class="info-card">
+                        <div class="info-icon"><i class="fas fa-compass"></i></div>
+                        <h3>Как использовать</h3>
+                        <ul class="step-list">
+                            <li>Выберите конфигурацию <span class="highlight">(white версии самые стабильные)</span></li>
+                            <li>Скопируйте ссылку на подписку</li>
+                            <li>Вставьте в <span class="highlight">v2rayNG / NekoBox / v2rayN</span></li>
+                            <li>Подпишитесь на Telegram-каналы для новых ключей</li>
+                        </ul>
+                        <div class="update-badge">
+                            <i class="far fa-clock"></i> Обновлено: <span id="lastUpdate">06.09.2026 20:24</span>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-icon"><i class="fas fa-shield-alt"></i></div>
+                        <h3>Почему это работает</h3>
+                        <p>Современные протоколы (VLESS, WireGuard, Hysteria) маскируют трафик и обходят DPI. Конфигурации проверяются и обновляются автоматически каждый час.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MTProto PROXIES -->
+        <div class="section" id="proxies">
+            <div class="container">
+                <div class="section-label">MTProto</div>
+                <h2 class="section-title">📡 Прокси для Telegram</h2>
+                <p class="section-desc">
+                    Прокси обновляются автоматически. Если список пуст — проверьте
+                    <a href="https://t.me/vlesstrojan" style="color:#0072f5;">Telegram-канал</a>.
+                </p>
+
+                <div class="proxy-region-block">
+                    <div class="proxy-region-title"><i class="fas fa-flag"></i> Россия <span class="proxy-count" id="ru-count"></span></div>
+                    <div id="proxy-ru" class="proxy-grid"><span class="proxy-loading"><span class="spinner"></span> Загружаем...</span></div>
+                </div>
+                <div class="proxy-region-block">
+                    <div class="proxy-region-title"><i class="fas fa-flag"></i> Европа <span class="proxy-count" id="eu-count"></span></div>
+                    <div id="proxy-eu" class="proxy-grid"><span class="proxy-loading"><span class="spinner"></span> Загружаем...</span></div>
+                </div>
+                <div class="proxy-region-block">
+                    <div class="proxy-region-title"><i class="fas fa-flag"></i> США <span class="proxy-count" id="us-count"></span></div>
+                    <div id="proxy-us" class="proxy-grid"><span class="proxy-loading"><span class="spinner"></span> Загружаем...</span></div>
+                </div>
+                <div class="proxy-region-block">
+                    <div class="proxy-region-title"><i class="fas fa-flag"></i> Азия <span class="proxy-count" id="asia-count"></span></div>
+                    <div id="proxy-asia" class="proxy-grid"><span class="proxy-loading"><span class="spinner"></span> Загружаем...</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- VPN CONFIGS -->
+        <div class="section" id="configs">
+            <div class="container">
+                <div class="section-label">Конфигурации</div>
+                <h2 class="section-title">⚡ VPN конфигурации</h2>
+                <p class="section-desc">Рабочие ссылки для импорта в ваш VPN-клиент. White версии — самые стабильные.</p>
+
+                <div class="configs-grid">
+                    
+                    <div class="config-card recommended">
+                        <div class="config-name">ru_white_part1?ts=1788726245</div>
+                        <div class="config-category"><i class="fas fa-tag"></i> 🇷🇺 RUSSIA (FAST)</div>
+                        <div class="config-actions">
+                            <button class="btn-primary-sm" data-url="https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/RU_Best/ru_white_part1.txt?ts=1788726245" onclick="copyConfig(this, 'https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/RU_Best/ru_white_part1.txt?ts=1788726245')">
+                                <i class="fas fa-copy"></i> Копировать
+                            </button>
+                            <a href="https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/RU_Best/ru_white_part1.txt?ts=1788726245" target="_blank" class="btn-ghost">
+                                <i class="fas fa-external-link-alt"></i> Открыть
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="config-card recommended">
+                        <div class="config-name">ru_white_part2?ts=1788726245</div>
+                        <div class="config-category"><i class="fas fa-tag"></i> 🇷🇺 RUSSIA (FAST)</div>
+                        <div class="config-actions">
+                            <button class="btn-primary-sm" data-url="https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/RU_Best/ru_white_part2.txt?ts=1788726245" onclick="copyConfig(this, 'https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/RU_Best/ru_white_part2.txt?ts=1788726245')">
+                                <i class="fas fa-copy"></i> Копировать
+                            </button>
+                            <a href="https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/RU_Best/ru_white_part2.txt?ts=1788726245" target="_blank" class="btn-ghost">
+                                <i class="fas fa-external-link-alt"></i> Открыть
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="config-card recommended">
+                        <div class="config-name">ru_white_part3?ts=1788726245</div>
+                        <div class="config-category"><i class="fas fa-tag"></i> 🇷🇺 RUSSIA (FAST)</div>
+                        <div class="config-actions">
+                            <button class="btn-primary-sm" data-url="https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/RU_Best/ru_white_part3.txt?ts=1788726245" onclick="copyConfig(this, 'https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/RU_Best/ru_white_part3.txt?ts=1788726245')">
+                                <i class="fas fa-copy"></i> Копировать
+                            </button>
+                            <a href="https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/RU_Best/ru_white_part3.txt?ts=1788726245" target="_blank" class="btn-ghost">
+                                <i class="fas fa-external-link-alt"></i> Открыть
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="config-card recommended">
+                        <div class="config-name">ru_white_all_part1?ts=1788726245</div>
+                        <div class="config-category"><i class="fas fa-tag"></i> 🇷🇺 RUSSIA (ALL)</div>
+                        <div class="config-actions">
+                            <button class="btn-primary-sm" data-url="https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/RU_Best/ru_white_all_part1.txt?ts=1788726245" onclick="copyConfig(this, 'https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/RU_Best/ru_white_all_part1.txt?ts=1788726245')">
+                                <i class="fas fa-copy"></i> Копировать
+                            </button>
+                            <a href="https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/RU_Best/ru_white_all_part1.txt?ts=1788726245" target="_blank" class="btn-ghost">
+                                <i class="fas fa-external-link-alt"></i> Открыть
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="config-card recommended">
+                        <div class="config-name">ru_white_all_part2?ts=1788726245</div>
+                        <div class="config-category"><i class="fas fa-tag"></i> 🇷🇺 RUSSIA (ALL)</div>
+                        <div class="config-actions">
+                            <button class="btn-primary-sm" data-url="https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/RU_Best/ru_white_all_part2.txt?ts=1788726245" onclick="copyConfig(this, 'https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/RU_Best/ru_white_all_part2.txt?ts=1788726245')">
+                                <i class="fas fa-copy"></i> Копировать
+                            </button>
+                            <a href="https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/RU_Best/ru_white_all_part2.txt?ts=1788726245" target="_blank" class="btn-ghost">
+                                <i class="fas fa-external-link-alt"></i> Открыть
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="config-card recommended">
+                        <div class="config-name">ru_white_all_part3?ts=1788726245</div>
+                        <div class="config-category"><i class="fas fa-tag"></i> 🇷🇺 RUSSIA (ALL)</div>
+                        <div class="config-actions">
+                            <button class="btn-primary-sm" data-url="https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/RU_Best/ru_white_all_part3.txt?ts=1788726245" onclick="copyConfig(this, 'https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/RU_Best/ru_white_all_part3.txt?ts=1788726245')">
+                                <i class="fas fa-copy"></i> Копировать
+                            </button>
+                            <a href="https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/RU_Best/ru_white_all_part3.txt?ts=1788726245" target="_blank" class="btn-ghost">
+                                <i class="fas fa-external-link-alt"></i> Открыть
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="config-card recommended">
+                        <div class="config-name">ru_white_all_part4?ts=1788726245</div>
+                        <div class="config-category"><i class="fas fa-tag"></i> 🇷🇺 RUSSIA (ALL)</div>
+                        <div class="config-actions">
+                            <button class="btn-primary-sm" data-url="https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/RU_Best/ru_white_all_part4.txt?ts=1788726245" onclick="copyConfig(this, 'https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/RU_Best/ru_white_all_part4.txt?ts=1788726245')">
+                                <i class="fas fa-copy"></i> Копировать
+                            </button>
+                            <a href="https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/RU_Best/ru_white_all_part4.txt?ts=1788726245" target="_blank" class="btn-ghost">
+                                <i class="fas fa-external-link-alt"></i> Открыть
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="config-card recommended">
+                        <div class="config-name">ru_white_all_part5?ts=1788726245</div>
+                        <div class="config-category"><i class="fas fa-tag"></i> 🇷🇺 RUSSIA (ALL)</div>
+                        <div class="config-actions">
+                            <button class="btn-primary-sm" data-url="https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/RU_Best/ru_white_all_part5.txt?ts=1788726245" onclick="copyConfig(this, 'https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/RU_Best/ru_white_all_part5.txt?ts=1788726245')">
+                                <i class="fas fa-copy"></i> Копировать
+                            </button>
+                            <a href="https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/RU_Best/ru_white_all_part5.txt?ts=1788726245" target="_blank" class="btn-ghost">
+                                <i class="fas fa-external-link-alt"></i> Открыть
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="config-card recommended">
+                        <div class="config-name">ru_white_all_part6?ts=1788726245</div>
+                        <div class="config-category"><i class="fas fa-tag"></i> 🇷🇺 RUSSIA (ALL)</div>
+                        <div class="config-actions">
+                            <button class="btn-primary-sm" data-url="https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/RU_Best/ru_white_all_part6.txt?ts=1788726245" onclick="copyConfig(this, 'https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/RU_Best/ru_white_all_part6.txt?ts=1788726245')">
+                                <i class="fas fa-copy"></i> Копировать
+                            </button>
+                            <a href="https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/RU_Best/ru_white_all_part6.txt?ts=1788726245" target="_blank" class="btn-ghost">
+                                <i class="fas fa-external-link-alt"></i> Открыть
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="config-card recommended">
+                        <div class="config-name">ru_white_all_part7?ts=1788726245</div>
+                        <div class="config-category"><i class="fas fa-tag"></i> 🇷🇺 RUSSIA (ALL)</div>
+                        <div class="config-actions">
+                            <button class="btn-primary-sm" data-url="https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/RU_Best/ru_white_all_part7.txt?ts=1788726245" onclick="copyConfig(this, 'https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/RU_Best/ru_white_all_part7.txt?ts=1788726245')">
+                                <i class="fas fa-copy"></i> Копировать
+                            </button>
+                            <a href="https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/RU_Best/ru_white_all_part7.txt?ts=1788726245" target="_blank" class="btn-ghost">
+                                <i class="fas fa-external-link-alt"></i> Открыть
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="config-card recommended">
+                        <div class="config-name">ru_white_all_part8?ts=1788726245</div>
+                        <div class="config-category"><i class="fas fa-tag"></i> 🇷🇺 RUSSIA (ALL)</div>
+                        <div class="config-actions">
+                            <button class="btn-primary-sm" data-url="https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/RU_Best/ru_white_all_part8.txt?ts=1788726245" onclick="copyConfig(this, 'https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/RU_Best/ru_white_all_part8.txt?ts=1788726245')">
+                                <i class="fas fa-copy"></i> Копировать
+                            </button>
+                            <a href="https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/RU_Best/ru_white_all_part8.txt?ts=1788726245" target="_blank" class="btn-ghost">
+                                <i class="fas fa-external-link-alt"></i> Открыть
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="config-card ">
+                        <div class="config-name">my_euro_part1?ts=1788726245</div>
+                        <div class="config-category"><i class="fas fa-tag"></i> 🇪🇺 EUROPE (FAST)</div>
+                        <div class="config-actions">
+                            <button class="btn-primary-sm" data-url="https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/My_Euro/my_euro_part1.txt?ts=1788726245" onclick="copyConfig(this, 'https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/My_Euro/my_euro_part1.txt?ts=1788726245')">
+                                <i class="fas fa-copy"></i> Копировать
+                            </button>
+                            <a href="https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/My_Euro/my_euro_part1.txt?ts=1788726245" target="_blank" class="btn-ghost">
+                                <i class="fas fa-external-link-alt"></i> Открыть
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="config-card ">
+                        <div class="config-name">my_euro_part2?ts=1788726245</div>
+                        <div class="config-category"><i class="fas fa-tag"></i> 🇪🇺 EUROPE (FAST)</div>
+                        <div class="config-actions">
+                            <button class="btn-primary-sm" data-url="https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/My_Euro/my_euro_part2.txt?ts=1788726245" onclick="copyConfig(this, 'https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/My_Euro/my_euro_part2.txt?ts=1788726245')">
+                                <i class="fas fa-copy"></i> Копировать
+                            </button>
+                            <a href="https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/My_Euro/my_euro_part2.txt?ts=1788726245" target="_blank" class="btn-ghost">
+                                <i class="fas fa-external-link-alt"></i> Открыть
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="config-card ">
+                        <div class="config-name">my_euro_part3?ts=1788726245</div>
+                        <div class="config-category"><i class="fas fa-tag"></i> 🇪🇺 EUROPE (FAST)</div>
+                        <div class="config-actions">
+                            <button class="btn-primary-sm" data-url="https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/My_Euro/my_euro_part3.txt?ts=1788726245" onclick="copyConfig(this, 'https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/My_Euro/my_euro_part3.txt?ts=1788726245')">
+                                <i class="fas fa-copy"></i> Копировать
+                            </button>
+                            <a href="https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/My_Euro/my_euro_part3.txt?ts=1788726245" target="_blank" class="btn-ghost">
+                                <i class="fas fa-external-link-alt"></i> Открыть
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="config-card ">
+                        <div class="config-name">my_euro_all_part1?ts=1788726245</div>
+                        <div class="config-category"><i class="fas fa-tag"></i> 🇪🇺 EUROPE (ALL)</div>
+                        <div class="config-actions">
+                            <button class="btn-primary-sm" data-url="https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/My_Euro/my_euro_all_part1.txt?ts=1788726245" onclick="copyConfig(this, 'https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/My_Euro/my_euro_all_part1.txt?ts=1788726245')">
+                                <i class="fas fa-copy"></i> Копировать
+                            </button>
+                            <a href="https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/My_Euro/my_euro_all_part1.txt?ts=1788726245" target="_blank" class="btn-ghost">
+                                <i class="fas fa-external-link-alt"></i> Открыть
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="config-card ">
+                        <div class="config-name">my_euro_all_part2?ts=1788726245</div>
+                        <div class="config-category"><i class="fas fa-tag"></i> 🇪🇺 EUROPE (ALL)</div>
+                        <div class="config-actions">
+                            <button class="btn-primary-sm" data-url="https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/My_Euro/my_euro_all_part2.txt?ts=1788726245" onclick="copyConfig(this, 'https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/My_Euro/my_euro_all_part2.txt?ts=1788726245')">
+                                <i class="fas fa-copy"></i> Копировать
+                            </button>
+                            <a href="https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/My_Euro/my_euro_all_part2.txt?ts=1788726245" target="_blank" class="btn-ghost">
+                                <i class="fas fa-external-link-alt"></i> Открыть
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="config-card ">
+                        <div class="config-name">my_euro_all_part3?ts=1788726245</div>
+                        <div class="config-category"><i class="fas fa-tag"></i> 🇪🇺 EUROPE (ALL)</div>
+                        <div class="config-actions">
+                            <button class="btn-primary-sm" data-url="https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/My_Euro/my_euro_all_part3.txt?ts=1788726245" onclick="copyConfig(this, 'https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/My_Euro/my_euro_all_part3.txt?ts=1788726245')">
+                                <i class="fas fa-copy"></i> Копировать
+                            </button>
+                            <a href="https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/My_Euro/my_euro_all_part3.txt?ts=1788726245" target="_blank" class="btn-ghost">
+                                <i class="fas fa-external-link-alt"></i> Открыть
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="config-card ">
+                        <div class="config-name">my_euro_all_part4?ts=1788726245</div>
+                        <div class="config-category"><i class="fas fa-tag"></i> 🇪🇺 EUROPE (ALL)</div>
+                        <div class="config-actions">
+                            <button class="btn-primary-sm" data-url="https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/My_Euro/my_euro_all_part4.txt?ts=1788726245" onclick="copyConfig(this, 'https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/My_Euro/my_euro_all_part4.txt?ts=1788726245')">
+                                <i class="fas fa-copy"></i> Копировать
+                            </button>
+                            <a href="https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/My_Euro/my_euro_all_part4.txt?ts=1788726245" target="_blank" class="btn-ghost">
+                                <i class="fas fa-external-link-alt"></i> Открыть
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="config-card ">
+                        <div class="config-name">my_euro_all_part5?ts=1788726245</div>
+                        <div class="config-category"><i class="fas fa-tag"></i> 🇪🇺 EUROPE (ALL)</div>
+                        <div class="config-actions">
+                            <button class="btn-primary-sm" data-url="https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/My_Euro/my_euro_all_part5.txt?ts=1788726245" onclick="copyConfig(this, 'https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/My_Euro/my_euro_all_part5.txt?ts=1788726245')">
+                                <i class="fas fa-copy"></i> Копировать
+                            </button>
+                            <a href="https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/My_Euro/my_euro_all_part5.txt?ts=1788726245" target="_blank" class="btn-ghost">
+                                <i class="fas fa-external-link-alt"></i> Открыть
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="config-card ">
+                        <div class="config-name">my_euro_all_part6?ts=1788726245</div>
+                        <div class="config-category"><i class="fas fa-tag"></i> 🇪🇺 EUROPE (ALL)</div>
+                        <div class="config-actions">
+                            <button class="btn-primary-sm" data-url="https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/My_Euro/my_euro_all_part6.txt?ts=1788726245" onclick="copyConfig(this, 'https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/My_Euro/my_euro_all_part6.txt?ts=1788726245')">
+                                <i class="fas fa-copy"></i> Копировать
+                            </button>
+                            <a href="https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/My_Euro/my_euro_all_part6.txt?ts=1788726245" target="_blank" class="btn-ghost">
+                                <i class="fas fa-external-link-alt"></i> Открыть
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="config-card ">
+                        <div class="config-name">my_euro_all_part7?ts=1788726245</div>
+                        <div class="config-category"><i class="fas fa-tag"></i> 🇪🇺 EUROPE (ALL)</div>
+                        <div class="config-actions">
+                            <button class="btn-primary-sm" data-url="https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/My_Euro/my_euro_all_part7.txt?ts=1788726245" onclick="copyConfig(this, 'https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/My_Euro/my_euro_all_part7.txt?ts=1788726245')">
+                                <i class="fas fa-copy"></i> Копировать
+                            </button>
+                            <a href="https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/My_Euro/my_euro_all_part7.txt?ts=1788726245" target="_blank" class="btn-ghost">
+                                <i class="fas fa-external-link-alt"></i> Открыть
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="config-card ">
+                        <div class="config-name">my_euro_all_part8?ts=1788726245</div>
+                        <div class="config-category"><i class="fas fa-tag"></i> 🇪🇺 EUROPE (ALL)</div>
+                        <div class="config-actions">
+                            <button class="btn-primary-sm" data-url="https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/My_Euro/my_euro_all_part8.txt?ts=1788726245" onclick="copyConfig(this, 'https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/My_Euro/my_euro_all_part8.txt?ts=1788726245')">
+                                <i class="fas fa-copy"></i> Копировать
+                            </button>
+                            <a href="https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/My_Euro/my_euro_all_part8.txt?ts=1788726245" target="_blank" class="btn-ghost">
+                                <i class="fas fa-external-link-alt"></i> Открыть
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="config-card ">
+                        <div class="config-name">my_euro_all_part9?ts=1788726245</div>
+                        <div class="config-category"><i class="fas fa-tag"></i> 🇪🇺 EUROPE (ALL)</div>
+                        <div class="config-actions">
+                            <button class="btn-primary-sm" data-url="https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/My_Euro/my_euro_all_part9.txt?ts=1788726245" onclick="copyConfig(this, 'https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/My_Euro/my_euro_all_part9.txt?ts=1788726245')">
+                                <i class="fas fa-copy"></i> Копировать
+                            </button>
+                            <a href="https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/My_Euro/my_euro_all_part9.txt?ts=1788726245" target="_blank" class="btn-ghost">
+                                <i class="fas fa-external-link-alt"></i> Открыть
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="config-card ">
+                        <div class="config-name">my_euro_all_part10?ts=1788726245</div>
+                        <div class="config-category"><i class="fas fa-tag"></i> 🇪🇺 EUROPE (ALL)</div>
+                        <div class="config-actions">
+                            <button class="btn-primary-sm" data-url="https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/My_Euro/my_euro_all_part10.txt?ts=1788726245" onclick="copyConfig(this, 'https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/My_Euro/my_euro_all_part10.txt?ts=1788726245')">
+                                <i class="fas fa-copy"></i> Копировать
+                            </button>
+                            <a href="https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/My_Euro/my_euro_all_part10.txt?ts=1788726245" target="_blank" class="btn-ghost">
+                                <i class="fas fa-external-link-alt"></i> Открыть
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="config-card ">
+                        <div class="config-name">my_euro_all_part11?ts=1788726245</div>
+                        <div class="config-category"><i class="fas fa-tag"></i> 🇪🇺 EUROPE (ALL)</div>
+                        <div class="config-actions">
+                            <button class="btn-primary-sm" data-url="https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/My_Euro/my_euro_all_part11.txt?ts=1788726245" onclick="copyConfig(this, 'https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/My_Euro/my_euro_all_part11.txt?ts=1788726245')">
+                                <i class="fas fa-copy"></i> Копировать
+                            </button>
+                            <a href="https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/My_Euro/my_euro_all_part11.txt?ts=1788726245" target="_blank" class="btn-ghost">
+                                <i class="fas fa-external-link-alt"></i> Открыть
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="config-card ">
+                        <div class="config-name">my_euro_all_part12?ts=1788726245</div>
+                        <div class="config-category"><i class="fas fa-tag"></i> 🇪🇺 EUROPE (ALL)</div>
+                        <div class="config-actions">
+                            <button class="btn-primary-sm" data-url="https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/My_Euro/my_euro_all_part12.txt?ts=1788726245" onclick="copyConfig(this, 'https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/My_Euro/my_euro_all_part12.txt?ts=1788726245')">
+                                <i class="fas fa-copy"></i> Копировать
+                            </button>
+                            <a href="https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/My_Euro/my_euro_all_part12.txt?ts=1788726245" target="_blank" class="btn-ghost">
+                                <i class="fas fa-external-link-alt"></i> Открыть
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="config-card ">
+                        <div class="config-name">my_euro_all_part13?ts=1788726245</div>
+                        <div class="config-category"><i class="fas fa-tag"></i> 🇪🇺 EUROPE (ALL)</div>
+                        <div class="config-actions">
+                            <button class="btn-primary-sm" data-url="https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/My_Euro/my_euro_all_part13.txt?ts=1788726245" onclick="copyConfig(this, 'https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/My_Euro/my_euro_all_part13.txt?ts=1788726245')">
+                                <i class="fas fa-copy"></i> Копировать
+                            </button>
+                            <a href="https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/My_Euro/my_euro_all_part13.txt?ts=1788726245" target="_blank" class="btn-ghost">
+                                <i class="fas fa-external-link-alt"></i> Открыть
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="config-card ">
+                        <div class="config-name">my_euro_all_part14?ts=1788726245</div>
+                        <div class="config-category"><i class="fas fa-tag"></i> 🇪🇺 EUROPE (ALL)</div>
+                        <div class="config-actions">
+                            <button class="btn-primary-sm" data-url="https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/My_Euro/my_euro_all_part14.txt?ts=1788726245" onclick="copyConfig(this, 'https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/My_Euro/my_euro_all_part14.txt?ts=1788726245')">
+                                <i class="fas fa-copy"></i> Копировать
+                            </button>
+                            <a href="https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/My_Euro/my_euro_all_part14.txt?ts=1788726245" target="_blank" class="btn-ghost">
+                                <i class="fas fa-external-link-alt"></i> Открыть
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="config-card recommended">
+                        <div class="config-name">ru_white_all_WHITE?ts=1788726245</div>
+                        <div class="config-category"><i class="fas fa-tag"></i> ✅ WHITE RUSSIA (ALL)</div>
+                        <div class="config-actions">
+                            <button class="btn-primary-sm" data-url="https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/RU_Best/ru_white_all_WHITE.txt?ts=1788726245" onclick="copyConfig(this, 'https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/RU_Best/ru_white_all_WHITE.txt?ts=1788726245')">
+                                <i class="fas fa-copy"></i> Копировать
+                            </button>
+                            <a href="https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/RU_Best/ru_white_all_WHITE.txt?ts=1788726245" target="_blank" class="btn-ghost">
+                                <i class="fas fa-external-link-alt"></i> Открыть
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="config-card recommended">
+                        <div class="config-name">my_euro_all_WHITE?ts=1788726245</div>
+                        <div class="config-category"><i class="fas fa-tag"></i> ✅ WHITE EUROPE (ALL)</div>
+                        <div class="config-actions">
+                            <button class="btn-primary-sm" data-url="https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/My_Euro/my_euro_all_WHITE.txt?ts=1788726245" onclick="copyConfig(this, 'https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/My_Euro/my_euro_all_WHITE.txt?ts=1788726245')">
+                                <i class="fas fa-copy"></i> Копировать
+                            </button>
+                            <a href="https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/My_Euro/my_euro_all_WHITE.txt?ts=1788726245" target="_blank" class="btn-ghost">
+                                <i class="fas fa-external-link-alt"></i> Открыть
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="config-card recommended">
+                        <div class="config-name">ru_white_all_BLACK?ts=1788726245</div>
+                        <div class="config-category"><i class="fas fa-tag"></i> ⚠️ BLACK RUSSIA (ALL)</div>
+                        <div class="config-actions">
+                            <button class="btn-primary-sm" data-url="https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/RU_Best/ru_white_all_BLACK.txt?ts=1788726245" onclick="copyConfig(this, 'https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/RU_Best/ru_white_all_BLACK.txt?ts=1788726245')">
+                                <i class="fas fa-copy"></i> Копировать
+                            </button>
+                            <a href="https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/RU_Best/ru_white_all_BLACK.txt?ts=1788726245" target="_blank" class="btn-ghost">
+                                <i class="fas fa-external-link-alt"></i> Открыть
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="config-card ">
+                        <div class="config-name">my_euro_all_BLACK?ts=1788726245</div>
+                        <div class="config-category"><i class="fas fa-tag"></i> ⚠️ BLACK EUROPE (ALL)</div>
+                        <div class="config-actions">
+                            <button class="btn-primary-sm" data-url="https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/My_Euro/my_euro_all_BLACK.txt?ts=1788726245" onclick="copyConfig(this, 'https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/My_Euro/my_euro_all_BLACK.txt?ts=1788726245')">
+                                <i class="fas fa-copy"></i> Копировать
+                            </button>
+                            <a href="https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/My_Euro/my_euro_all_BLACK.txt?ts=1788726245" target="_blank" class="btn-ghost">
+                                <i class="fas fa-external-link-alt"></i> Открыть
+                            </a>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+
+        <!-- APPS -->
+        <div class="section" id="apps">
+            <div class="container">
+                <div class="section-label">Клиенты</div>
+                <h2 class="section-title">📱 Скачать VPN-клиенты</h2>
+                <p class="section-desc">Приложения для подключения по протоколам V2Ray, VLESS, Hysteria и Trojan.</p>
+
+                <div class="apps-grid">
+                    <div class="app-card">
+                        <div class="app-icon"><i class="fab fa-android"></i></div>
+                        <h3>Android</h3>
+                        <div class="app-links">
+                            <a href="https://github.com/2dust/v2rayNG/releases/latest" class="app-link">v2rayNG</a>
+                            <a href="https://github.com/MatsuriDayo/NekoBoxForAndroid/releases/latest" class="app-link">NekoBox</a>
+                            <a href="https://www.happ.su/main" class="app-link">Happ</a>
+                            <a href="https://karing.app/en/download/" class="app-link">Karing</a>
+                        </div>
+                    </div>
+                    <div class="app-card">
+                        <div class="app-icon"><i class="fab fa-windows"></i></div>
+                        <h3>Windows</h3>
+                        <div class="app-links">
+                            <a href="https://github.com/2dust/v2rayN/releases/latest/download/v2rayN-windows-64.zip" class="app-link">v2rayN</a>
+                        </div>
+                    </div>
+                    <div class="app-card">
+                        <div class="app-icon"><i class="fab fa-apple"></i></div>
+                        <h3>iOS / macOS</h3>
+                        <div class="app-links">
+                            <a href="https://apps.apple.com/app/shadowrocket/id932747118" class="app-link">Shadowrocket</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- NEWS -->
+        <div class="section" id="news">
+            <div class="container">
+                <div class="section-label">Контекст</div>
+                <h2 class="section-title">📰 Блокировки в России</h2>
+                <p class="section-desc">Актуальные новости о регулировании интернета, блокировках и ограничениях.</p>
+
+                <div class="news-list">
+                    
+                    <div class="news-item">
+                        <div class="news-date"><i class="far fa-calendar-alt"></i> 06 September 2026</div>
+                        <div class="news-title">Актуальные новости о блокировках</div>
+                        <div class="news-summary">Следите за официальными заявлениями Роскомнадзора и Минцифры.</div>
+                        <div class="news-source">Источник: РКН</div>
+                    </div>
+                    
+                </div>
+
+                <div class="official-links">
+                    <i class="fas fa-link"></i> Официальные источники:
+                    <a href="https://rkn.gov.ru/" target="_blank" rel="noopener">Роскомнадзор</a>
+                    <a href="https://digital.gov.ru/ru/" target="_blank" rel="noopener">Минцифры РФ</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="https://github.com/kort0881/internet-access-site" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                <a href="https://t.me/vlesstrojan" target="_blank" rel="noopener" aria-label="Telegram"><i class="fab fa-telegram"></i></a>
+            </div>
+            <div class="footer-copy">© 2026 Доступ к интернету</div>
+        </div>
+    </footer>
+
+    <script>
+        // Копирование в буфер
+        function copyToClipboard(btn, text, successText) {
+            const original = btn.innerHTML;
+            navigator.clipboard.writeText(text).then(() => {
+                btn.innerHTML = '<i class="fas fa-check"></i> ' + (successText || 'Скопировано');
+                setTimeout(() => { btn.innerHTML = original; }, 1500);
+            }).catch(() => {
+                const ta = document.createElement('textarea');
+                ta.value = text;
+                document.body.appendChild(ta);
+                ta.select();
+                document.execCommand('copy');
+                document.body.removeChild(ta);
+                btn.innerHTML = '<i class="fas fa-check"></i> ' + (successText || 'Скопировано');
+                setTimeout(() => { btn.innerHTML = original; }, 1500);
+            });
+        }
+
+        function copyConfig(btn, url) {
+            copyToClipboard(btn, url);
+        }
+
+        // Загрузка прокси
+        async function loadProxies() {
+            const containers = {
+                ru: document.getElementById('proxy-ru'),
+                eu: document.getElementById('proxy-eu'),
+                us: document.getElementById('proxy-us'),
+                asia: document.getElementById('proxy-asia')
+            };
+            const counts = {
+                ru: document.getElementById('ru-count'),
+                eu: document.getElementById('eu-count'),
+                us: document.getElementById('us-count'),
+                asia: document.getElementById('asia-count')
+            };
+            const sources = [
+                { url: 'https://raw.githubusercontent.com/kort0881/telegram-proxy-collector/main/verified/proxy_ru_verified.txt', container: containers.ru,
+                    countEl: counts.ru, label: 'Россия' },
+                { url: 'https://raw.githubusercontent.com/kort0881/telegram-proxy-collector/main/verified/proxy_eu_verified.txt', container: containers.eu,
+                    countEl: counts.eu, label: 'Европа' },
+                { url: 'https://raw.githubusercontent.com/kort0881/telegram-proxy-collector/main/verified/proxy_us_verified.txt', container: containers.us,
+                    countEl: counts.us, label: 'США' },
+                { url: 'https://raw.githubusercontent.com/kort0881/telegram-proxy-collector/main/verified/proxy_asia_verified.txt', container: containers
+                        .asia, countEl: counts.asia, label: 'Азия' }
+            ];
+
+            for (const src of sources) {
+                try {
+                    const resp = await fetch(src.url + '?ts=' + Date.now());
+                    if (!resp.ok) throw new Error('HTTP ' + resp.status);
+                    const text = await resp.text();
+                    const links = text.match(/tg:\/\/proxy\?[^\s]+/g) || [];
+                    src.container.innerHTML = '';
+                    if (links.length === 0) {
+                        src.container.innerHTML = '<span class="proxy-empty">Прокси для этого региона пока нет</span>';
+                        if (src.countEl) src.countEl.textContent = '(0)';
+                        continue;
+                    }
+                    links.forEach((link, idx) => {
+                        const wrapper = document.createElement('div');
+                        wrapper.className = 'proxy-item-wrapper';
+                        const a = document.createElement('a');
+                        a.href = link;
+                        a.textContent = '🔌 Прокси #' + (idx + 1);
+                        a.target = '_blank';
+                        a.title = link;
+                        wrapper.appendChild(a);
+                        const copyBtn = document.createElement('button');
+                        copyBtn.className = 'proxy-copy-btn';
+                        copyBtn.innerHTML = '<i class="fas fa-copy"></i>';
+                        copyBtn.setAttribute('aria-label', 'Копировать прокси');
+                        copyBtn.onclick = (e) => { e.preventDefault();
+                            copyToClipboard(copyBtn, link, 'Готово'); };
+                        wrapper.appendChild(copyBtn);
+                        src.container.appendChild(wrapper);
+                    });
+                    if (src.countEl) src.countEl.textContent = '(' + links.length + ')';
+                } catch (e) {
+                    console.error('Proxy error for', src.label, e);
+                    src.container.innerHTML = '<span class="proxy-empty">⚠️ Ошибка загрузки прокси для ' + src.label + '</span>';
+                    if (src.countEl) src.countEl.textContent = '(ошибка)';
+                }
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            loadProxies();
+            setInterval(loadProxies, 600000);
+            var el = document.getElementById('lastUpdate');
+            if (el && el.textContent === 'сегодня') {
+                el.textContent = new Date().toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' });
+            }
+        });
+    </script>
+
+</body>
+</html>
