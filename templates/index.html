@@ -464,28 +464,6 @@
             color: #666;
         }
 
-        /* ---------- УВЕДОМЛЕНИЕ ---------- */
-        .notice-card {
-            padding: 24px 32px;
-            border-radius: 8px;
-            background: #fafafa;
-            box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.08);
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            flex-wrap: wrap;
-            margin-bottom: 40px;
-        }
-        .notice-card p {
-            font-size: 0.9375rem;
-            color: #4d4d4d;
-            flex: 1;
-        }
-        .notice-card a {
-            color: #0072f5;
-            text-decoration: underline;
-        }
-
         /* ---------- КАРТОЧКИ КОНФИГОВ ---------- */
         .configs-grid {
             display: grid;
@@ -748,24 +726,6 @@
             text-decoration: underline;
         }
 
-        /* ---------- FAQ ---------- */
-        .faq-list {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-        .faq-item h3 {
-            font-size: 1.05rem;
-            font-weight: 600;
-            color: #171717;
-            margin-bottom: 6px;
-        }
-        .faq-item p {
-            font-size: 0.9375rem;
-            color: #4d4d4d;
-            line-height: 1.6;
-        }
-
         /* ---------- ФУТЕР ---------- */
         footer {
             padding: 48px 0 32px;
@@ -841,10 +801,6 @@
             .nav-links {
                 width: 100%;
                 justify-content: center;
-            }
-            .notice-card {
-                flex-direction: column;
-                text-align: center;
             }
         }
 
@@ -962,9 +918,8 @@
                 <h2 class="section-title">⚡ VPN конфигурации</h2>
                 <p class="section-desc">Рабочие ссылки для импорта в ваш VPN-клиент. White версии — самые стабильные.</p>
 
-                <div class="configs-grid">
-                    <!-- Здесь будут ваши конфиги (заполняются динамически или статически) -->
-                    <p style="color:#666;">Конфигурации временно недоступны</p>
+                <div class="configs-grid" id="configsGrid">
+                    <span class="proxy-loading"><span class="spinner"></span> Загружаем конфигурации...</span>
                 </div>
             </div>
         </div>
@@ -1069,7 +1024,7 @@
             copyToClipboard(btn, url);
         }
 
-        // Загрузка прокси
+        // Загрузка прокси (MTProto)
         async function loadProxies() {
             const containers = {
                 ru: document.getElementById('proxy-ru'),
@@ -1133,9 +1088,72 @@
             }
         }
 
+        // Загрузка конфигураций из configs.txt
+        async function loadConfigs() {
+            const grid = document.getElementById('configsGrid');
+            try {
+                const resp = await fetch('configs.txt?ts=' + Date.now());
+                if (!resp.ok) throw new Error('HTTP ' + resp.status);
+                const text = await resp.text();
+                const lines = text.split('\n').filter(line => line.trim() && line.includes('|'));
+
+                if (lines.length === 0) {
+                    grid.innerHTML = '<p style="color:#666;">Нет активных конфигураций</p>';
+                    return;
+                }
+
+                grid.innerHTML = '';
+                lines.forEach(line => {
+                    const parts = line.split('|');
+                    if (parts.length < 3) return;
+                    const name = parts[0].trim();
+                    const category = parts[1].trim();
+                    const url = parts[2].trim();
+                    const isRecommended = name.toLowerCase().includes('white');
+
+                    const card = document.createElement('div');
+                    card.className = 'config-card' + (isRecommended ? ' recommended' : '');
+
+                    const nameDiv = document.createElement('div');
+                    nameDiv.className = 'config-name';
+                    nameDiv.textContent = name;
+
+                    const catDiv = document.createElement('div');
+                    catDiv.className = 'config-category';
+                    catDiv.innerHTML = '<i class="fas fa-tag"></i> ' + category;
+
+                    const actions = document.createElement('div');
+                    actions.className = 'config-actions';
+
+                    const copyBtn = document.createElement('button');
+                    copyBtn.className = 'btn-primary-sm';
+                    copyBtn.innerHTML = '<i class="fas fa-copy"></i> Копировать';
+                    copyBtn.onclick = function() { copyConfig(this, url); };
+
+                    const openBtn = document.createElement('a');
+                    openBtn.className = 'btn-ghost';
+                    openBtn.innerHTML = '<i class="fas fa-external-link-alt"></i> Открыть';
+                    openBtn.href = url;
+                    openBtn.target = '_blank';
+
+                    actions.appendChild(copyBtn);
+                    actions.appendChild(openBtn);
+                    card.appendChild(nameDiv);
+                    card.appendChild(catDiv);
+                    card.appendChild(actions);
+                    grid.appendChild(card);
+                });
+            } catch (e) {
+                console.error('Config load error:', e);
+                grid.innerHTML = '<p style="color:#666;">⚠️ Ошибка загрузки конфигураций</p>';
+            }
+        }
+
         document.addEventListener('DOMContentLoaded', function() {
             loadProxies();
+            loadConfigs();
             setInterval(loadProxies, 600000);
+            setInterval(loadConfigs, 600000);
             var el = document.getElementById('lastUpdate');
             if (el && el.textContent === 'сегодня') {
                 el.textContent = new Date().toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' });
