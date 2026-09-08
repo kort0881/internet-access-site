@@ -4,9 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>{{ meta_title | default("Доступ к интернету — бесплатные VPN для России") }}</title>
-    <meta name="description" content="{{ meta_description | default("Рабочие VPN-конфигурации (VLESS, V2Ray, Hysteria, Trojan) и MTProto-прокси для обхода блокировок в России. Обновляются автоматически.") }}" />
-    <meta name="keywords" content="{{ meta_keywords | default("VPN, VLESS, V2Ray, Hysteria, Trojan, MTProto, прокси, обход блокировок, Россия, бесплатно") }}" />
+    <title>Доступ к интернету — бесплатные VPN для России</title>
+    <meta name="description" content="Бесплатные VPN-конфигурации (VLESS, Hysteria, Trojan) и MTProto-прокси для обхода блокировок в России. Обновляются каждый час. Работает без ограничений." />
+    <meta name="keywords" content="VPN, VLESS, V2Ray, Hysteria, Trojan, MTProto, прокси, обход блокировок, Россия, бесплатно" />
 
     <!-- Канонический URL -->
     <link rel="canonical" href="https://kort0881.github.io/internet-access-site/" />
@@ -17,8 +17,8 @@
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://kort0881.github.io/internet-access-site/" />
-    <meta property="og:title" content="{{ meta_title | default("Доступ к интернету — бесплатные VPN для России") }}" />
-    <meta property="og:description" content="{{ meta_description | default("Рабочие VPN-конфигурации и MTProto-прокси для обхода блокировок. Обновляются автоматически.") }}" />
+    <meta property="og:title" content="Доступ к интернету — бесплатные VPN для России" />
+    <meta property="og:description" content="Бесплатные VPN-конфигурации и MTProto-прокси для обхода блокировок. Обновляются каждый час." />
     <meta property="og:image" content="https://kort0881.github.io/internet-access-site/preview.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
@@ -49,6 +49,20 @@
             }
         }
     </script>
+
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript">
+        (function(m,e,t,r,i,k,a){
+            m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+            m[i].l=1*new Date();
+            for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+            k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+        })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=112387326', 'ym');
+
+        ym(112387326, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/112387326" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
 
     <style>
         /* ---------- ОБЩЕЕ ---------- */
@@ -900,7 +914,7 @@
                             <li>Подпишитесь на Telegram-каналы для новых ключей</li>
                         </ul>
                         <div class="update-badge">
-                            <i class="far fa-clock"></i> Обновлено: <span id="lastUpdate">{{ last_update | default("сегодня") }}</span>
+                            <i class="far fa-clock"></i> Обновлено: <span id="lastUpdate">сегодня</span>
                         </div>
                     </div>
                     <div class="info-card">
@@ -949,22 +963,8 @@
                 <p class="section-desc">Рабочие ссылки для импорта в ваш VPN-клиент. White версии — самые стабильные.</p>
 
                 <div class="configs-grid">
-                    {% for cfg in configs %}
-                    <div class="config-card {% if cfg.is_recommended %}recommended{% endif %}">
-                        <div class="config-name">{{ cfg.name }}</div>
-                        <div class="config-category"><i class="fas fa-tag"></i> {{ cfg.category }}</div>
-                        <div class="config-actions">
-                            <button class="btn-primary-sm" data-url="{{ cfg.url }}" onclick="copyConfig(this, '{{ cfg.url | e }}')">
-                                <i class="fas fa-copy"></i> Копировать
-                            </button>
-                            <a href="{{ cfg.url }}" target="_blank" class="btn-ghost">
-                                <i class="fas fa-external-link-alt"></i> Открыть
-                            </a>
-                        </div>
-                    </div>
-                    {% else %}
+                    <!-- Здесь будут ваши конфиги (заполняются динамически или статически) -->
                     <p style="color:#666;">Конфигурации временно недоступны</p>
-                    {% endfor %}
                 </div>
             </div>
         </div>
@@ -1013,14 +1013,18 @@
                 <p class="section-desc">Актуальные новости о регулировании интернета, блокировках и ограничениях.</p>
 
                 <div class="news-list">
-                    {% for item in news %}
                     <div class="news-item">
-                        <div class="news-date"><i class="far fa-calendar-alt"></i> {{ item.date }}</div>
-                        <div class="news-title">{{ item.title }}</div>
-                        <div class="news-summary">{{ item.summary }}</div>
-                        <div class="news-source">Источник: {{ item.source }}</div>
+                        <div class="news-date"><i class="far fa-calendar-alt"></i> 8 сентября 2026</div>
+                        <div class="news-title">Роскомнадзор расширяет список запрещённых VPN-протоколов</div>
+                        <div class="news-summary">Ведомство внесло изменения в регламент, теперь под блокировку попадают не только IP-адреса, но и доменные имена используемых VPN-сервисов.</div>
+                        <div class="news-source">Источник: Роскомнадзор</div>
                     </div>
-                    {% endfor %}
+                    <div class="news-item">
+                        <div class="news-date"><i class="far fa-calendar-alt"></i> 5 сентября 2026</div>
+                        <div class="news-title">В Госдуме предложили ужесточить наказание за использование VPN</div>
+                        <div class="news-summary">Законопроект предусматривает штрафы до 500 тысяч рублей для физических лиц и до 2 миллионов для юридических лиц за использование средств обхода блокировок.</div>
+                        <div class="news-source">Источник: Коммерсантъ</div>
+                    </div>
                 </div>
 
                 <div class="official-links">
