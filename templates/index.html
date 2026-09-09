@@ -1088,39 +1088,57 @@
             }
         }
 
-        // Загрузка конфигураций из configs.txt
+        // Новая функция загрузки конфигураций — парсит subscriptions_list.txt
         async function loadConfigs() {
             const grid = document.getElementById('configsGrid');
             try {
-                const resp = await fetch('configs.txt?ts=' + Date.now());
+                const resp = await fetch('https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/subscriptions_list.txt?ts=' + Date.now());
                 if (!resp.ok) throw new Error('HTTP ' + resp.status);
                 const text = await resp.text();
-                const lines = text.split('\n').filter(line => line.trim() && line.includes('|'));
+                const lines = text.split('\n').map(line => line.trim()).filter(line => line.length > 0);
 
-                if (lines.length === 0) {
+                let currentCategory = 'Общие';
+                const configs = [];
+
+                for (const line of lines) {
+                    // Проверяем, является ли строка категорией
+                    const categoryMatch = line.match(/^===\s*(.+?)\s*===$/);
+                    if (categoryMatch) {
+                        currentCategory = categoryMatch[1];
+                        continue;
+                    }
+                    // Если строка начинается с https:// — это ссылка
+                    if (line.startsWith('https://')) {
+                        const filename = line.split('/').pop() || '';
+                        const name = filename.replace(/\.txt$/i, '') || 'Конфиг';
+                        configs.push({
+                            name: name,
+                            category: currentCategory,
+                            url: line,
+                            filename: filename
+                        });
+                    }
+                }
+
+                if (configs.length === 0) {
                     grid.innerHTML = '<p style="color:#666;">Нет активных конфигураций</p>';
                     return;
                 }
 
                 grid.innerHTML = '';
-                lines.forEach(line => {
-                    const parts = line.split('|');
-                    if (parts.length < 3) return;
-                    const name = parts[0].trim();
-                    const category = parts[1].trim();
-                    const url = parts[2].trim();
-                    const isRecommended = name.toLowerCase().includes('white');
+                configs.forEach(cfg => {
+                    const isRecommended = cfg.filename.toLowerCase().includes('white');
 
                     const card = document.createElement('div');
                     card.className = 'config-card' + (isRecommended ? ' recommended' : '');
 
                     const nameDiv = document.createElement('div');
                     nameDiv.className = 'config-name';
-                    nameDiv.textContent = name;
+                    nameDiv.textContent = cfg.name;
 
                     const catDiv = document.createElement('div');
                     catDiv.className = 'config-category';
-                    catDiv.innerHTML = '<i class="fas fa-tag"></i> ' + category;
+                    catDiv.innerHTML = '<i class="fas fa-tag"></i> ' + cfg.category;
 
                     const actions = document.createElement('div');
                     actions.className = 'config-actions';
@@ -1128,12 +1146,12 @@
                     const copyBtn = document.createElement('button');
                     copyBtn.className = 'btn-primary-sm';
                     copyBtn.innerHTML = '<i class="fas fa-copy"></i> Копировать';
-                    copyBtn.onclick = function() { copyConfig(this, url); };
+                    copyBtn.onclick = function() { copyConfig(this, cfg.url); };
 
                     const openBtn = document.createElement('a');
                     openBtn.className = 'btn-ghost';
                     openBtn.innerHTML = '<i class="fas fa-external-link-alt"></i> Открыть';
-                    openBtn.href = url;
+                    openBtn.href = cfg.url;
                     openBtn.target = '_blank';
 
                     actions.appendChild(copyBtn);
