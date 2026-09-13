@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Доступ к интернету — бесплатные VPN для России</title>
+    <meta name="description" content="Бесплатные VPN-конфигурации (VLESS, Hysteria, Trojan) и MTProto-прокси для обхода блокировок в России. Обновляются каждый час. Работает без ограничений." />
+    <meta name="keywords" content="VPN, VLESS, V2Ray, Hysteria, Trojan, MTProto, прокси, обход блокировок, Россия, бесплатно" />
+
+    <!-- Канонический URL -->
+    <link rel="canonical" href="https://kort0881.github.io/internet-access-site/" />
+
+    <!-- Pinterest верификация -->
+    <meta name="p:domain_verify" content="5cb2efcf7a168002d8361a48c34dec69" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://kort0881.github.io/internet-access-site/" />
+    <meta property="og:title" content="Доступ к интернету — бесплатные VPN для России" />
+    <meta property="og:description" content="Бесплатные VPN-конфигурации и MTProto-прокси для обхода блокировок. Обновляются каждый час." />
+    <meta property="og:image" content="https://kort0881.github.io/internet-access-site/preview.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Favicon (реальные файлы) -->
+    <link rel="icon" type="image/x-icon" href="/internet-access-site/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/internet-access-site/favicon.png" />
+    <link rel="apple-touch-icon" href="/internet-access-site/favicon.png" />
+
+    <!-- Шрифты -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+    <!-- JSON-LD -->
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            "name": "Доступ к интернету",
+            "url": "https://kort0881.github.io/internet-access-site/",
+            "description": "Бесплатные VPN-конфигурации и прокси для обхода блокировок в России.",
+            "publisher": {
+                "@type": "Organization",
+                "name": "Доступ к интернету"
+            }
+        }
+    </script>
+
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript">
+        (function(m,e,t,r,i,k,a){
+            m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+            m[i].l=1*new Date();
+            for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+            k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+        })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=112387326', 'ym');
+
+        ym(112387326, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/112387326" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+
+    <style>
+        /* ---------- ОБЩЕЕ ---------- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Geist', system-ui, -apple-system, sans-serif;
+            color: #171717;
+            line-height: 1.6;
+            background: #E0CDBB;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        /* ---------- HERO ---------- */
+        .hero {
+            position: relative;
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #E0CDBB;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .hero-bg video,
+        .hero-bg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.75;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            background: linear-gradient(180deg,
+                    rgba(224, 205, 187, 0) 50%,
+                    #E0CDBB 100%);
+        }
+
+        .hero-overlay-top {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 120px;
+            z-index: 1;
+            background: linear-gradient(0deg,
+                    rgba(224, 205, 187, 0) 0%,
+                    #E0CDBB 100%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 720px;
+            padding: 60px 28px 100px;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #ebf5ff;
+            color: #0068d6;
+            font-size: 0.75rem;
+            font-weight: 500;
+            padding: 4px 14px;
+            border-radius: 9999px;
+            letter-spacing: 0.02em;
+            margin-bottom: 32px;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 600;
+            line-height: 1.1;
+            letter-spacing: -0.04em;
+            color: #171717;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(135deg, #171717 40%, #666666 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.125rem;
+            color: #4d4d4d;
+            line-height: 1.6;
+            max-width: 560px;
+            margin: 0 auto 32px;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* ---------- КНОПКИ ---------- */
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 24px;
+            background: #171717;
+            color: #ffffff;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+        .btn-primary:hover {
+            background: #333333;
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 24px;
+            background: #ffffff;
+            color: #171717;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.2s;
+            box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.08);
+            border: none;
+            cursor: pointer;
+        }
+        .btn-secondary:hover {
+            box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.15), 0px 2px 4px rgba(0, 0, 0, 0.04);
+            transform: translateY(-1px);
+        }
+
+        .btn-primary-sm,
+        .btn-copy {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 16px;
+            background: #171717;
+            color: #ffffff;
+            border-radius: 6px;
+            font-size: 0.8125rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.15s;
+            border: none;
+            cursor: pointer;
+            font-family: inherit;
+        }
+        .btn-primary-sm:hover {
+            background: #333333;
+        }
+
+        .btn-ghost {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 16px;
+            background: transparent;
+            color: #4d4d4d;
+            border-radius: 6px;
+            font-size: 0.8125rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.15s;
+            box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.08);
+            border: none;
+            cursor: pointer;
+            font-family: inherit;
+        }
+        .btn-ghost:hover {
+            color: #171717;
+            box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.15);
+        }
+
+        /* ---------- КОНТЕЙНЕР ---------- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 28px;
+        }
+
+        /* ---------- НАВИГАЦИЯ ---------- */
+        .nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(224, 205, 187, 0.92);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+        }
+
+        .nav-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 0;
+            gap: 20px;
+        }
+
+        .nav-logo {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #171717;
+            text-decoration: none;
+            letter-spacing: -0.03em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-logo-text {
+            font-size: 0.9rem;
+            color: #666;
+            font-weight: 400;
+            letter-spacing: 0;
+            margin-left: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-link {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #4d4d4d;
+            text-decoration: none;
+            padding: 6px 14px;
+            border-radius: 6px;
+            transition: all 0.15s;
+        }
+        .nav-link:hover {
+            color: #171717;
+            background: rgba(0, 0, 0, 0.06);
+        }
+
+        /* ---------- СЕКЦИИ ---------- */
+        .section {
+            padding: 80px 0;
+        }
+        .section:not(:last-child) {
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+        }
+
+        .section-label {
+            font-family: 'Geist Mono', monospace;
+            font-size: 0.75rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #666;
+            margin-bottom: 12px;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 600;
+            letter-spacing: -0.04em;
+            color: #171717;
+            margin-bottom: 12px;
+        }
+
+        .section-desc {
+            font-size: 1rem;
+            color: #3d3d3d;
+            max-width: 600px;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        /* ---------- КАРТОЧКИ ---------- */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+
+        .info-card {
+            padding: 32px;
+            border-radius: 8px;
+            background: #ffffff;
+            box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.08),
+                0px 2px 2px rgba(0, 0, 0, 0.04),
+                0px 8px 8px -8px rgba(0, 0, 0, 0.04);
+            transition: all 0.2s;
+        }
+        .info-card:hover {
+            box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.12),
+                0px 4px 8px rgba(0, 0, 0, 0.06),
+                0px 16px 16px -8px rgba(0, 0, 0, 0.06);
+            transform: translateY(-2px);
+        }
+
+        .info-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 8px;
+            background: #f5f5f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: #171717;
+            margin-bottom: 20px;
+        }
+
+        .info-card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            color: #171717;
+            margin-bottom: 12px;
+        }
+
+        .info-card p,
+        .info-card li {
+            font-size: 0.9375rem;
+            color: #4d4d4d;
+            line-height: 1.6;
+        }
+
+        .step-list {
+            list-style: none;
+            counter-reset: step;
+        }
+        .step-list li {
+            counter-increment: step;
+            margin-bottom: 10px;
+            padding-left: 28px;
+            position: relative;
+        }
+        .step-list li::before {
+            content: counter(step);
+            position: absolute;
+            left: 0;
+            top: 1px;
+            width: 20px;
+            height: 20px;
+            background: #f0f0f0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: #666;
+        }
+
+        .highlight {
+            color: #171717;
+            font-weight: 600;
+        }
+
+        .update-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 20px;
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        /* ---------- КАРТОЧКИ КОНФИГОВ ---------- */
+        .configs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 24px 0;
+        }
+
+        .config-card {
+            padding: 24px;
+            border-radius: 8px;
+            background: #ffffff;
+            box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.08);
+            transition: all 0.2s;
+        }
+        .config-card:hover {
+            box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.12),
+                0px 4px 8px rgba(0, 0, 0, 0.06);
+            transform: translateY(-2px);
+        }
+        .config-card.recommended {
+            box-shadow: 0px 0px 0px 1px #171717,
+                0px 2px 2px rgba(0, 0, 0, 0.04);
+        }
+
+        .config-name {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: #171717;
+            letter-spacing: -0.02em;
+            margin-bottom: 4px;
+            word-break: break-word;
+        }
+
+        .config-category {
+            font-size: 0.8125rem;
+            font-family: 'Geist Mono', monospace;
+            color: #666;
+            margin-bottom: 16px;
+        }
+
+        .config-actions {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        /* ---------- ПРОКСИ ---------- */
+        .proxy-region-block {
+            margin-bottom: 40px;
+        }
+
+        .proxy-region-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #171717;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .proxy-count {
+            font-family: 'Geist Mono', monospace;
+            font-size: 0.8rem;
+            color: #666;
+            font-weight: 400;
+        }
+
+        .proxy-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            max-height: 400px;
+            overflow-y: auto;
+            padding-right: 4px;
+        }
+        .proxy-grid::-webkit-scrollbar {
+            width: 4px;
+        }
+        .proxy-grid::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .proxy-grid::-webkit-scrollbar-thumb {
+            background: #d0d0d0;
+            border-radius: 4px;
+        }
+
+        .proxy-item-wrapper {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: #fafafa;
+            border: 1px solid #ebebeb;
+            padding: 4px 12px 4px 14px;
+            border-radius: 6px;
+            transition: all 0.15s;
+        }
+        .proxy-item-wrapper:hover {
+            background: #f0f0f0;
+            border-color: #d0d0d0;
+        }
+        .proxy-item-wrapper a {
+            color: #4d4d4d;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            word-break: break-all;
+        }
+        .proxy-item-wrapper a:hover {
+            color: #171717;
+        }
+
+        .proxy-copy-btn {
+            background: transparent;
+            border: none;
+            color: #808080;
+            cursor: pointer;
+            font-size: 0.8rem;
+            padding: 2px 4px;
+            border-radius: 4px;
+            transition: 0.15s;
+            display: inline-flex;
+            align-items: center;
+        }
+        .proxy-copy-btn:hover {
+            color: #171717;
+            background: #e5e5e5;
+        }
+
+        .proxy-loading,
+        .proxy-error {
+            font-size: 0.85rem;
+            color: #666;
+        }
+        .proxy-empty {
+            font-size: 0.85rem;
+            color: #666;
+            font-style: italic;
+        }
+
+        /* ---------- ПРИЛОЖЕНИЯ ---------- */
+        .apps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+        }
+
+        .app-card {
+            padding: 24px;
+            border-radius: 8px;
+            background: #ffffff;
+            box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.08);
+            text-align: center;
+            transition: all 0.2s;
+        }
+        .app-card:hover {
+            box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.12),
+                0px 4px 8px rgba(0, 0, 0, 0.06);
+            transform: translateY(-2px);
+        }
+
+        .app-icon {
+            font-size: 2rem;
+            margin-bottom: 12px;
+            color: #666;
+        }
+
+        .app-card h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #171717;
+            margin-bottom: 16px;
+        }
+
+        .app-links {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .app-link {
+            padding: 8px;
+            border-radius: 6px;
+            background: #fafafa;
+            border: 1px solid #ebebeb;
+            color: #4d4d4d;
+            text-decoration: none;
+            transition: 0.15s;
+            font-size: 0.85rem;
+        }
+        .app-link:hover {
+            background: #f0f0f0;
+            border-color: #d0d0d0;
+            color: #171717;
+        }
+
+        /* ---------- НОВОСТИ ---------- */
+        .news-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .news-item {
+            padding: 24px;
+            border-radius: 8px;
+            background: #ffffff;
+            box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.08);
+            transition: all 0.15s;
+        }
+        .news-item:hover {
+            box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.12),
+                0px 4px 8px rgba(0, 0, 0, 0.06);
+        }
+
+        .news-date {
+            font-size: 0.8rem;
+            font-family: 'Geist Mono', monospace;
+            color: #666;
+            margin-bottom: 8px;
+        }
+
+        .news-title {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: #171717;
+            letter-spacing: -0.02em;
+            margin-bottom: 8px;
+        }
+
+        .news-summary {
+            font-size: 0.9375rem;
+            color: #4d4d4d;
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+
+        .news-source {
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        .official-links {
+            margin-top: 28px;
+            padding: 20px;
+            background: #fafafa;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        .official-links a {
+            color: #0072f5;
+            text-decoration: none;
+            margin: 0 12px;
+            font-weight: 500;
+        }
+        .official-links a:hover {
+            text-decoration: underline;
+        }
+
+        /* ---------- ФУТЕР ---------- */
+        footer {
+            padding: 48px 0 32px;
+            text-align: center;
+            border-top: 1px solid rgba(0, 0, 0, 0.08);
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-bottom: 20px;
+        }
+        .footer-links a {
+            color: #666;
+            font-size: 1.3rem;
+            transition: 0.15s;
+        }
+        .footer-links a:hover {
+            color: #171717;
+        }
+
+        .footer-copy {
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        /* ---------- АНИМАЦИЯ ---------- */
+        .spinner {
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            border: 2px solid #d0d0d0;
+            border-top: 2px solid #171717;
+            border-radius: 50%;
+            animation: spin 0.7s linear infinite;
+            vertical-align: middle;
+            margin-right: 6px;
+        }
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* ---------- АДАПТИВ ---------- */
+        @media (max-width: 800px) {
+            .container {
+                padding: 0 20px;
+            }
+            .section {
+                padding: 48px 0;
+            }
+            .section-title {
+                font-size: 1.5rem;
+            }
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+            .configs-grid {
+                grid-template-columns: 1fr;
+            }
+            .apps-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .hero-content {
+                padding: 40px 20px 80px;
+            }
+            .nav-inner {
+                flex-direction: column;
+                gap: 12px;
+            }
+            .nav-links {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .apps-grid {
+                grid-template-columns: 1fr;
+            }
+            .hero h1 {
+                letter-spacing: -0.03em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- НАВИГАЦИЯ -->
+    <div class="nav">
+        <div class="container">
+            <div class="nav-inner">
+                <a href="#" class="nav-logo">
+                    🌐 Доступ к интернету
+                    <span class="nav-logo-text">VPN</span>
+                </a>
+                <div class="nav-links">
+                    <a href="#configs" class="nav-link">Конфиги</a>
+                    <a href="#proxies" class="nav-link">Прокси</a>
+                    <a href="#apps" class="nav-link">Клиенты</a>
+                    <a href="#news" class="nav-link">Новости</a>
+                    <a href="https://t.me/vlesstrojan" class="nav-link" target="_blank">
+                        <i class="fab fa-telegram"></i> @vlesstrojan
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-bg">
+            <img src="static/background.gif" alt="Background" aria-hidden="true" />
+        </div>
+        <div class="hero-overlay-top"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <div class="hero-badge"><i class="fas fa-shield-halved"></i> Бесплатно · Обновляется автоматически</div>
+            <h1>Доступ к <span>интернету</span><br />без границ</h1>
+            <p>Рабочие VPN-конфигурации VLESS, V2Ray, Hysteria, Trojan и MTProto-прокси для обхода блокировок в России.</p>
+            <div class="hero-actions">
+                <a href="#configs" class="btn-primary"><i class="fas fa-download"></i> Конфигурации</a>
+                <a href="#proxies" class="btn-secondary"><i class="fas fa-plug"></i> MTProto прокси</a>
+            </div>
+        </div>
+    </section>
+
+    <main>
+        <!-- HOW-TO + WHY -->
+        <div class="section">
+            <div class="container">
+                <div class="info-grid">
+                    <div class="info-card">
+                        <div class="info-icon"><i class="fas fa-compass"></i></div>
+                        <h3>Как использовать</h3>
+                        <ul class="step-list">
+                            <li>Выберите конфигурацию <span class="highlight">(white версии самые стабильные)</span></li>
+                            <li>Скопируйте ссылку на подписку</li>
+                            <li>Вставьте в <span class="highlight">v2rayNG / NekoBox / v2rayN</span></li>
+                            <li>Подпишитесь на Telegram-каналы для новых ключей</li>
+                        </ul>
+                        <div class="update-badge">
+                            <i class="far fa-clock"></i> Обновлено: <span id="lastUpdate">сегодня</span>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-icon"><i class="fas fa-shield-alt"></i></div>
+                        <h3>Почему это работает</h3>
+                        <p>Современные протоколы (VLESS, WireGuard, Hysteria) маскируют трафик и обходят DPI. Конфигурации проверяются и обновляются автоматически каждый час.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MTProto PROXIES -->
+        <div class="section" id="proxies">
+            <div class="container">
+                <div class="section-label">MTProto</div>
+                <h2 class="section-title">📡 Прокси для Telegram</h2>
+                <p class="section-desc">
+                    Прокси обновляются автоматически. Если список пуст — проверьте
+                    <a href="https://t.me/vlesstrojan" style="color:#0072f5;">Telegram-канал</a>.
+                </p>
+
+                <div class="proxy-region-block">
+                    <div class="proxy-region-title"><i class="fas fa-flag"></i> Россия <span class="proxy-count" id="ru-count"></span></div>
+                    <div id="proxy-ru" class="proxy-grid"><span class="proxy-loading"><span class="spinner"></span> Загружаем...</span></div>
+                </div>
+                <div class="proxy-region-block">
+                    <div class="proxy-region-title"><i class="fas fa-flag"></i> Европа <span class="proxy-count" id="eu-count"></span></div>
+                    <div id="proxy-eu" class="proxy-grid"><span class="proxy-loading"><span class="spinner"></span> Загружаем...</span></div>
+                </div>
+                <div class="proxy-region-block">
+                    <div class="proxy-region-title"><i class="fas fa-flag"></i> США <span class="proxy-count" id="us-count"></span></div>
+                    <div id="proxy-us" class="proxy-grid"><span class="proxy-loading"><span class="spinner"></span> Загружаем...</span></div>
+                </div>
+                <div class="proxy-region-block">
+                    <div class="proxy-region-title"><i class="fas fa-flag"></i> Азия <span class="proxy-count" id="asia-count"></span></div>
+                    <div id="proxy-asia" class="proxy-grid"><span class="proxy-loading"><span class="spinner"></span> Загружаем...</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- VPN CONFIGS -->
+        <div class="section" id="configs">
+            <div class="container">
+                <div class="section-label">Конфигурации</div>
+                <h2 class="section-title">⚡ VPN конфигурации</h2>
+                <p class="section-desc">Рабочие ссылки для импорта в ваш VPN-клиент. White версии — самые стабильные.</p>
+
+                <div class="configs-grid" id="configsGrid">
+                    <span class="proxy-loading"><span class="spinner"></span> Загружаем конфигурации...</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- APPS -->
+        <div class="section" id="apps">
+            <div class="container">
+                <div class="section-label">Клиенты</div>
+                <h2 class="section-title">📱 Скачать VPN-клиенты</h2>
+                <p class="section-desc">Приложения для подключения по протоколам V2Ray, VLESS, Hysteria и Trojan.</p>
+
+                <div class="apps-grid">
+                    <div class="app-card">
+                        <div class="app-icon"><i class="fab fa-android"></i></div>
+                        <h3>Android</h3>
+                        <div class="app-links">
+                            <a href="https://github.com/2dust/v2rayNG/releases/latest" class="app-link">v2rayNG</a>
+                            <a href="https://github.com/MatsuriDayo/NekoBoxForAndroid/releases/latest" class="app-link">NekoBox</a>
+                            <a href="https://www.happ.su/main" class="app-link">Happ</a>
+                            <a href="https://karing.app/en/download/" class="app-link">Karing</a>
+                        </div>
+                    </div>
+                    <div class="app-card">
+                        <div class="app-icon"><i class="fab fa-windows"></i></div>
+                        <h3>Windows</h3>
+                        <div class="app-links">
+                            <a href
