@@ -46,7 +46,6 @@ def fetch_news():
     except Exception as e:
         print(f"⚠️ Ошибка парсинга новостей: {e}")
 
-    # Если новостей нет – добавляем информационную запись
     if not news:
         news.append({
             'title': 'Актуальные новости о блокировках',
@@ -81,28 +80,39 @@ def copy_og_image():
     else:
         print("⚠️ OG image og-image.png не найден в корне репозитория")
 
+def copy_favicons():
+    """Копирование фавиконок в dist."""
+    favicons = ['favicon.ico', 'favicon.png', 'favicon-96x96.png', 'apple-touch-icon.png']
+    copied = 0
+    for f in favicons:
+        src = Path(f)
+        if src.exists():
+            dest = DIST_DIR / f
+            shutil.copy2(src, dest)
+            copied += 1
+            print(f"✅ Скопирован: {f}")
+    if copied == 0:
+        print("⚠️ Фавиконки не найдены в корне репозитория")
+
 def build_html():
     """Генерация HTML из шаблонов."""
     print("\n🛠️ Сборка HTML...")
-    
-    # Получаем данные
+
     print("📥 Загрузка VPN конфигураций...")
     configs = get_vpn_configs()
     last_update = get_last_update_time()
-    
+
     print("📰 Загрузка новостей...")
     news = fetch_news()
-    
+
     print(f"✅ Найдено конфигураций: {len(configs)}")
     print(f"✅ Загружено новостей: {len(news)}")
     if last_update:
         print(f"⏰ Последнее обновление: {last_update}")
-    
-    # Настраиваем Jinja2
+
     env = Environment(loader=FileSystemLoader(str(TEMPLATES_DIR)))
     template = env.get_template('index.html')
-    
-    # Рендерим
+
     html = template.render(
         configs=configs,
         last_update=last_update,
@@ -112,8 +122,7 @@ def build_html():
         meta_description=META_DESCRIPTION,
         meta_keywords=META_KEYWORDS
     )
-    
-    # Сохраняем
+
     output_file = DIST_DIR / 'index.html'
     output_file.write_text(html, encoding='utf-8')
     print(f"✅ Создан: {output_file}")
@@ -138,7 +147,7 @@ def create_404():
     </div>
 </body>
 </html>'''
-    
+
     output_file = DIST_DIR / '404.html'
     output_file.write_text(html_404, encoding='utf-8')
     print(f"✅ Создан: {output_file}")
@@ -156,9 +165,8 @@ Sitemap: {SITE_URL}sitemap.xml
 
 def create_sitemap():
     """Создание sitemap.xml."""
-    from datetime import datetime
     today = datetime.now().strftime('%Y-%m-%d')
-    
+
     sitemap = f'''<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
@@ -176,15 +184,16 @@ def create_sitemap():
 def main():
     """Основной процесс сборки."""
     print("🚀 Запуск сборки статического сайта...\n")
-    
+
     clean_dist()
     copy_static()
     copy_og_image()
+    copy_favicons()      # ← новая строка — копируем фавиконки
     build_html()
     create_404()
     create_robots_txt()
     create_sitemap()
-    
+
     print(f"\n✅ Сборка завершена! Результат в папке: {DIST_DIR}")
     print(f"🌐 Сайт будет доступен по адресу: {SITE_URL}")
 
