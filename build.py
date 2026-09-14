@@ -14,13 +14,22 @@ DIST_DIR = Path('dist')
 TEMPLATES_DIR = Path('templates')
 STATIC_DIR = Path('static')
 
-# SEO
+# SEO (RU)
 META_TITLE = "Доступ к интернету - Бесплатные VPN конфигурации"
 META_DESCRIPTION = (
     "Автоматические VPN-конфиги для V2Ray, VLESS, Hysteria, Trojan, VMess, Reality и Shadowsocks. "
     "Регулярное обновление, удобные ссылки."
 )
 META_KEYWORDS = "vpn, vless, v2ray, shadowsocks, hysteria, trojan, vmess, reality, free vpn, доступ к интернету"
+
+# SEO (EN)
+META_TITLE_EN = "Internet Access - Free VPN Configurations"
+META_DESCRIPTION_EN = (
+    "Automatic VPN configs for V2Ray, VLESS, Hysteria, Trojan, VMess, Reality and Shadowsocks. "
+    "Updated regularly, easy subscription links."
+)
+META_KEYWORDS_EN = "vpn, vless, v2ray, shadowsocks, hysteria, trojan, vmess, reality, free vpn, internet access, censorship bypass"
+
 SITE_URL = "https://kort0881.github.io/internet-access-site/"
 
 def fetch_news():
@@ -95,7 +104,7 @@ def copy_favicons():
         print("⚠️ Фавиконки не найдены в корне репозитория")
 
 def build_html():
-    """Генерация HTML из шаблонов."""
+    """Генерация HTML из шаблонов (RU + EN)."""
     print("\n🛠️ Сборка HTML...")
 
     print("📥 Загрузка VPN конфигураций...")
@@ -111,21 +120,38 @@ def build_html():
         print(f"⏰ Последнее обновление: {last_update}")
 
     env = Environment(loader=FileSystemLoader(str(TEMPLATES_DIR)))
-    template = env.get_template('index.html')
 
-    html = template.render(
+    # --- RU (корень) ---
+    template_ru = env.get_template('index.html')
+    html_ru = template_ru.render(
         configs=configs,
         last_update=last_update,
         news=news,
         site_url=SITE_URL,
         meta_title=META_TITLE,
         meta_description=META_DESCRIPTION,
-        meta_keywords=META_KEYWORDS
+        meta_keywords=META_KEYWORDS,
+        lang='ru',
     )
+    (DIST_DIR / 'index.html').write_text(html_ru, encoding='utf-8')
+    print(f"✅ Создан: {DIST_DIR / 'index.html'}")
 
-    output_file = DIST_DIR / 'index.html'
-    output_file.write_text(html, encoding='utf-8')
-    print(f"✅ Создан: {output_file}")
+    # --- EN (папка en/) ---
+    en_dir = DIST_DIR / 'en'
+    en_dir.mkdir(parents=True, exist_ok=True)
+    template_en = env.get_template('index_en.html')
+    html_en = template_en.render(
+        configs=configs,
+        last_update=last_update,
+        news=news,
+        site_url=SITE_URL,
+        meta_title=META_TITLE_EN,
+        meta_description=META_DESCRIPTION_EN,
+        meta_keywords=META_KEYWORDS_EN,
+        lang='en',
+    )
+    (en_dir / 'index.html').write_text(html_en, encoding='utf-8')
+    print(f"✅ Создан: {en_dir / 'index.html'}")
 
 def create_404():
     """Создание 404 страницы."""
@@ -164,16 +190,29 @@ Sitemap: {SITE_URL}sitemap.xml
     print(f"✅ Создан: {output_file}")
 
 def create_sitemap():
-    """Создание sitemap.xml."""
+    """Создание sitemap.xml с обеими языковыми версиями."""
     today = datetime.now().strftime('%Y-%m-%d')
 
     sitemap = f'''<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>{SITE_URL}</loc>
     <lastmod>{today}</lastmod>
     <changefreq>hourly</changefreq>
     <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="ru" href="{SITE_URL}"/>
+    <xhtml:link rel="alternate" hreflang="en" href="{SITE_URL}en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="{SITE_URL}"/>
+  </url>
+  <url>
+    <loc>{SITE_URL}en/</loc>
+    <lastmod>{today}</lastmod>
+    <changefreq>hourly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="ru" href="{SITE_URL}"/>
+    <xhtml:link rel="alternate" hreflang="en" href="{SITE_URL}en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="{SITE_URL}"/>
   </url>
 </urlset>
 '''
@@ -188,7 +227,7 @@ def main():
     clean_dist()
     copy_static()
     copy_og_image()
-    copy_favicons()      # ← новая строка — копируем фавиконки
+    copy_favicons()
     build_html()
     create_404()
     create_robots_txt()
