@@ -7,6 +7,10 @@
     <meta name="description" content="Бесплатные VPN-конфигурации (VLESS, Hysteria, Trojan) и MTProto-прокси для обхода блокировок в России. Обновляются каждый час." />
     <meta name="keywords" content="VPN, VLESS, V2Ray, Hysteria, Trojan, MTProto, прокси, обход блокировок, Россия, бесплатно" />
     <link rel="canonical" href="https://kort0881.github.io/internet-access-site/" />
+    <!-- ADDED: hreflang для мультиязычности -->
+    <link rel="alternate" hreflang="ru" href="https://kort0881.github.io/internet-access-site/" />
+    <link rel="alternate" hreflang="en" href="https://kort0881.github.io/internet-access-site/en/" />
+    <link rel="alternate" hreflang="x-default" href="https://kort0881.github.io/internet-access-site/" />
     <meta name="p:domain_verify" content="5cb2efcf7a168002d8361a48c34dec69" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://kort0881.github.io/internet-access-site/" />
@@ -15,6 +19,9 @@
     <meta property="og:image" content="https://kort0881.github.io/internet-access-site/preview.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
+    <!-- ADDED: og:locale -->
+    <meta property="og:locale" content="ru_RU" />
+    <meta property="og:locale:alternate" content="en_US" />
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="icon" type="image/x-icon" href="/internet-access-site/favicon.ico" />
     <link rel="icon" type="image/png" sizes="32x32" href="/internet-access-site/favicon.png" />
@@ -29,8 +36,21 @@
       "@type": "WebSite",
       "name": "Доступ к интернету",
       "url": "https://kort0881.github.io/internet-access-site/",
-      "description": "Бесплатные VPN-конфигурации и прокси для обхода блокировок в России."
+      "description": "Бесплатные VPN-конфигурации и прокси для обхода блокировок в России.",
+      "inLanguage": "ru-RU"
     }
+    </script>
+    <!-- ADDED: автопереключение на английскую версию для не-русскоязычных браузеров -->
+    <script>
+        (function() {
+            try {
+                if (localStorage.getItem('lang_manual')) return; // пользователь выбрал вручную — не трогаем
+                var lang = (navigator.language || navigator.userLanguage || 'ru').toLowerCase();
+                if (!lang.startsWith('ru')) {
+                    location.replace('/internet-access-site/en/');
+                }
+            } catch (e) {}
+        })();
     </script>
     <script type="text/javascript">
         (function(m,e,t,r,i,k,a){
@@ -72,6 +92,9 @@
         .nav-links { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
         .nav-link { font-size: 0.875rem; font-weight: 500; color: #4d4d4d; text-decoration: none; padding: 6px 14px; border-radius: 6px; transition: all 0.15s; }
         .nav-link:hover { color: #171717; background: rgba(0,0,0,0.06); }
+        /* ADDED: стиль переключателя языка */
+        .lang-switch { font-size: 0.8rem; font-weight: 600; padding: 6px 12px; border-radius: 6px; background: #171717; color: #fff; text-decoration: none; transition: all 0.15s; }
+        .lang-switch:hover { background: #333; }
         .section { padding: 80px 0; }
         .section:not(:last-child) { border-bottom: 1px solid rgba(0,0,0,0.08); }
         .section-label { font-family: 'Geist Mono', monospace; font-size: 0.75rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; color: #666; margin-bottom: 12px; }
@@ -163,6 +186,8 @@
                     <a href="#apps" class="nav-link">Клиенты</a>
                     <a href="#news" class="nav-link">Новости</a>
                     <a href="https://t.me/vlesstrojan" class="nav-link" target="_blank"><i class="fab fa-telegram"></i> @vlesstrojan</a>
+                    <!-- ADDED: переключатель на английскую версию -->
+                    <a href="/internet-access-site/en/" class="lang-switch" id="langSwitch" title="English version">EN</a>
                 </div>
             </div>
         </div>
@@ -456,6 +481,13 @@
             var el = document.getElementById('lastUpdate');
             if (el && el.textContent === 'сегодня') {
                 el.textContent = new Date().toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' });
+            }
+            // ADDED: запоминаем ручной выбор языка, чтобы автопереключение больше не срабатывало
+            var langSwitch = document.getElementById('langSwitch');
+            if (langSwitch) {
+                langSwitch.addEventListener('click', function() {
+                    try { localStorage.setItem('lang_manual', '1'); } catch (e) {}
+                });
             }
         });
     </script>
