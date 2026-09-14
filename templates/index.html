@@ -3,29 +3,27 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Доступ к интернету — бесплатные VPN для России</title>
-    <meta name="description" content="Бесплатные VPN-конфигурации (VLESS, Hysteria, Trojan) и MTProto-прокси для обхода блокировок в России. Обновляются каждый час." />
-    <meta name="keywords" content="VPN, VLESS, V2Ray, Hysteria, Trojan, MTProto, прокси, обход блокировок, Россия, бесплатно" />
-    <link rel="canonical" href="https://kort0881.github.io/internet-access-site/" />
-    <!-- ADDED: hreflang для мультиязычности -->
-    <link rel="alternate" hreflang="ru" href="https://kort0881.github.io/internet-access-site/" />
-    <link rel="alternate" hreflang="en" href="https://kort0881.github.io/internet-access-site/en/" />
-    <link rel="alternate" hreflang="x-default" href="https://kort0881.github.io/internet-access-site/" />
+    <title>{{ meta_title }}</title>
+    <meta name="description" content="{{ meta_description }}" />
+    <meta name="keywords" content="{{ meta_keywords }}" />
+    <link rel="canonical" href="{{ site_url }}" />
+    <link rel="alternate" hreflang="ru" href="{{ site_url }}" />
+    <link rel="alternate" hreflang="en" href="{{ site_url }}en/" />
+    <link rel="alternate" hreflang="x-default" href="{{ site_url }}" />
     <meta name="p:domain_verify" content="5cb2efcf7a168002d8361a48c34dec69" />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://kort0881.github.io/internet-access-site/" />
-    <meta property="og:title" content="Доступ к интернету — бесплатные VPN для России" />
-    <meta property="og:description" content="Бесплатные VPN-конфигурации и MTProto-прокси для обхода блокировок. Обновляются каждый час." />
-    <meta property="og:image" content="https://kort0881.github.io/internet-access-site/preview.png" />
+    <meta property="og:url" content="{{ site_url }}" />
+    <meta property="og:title" content="{{ meta_title }}" />
+    <meta property="og:description" content="{{ meta_description }}" />
+    <meta property="og:image" content="{{ site_url }}og-image.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <!-- ADDED: og:locale -->
     <meta property="og:locale" content="ru_RU" />
     <meta property="og:locale:alternate" content="en_US" />
     <meta name="twitter:card" content="summary_large_image" />
-    <link rel="icon" type="image/x-icon" href="/internet-access-site/favicon.ico" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/internet-access-site/favicon.png" />
-    <link rel="apple-touch-icon" href="/internet-access-site/favicon.png" />
+    <link rel="icon" type="image/x-icon" href="{{ site_url }}favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ site_url }}favicon.png" />
+    <link rel="apple-touch-icon" href="{{ site_url }}favicon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
@@ -35,19 +33,18 @@
       "@context": "https://schema.org",
       "@type": "WebSite",
       "name": "Доступ к интернету",
-      "url": "https://kort0881.github.io/internet-access-site/",
-      "description": "Бесплатные VPN-конфигурации и прокси для обхода блокировок в России.",
+      "url": "{{ site_url }}",
+      "description": "{{ meta_description }}",
       "inLanguage": "ru-RU"
     }
     </script>
-    <!-- ADDED: автопереключение на английскую версию для не-русскоязычных браузеров -->
     <script>
         (function() {
             try {
-                if (localStorage.getItem('lang_manual')) return; // пользователь выбрал вручную — не трогаем
+                if (localStorage.getItem('lang_manual')) return;
                 var lang = (navigator.language || navigator.userLanguage || 'ru').toLowerCase();
                 if (!lang.startsWith('ru')) {
-                    location.replace('/internet-access-site/en/');
+                    location.replace('{{ site_url }}en/');
                 }
             } catch (e) {}
         })();
@@ -92,7 +89,6 @@
         .nav-links { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
         .nav-link { font-size: 0.875rem; font-weight: 500; color: #4d4d4d; text-decoration: none; padding: 6px 14px; border-radius: 6px; transition: all 0.15s; }
         .nav-link:hover { color: #171717; background: rgba(0,0,0,0.06); }
-        /* ADDED: стиль переключателя языка */
         .lang-switch { font-size: 0.8rem; font-weight: 600; padding: 6px 12px; border-radius: 6px; background: #171717; color: #fff; text-decoration: none; transition: all 0.15s; }
         .lang-switch:hover { background: #333; }
         .section { padding: 80px 0; }
@@ -148,9 +144,6 @@
         .news-title { font-size: 1.15rem; font-weight: 600; color: #171717; letter-spacing: -0.02em; margin-bottom: 8px; }
         .news-summary { font-size: 0.9375rem; color: #4d4d4d; line-height: 1.6; margin-bottom: 12px; }
         .news-source { font-size: 0.8rem; color: #666; }
-        .official-links { margin-top: 28px; padding: 20px; background: #fafafa; border-radius: 8px; text-align: center; font-size: 0.9rem; color: #666; }
-        .official-links a { color: #0072f5; text-decoration: none; margin: 0 12px; font-weight: 500; }
-        .official-links a:hover { text-decoration: underline; }
         footer { padding: 48px 0 32px; text-align: center; border-top: 1px solid rgba(0,0,0,0.08); }
         .footer-links { display: flex; justify-content: center; gap: 24px; margin-bottom: 20px; }
         .footer-links a { color: #666; font-size: 1.3rem; transition: 0.15s; }
@@ -175,7 +168,6 @@
     </style>
 </head>
 <body>
-    <!-- НАВИГАЦИЯ -->
     <div class="nav">
         <div class="container">
             <div class="nav-inner">
@@ -186,16 +178,14 @@
                     <a href="#apps" class="nav-link">Клиенты</a>
                     <a href="#news" class="nav-link">Новости</a>
                     <a href="https://t.me/vlesstrojan" class="nav-link" target="_blank"><i class="fab fa-telegram"></i> @vlesstrojan</a>
-                    <!-- ADDED: переключатель на английскую версию -->
-                    <a href="/internet-access-site/en/" class="lang-switch" id="langSwitch" title="English version">EN</a>
+                    <a href="{{ site_url }}en/" class="lang-switch" id="langSwitch" title="English version">EN</a>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- HERO -->
     <section class="hero">
-        <div class="hero-bg"><img src="static/background.gif" alt="Background" aria-hidden="true" /></div>
+        <div class="hero-bg"><img src="{{ site_url }}static/background.gif" alt="Background" aria-hidden="true" /></div>
         <div class="hero-overlay-top"></div>
         <div class="hero-overlay"></div>
         <div class="hero-content">
@@ -222,7 +212,7 @@
                             <li>Вставьте в <span class="highlight">v2rayNG / NekoBox / v2rayN</span></li>
                             <li>Подпишитесь на Telegram-каналы для новых ключей</li>
                         </ul>
-                        <div class="update-badge"><i class="far fa-clock"></i> Обновлено: <span id="lastUpdate">сегодня</span></div>
+                        <div class="update-badge"><i class="far fa-clock"></i> Обновлено: <span id="lastUpdate">{{ last_update }}</span></div>
                     </div>
                     <div class="info-card">
                         <div class="info-icon"><i class="fas fa-shield-alt"></i></div>
@@ -308,23 +298,14 @@
                 <h2 class="section-title">📰 Блокировки в России</h2>
                 <p class="section-desc">Актуальные новости о регулировании интернета, блокировках и ограничениях.</p>
                 <div class="news-list">
+                    {% for item in news %}
                     <div class="news-item">
-                        <div class="news-date"><i class="far fa-calendar-alt"></i> 8 сентября 2026</div>
-                        <div class="news-title">Роскомнадзор расширяет список запрещённых VPN-протоколов</div>
-                        <div class="news-summary">Ведомство внесло изменения в регламент, теперь под блокировку попадают не только IP-адреса, но и доменные имена используемых VPN-сервисов.</div>
-                        <div class="news-source">Источник: Роскомнадзор</div>
+                        <div class="news-date"><i class="far fa-calendar-alt"></i> {{ item.date }}</div>
+                        <div class="news-title">{{ item.title }}</div>
+                        <div class="news-summary">{{ item.summary }}</div>
+                        <div class="news-source">Источник: {{ item.source }}</div>
                     </div>
-                    <div class="news-item">
-                        <div class="news-date"><i class="far fa-calendar-alt"></i> 5 сентября 2026</div>
-                        <div class="news-title">В Госдуме предложили ужесточить наказание за использование VPN</div>
-                        <div class="news-summary">Законопроект предусматривает штрафы до 500 тысяч рублей для физических лиц и до 2 миллионов для юридических лиц за использование средств обхода блокировок.</div>
-                        <div class="news-source">Источник: Коммерсантъ</div>
-                    </div>
-                </div>
-                <div class="official-links">
-                    <i class="fas fa-link"></i> Официальные источники:
-                    <a href="https://rkn.gov.ru/" target="_blank" rel="noopener">Роскомнадзор</a>
-                    <a href="https://digital.gov.ru/ru/" target="_blank" rel="noopener">Минцифры РФ</a>
+                    {% endfor %}
                 </div>
             </div>
         </div>
@@ -478,11 +459,6 @@
             loadConfigs();
             setInterval(loadProxies, 600000);
             setInterval(loadConfigs, 600000);
-            var el = document.getElementById('lastUpdate');
-            if (el && el.textContent === 'сегодня') {
-                el.textContent = new Date().toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' });
-            }
-            // ADDED: запоминаем ручной выбор языка, чтобы автопереключение больше не срабатывало
             var langSwitch = document.getElementById('langSwitch');
             if (langSwitch) {
                 langSwitch.addEventListener('click', function() {
