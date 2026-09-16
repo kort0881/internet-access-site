@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Internet Access - Free VPN Configurations</title>
+    <meta name="description" content="Automatic VPN configs for V2Ray, VLESS, Hysteria, Trojan, VMess, Reality and Shadowsocks. Updated regularly, easy subscription links." />
+    <meta name="keywords" content="vpn, vless, v2ray, shadowsocks, hysteria, trojan, vmess, reality, free vpn, internet access, censorship bypass" />
+    <link rel="canonical" href="https://kort0881.github.io/internet-access-site/en/" />
+    <link rel="alternate" hreflang="ru" href="https://kort0881.github.io/internet-access-site/" />
+    <link rel="alternate" hreflang="en" href="https://kort0881.github.io/internet-access-site/en/" />
+    <link rel="alternate" hreflang="x-default" href="https://kort0881.github.io/internet-access-site/" />
+    <meta name="p:domain_verify" content="5cb2efcf7a168002d8361a48c34dec69" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://kort0881.github.io/internet-access-site/en/" />
+    <meta property="og:title" content="Internet Access - Free VPN Configurations" />
+    <meta property="og:description" content="Automatic VPN configs for V2Ray, VLESS, Hysteria, Trojan, VMess, Reality and Shadowsocks. Updated regularly, easy subscription links." />
+    <meta property="og:image" content="https://kort0881.github.io/internet-access-site/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:locale:alternate" content="ru_RU" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" type="image/x-icon" href="https://kort0881.github.io/internet-access-site/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="https://kort0881.github.io/internet-access-site/favicon.png" />
+    <link rel="apple-touch-icon" href="https://kort0881.github.io/internet-access-site/favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Internet Access",
+      "url": "https://kort0881.github.io/internet-access-site/en/",
+      "description": "Automatic VPN configs for V2Ray, VLESS, Hysteria, Trojan, VMess, Reality and Shadowsocks. Updated regularly, easy subscription links.",
+      "inLanguage": "en-US"
+    }
+    </script>
+    <script>
+        (function() {
+            try {
+                if (localStorage.getItem('lang_manual')) return;
+                var lang = (navigator.language || navigator.userLanguage || 'en').toLowerCase();
+                if (lang.startsWith('ru')) {
+                    location.replace('https://kort0881.github.io/internet-access-site/');
+                }
+            } catch (e) {}
+        })();
+    </script>
+    <script type="text/javascript">
+        (function(m,e,t,r,i,k,a){
+            m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+            m[i].l=1*new Date();
+            for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+            k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+        })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=112387326', 'ym');
+        ym(112387326, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/112387326" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Geist', system-ui, -apple-system, sans-serif; color: #171717; line-height: 1.6; background: #E0CDBB; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+        .hero { position: relative; min-height: 70vh; display: flex; align-items: center; justify-content: center; background: #E0CDBB; overflow: hidden; }
+        .hero-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; overflow: hidden; }
+        .hero-bg video, .hero-bg img { width: 100%; height: 100%; object-fit: cover; opacity: 0.75; }
+        .hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; background: linear-gradient(180deg, rgba(224,205,187,0) 50%, #E0CDBB 100%); }
+        .hero-overlay-top { position: absolute; top: 0; left: 0; width: 100%; height: 120px; z-index: 1; background: linear-gradient(0deg, rgba(224,205,187,0) 0%, #E0CDBB 100%); }
+        .hero-content { position: relative; z-index: 2; text-align: center; max-width: 720px; padding: 60px 28px 100px; }
+        .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: #ebf5ff; color: #0068d6; font-size: 0.75rem; font-weight: 500; padding: 4px 14px; border-radius: 9999px; letter-spacing: 0.02em; margin-bottom: 32px; }
+        .hero h1 { font-size: clamp(2.5rem, 6vw, 4rem); font-weight: 600; line-height: 1.1; letter-spacing: -0.04em; color: #171717; margin-bottom: 20px; }
+        .hero h1 span { background: linear-gradient(135deg, #171717 40%, #666666 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+        .hero p { font-size: 1.125rem; color: #4d4d4d; line-height: 1.6; max-width: 560px; margin: 0 auto 32px; }
+        .hero-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+        .btn-primary { display: inline-flex; align-items: center; gap: 8px; padding: 10px 24px; background: #171717; color: #ffffff; border-radius: 6px; font-size: 0.875rem; font-weight: 500; text-decoration: none; transition: all 0.2s; border: none; cursor: pointer; }
+        .btn-primary:hover { background: #333333; transform: translateY(-1px); }
+        .btn-secondary { display: inline-flex; align-items: center; gap: 8px; padding: 10px 24px; background: #ffffff; color: #171717; border-radius: 6px; font-size: 0.875rem; font-weight: 500; text-decoration: none; transition: all 0.2s; box-shadow: 0px 0px 0px 1px rgba(0,0,0,0.08); border: none; cursor: pointer; }
+        .btn-secondary:hover { box-shadow: 0px 0px 0px 1px rgba(0,0,0,0.15), 0px 2px 4px rgba(0,0,0,0.04); transform: translateY(-1px); }
+        .btn-primary-sm, .btn-copy { display: inline-flex; align-items: center; gap: 6px; padding: 6px 16px; background: #171717; color: #ffffff; border-radius: 6px; font-size: 0.8125rem; font-weight: 500; text-decoration: none; transition: all 0.15s; border: none; cursor: pointer; font-family: inherit; }
+        .btn-primary-sm:hover { background: #333333; }
+        .btn-ghost { display: inline-flex; align-items: center; gap: 6px; padding: 6px 16px; background: transparent; color: #4d4d4d; border-radius: 6px; font-size: 0.8125rem; font-weight: 500; text-decoration: none; transition: all 0.15s; box-shadow: 0px 0px 0px 1px rgba(0,0,0,0.08); border: none; cursor: pointer; font-family: inherit; }
+        .btn-ghost:hover { color: #171717; box-shadow: 0px 0px 0px 1px rgba(0,0,0,0.15); }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 28px; }
+        .nav { position: sticky; top: 0; z-index: 100; background: rgba(224,205,187,0.92); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid rgba(0,0,0,0.08); }
+        .nav-inner { display: flex; justify-content: space-between; align-items: center; padding: 14px 0; gap: 20px; }
+        .nav-logo { font-size: 1.25rem; font-weight: 600; color: #171717; text-decoration: none; letter-spacing: -0.03em; display: flex; align-items: center; gap: 10px; }
+        .nav-logo-text { font-size: 0.9rem; color: #666; font-weight: 400; letter-spacing: 0; margin-left: 2px; }
+        .nav-links { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+        .nav-link { font-size: 0.875rem; font-weight: 500; color: #4d4d4d; text-decoration: none; padding: 6px 14px; border-radius: 6px; transition: all 0.15s; }
+        .nav-link:hover { color: #171717; background: rgba(0,0,0,0.06); }
+        .lang-switch { font-size: 0.8rem; font-weight: 600; padding: 6px 12px; border-radius: 6px; background: #171717; color: #fff; text-decoration: none; transition: all 0.15s; }
+        .lang-switch:hover { background: #333; }
+        .section { padding: 80px 0; }
+        .section:not(:last-child) { border-bottom: 1px solid rgba(0,0,0,0.08); }
+        .section-label { font-family: 'Geist Mono', monospace; font-size: 0.75rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; color: #666; margin-bottom: 12px; }
+        .section-title { font-size: 2rem; font-weight: 600; letter-spacing: -0.04em; color: #171717; margin-bottom: 12px; }
+        .section-desc { font-size: 1rem; color: #3d3d3d; max-width: 600px; margin-bottom: 40px; line-height: 1.6; }
+        .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
+        .info-card { padding: 32px; border-radius: 8px; background: #ffffff; box-shadow: 0px 0px 0px 1px rgba(0,0,0,0.08), 0px 2px 2px rgba(0,0,0,0.04), 0px 8px 8px -8px rgba(0,0,0,0.04); transition: all 0.2s; }
+        .info-card:hover { box-shadow: 0px 0px 0px 1px rgba(0,0,0,0.12), 0px 4px 8px rgba(0,0,0,0.06), 0px 16px 16px -8px rgba(0,0,0,0.06); transform: translateY(-2px); }
+        .info-icon { width: 44px; height: 44px; border-radius: 8px; background: #f5f5f5; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; color: #171717; margin-bottom: 20px; }
+        .info-card h3 { font-size: 1.25rem; font-weight: 600; letter-spacing: -0.02em; color: #171717; margin-bottom: 12px; }
+        .info-card p, .info-card li { font-size: 0.9375rem; color: #4d4d4d; line-height: 1.6; }
+        .step-list { list-style: none; counter-reset: step; }
+        .step-list li { counter-increment: step; margin-bottom: 10px; padding-left: 28px; position: relative; }
+        .step-list li::before { content: counter(step); position: absolute; left: 0; top: 1px; width: 20px; height: 20px; background: #f0f0f0; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: 600; color: #666; }
+        .highlight { color: #171717; font-weight: 600; }
+        .update-badge { display: inline-flex; align-items: center; gap: 6px; margin-top: 20px; font-size: 0.8rem; color: #666; }
+        .configs-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; margin: 24px 0; }
+        .config-card { padding: 24px; border-radius: 8px; background: #ffffff; box-shadow: 0px 0px 0px 1px rgba(0,0,0,0.08); transition: all 0.2s; }
+        .config-card:hover { box-shadow: 0px 0px 0px 1px rgba(0,0,0,0.12), 0px 4px 8px rgba(0,0,0,0.06); transform: translateY(-2px); }
+        .config-card.recommended { box-shadow: 0px 0px 0px 1px #171717, 0px 2px 2px rgba(0,0,0,0.04); }
+        .config-name { font-size: 1.05rem; font-weight: 600; color: #171717; letter-spacing: -0.02em; margin-bottom: 4px; word-break: break-word; }
+        .config-category { font-size: 0.8125rem; font-family: 'Geist Mono', monospace; color: #666; margin-bottom: 16px; }
+        .config-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+        .proxy-region-block { margin-bottom: 40px; }
+        .proxy-region-title { font-size: 1rem; font-weight: 600; color: #171717; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+        .proxy-count { font-family: 'Geist Mono', monospace; font-size: 0.8rem; color: #666; font-weight: 400; }
+        .proxy-grid { display: flex; flex-wrap: wrap; gap: 8px; max-height: 400px; overflow-y: auto; padding-right: 4px; }
+        .proxy-grid::-webkit-scrollbar { width: 4px; }
+        .proxy-grid::-webkit-scrollbar-track { background: transparent; }
+        .proxy-grid::-webkit-scrollbar-thumb { background: #d0d0d0; border-radius: 4px; }
+        .proxy-item-wrapper { display: inline-flex; align-items: center; gap: 6px; background: #fafafa; border: 1px solid #ebebeb; padding: 4px 12px 4px 14px; border-radius: 6px; transition: all 0.15s; }
+        .proxy-item-wrapper:hover { background: #f0f0f0; border-color: #d0d0d0; }
+        .proxy-item-wrapper a { color: #4d4d4d; text-decoration: none; font-size: 0.85rem; font-weight: 500; word-break: break-all; }
+        .proxy-item-wrapper a:hover { color: #171717; }
+        .proxy-copy-btn { background: transparent; border: none; color: #808080; cursor: pointer; font-size: 0.8rem; padding: 2px 4px; border-radius: 4px; transition: 0.15s; display: inline-flex; align-items: center; }
+        .proxy-copy-btn:hover { color: #171717; background: #e5e5e5; }
+        .proxy-loading, .proxy-error { font-size: 0.85rem; color: #666; }
+        .proxy-empty { font-size: 0.85rem; color: #666; font-style: italic; }
+        .apps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 20px; }
+        .app-card { padding: 24px; border-radius: 8px; background: #ffffff; box-shadow: 0px 0px 0px 1px rgba(0,0,0,0.08); text-align: center; transition: all 0.2s; }
+        .app-card:hover { box-shadow: 0px 0px 0px 1px rgba(0,0,0,0.12), 0px 4px 8px rgba(0,0,0,0.06); transform: translateY(-2px); }
+        .app-icon { font-size: 2rem; margin-bottom: 12px; color: #666; }
+        .app-card h3 { font-size: 1rem; font-weight: 600; color: #171717; margin-bottom: 16px; }
+        .app-links { display: flex; flex-direction: column; gap: 8px; }
+        .app-link { padding: 8px; border-radius: 6px; background: #fafafa; border: 1px solid #ebebeb; color: #4d4d4d; text-decoration: none; transition: 0.15s; font-size: 0.85rem; }
+        .app-link:hover { background: #f0f0f0; border-color: #d0d0d0; color: #171717; }
+        .news-list { display: flex; flex-direction: column; gap: 16px; }
+        .news-item { padding: 24px; border-radius: 8px; background: #ffffff; box-shadow: 0px 0px 0px 1px rgba(0,0,0,0.08); transition: all 0.15s; }
+        .news-item:hover { box-shadow: 0px 0px 0px 1px rgba(0,0,0,0.12), 0px 4px 8px rgba(0,0,0,0.06); }
+        .news-date { font-size: 0.8rem; font-family: 'Geist Mono', monospace; color: #666; margin-bottom: 8px; }
+        .news-title { font-size: 1.15rem; font-weight: 600; color: #171717; letter-spacing: -0.02em; margin-bottom: 8px; }
+        .news-summary { font-size: 0.9375rem; color: #4d4d4d; line-height: 1.6; margin-bottom: 12px; }
+        .news-source { font-size: 0.8rem; color: #666; }
+        footer { padding: 48px 0 32px; text-align: center; border-top: 1px solid rgba(0,0,0,0.08); }
+        .footer-links { display: flex; justify-content: center; gap: 24px; margin-bottom: 20px; }
+        .footer-links a { color: #666; font-size: 1.3rem; transition: 0.15s; }
+        .footer-links a:hover { color: #171717; }
+        .footer-copy { font-size: 0.85rem; color: #666; }
+        .spinner { display: inline-block; width: 14px; height: 14px; border: 2px solid #d0d0d0; border-top: 2px solid #171717; border-radius: 50%; animation: spin 0.7s linear infinite; vertical-align: middle; margin-right: 6px; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        @media (max-width: 800px) {
+            .container { padding: 0 20px; }
+            .section { padding: 48px 0; }
+            .section-title { font-size: 1.5rem; }
+            .info-grid, .configs-grid { grid-template-columns: 1fr; }
+            .apps-grid { grid-template-columns: repeat(2, 1fr); }
+            .hero-content { padding: 40px 20px 80px; }
+            .nav-inner { flex-direction: column; gap: 12px; }
+            .nav-links { width: 100%; justify-content: center; }
+        }
+        @media (max-width: 480px) {
+            .apps-grid { grid-template-columns: 1fr; }
+            .hero h1 { letter-spacing: -0.03em; }
+        }
+    </style>
+</head>
+<body>
+    <div class="nav">
+        <div class="container">
+            <div class="nav-inner">
+                <a href="#" class="nav-logo">🌐 Internet Access <span class="nav-logo-text">VPN</span></a>
+                <div class="nav-links">
+                    <a href="#configs" class="nav-link">Configs</a>
+                    <a href="#proxies" class="nav-link">Proxies</a>
+                    <a href="#apps" class="nav-link">Clients</a>
+                    <a href="#news" class="nav-link">News</a>
+                    <a href="https://t.me/vlesstrojan" class="nav-link" target="_blank"><i class="fab fa-telegram"></i> @vlesstrojan</a>
+                    <a href="https://kort0881.github.io/internet-access-site/" class="lang-switch" id="langSwitch" title="Русская версия">RU</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="hero">
+        <div class="hero-bg"><img src="https://kort0881.github.io/internet-access-site/static/background.gif" alt="Background" aria-hidden="true" /></div>
+        <div class="hero-overlay-top"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <div class="hero-badge"><i class="fas fa-shield-halved"></i> Free · Updated automatically</div>
+            <h1>Internet access <span>without borders</span></h1>
+            <p>Working VPN configurations — VLESS, V2Ray, Hysteria, Trojan — and MTProto proxies to bypass censorship in Russia.</p>
+            <div class="hero-actions">
+                <a href="#configs" class="btn-primary"><i class="fas fa-download"></i> Configurations</a>
+                <a href="#proxies" class="btn-secondary"><i class="fas fa-plug"></i> MTProto proxies</a>
+            </div>
+        </div>
+    </section>
+
+    <main>
+        <div class="section">
+            <div class="container">
+                <div class="info-grid">
+                    <div class="info-card">
+                        <div class="info-icon"><i class="fas fa-compass"></i></div>
+                        <h3>How to use</h3>
+                        <ul class="step-list">
+                            <li>Pick a configuration <span class="highlight">(“white” versions are the most stable)</span></li>
+                            <li>Copy the subscription link</li>
+                            <li>Paste it into <span class="highlight">v2rayNG / NekoBox / v2rayN</span></li>
+                            <li>Follow the Telegram channels for new keys</li>
+                        </ul>
+                        <div class="update-badge"><i class="far fa-clock"></i> Updated: <span id="lastUpdate">15.09.2026 21:44</span></div>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-icon"><i class="fas fa-shield-alt"></i></div>
+                        <h3>Why it works</h3>
+                        <p>Modern protocols (VLESS, WireGuard, Hysteria) disguise traffic and evade DPI. Configurations are tested and refreshed automatically every hour.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section" id="proxies">
+            <div class="container">
+                <div class="section-label">MTProto</div>
+                <h2 class="section-title">📡 Telegram proxies</h2>
+                <p class="section-desc">Proxies are updated automatically. If the list is empty, check the <a href="https://t.me/vlesstrojan" style="color:#0072f5;">Telegram channel</a>.</p>
+                <div class="proxy-region-block">
+                    <div class="proxy-region-title"><i class="fas fa-flag"></i> Russia <span class="proxy-count" id="ru-count"></span></div>
+                    <div id="proxy-ru" class="proxy-grid"><span class="proxy-loading"><span class="spinner"></span> Loading...</span></div>
+                </div>
+                <div class="proxy-region-block">
+                    <div class="proxy-region-title"><i class="fas fa-flag"></i> Europe <span class="proxy-count" id="eu-count"></span></div>
+                    <div id="proxy-eu" class="proxy-grid"><span class="proxy-loading"><span class="spinner"></span> Loading...</span></div>
+                </div>
+                <div class="proxy-region-block">
+                    <div class="proxy-region-title"><i class="fas fa-flag"></i> USA <span class="proxy-count" id="us-count"></span></div>
+                    <div id="proxy-us" class="proxy-grid"><span class="proxy-loading"><span class="spinner"></span> Loading...</span></div>
+                </div>
+                <div class="proxy-region-block">
+                    <div class="proxy-region-title"><i class="fas fa-flag"></i> Asia <span class="proxy-count" id="asia-count"></span></div>
+                    <div id="proxy-asia" class="proxy-grid"><span class="proxy-loading"><span class="spinner"></span> Loading...</span></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section" id="configs">
+            <div class="container">
+                <div class="section-label">Configurations</div>
+                <h2 class="section-title">⚡ VPN configurations</h2>
+                <p class="section-desc">Working links to import into your VPN client. “White” versions are the most stable.</p>
+                <div class="configs-grid" id="configsGrid">
+                    <span class="proxy-loading"><span class="spinner"></span> Loading configurations...</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="section" id="apps">
+            <div class="container">
+                <div class="section-label">Clients</div>
+                <h2 class="section-title">📱 Download VPN clients</h2>
+                <p class="section-desc">Apps for connecting via V2Ray, VLESS, Hysteria and Trojan.</p>
+                <div class="apps-grid">
+                    <div class="app-card">
+                        <div class="app-icon"><i class="fab fa-android"></i></div>
+                        <h3>Android</h3>
+                        <div class="app-links">
+                            <a href="https://github.com/2dust/v2rayNG/releases/latest" class="app-link">v2rayNG</a>
+                            <a href="https://github.com/MatsuriDayo/NekoBoxForAndroid/releases/latest" class="app-link">NekoBox</a>
+                            <a href="https://www.happ.su/main" class="app-link">Happ</a>
+                            <a href="https://karing.app/en/download/" class="app-link">Karing</a>
+                        </div>
+                    </div>
+                    <div class="app-card">
+                        <div class="app-icon"><i class="fab fa-windows"></i></div>
+                        <h3>Windows</h3>
+                        <div class="app-links">
+                            <a href="https://github.com/2dust/v2rayN/releases/latest/download/v2rayN-windows-64.zip" class="app-link">v2rayN</a>
+                        </div>
+                    </div>
+                    <div class="app-card">
+                        <div class="app-icon"><i class="fab fa-apple"></i></div>
+                        <h3>iOS / macOS</h3>
+                        <div class="app-links">
+                            <a href="https://apps.apple.com/app/shadowrocket/id932747118" class="app-link">Shadowrocket</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section" id="news">
+            <div class="container">
+                <div class="section-label">Context</div>
+                <h2 class="section-title">📰 Censorship in Russia</h2>
+                <p class="section-desc">Latest news on internet regulation, blocking and restrictions.</p>
+                <div class="news-list">
+                    
+                    <div class="news-item">
+                        <div class="news-date"><i class="far fa-calendar-alt"></i> 16 September 2026</div>
+                        <div class="news-title">Актуальные новости о блокировках</div>
+                        <div class="news-summary">Следите за официальными заявлениями Роскомнадзора и Минцифры.</div>
+                        <div class="news-source">Source: РКН</div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="https://github.com/kort0881/internet-access-site" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                <a href="https://t.me/vlesstrojan" target="_blank" rel="noopener" aria-label="Telegram"><i class="fab fa-telegram"></i></a>
+            </div>
+            <div class="footer-copy">© 2026 Internet Access</div>
+        </div>
+    </footer>
+
+    <script>
+        function copyToClipboard(btn, text, successText) {
+            const original = btn.innerHTML;
+            navigator.clipboard.writeText(text).then(() => {
+                btn.innerHTML = '<i class="fas fa-check"></i> ' + (successText || 'Copied');
+                setTimeout(() => { btn.innerHTML = original; }, 1500);
+            }).catch(() => {
+                const ta = document.createElement('textarea');
+                ta.value = text;
+                document.body.appendChild(ta);
+                ta.select();
+                document.execCommand('copy');
+                document.body.removeChild(ta);
+                btn.innerHTML = '<i class="fas fa-check"></i> ' + (successText || 'Copied');
+                setTimeout(() => { btn.innerHTML = original; }, 1500);
+            });
+        }
+        function copyConfig(btn, url) { copyToClipboard(btn, url); }
+
+        async function loadProxies() {
+            const containers = {
+                ru: document.getElementById('proxy-ru'),
+                eu: document.getElementById('proxy-eu'),
+                us: document.getElementById('proxy-us'),
+                asia: document.getElementById('proxy-asia')
+            };
+            const counts = {
+                ru: document.getElementById('ru-count'),
+                eu: document.getElementById('eu-count'),
+                us: document.getElementById('us-count'),
+                asia: document.getElementById('asia-count')
+            };
+            const sources = [
+                { url: 'https://cdn.jsdelivr.net/gh/kort0881/telegram-proxy-collector@main/verified/proxy_ru_verified.txt', container: containers.ru, countEl: counts.ru, label: 'Russia' },
+                { url: 'https://cdn.jsdelivr.net/gh/kort0881/telegram-proxy-collector@main/verified/proxy_eu_verified.txt', container: containers.eu, countEl: counts.eu, label: 'Europe' },
+                { url: 'https://cdn.jsdelivr.net/gh/kort0881/telegram-proxy-collector@main/verified/proxy_us_verified.txt', container: containers.us, countEl: counts.us, label: 'USA' },
+                { url: 'https://cdn.jsdelivr.net/gh/kort0881/telegram-proxy-collector@main/verified/proxy_asia_verified.txt', container: containers.asia, countEl: counts.asia, label: 'Asia' }
+            ];
+            for (const src of sources) {
+                try {
+                    const resp = await fetch(src.url + '?ts=' + Date.now());
+                    if (!resp.ok) throw new Error('HTTP ' + resp.status);
+                    const text = await resp.text();
+                    const links = text.match(/tg:\/\/proxy\?[^\s]+/g) || [];
+                    src.container.innerHTML = '';
+                    if (links.length === 0) {
+                        src.container.innerHTML = '<span class="proxy-empty">No proxies for this region yet</span>';
+                        if (src.countEl) src.countEl.textContent = '(0)';
+                        continue;
+                    }
+                    links.forEach((link, idx) => {
+                        const wrapper = document.createElement('div');
+                        wrapper.className = 'proxy-item-wrapper';
+                        const a = document.createElement('a');
+                        a.href = link;
+                        a.textContent = '🔌 Proxy #' + (idx + 1);
+                        a.target = '_blank';
+                        a.title = link;
+                        wrapper.appendChild(a);
+                        const copyBtn = document.createElement('button');
+                        copyBtn.className = 'proxy-copy-btn';
+                        copyBtn.innerHTML = '<i class="fas fa-copy"></i>';
+                        copyBtn.setAttribute('aria-label', 'Copy proxy');
+                        copyBtn.onclick = (e) => { e.preventDefault(); copyToClipboard(copyBtn, link, 'Done'); };
+                        wrapper.appendChild(copyBtn);
+                        src.container.appendChild(wrapper);
+                    });
+                    if (src.countEl) src.countEl.textContent = '(' + links.length + ')';
+                } catch (e) {
+                    console.error('Proxy error for', src.label, e);
+                    src.container.innerHTML = '<span class="proxy-empty">⚠️ Failed to load proxies for ' + src.label + '</span>';
+                    if (src.countEl) src.countEl.textContent = '(error)';
+                }
+            }
+        }
+
+        async function loadConfigs() {
+            const grid = document.getElementById('configsGrid');
+            try {
+                const resp = await fetch('https://cdn.jsdelivr.net/gh/kort0881/vpn-checker-backend@main/checked/subscriptions_list.txt?ts=' + Date.now());
+                if (!resp.ok) throw new Error('HTTP ' + resp.status);
+                const text = await resp.text();
+                const lines = text.split('\n').map(line => line.trim()).filter(line => line.length > 0);
+                let currentCategory = 'General';
+                const configs = [];
+                for (const line of lines) {
+                    const categoryMatch = line.match(/^===\s*(.+?)\s*===$/);
+                    if (categoryMatch) { currentCategory = categoryMatch[1]; continue; }
+                    if (line.startsWith('https://')) {
+                        const filename = line.split('/').pop() || '';
+                        const name = filename.replace(/\.txt$/i, '') || 'Config';
+                        configs.push({ name: name, category: currentCategory, url: line, filename: filename });
+                    }
+                }
+                if (configs.length === 0) {
+                    grid.innerHTML = '<p style="color:#666;">No active configurations</p>';
+                    return;
+                }
+                grid.innerHTML = '';
+                configs.forEach(cfg => {
+                    const isRecommended = cfg.filename.toLowerCase().includes('white');
+                    const card = document.createElement('div');
+                    card.className = 'config-card' + (isRecommended ? ' recommended' : '');
+                    const nameDiv = document.createElement('div');
+                    nameDiv.className = 'config-name';
+                    nameDiv.textContent = cfg.name;
+                    const catDiv = document.createElement('div');
+                    catDiv.className = 'config-category';
+                    catDiv.innerHTML = '<i class="fas fa-tag"></i> ' + cfg.category;
+                    const actions = document.createElement('div');
+                    actions.className = 'config-actions';
+                    const copyBtn = document.createElement('button');
+                    copyBtn.className = 'btn-primary-sm';
+                    copyBtn.innerHTML = '<i class="fas fa-copy"></i> Copy';
+                    copyBtn.onclick = function() { copyConfig(this, cfg.url); };
+                    const openBtn = document.createElement('a');
+                    openBtn.className = 'btn-ghost';
+                    openBtn.innerHTML = '<i class="fas fa-external-link-alt"></i> Open';
+                    openBtn.href = cfg.url;
+                    openBtn.target = '_blank';
+                    actions.appendChild(copyBtn);
+                    actions.appendChild(openBtn);
+                    card.appendChild(nameDiv);
+                    card.appendChild(catDiv);
+                    card.appendChild(actions);
+                    grid.appendChild(card);
+                });
+            } catch (e) {
+                console.error('Config load error:', e);
+                grid.innerHTML = '<p style="color:#666;">⚠️ Failed to load configurations</p>';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            loadProxies();
+            loadConfigs();
+            setInterval(loadProxies, 600000);
+            setInterval(loadConfigs, 600000);
+            var langSwitch = document.getElementById('langSwitch');
+            if (langSwitch) {
+                langSwitch.addEventListener('click', function() {
+                    try { localStorage.setItem('lang_manual', '1'); } catch (e) {}
+                });
+            }
+        });
+    </script>
+</body>
+</html>
