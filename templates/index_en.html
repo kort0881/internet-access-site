@@ -38,17 +38,6 @@
       "inLanguage": "en-US"
     }
     </script>
-    <script>
-        (function() {
-            try {
-                if (localStorage.getItem('lang_manual')) return;
-                var lang = (navigator.language || navigator.userLanguage || 'en').toLowerCase();
-                if (lang.startsWith('ru')) {
-                    location.replace('{{ site_url }}');
-                }
-            } catch (e) {}
-        })();
-    </script>
     <script type="text/javascript">
         (function(m,e,t,r,i,k,a){
             m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
@@ -85,7 +74,6 @@
         .nav { position: sticky; top: 0; z-index: 100; background: rgba(224,205,187,0.92); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid rgba(0,0,0,0.08); }
         .nav-inner { display: flex; justify-content: space-between; align-items: center; padding: 14px 0; gap: 20px; }
         .nav-logo { font-size: 1.25rem; font-weight: 600; color: #171717; text-decoration: none; letter-spacing: -0.03em; display: flex; align-items: center; gap: 10px; }
-        .nav-logo-text { font-size: 0.9rem; color: #666; font-weight: 400; letter-spacing: 0; margin-left: 2px; }
         .nav-links { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
         .nav-link { font-size: 0.875rem; font-weight: 500; color: #4d4d4d; text-decoration: none; padding: 6px 14px; border-radius: 6px; transition: all 0.15s; }
         .nav-link:hover { color: #171717; background: rgba(0,0,0,0.06); }
@@ -171,14 +159,14 @@
     <div class="nav">
         <div class="container">
             <div class="nav-inner">
-                <a href="#" class="nav-logo">🌐 Internet Access <span class="nav-logo-text">VPN</span></a>
+                <a href="#" class="nav-logo">🌐 Internet Access</a>
                 <div class="nav-links">
-                    <a href="#configs" class="nav-link">Configs</a>
+                    <a href="#configs" class="nav-link">Configurations</a>
                     <a href="#proxies" class="nav-link">Proxies</a>
-                    <a href="#apps" class="nav-link">Clients</a>
+                    <a href="#apps" class="nav-link">Apps</a>
                     <a href="#news" class="nav-link">News</a>
                     <a href="https://t.me/vlesstrojan" class="nav-link" target="_blank"><i class="fab fa-telegram"></i> @vlesstrojan</a>
-                    <a href="{{ site_url }}" class="lang-switch" id="langSwitch" title="Русская версия">RU</a>
+                    <a href="{{ site_url }}" class="lang-switch" title="Русская версия">RU</a>
                 </div>
             </div>
         </div>
@@ -191,7 +179,7 @@
         <div class="hero-content">
             <div class="hero-badge"><i class="fas fa-shield-halved"></i> Free · Updated automatically</div>
             <h1>Internet access <span>without borders</span></h1>
-            <p>Working VPN configurations — VLESS, V2Ray, Hysteria, Trojan — and MTProto proxies to bypass censorship in Russia.</p>
+            <p>Working configurations — VLESS, V2Ray, Hysteria, Trojan — and MTProto proxies for free internet access.</p>
             <div class="hero-actions">
                 <a href="#configs" class="btn-primary"><i class="fas fa-download"></i> Configurations</a>
                 <a href="#proxies" class="btn-secondary"><i class="fas fa-plug"></i> MTProto proxies</a>
@@ -216,8 +204,8 @@
                     </div>
                     <div class="info-card">
                         <div class="info-icon"><i class="fas fa-shield-alt"></i></div>
-                        <h3>Why it works</h3>
-                        <p>Modern protocols (VLESS, WireGuard, Hysteria) disguise traffic and evade DPI. Configurations are tested and refreshed automatically every hour.</p>
+                        <h3>Free internet access</h3>
+                        <p>Modern protocols (VLESS, WireGuard, Hysteria) provide a stable and fast connection. Configurations are tested and refreshed automatically every hour.</p>
                     </div>
                 </div>
             </div>
@@ -249,9 +237,9 @@
 
         <div class="section" id="configs">
             <div class="container">
-                <div class="section-label">Configurations</div>
-                <h2 class="section-title">⚡ VPN configurations</h2>
-                <p class="section-desc">Working links to import into your VPN client. “White” versions are the most stable.</p>
+                <div class="section-label">Free internet access</div>
+                <h2 class="section-title">⚡ Configurations</h2>
+                <p class="section-desc">Working links to import into your app. “White” versions are the most stable.</p>
                 <div class="configs-grid" id="configsGrid">
                     <span class="proxy-loading"><span class="spinner"></span> Loading configurations...</span>
                 </div>
@@ -260,9 +248,9 @@
 
         <div class="section" id="apps">
             <div class="container">
-                <div class="section-label">Clients</div>
-                <h2 class="section-title">📱 Download VPN clients</h2>
-                <p class="section-desc">Apps for connecting via V2Ray, VLESS, Hysteria and Trojan.</p>
+                <div class="section-label">Apps</div>
+                <h2 class="section-title">📱 Download apps</h2>
+                <p class="section-desc">Programs for connecting via V2Ray, VLESS, Hysteria and Trojan.</p>
                 <div class="apps-grid">
                     <div class="app-card">
                         <div class="app-icon"><i class="fab fa-android"></i></div>
@@ -295,8 +283,8 @@
         <div class="section" id="news">
             <div class="container">
                 <div class="section-label">Context</div>
-                <h2 class="section-title">📰 Censorship in Russia</h2>
-                <p class="section-desc">Latest news on internet regulation, blocking and restrictions.</p>
+                <h2 class="section-title">📰 Free internet access</h2>
+                <p class="section-desc">Latest news on internet regulation and free access to the network.</p>
                 <div class="news-list">
                     {% for item in news %}
                     <div class="news-item">
@@ -459,12 +447,6 @@
             loadConfigs();
             setInterval(loadProxies, 600000);
             setInterval(loadConfigs, 600000);
-            var langSwitch = document.getElementById('langSwitch');
-            if (langSwitch) {
-                langSwitch.addEventListener('click', function() {
-                    try { localStorage.setItem('lang_manual', '1'); } catch (e) {}
-                });
-            }
         });
     </script>
 </body>
