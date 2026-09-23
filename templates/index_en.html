@@ -179,7 +179,7 @@
         <div class="hero-content">
             <div class="hero-badge"><i class="fas fa-shield-halved"></i> Free · Updated automatically</div>
             <h1>Internet access <span>without borders</span></h1>
-            <p>Working configurations — VLESS, V2Ray, Hysteria, Trojan — and MTProto proxies for free internet access.</p>
+            <p>Working configurations — VLESS, V2Ray, Hysteria, Trojan — and MTProto proxies for free access to the network.</p>
             <div class="hero-actions">
                 <a href="#configs" class="btn-primary"><i class="fas fa-download"></i> Configurations</a>
                 <a href="#proxies" class="btn-secondary"><i class="fas fa-plug"></i> MTProto proxies</a>
@@ -204,7 +204,7 @@
                     </div>
                     <div class="info-card">
                         <div class="info-icon"><i class="fas fa-shield-alt"></i></div>
-                        <h3>Free internet access</h3>
+                        <h3>How it works</h3>
                         <p>Modern protocols (VLESS, WireGuard, Hysteria) provide a stable and fast connection. Configurations are tested and refreshed automatically every hour.</p>
                     </div>
                 </div>
@@ -237,7 +237,7 @@
 
         <div class="section" id="configs">
             <div class="container">
-                <div class="section-label">Free internet access</div>
+                <div class="section-label">Configurations</div>
                 <h2 class="section-title">⚡ Configurations</h2>
                 <p class="section-desc">Working links to import into your app. “White” versions are the most stable.</p>
                 <div class="configs-grid" id="configsGrid">
@@ -283,7 +283,7 @@
         <div class="section" id="news">
             <div class="container">
                 <div class="section-label">Context</div>
-                <h2 class="section-title">📰 Free internet access</h2>
+                <h2 class="section-title">📰 Internet freedom</h2>
                 <p class="section-desc">Latest news on internet regulation and free access to the network.</p>
                 <div class="news-list">
                     {% for item in news %}
@@ -342,10 +342,10 @@
                 asia: document.getElementById('asia-count')
             };
             const sources = [
-                { url: 'https://cdn.jsdelivr.net/gh/kort0881/telegram-proxy-collector@main/verified/proxy_ru_verified.txt', container: containers.ru, countEl: counts.ru, label: 'Russia' },
-                { url: 'https://cdn.jsdelivr.net/gh/kort0881/telegram-proxy-collector@main/verified/proxy_eu_verified.txt', container: containers.eu, countEl: counts.eu, label: 'Europe' },
-                { url: 'https://cdn.jsdelivr.net/gh/kort0881/telegram-proxy-collector@main/verified/proxy_us_verified.txt', container: containers.us, countEl: counts.us, label: 'USA' },
-                { url: 'https://cdn.jsdelivr.net/gh/kort0881/telegram-proxy-collector@main/verified/proxy_asia_verified.txt', container: containers.asia, countEl: counts.asia, label: 'Asia' }
+                { url: 'https://raw.githubusercontent.com/kort0881/telegram-proxy-collector/main/verified/proxy_ru_verified.txt', container: containers.ru, countEl: counts.ru, label: 'Russia' },
+                { url: 'https://raw.githubusercontent.com/kort0881/telegram-proxy-collector/main/verified/proxy_eu_verified.txt', container: containers.eu, countEl: counts.eu, label: 'Europe' },
+                { url: 'https://raw.githubusercontent.com/kort0881/telegram-proxy-collector/main/verified/proxy_us_verified.txt', container: containers.us, countEl: counts.us, label: 'USA' },
+                { url: 'https://raw.githubusercontent.com/kort0881/telegram-proxy-collector/main/verified/proxy_asia_verified.txt', container: containers.asia, countEl: counts.asia, label: 'Asia' }
             ];
             for (const src of sources) {
                 try {
@@ -388,7 +388,7 @@
         async function loadConfigs() {
             const grid = document.getElementById('configsGrid');
             try {
-                const resp = await fetch('https://cdn.jsdelivr.net/gh/kort0881/vpn-checker-backend@main/checked/subscriptions_list.txt?ts=' + Date.now());
+                const resp = await fetch('https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/subscriptions_list.txt?ts=' + Date.now());
                 if (!resp.ok) throw new Error('HTTP ' + resp.status);
                 const text = await resp.text();
                 const lines = text.split('\n').map(line => line.trim()).filter(line => line.length > 0);
