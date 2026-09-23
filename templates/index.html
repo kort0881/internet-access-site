@@ -38,17 +38,6 @@
       "inLanguage": "ru-RU"
     }
     </script>
-    <script>
-        (function() {
-            try {
-                if (localStorage.getItem('lang_manual')) return;
-                var lang = (navigator.language || navigator.userLanguage || 'ru').toLowerCase();
-                if (!lang.startsWith('ru')) {
-                    location.replace('{{ site_url }}en/');
-                }
-            } catch (e) {}
-        })();
-    </script>
     <script type="text/javascript">
         (function(m,e,t,r,i,k,a){
             m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
@@ -85,7 +74,6 @@
         .nav { position: sticky; top: 0; z-index: 100; background: rgba(224,205,187,0.92); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid rgba(0,0,0,0.08); }
         .nav-inner { display: flex; justify-content: space-between; align-items: center; padding: 14px 0; gap: 20px; }
         .nav-logo { font-size: 1.25rem; font-weight: 600; color: #171717; text-decoration: none; letter-spacing: -0.03em; display: flex; align-items: center; gap: 10px; }
-        .nav-logo-text { font-size: 0.9rem; color: #666; font-weight: 400; letter-spacing: 0; margin-left: 2px; }
         .nav-links { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
         .nav-link { font-size: 0.875rem; font-weight: 500; color: #4d4d4d; text-decoration: none; padding: 6px 14px; border-radius: 6px; transition: all 0.15s; }
         .nav-link:hover { color: #171717; background: rgba(0,0,0,0.06); }
@@ -178,7 +166,7 @@
                     <a href="#apps" class="nav-link">Приложения</a>
                     <a href="#news" class="nav-link">Новости</a>
                     <a href="https://t.me/vlesstrojan" class="nav-link" target="_blank"><i class="fab fa-telegram"></i> @vlesstrojan</a>
-                    <a href="{{ site_url }}en/" class="lang-switch" id="langSwitch" title="English version">EN</a>
+                    <a href="{{ site_url }}en/" class="lang-switch" title="English version">EN</a>
                 </div>
             </div>
         </div>
@@ -459,12 +447,6 @@
             loadConfigs();
             setInterval(loadProxies, 600000);
             setInterval(loadConfigs, 600000);
-            var langSwitch = document.getElementById('langSwitch');
-            if (langSwitch) {
-                langSwitch.addEventListener('click', function() {
-                    try { localStorage.setItem('lang_manual', '1'); } catch (e) {}
-                });
-            }
         });
     </script>
 </body>
