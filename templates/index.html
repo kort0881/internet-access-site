@@ -342,10 +342,10 @@
                 asia: document.getElementById('asia-count')
             };
             const sources = [
-                { url: 'https://cdn.jsdelivr.net/gh/kort0881/telegram-proxy-collector@main/verified/proxy_ru_verified.txt', container: containers.ru, countEl: counts.ru, label: 'Россия' },
-                { url: 'https://cdn.jsdelivr.net/gh/kort0881/telegram-proxy-collector@main/verified/proxy_eu_verified.txt', container: containers.eu, countEl: counts.eu, label: 'Европа' },
-                { url: 'https://cdn.jsdelivr.net/gh/kort0881/telegram-proxy-collector@main/verified/proxy_us_verified.txt', container: containers.us, countEl: counts.us, label: 'США' },
-                { url: 'https://cdn.jsdelivr.net/gh/kort0881/telegram-proxy-collector@main/verified/proxy_asia_verified.txt', container: containers.asia, countEl: counts.asia, label: 'Азия' }
+                { url: 'https://raw.githubusercontent.com/kort0881/telegram-proxy-collector/main/verified/proxy_ru_verified.txt', container: containers.ru, countEl: counts.ru, label: 'Россия' },
+                { url: 'https://raw.githubusercontent.com/kort0881/telegram-proxy-collector/main/verified/proxy_eu_verified.txt', container: containers.eu, countEl: counts.eu, label: 'Европа' },
+                { url: 'https://raw.githubusercontent.com/kort0881/telegram-proxy-collector/main/verified/proxy_us_verified.txt', container: containers.us, countEl: counts.us, label: 'США' },
+                { url: 'https://raw.githubusercontent.com/kort0881/telegram-proxy-collector/main/verified/proxy_asia_verified.txt', container: containers.asia, countEl: counts.asia, label: 'Азия' }
             ];
             for (const src of sources) {
                 try {
@@ -388,7 +388,7 @@
         async function loadConfigs() {
             const grid = document.getElementById('configsGrid');
             try {
-                const resp = await fetch('https://cdn.jsdelivr.net/gh/kort0881/vpn-checker-backend@main/checked/subscriptions_list.txt?ts=' + Date.now());
+                const resp = await fetch('https://raw.githubusercontent.com/kort0881/vpn-checker-backend/main/checked/subscriptions_list.txt?ts=' + Date.now());
                 if (!resp.ok) throw new Error('HTTP ' + resp.status);
                 const text = await resp.text();
                 const lines = text.split('\n').map(line => line.trim()).filter(line => line.length > 0);
