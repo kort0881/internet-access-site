@@ -15,20 +15,20 @@ TEMPLATES_DIR = Path('templates')
 STATIC_DIR = Path('static')
 
 # SEO (RU)
-META_TITLE = "Доступ к интернету - Бесплатные VPN конфигурации"
+META_TITLE = "Доступ к интернету - Свободный доступ в сеть"
 META_DESCRIPTION = (
-    "Автоматические VPN-конфиги для V2Ray, VLESS, Hysteria, Trojan, VMess, Reality и Shadowsocks. "
-    "Регулярное обновление, удобные ссылки."
+    "Автоматические конфигурации для V2Ray, VLESS, Hysteria, Trojan, VMess, Reality и Shadowsocks. "
+    "Регулярное обновление, удобные ссылки, стабильное соединение."
 )
-META_KEYWORDS = "vpn, vless, v2ray, shadowsocks, hysteria, trojan, vmess, reality, free vpn, доступ к интернету"
+META_KEYWORDS = "доступ к интернету, свободный доступ в сеть, vless, v2ray, shadowsocks, hysteria, trojan, vmess, reality, конфигурации"
 
 # SEO (EN)
-META_TITLE_EN = "Internet Access - Free VPN Configurations"
+META_TITLE_EN = "Internet Access - Free Internet Access"
 META_DESCRIPTION_EN = (
-    "Automatic VPN configs for V2Ray, VLESS, Hysteria, Trojan, VMess, Reality and Shadowsocks. "
-    "Updated regularly, easy subscription links."
+    "Automatic configurations for V2Ray, VLESS, Hysteria, Trojan, VMess, Reality and Shadowsocks. "
+    "Updated regularly, easy subscription links, stable connection."
 )
-META_KEYWORDS_EN = "vpn, vless, v2ray, shadowsocks, hysteria, trojan, vmess, reality, free vpn, internet access, censorship bypass"
+META_KEYWORDS_EN = "internet access, free internet access, vless, v2ray, shadowsocks, hysteria, trojan, vmess, reality, configurations"
 
 SITE_URL = "https://kort0881.github.io/internet-access-site/"
 
@@ -36,7 +36,7 @@ def fetch_news():
     """Парсит новости с Хабра (раздел Интернет) по ключевым словам."""
     news = []
     habr_url = 'https://habr.com/ru/rss/hub/internet/all/?fl=ru'
-    keywords = ['блокировк', 'ркн', 'роскомнадзор', 'впн', 'vpn', 'запрет', 'ограничени', 'dpi']
+    keywords = ['доступ', 'интернет', 'связь', 'сеть', 'запрет', 'ограничени', 'регулирован']
     try:
         feed = feedparser.parse(habr_url)
         for entry in feed.entries[:10]:
@@ -57,11 +57,11 @@ def fetch_news():
 
     if not news:
         news.append({
-            'title': 'Актуальные новости о блокировках',
-            'summary': 'Следите за официальными заявлениями Роскомнадзора и Минцифры.',
-            'link': 'https://rkn.gov.ru/',
+            'title': 'Актуальные новости о свободном доступе в сеть',
+            'summary': 'Следите за новостями о регулировании интернета и доступе к сети.',
+            'link': SITE_URL,
             'date': datetime.now().strftime('%d %B %Y'),
-            'source': 'РКН'
+            'source': 'Новости'
         })
     return news
 
@@ -107,7 +107,7 @@ def build_html():
     """Генерация HTML из шаблонов (RU + EN)."""
     print("\n🛠️ Сборка HTML...")
 
-    print("📥 Загрузка VPN конфигураций...")
+    print("📥 Загрузка конфигураций...")
     configs = get_vpn_configs()
     last_update = get_last_update_time()
 
