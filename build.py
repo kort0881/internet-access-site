@@ -32,14 +32,20 @@ META_KEYWORDS_EN = "internet access, free internet access, vless, v2ray, shadows
 
 SITE_URL = "https://kort0881.github.io/internet-access-site/"
 
+
 def fetch_news():
-    """Парсит новости с Хабра (раздел Интернет) по ключевым словам."""
+    """Парсит новости с Хабра (раздел Интернет)."""
     news = []
     habr_url = 'https://habr.com/ru/rss/hub/internet/all/?fl=ru'
-    keywords = ['доступ', 'интернет', 'связь', 'сеть', 'запрет', 'ограничени', 'регулирован']
+    keywords = [
+        'интернет', 'сеть', 'связь', 'трафик', 'провайдер',
+        'регулирован', 'закон', 'запрет', 'ограничен',
+        'роскомнадзор', 'ркн', 'минцифры', 'минцифра',
+        'телеком', 'мессенджер', 'телеграм', 'telegram',
+    ]
     try:
         feed = feedparser.parse(habr_url)
-        for entry in feed.entries[:10]:
+        for entry in feed.entries[:15]:
             title_lower = entry.title.lower()
             if any(kw in title_lower for kw in keywords):
                 summary = entry.summary
@@ -55,6 +61,24 @@ def fetch_news():
     except Exception as e:
         print(f"⚠️ Ошибка парсинга новостей: {e}")
 
+    # Fallback: если по ключевым словам ничего не нашли — берём последние 3 новости хаба
+    if not news:
+        try:
+            feed = feedparser.parse(habr_url)
+            for entry in feed.entries[:3]:
+                summary = entry.summary
+                if len(summary) > 300:
+                    summary = summary[:300] + '...'
+                news.append({
+                    'title': entry.title,
+                    'summary': summary,
+                    'link': entry.link,
+                    'date': datetime(*entry.published_parsed[:6]).strftime('%d %B %Y'),
+                    'source': 'Хабр'
+                })
+        except Exception as e:
+            print(f"⚠️ Ошибка fallback-парсинга новостей: {e}")
+
     if not news:
         news.append({
             'title': 'Актуальные новости о свободном доступе в сеть',
@@ -65,6 +89,7 @@ def fetch_news():
         })
     return news
 
+
 def clean_dist():
     """Очистка папки dist."""
     if DIST_DIR.exists():
@@ -72,12 +97,14 @@ def clean_dist():
     DIST_DIR.mkdir(parents=True, exist_ok=True)
     print(f"✅ Папка {DIST_DIR} очищена")
 
+
 def copy_static():
     """Копирование статических файлов."""
     if STATIC_DIR.exists():
         dest = DIST_DIR / 'static'
         shutil.copytree(STATIC_DIR, dest, dirs_exist_ok=True)
-        print(f"✅ Статические файлы скопированы")
+        print("✅ Статические файлы скопированы")
+
 
 def copy_og_image():
     """Копирование og-image.png в dist."""
@@ -88,6 +115,7 @@ def copy_og_image():
         print(f"✅ OG image скопирован: {dest}")
     else:
         print("⚠️ OG image og-image.png не найден в корне репозитория")
+
 
 def copy_favicons():
     """Копирование фавиконок в dist."""
@@ -102,6 +130,7 @@ def copy_favicons():
             print(f"✅ Скопирован: {f}")
     if copied == 0:
         print("⚠️ Фавиконки не найдены в корне репозитория")
+
 
 def build_html():
     """Генерация HTML из шаблонов (RU + EN)."""
@@ -122,36 +151,45 @@ def build_html():
     env = Environment(loader=FileSystemLoader(str(TEMPLATES_DIR)))
 
     # --- RU (корень) ---
-    template_ru = env.get_template('index.html')
-    html_ru = template_ru.render(
-        configs=configs,
-        last_update=last_update,
-        news=news,
-        site_url=SITE_URL,
-        meta_title=META_TITLE,
-        meta_description=META_DESCRIPTION,
-        meta_keywords=META_KEYWORDS,
-        lang='ru',
-    )
-    (DIST_DIR / 'index.html').write_text(html_ru, encoding='utf-8')
-    print(f"✅ Создан: {DIST_DIR / 'index.html'}")
+    try:
+        template_ru = env.get_template('index.html')
+        html_ru = template_ru.render(
+            configs=configs,
+            last_update=last_update,
+            news=news,
+            site_url=SITE_URL,
+            meta_title=META_TITLE,
+            meta_description=META_DESCRIPTION,
+            meta_keywords=META_KEYWORDS,
+            lang='ru',
+        )
+        (DIST_DIR / 'index.html').write_text(html_ru, encoding='utf-8')
+        print(f"✅ Создан: {DIST_DIR / 'index.html'}")
+    except Exception as e:
+        print(f"❌ Ошибка сборки RU: {e}")
+        raise
 
     # --- EN (папка en/) ---
-    en_dir = DIST_DIR / 'en'
-    en_dir.mkdir(parents=True, exist_ok=True)
-    template_en = env.get_template('index_en.html')
-    html_en = template_en.render(
-        configs=configs,
-        last_update=last_update,
-        news=news,
-        site_url=SITE_URL,
-        meta_title=META_TITLE_EN,
-        meta_description=META_DESCRIPTION_EN,
-        meta_keywords=META_KEYWORDS_EN,
-        lang='en',
-    )
-    (en_dir / 'index.html').write_text(html_en, encoding='utf-8')
-    print(f"✅ Создан: {en_dir / 'index.html'}")
+    try:
+        en_dir = DIST_DIR / 'en'
+        en_dir.mkdir(parents=True, exist_ok=True)
+        template_en = env.get_template('index_en.html')
+        html_en = template_en.render(
+            configs=configs,
+            last_update=last_update,
+            news=news,
+            site_url=SITE_URL,
+            meta_title=META_TITLE_EN,
+            meta_description=META_DESCRIPTION_EN,
+            meta_keywords=META_KEYWORDS_EN,
+            lang='en',
+        )
+        (en_dir / 'index.html').write_text(html_en, encoding='utf-8')
+        print(f"✅ Создан: {en_dir / 'index.html'}")
+    except Exception as e:
+        print(f"⚠️ EN-версия не собрана: {e}")
+        print("   RU-страница всё равно задеплоится. Проверь templates/index_en.html.")
+
 
 def create_404():
     """Создание 404 страницы."""
@@ -173,10 +211,10 @@ def create_404():
     </div>
 </body>
 </html>'''
-
     output_file = DIST_DIR / '404.html'
     output_file.write_text(html_404, encoding='utf-8')
     print(f"✅ Создан: {output_file}")
+
 
 def create_robots_txt():
     """Создание robots.txt."""
@@ -189,10 +227,10 @@ Sitemap: {SITE_URL}sitemap.xml
     output_file.write_text(robots, encoding='utf-8')
     print(f"✅ Создан: {output_file}")
 
+
 def create_sitemap():
     """Создание sitemap.xml с обеими языковыми версиями."""
     today = datetime.now().strftime('%Y-%m-%d')
-
     sitemap = f'''<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
@@ -220,10 +258,10 @@ def create_sitemap():
     output_file.write_text(sitemap, encoding='utf-8')
     print(f"✅ Создан: {output_file}")
 
+
 def main():
     """Основной процесс сборки."""
     print("🚀 Запуск сборки статического сайта...\n")
-
     clean_dist()
     copy_static()
     copy_og_image()
@@ -232,9 +270,9 @@ def main():
     create_404()
     create_robots_txt()
     create_sitemap()
-
     print(f"\n✅ Сборка завершена! Результат в папке: {DIST_DIR}")
     print(f"🌐 Сайт будет доступен по адресу: {SITE_URL}")
+
 
 if __name__ == '__main__':
     main()
