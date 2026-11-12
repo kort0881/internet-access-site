@@ -1,25 +1,25 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{{ meta_title }}</title>
     <meta name="description" content="{{ meta_description }}" />
     <meta name="keywords" content="{{ meta_keywords }}" />
-    <link rel="canonical" href="{{ site_url }}" />
+    <link rel="canonical" href="{{ site_url }}en/" />
     <link rel="alternate" hreflang="ru" href="{{ site_url }}" />
     <link rel="alternate" hreflang="en" href="{{ site_url }}en/" />
     <link rel="alternate" hreflang="x-default" href="{{ site_url }}" />
     <meta name="p:domain_verify" content="5cb2efcf7a168002d8361a48c34dec69" />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="{{ site_url }}" />
+    <meta property="og:url" content="{{ site_url }}en/" />
     <meta property="og:title" content="{{ meta_title }}" />
     <meta property="og:description" content="{{ meta_description }}" />
     <meta property="og:image" content="{{ site_url }}og-image.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:locale" content="ru_RU" />
-    <meta property="og:locale:alternate" content="en_US" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:locale:alternate" content="ru_RU" />
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="icon" type="image/x-icon" href="{{ site_url }}favicon.ico" />
     <link rel="icon" type="image/png" sizes="32x32" href="{{ site_url }}favicon.png" />
@@ -34,34 +34,34 @@
       "@graph": [
         {
           "@type": "WebSite",
-          "name": "Доступ к интернету",
-          "url": "{{ site_url }}",
+          "name": "Internet Access",
+          "url": "{{ site_url }}en/",
           "description": "{{ meta_description }}",
-          "inLanguage": "ru-RU"
+          "inLanguage": "en-US"
         },
         {
           "@type": "HowTo",
-          "name": "Как подключиться к VPN «ДОСТУП К ИНТЕРНЕТУ» (@vlessbots_bot)",
-          "description": "Пошаговая инструкция: скопировать ключ в Telegram-боте @vlessbots_bot, установить приложение (Happ, Karing, v2rayNG, Hiddify, Streisand), импортировать ключ из буфера обмена и подключиться. Первые 2 дня — бесплатный тест.",
+          "name": "How to connect to Internet Access (@vlessbots_bot) VPN",
+          "description": "Step-by-step: copy the key in the @vlessbots_bot Telegram bot, install an app (Happ, Karing, v2rayNG, Hiddify, Streisand), import the key from clipboard and connect. First 2 days free.",
           "totalTime": "PT2M",
           "tool": [
             { "@type": "HowToTool", "name": "Telegram" },
             { "@type": "HowToTool", "name": "Happ / Karing / v2rayNG / Hiddify / Streisand" }
           ],
           "step": [
-            { "@type": "HowToStep", "position": 1, "name": "Скопируй ключ в боте", "text": "Открой @vlessbots_bot, нажми «Мои ключи», под сообщением нажми «Скопировать 1» (или 2, 3 — разные каналы). Бот пришлёт ключ отдельным сообщением — нажми на него, он скопируется.", "url": "{{ site_url }}#howto" },
-            { "@type": "HowToStep", "position": 2, "name": "Установи приложение", "text": "Happ (iPhone, Android, Windows), Karing (Windows, Android, iOS), v2rayNG (Android), Hiddify (все платформы), Streisand (iPhone, iPad).", "url": "{{ site_url }}#howto" },
-            { "@type": "HowToStep", "position": 3, "name": "Вставь ключ", "text": "Открой приложение, нажми «Добавить конфигурацию» (или «+»), выбери «Импорт из буфера обмена». Если кнопки импорта нет — «Добавить из ссылки» и вставь ключ вручную.", "url": "{{ site_url }}#howto" },
-            { "@type": "HowToStep", "position": 4, "name": "Подключись", "text": "Нажми большую кнопку подключения. Появится «Подключено» — трафик идёт через приватные серверы «ДОСТУП К ИНТЕРНЕТУ».", "url": "{{ site_url }}#howto" }
+            { "@type": "HowToStep", "position": 1, "name": "Copy the key in the bot", "text": "Open @vlessbots_bot, tap “My keys”, then “Copy 1” (or 2, 3 — different channels). The bot sends the key as a separate message — tap it and it is copied.", "url": "{{ site_url }}en/#howto" },
+            { "@type": "HowToStep", "position": 2, "name": "Install an app", "text": "Happ (iPhone, Android, Windows), Karing (Windows, Android, iOS), v2rayNG (Android), Hiddify (all platforms), Streisand (iPhone, iPad).", "url": "{{ site_url }}en/#howto" },
+            { "@type": "HowToStep", "position": 3, "name": "Paste the key", "text": "Open the app, tap “Add configuration” (or “+”), choose “Import from clipboard”. If there is no import button, use “Add from link” and paste the key manually.", "url": "{{ site_url }}en/#howto" },
+            { "@type": "HowToStep", "position": 4, "name": "Connect", "text": "Tap the big connect button. You will see “Connected” — traffic now goes through Internet Access private servers.", "url": "{{ site_url }}en/#howto" }
           ]
         },
         {
           "@type": "FAQPage",
           "mainEntity": [
-            { "@type": "Question", "name": "Какой ключ выбрать, если их несколько?", "acceptedAnswer": { "@type": "Answer", "text": "Первый — основной, работает у большинства. Второй — резервный: если первый не подключается, попробуй его. Третий (XHTTP) — для мобильного интернета, когда обычные не проходят." } },
-            { "@type": "Question", "name": "Есть ли бесплатный тестовый период?", "acceptedAnswer": { "@type": "Answer", "text": "Да, в сервисе «ДОСТУП К ИНТЕРНЕТУ» (@vlessbots_bot) доступен бесплатный тест на 2 дня — чтобы проверить скорость и работоспособность. Если всё устраивает, нажми в боте «ПРОДЛИТЬ»." } },
-            { "@type": "Question", "name": "Что делать, если VPN не подключается?", "acceptedAnswer": { "@type": "Answer", "text": "Переключись с Wi-Fi на мобильный интернет или наоборот. Попробуй другой ключ из списка. В приложении нажми «Обновить подписку» и переподключись. Проверь, что для приложения отключена экономия трафика. Если не помогло — напиши в бот @vlessbots_bot, раздел «Поддержка»." } },
-            { "@type": "Question", "name": "Можно ли передавать ключ другим людям?", "acceptedAnswer": { "@type": "Answer", "text": "Нет. Ключ — это личная ссылка. Не публикуй её в чатах и не передавай другим: посторонние могут использовать подписку, что снизит скорость и приведёт к блокировке ключа." } }
+            { "@type": "Question", "name": "Which key should I use if there are several?", "acceptedAnswer": { "@type": "Answer", "text": "First — primary, works for most users. Second — backup if the first fails. Third (XHTTP) — for mobile networks when regular keys fail." } },
+            { "@type": "Question", "name": "Is there a free trial?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Internet Access (@vlessbots_bot) offers a 2-day free trial so you can test speed and reliability. If it works for you, tap “RENEW” in the bot." } },
+            { "@type": "Question", "name": "What should I do if the VPN does not connect?", "acceptedAnswer": { "@type": "Answer", "text": "Switch between Wi-Fi and mobile data. Try another key. In the app tap “Update subscription” and reconnect. Make sure battery/data saver is disabled for the app. If it still fails, contact Support in @vlessbots_bot." } },
+            { "@type": "Question", "name": "Can I share my key with others?", "acceptedAnswer": { "@type": "Answer", "text": "No. The key is a personal link. Do not post it in chats or share it: third parties could use your subscription, which reduces speed and may lead to the key being blocked." } }
           ]
         }
       ]
@@ -188,15 +188,15 @@
     <div class="nav">
         <div class="container">
             <div class="nav-inner">
-                <a href="#" class="nav-logo">🌐 Доступ к интернету</a>
+                <a href="#" class="nav-logo">🌐 Internet Access</a>
                 <div class="nav-links">
-                    <a href="#configs" class="nav-link">Конфигурации</a>
-                    <a href="#howto" class="nav-link">Инструкция</a>
-                    <a href="#proxies" class="nav-link">Прокси</a>
-                    <a href="#apps" class="nav-link">Приложения</a>
-                    <a href="#news" class="nav-link">Новости</a>
+                    <a href="#configs" class="nav-link">Configurations</a>
+                    <a href="#howto" class="nav-link">Setup</a>
+                    <a href="#proxies" class="nav-link">Proxies</a>
+                    <a href="#apps" class="nav-link">Apps</a>
+                    <a href="#news" class="nav-link">News</a>
                     <a href="https://t.me/vlesstrojan" class="nav-link" target="_blank"><i class="fab fa-telegram"></i> @vlesstrojan</a>
-                    <a href="{{ site_url }}en/" class="lang-switch" title="English version">EN</a>
+                    <a href="{{ site_url }}" class="lang-switch" title="Русская версия">RU</a>
                 </div>
             </div>
         </div>
@@ -207,12 +207,12 @@
         <div class="hero-overlay-top"></div>
         <div class="hero-overlay"></div>
         <div class="hero-content">
-            <div class="hero-badge"><i class="fas fa-shield-halved"></i> Бесплатно · Обновляется автоматически</div>
-            <h1>Доступ к <span>интернету</span><br />без границ</h1>
-            <p>Рабочие конфигурации VLESS, V2Ray, Hysteria, Trojan и MTProto-прокси для свободного доступа в сеть.</p>
+            <div class="hero-badge"><i class="fas fa-shield-halved"></i> Free · Updated automatically</div>
+            <h1>Internet access <span>without borders</span></h1>
+            <p>Working configurations — VLESS, V2Ray, Hysteria, Trojan — and MTProto proxies for free access to the network.</p>
             <div class="hero-actions">
-                <a href="#configs" class="btn-primary"><i class="fas fa-download"></i> Конфигурации</a>
-                <a href="#proxies" class="btn-secondary"><i class="fas fa-plug"></i> MTProto прокси</a>
+                <a href="#configs" class="btn-primary"><i class="fas fa-download"></i> Configurations</a>
+                <a href="#proxies" class="btn-secondary"><i class="fas fa-plug"></i> MTProto proxies</a>
             </div>
         </div>
     </section>
@@ -223,19 +223,19 @@
                 <div class="info-grid">
                     <div class="info-card">
                         <div class="info-icon"><i class="fas fa-compass"></i></div>
-                        <h3>Как использовать</h3>
+                        <h3>How to use</h3>
                         <ul class="step-list">
-                            <li>Выберите конфигурацию <span class="highlight">(white версии самые стабильные)</span></li>
-                            <li>Скопируйте ссылку на подписку</li>
-                            <li>Вставьте в <span class="highlight">v2rayNG / NekoBox / v2rayN</span></li>
-                            <li>Подпишитесь на Telegram-каналы для новых ключей</li>
+                            <li>Pick a configuration <span class="highlight">(“white” versions are the most stable)</span></li>
+                            <li>Copy the subscription link</li>
+                            <li>Paste it into <span class="highlight">v2rayNG / NekoBox / v2rayN</span></li>
+                            <li>Follow the Telegram channels for new keys</li>
                         </ul>
-                        <div class="update-badge"><i class="far fa-clock"></i> Обновлено: <span id="lastUpdate">{{ last_update }}</span></div>
+                        <div class="update-badge"><i class="far fa-clock"></i> Updated: <span id="lastUpdate">{{ last_update }}</span></div>
                     </div>
                     <div class="info-card">
                         <div class="info-icon"><i class="fas fa-shield-alt"></i></div>
-                        <h3>Свободный доступ в сеть</h3>
-                        <p>Современные протоколы (VLESS, WireGuard, Hysteria) обеспечивают стабильное и быстрое соединение. Конфигурации проверяются и обновляются автоматически каждый час.</p>
+                        <h3>How it works</h3>
+                        <p>Modern protocols (VLESS, WireGuard, Hysteria) provide a stable and fast connection. Configurations are tested and refreshed automatically every hour.</p>
                     </div>
                 </div>
             </div>
@@ -244,89 +244,89 @@
         <div class="section" id="proxies">
             <div class="container">
                 <div class="section-label">MTProto</div>
-                <h2 class="section-title">📡 Прокси для Telegram</h2>
-                <p class="section-desc">Прокси обновляются автоматически. Если список пуст — проверьте <a href="https://t.me/vlesstrojan" style="color:#0072f5;">Telegram-канал</a>.</p>
+                <h2 class="section-title">📡 Telegram proxies</h2>
+                <p class="section-desc">Proxies are updated automatically. If the list is empty, check the <a href="https://t.me/vlesstrojan" style="color:#0072f5;">Telegram channel</a>.</p>
                 <div class="proxy-region-block">
-                    <div class="proxy-region-title"><i class="fas fa-flag"></i> Россия <span class="proxy-count" id="ru-count"></span></div>
-                    <div id="proxy-ru" class="proxy-grid"><span class="proxy-loading"><span class="spinner"></span> Загружаем...</span></div>
+                    <div class="proxy-region-title"><i class="fas fa-flag"></i> Russia <span class="proxy-count" id="ru-count"></span></div>
+                    <div id="proxy-ru" class="proxy-grid"><span class="proxy-loading"><span class="spinner"></span> Loading...</span></div>
                 </div>
                 <div class="proxy-region-block">
-                    <div class="proxy-region-title"><i class="fas fa-flag"></i> Европа <span class="proxy-count" id="eu-count"></span></div>
-                    <div id="proxy-eu" class="proxy-grid"><span class="proxy-loading"><span class="spinner"></span> Загружаем...</span></div>
+                    <div class="proxy-region-title"><i class="fas fa-flag"></i> Europe <span class="proxy-count" id="eu-count"></span></div>
+                    <div id="proxy-eu" class="proxy-grid"><span class="proxy-loading"><span class="spinner"></span> Loading...</span></div>
                 </div>
                 <div class="proxy-region-block">
-                    <div class="proxy-region-title"><i class="fas fa-flag"></i> США <span class="proxy-count" id="us-count"></span></div>
-                    <div id="proxy-us" class="proxy-grid"><span class="proxy-loading"><span class="spinner"></span> Загружаем...</span></div>
+                    <div class="proxy-region-title"><i class="fas fa-flag"></i> USA <span class="proxy-count" id="us-count"></span></div>
+                    <div id="proxy-us" class="proxy-grid"><span class="proxy-loading"><span class="spinner"></span> Loading...</span></div>
                 </div>
                 <div class="proxy-region-block">
-                    <div class="proxy-region-title"><i class="fas fa-flag"></i> Азия <span class="proxy-count" id="asia-count"></span></div>
-                    <div id="proxy-asia" class="proxy-grid"><span class="proxy-loading"><span class="spinner"></span> Загружаем...</span></div>
+                    <div class="proxy-region-title"><i class="fas fa-flag"></i> Asia <span class="proxy-count" id="asia-count"></span></div>
+                    <div id="proxy-asia" class="proxy-grid"><span class="proxy-loading"><span class="spinner"></span> Loading...</span></div>
                 </div>
             </div>
         </div>
 
         <div class="section" id="configs">
             <div class="container">
-                <div class="section-label">Свободный доступ в сеть</div>
-                <h2 class="section-title">⚡ Конфигурации</h2>
-                <p class="section-desc">Рабочие ссылки для импорта в ваше приложение. White версии — самые стабильные.</p>
+                <div class="section-label">Configurations</div>
+                <h2 class="section-title">⚡ Configurations</h2>
+                <p class="section-desc">Working links to import into your app. “White” versions are the most stable.</p>
                 <div class="configs-grid" id="configsGrid">
-                    <span class="proxy-loading"><span class="spinner"></span> Загружаем конфигурации...</span>
+                    <span class="proxy-loading"><span class="spinner"></span> Loading configurations...</span>
                 </div>
             </div>
         </div>
 
         <!-- ============================================================
-             ИНСТРУКЦИЯ ПО ПОДКЛЮЧЕНИЮ — статичный блок для SEO/LLM
+             SETUP GUIDE — static block for SEO/LLM
              ============================================================ -->
         <div class="section" id="howto">
             <div class="container">
-                <div class="section-label">Инструкция</div>
-                <h2 class="section-title">🔌 Как подключиться к VPN за 4 шага</h2>
+                <div class="section-label">Setup guide</div>
+                <h2 class="section-title">🔌 How to connect in 4 steps</h2>
                 <p class="section-desc">
-                    Подключение к сервису <strong>«ДОСТУП К ИНТЕРНЕТУ»</strong>
-                    (<a href="https://t.me/vlessbots_bot" target="_blank" rel="noopener" style="color:#0072f5;">@vlessbots_bot</a>)
-                    занимает около двух минут: скопировать ключ из бота, установить приложение, импортировать ключ и нажать «Подключиться».
-                    Первые <strong>2 дня — бесплатный тестовый период</strong> для проверки скорости и работоспособности.
+                    Connecting to <strong>“Internet Access”</strong> (the
+                    <a href="https://t.me/vlessbots_bot" target="_blank" rel="noopener" style="color:#0072f5;">@vlessbots_bot</a>
+                    Telegram bot) takes about two minutes: copy the key from the bot, install an app, import the key, and tap “Connect”.
+                    The first <strong>2 days are free</strong> so you can test speed and reliability.
                 </p>
 
                 <div class="info-grid" style="margin-bottom:24px;">
                     <div class="info-card">
                         <div class="info-icon"><i class="fas fa-key"></i></div>
-                        <h3>Шаг 1. Скопируй ключ в боте</h3>
+                        <h3>Step 1. Copy the key in the bot</h3>
                         <p>
-                            Открой бота <a href="https://t.me/vlessbots_bot" target="_blank" rel="noopener" style="color:#0072f5;">@vlessbots_bot</a>,
-                            нажми <strong>«Мои ключи»</strong> — ключи придут блоками.
-                            Под сообщением нажми <strong>«Скопировать 1»</strong> (или 2, 3 — это разные каналы).
-                            Бот пришлёт ключ отдельным сообщением — нажми на него пальцем, он скопируется.
+                            Open <a href="https://t.me/vlessbots_bot" target="_blank" rel="noopener" style="color:#0072f5;">@vlessbots_bot</a>,
+                            tap <strong>“My keys”</strong> — keys arrive in blocks.
+                            Under the message tap <strong>“Copy 1”</strong> (or 2, 3 — different channels).
+                            The bot sends the key as a separate message — tap it and it is copied.
                         </p>
                     </div>
                     <div class="info-card">
                         <div class="info-icon"><i class="fas fa-download"></i></div>
-                        <h3>Шаг 2. Установи приложение</h3>
+                        <h3>Step 2. Install an app</h3>
                         <ul style="padding-left:18px;font-size:0.9375rem;color:#4d4d4d;">
                             <li><strong>Happ</strong> — iPhone, Android, Windows (<a href="https://happ.su/" target="_blank" rel="noopener" style="color:#0072f5;">happ.su</a>)</li>
                             <li><strong>Karing</strong> — Windows, Android, iOS (<a href="https://karing.app/" target="_blank" rel="noopener" style="color:#0072f5;">karing.app</a>)</li>
                             <li><strong>v2rayNG</strong> — Android (<a href="https://github.com/2dust/v2rayNG/releases" target="_blank" rel="noopener" style="color:#0072f5;">GitHub</a>)</li>
-                            <li><strong>Hiddify</strong> — все платформы (<a href="https://hiddify.com/" target="_blank" rel="noopener" style="color:#0072f5;">hiddify.com</a>)</li>
+                            <li><strong>Hiddify</strong> — all platforms (<a href="https://hiddify.com/" target="_blank" rel="noopener" style="color:#0072f5;">hiddify.com</a>)</li>
                             <li><strong>Streisand</strong> — iPhone, iPad (<a href="https://apps.apple.com/app/streisand/id6450534064" target="_blank" rel="noopener" style="color:#0072f5;">App Store</a>)</li>
                         </ul>
                     </div>
                     <div class="info-card">
                         <div class="info-icon"><i class="fas fa-paste"></i></div>
-                        <h3>Шаг 3. Вставь ключ</h3>
+                        <h3>Step 3. Paste the key</h3>
                         <p>
-                            Открой приложение, нажми <strong>«Добавить конфигурацию»</strong> (или «+»),
-                            выбери <strong>«Импорт из буфера обмена»</strong>. Приложение само увидит скопированную ссылку
-                            и предложит добавить. Если кнопки импорта нет — «Добавить из ссылки» и вставь ключ вручную.
+                            Open the app, tap <strong>“Add configuration”</strong> (or “+”),
+                            choose <strong>“Import from clipboard”</strong>. The app detects the copied link and offers to add it.
+                            If there is no import button — use “Add from link” and paste the key manually.
                         </p>
                     </div>
                     <div class="info-card">
                         <div class="info-icon"><i class="fas fa-power-off"></i></div>
-                        <h3>Шаг 4. Подключись</h3>
+                        <h3>Step 4. Connect</h3>
                         <p>
-                            Нажми большую кнопку подключения. Появится <strong>«Подключено»</strong> — трафик идёт
-                            через приватные серверы «ДОСТУП К ИНТЕРНЕТУ». Если соединения нет — переходи к разделу ниже.
+                            Tap the big connect button. You will see <strong>“Connected”</strong> — traffic now goes
+                            through “Internet Access” private servers. If it does not connect, see the section below.
                         </p>
                     </div>
                 </div>
@@ -334,43 +334,43 @@
                 <div class="info-grid">
                     <div class="info-card">
                         <div class="info-icon"><i class="fas fa-layer-group"></i></div>
-                        <h3>Ключей несколько — какой выбрать</h3>
+                        <h3>Which key to choose</h3>
                         <ul style="padding-left:18px;font-size:0.9375rem;color:#4d4d4d;">
-                            <li><strong>Первый</strong> — основной, работает у большинства.</li>
-                            <li><strong>Второй</strong> — резервный: если первый не подключается, попробуй его.</li>
-                            <li><strong>Третий (XHTTP)</strong> — для мобильного интернета, когда обычные не проходят.</li>
+                            <li><strong>First</strong> — primary, works for most users.</li>
+                            <li><strong>Second</strong> — backup: try it if the first one fails.</li>
+                            <li><strong>Third (XHTTP)</strong> — for mobile networks when regular keys fail.</li>
                         </ul>
                     </div>
                     <div class="info-card">
                         <div class="info-icon"><i class="fas fa-hourglass-half"></i></div>
-                        <h3>Бесплатный тест 2 дня</h3>
+                        <h3>2-day free trial</h3>
                         <p>
-                            Сейчас доступ бесплатный на <strong>2 дня</strong> — чтобы проверить, работает ли у тебя.
-                            Если всё подключается и скорость устраивает, нажми в боте <strong>«ПРОДЛИТЬ»</strong> —
-                            оформи приватную подписку на VLESS Reality, Hysteria2 или Trojan.
+                            Access is currently free for <strong>2 days</strong> so you can verify it works for you.
+                            If speed and stability are fine, tap <strong>“RENEW”</strong> in the bot to get a private
+                            VLESS Reality / Hysteria2 / Trojan subscription.
                         </p>
                     </div>
                     <div class="info-card">
                         <div class="info-icon"><i class="fas fa-wrench"></i></div>
-                        <h3>Если не работает</h3>
+                        <h3>If it does not work</h3>
                         <ul style="padding-left:18px;font-size:0.9375rem;color:#4d4d4d;">
-                            <li>Переключись с Wi-Fi на мобильный интернет или наоборот.</li>
-                            <li>Попробуй другой ключ из списка.</li>
-                            <li>В приложении нажми «Обновить подписку» и переподключись.</li>
-                            <li>Проверь, что для приложения отключена экономия трафика.</li>
-                            <li>Всё равно тихо — напиши в бот, раздел <strong>«Поддержка»</strong>.</li>
+                            <li>Switch between Wi-Fi and mobile data.</li>
+                            <li>Try another key from the list.</li>
+                            <li>In the app tap “Update subscription” and reconnect.</li>
+                            <li>Make sure battery/data saver is disabled for the app.</li>
+                            <li>Still stuck — open the bot and use the <strong>“Support”</strong> section.</li>
                         </ul>
                     </div>
                     <div class="info-card" style="box-shadow:0px 0px 0px 1px #171717, 0px 2px 2px rgba(0,0,0,0.04);">
                         <div class="info-icon" style="background:#171717;color:#fff;"><i class="fas fa-lock"></i></div>
-                        <h3>Важно: ключ — личный</h3>
+                        <h3>Important: your key is personal</h3>
                         <p>
-                            Ключ — это личная ссылка. <strong>Не публикуй её в чатах и не передавай другим</strong>:
-                            посторонние могут использовать твою подписку, что снизит скорость и приведёт к блокировке ключа.
+                            The key is a personal link. <strong>Do not post it in chats or share it with others</strong>:
+                            third parties could use your subscription, which reduces speed and may lead to the key being blocked.
                         </p>
                         <div style="margin-top:16px;">
                             <a href="https://t.me/vlessbots_bot" class="btn-primary" target="_blank" rel="noopener">
-                                <i class="fab fa-telegram"></i> Открыть @vlessbots_bot
+                                <i class="fab fa-telegram"></i> Open @vlessbots_bot
                             </a>
                         </div>
                     </div>
@@ -380,9 +380,9 @@
 
         <div class="section" id="apps">
             <div class="container">
-                <div class="section-label">Приложения</div>
-                <h2 class="section-title">📱 Скачать приложения</h2>
-                <p class="section-desc">Программы для подключения по протоколам V2Ray, VLESS, Hysteria и Trojan.</p>
+                <div class="section-label">Apps</div>
+                <h2 class="section-title">📱 Download apps</h2>
+                <p class="section-desc">Programs for connecting via V2Ray, VLESS, Hysteria and Trojan.</p>
                 <div class="apps-grid">
                     <div class="app-card">
                         <div class="app-icon"><i class="fab fa-android"></i></div>
@@ -414,16 +414,16 @@
 
         <div class="section" id="news">
             <div class="container">
-                <div class="section-label">Контекст</div>
-                <h2 class="section-title">📰 Свободный доступ в сеть</h2>
-                <p class="section-desc">Актуальные новости о регулировании интернета и свободном доступе к сети.</p>
+                <div class="section-label">Context</div>
+                <h2 class="section-title">📰 Internet freedom</h2>
+                <p class="section-desc">Latest news on internet regulation and free access to the network.</p>
                 <div class="news-list">
                     {% for item in news %}
                     <div class="news-item">
                         <div class="news-date"><i class="far fa-calendar-alt"></i> {{ item.date }}</div>
                         <div class="news-title">{{ item.title }}</div>
                         <div class="news-summary">{{ item.summary }}</div>
-                        <div class="news-source">Источник: {{ item.source }}</div>
+                        <div class="news-source">Source: {{ item.source }}</div>
                     </div>
                     {% endfor %}
                 </div>
@@ -437,7 +437,7 @@
                 <a href="https://github.com/kort0881/internet-access-site" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
                 <a href="https://t.me/vlesstrojan" target="_blank" rel="noopener" aria-label="Telegram"><i class="fab fa-telegram"></i></a>
             </div>
-            <div class="footer-copy">© 2026 Доступ к интернету</div>
+            <div class="footer-copy">© 2026 Internet Access</div>
         </div>
     </footer>
 
@@ -445,7 +445,7 @@
         function copyToClipboard(btn, text, successText) {
             const original = btn.innerHTML;
             navigator.clipboard.writeText(text).then(() => {
-                btn.innerHTML = '<i class="fas fa-check"></i> ' + (successText || 'Скопировано');
+                btn.innerHTML = '<i class="fas fa-check"></i> ' + (successText || 'Copied');
                 setTimeout(() => { btn.innerHTML = original; }, 1500);
             }).catch(() => {
                 const ta = document.createElement('textarea');
@@ -454,7 +454,7 @@
                 ta.select();
                 document.execCommand('copy');
                 document.body.removeChild(ta);
-                btn.innerHTML = '<i class="fas fa-check"></i> ' + (successText || 'Скопировано');
+                btn.innerHTML = '<i class="fas fa-check"></i> ' + (successText || 'Copied');
                 setTimeout(() => { btn.innerHTML = original; }, 1500);
             });
         }
@@ -474,10 +474,10 @@
                 asia: document.getElementById('asia-count')
             };
             const sources = [
-                { url: 'https://raw.githubusercontent.com/kort0881/telegram-proxy-collector/main/verified/proxy_ru_verified.txt', container: containers.ru, countEl: counts.ru, label: 'Россия' },
-                { url: 'https://raw.githubusercontent.com/kort0881/telegram-proxy-collector/main/verified/proxy_eu_verified.txt', container: containers.eu, countEl: counts.eu, label: 'Европа' },
-                { url: 'https://raw.githubusercontent.com/kort0881/telegram-proxy-collector/main/verified/proxy_us_verified.txt', container: containers.us, countEl: counts.us, label: 'США' },
-                { url: 'https://raw.githubusercontent.com/kort0881/telegram-proxy-collector/main/verified/proxy_asia_verified.txt', container: containers.asia, countEl: counts.asia, label: 'Азия' }
+                { url: 'https://raw.githubusercontent.com/kort0881/telegram-proxy-collector/main/verified/proxy_ru_verified.txt', container: containers.ru, countEl: counts.ru, label: 'Russia' },
+                { url: 'https://raw.githubusercontent.com/kort0881/telegram-proxy-collector/main/verified/proxy_eu_verified.txt', container: containers.eu, countEl: counts.eu, label: 'Europe' },
+                { url: 'https://raw.githubusercontent.com/kort0881/telegram-proxy-collector/main/verified/proxy_us_verified.txt', container: containers.us, countEl: counts.us, label: 'USA' },
+                { url: 'https://raw.githubusercontent.com/kort0881/telegram-proxy-collector/main/verified/proxy_asia_verified.txt', container: containers.asia, countEl: counts.asia, label: 'Asia' }
             ];
             for (const src of sources) {
                 try {
@@ -487,7 +487,7 @@
                     const links = text.match(/tg:\/\/proxy\?[^\s]+/g) || [];
                     src.container.innerHTML = '';
                     if (links.length === 0) {
-                        src.container.innerHTML = '<span class="proxy-empty">Прокси для этого региона пока нет</span>';
+                        src.container.innerHTML = '<span class="proxy-empty">No proxies for this region yet</span>';
                         if (src.countEl) src.countEl.textContent = '(0)';
                         continue;
                     }
@@ -496,23 +496,23 @@
                         wrapper.className = 'proxy-item-wrapper';
                         const a = document.createElement('a');
                         a.href = link;
-                        a.textContent = '🔌 Прокси #' + (idx + 1);
+                        a.textContent = '🔌 Proxy #' + (idx + 1);
                         a.target = '_blank';
                         a.title = link;
                         wrapper.appendChild(a);
                         const copyBtn = document.createElement('button');
                         copyBtn.className = 'proxy-copy-btn';
                         copyBtn.innerHTML = '<i class="fas fa-copy"></i>';
-                        copyBtn.setAttribute('aria-label', 'Копировать прокси');
-                        copyBtn.onclick = (e) => { e.preventDefault(); copyToClipboard(copyBtn, link, 'Готово'); };
+                        copyBtn.setAttribute('aria-label', 'Copy proxy');
+                        copyBtn.onclick = (e) => { e.preventDefault(); copyToClipboard(copyBtn, link, 'Done'); };
                         wrapper.appendChild(copyBtn);
                         src.container.appendChild(wrapper);
                     });
                     if (src.countEl) src.countEl.textContent = '(' + links.length + ')';
                 } catch (e) {
                     console.error('Proxy error for', src.label, e);
-                    src.container.innerHTML = '<span class="proxy-empty">⚠️ Ошибка загрузки прокси для ' + src.label + '</span>';
-                    if (src.countEl) src.countEl.textContent = '(ошибка)';
+                    src.container.innerHTML = '<span class="proxy-empty">⚠️ Failed to load proxies for ' + src.label + '</span>';
+                    if (src.countEl) src.countEl.textContent = '(error)';
                 }
             }
         }
@@ -524,19 +524,19 @@
                 if (!resp.ok) throw new Error('HTTP ' + resp.status);
                 const text = await resp.text();
                 const lines = text.split('\n').map(line => line.trim()).filter(line => line.length > 0);
-                let currentCategory = 'Общие';
+                let currentCategory = 'General';
                 const configs = [];
                 for (const line of lines) {
                     const categoryMatch = line.match(/^===\s*(.+?)\s*===$/);
                     if (categoryMatch) { currentCategory = categoryMatch[1]; continue; }
                     if (line.startsWith('https://')) {
                         const filename = line.split('/').pop() || '';
-                        const name = filename.replace(/\.txt$/i, '') || 'Конфиг';
+                        const name = filename.replace(/\.txt$/i, '') || 'Config';
                         configs.push({ name: name, category: currentCategory, url: line, filename: filename });
                     }
                 }
                 if (configs.length === 0) {
-                    grid.innerHTML = '<p style="color:#666;">Нет активных конфигураций</p>';
+                    grid.innerHTML = '<p style="color:#666;">No active configurations</p>';
                     return;
                 }
                 grid.innerHTML = '';
@@ -554,11 +554,11 @@
                     actions.className = 'config-actions';
                     const copyBtn = document.createElement('button');
                     copyBtn.className = 'btn-primary-sm';
-                    copyBtn.innerHTML = '<i class="fas fa-copy"></i> Копировать';
+                    copyBtn.innerHTML = '<i class="fas fa-copy"></i> Copy';
                     copyBtn.onclick = function() { copyConfig(this, cfg.url); };
                     const openBtn = document.createElement('a');
                     openBtn.className = 'btn-ghost';
-                    openBtn.innerHTML = '<i class="fas fa-external-link-alt"></i> Открыть';
+                    openBtn.innerHTML = '<i class="fas fa-external-link-alt"></i> Open';
                     openBtn.href = cfg.url;
                     openBtn.target = '_blank';
                     actions.appendChild(copyBtn);
@@ -570,7 +570,7 @@
                 });
             } catch (e) {
                 console.error('Config load error:', e);
-                grid.innerHTML = '<p style="color:#666;">⚠️ Ошибка загрузки конфигураций</p>';
+                grid.innerHTML = '<p style="color:#666;">⚠️ Failed to load configurations</p>';
             }
         }
 
