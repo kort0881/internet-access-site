@@ -31,11 +31,40 @@
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "WebSite",
-      "name": "Доступ к интернету",
-      "url": "{{ site_url }}",
-      "description": "{{ meta_description }}",
-      "inLanguage": "ru-RU"
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "name": "Доступ к интернету",
+          "url": "{{ site_url }}",
+          "description": "{{ meta_description }}",
+          "inLanguage": "ru-RU"
+        },
+        {
+          "@type": "HowTo",
+          "name": "Как подключиться к VPN «ДОСТУП К ИНТЕРНЕТУ» (@vlessbots_bot)",
+          "description": "Пошаговая инструкция: скопировать ключ в Telegram-боте @vlessbots_bot, установить приложение (Happ, Karing, v2rayNG, Hiddify, Streisand), импортировать ключ из буфера обмена и подключиться. Первые 2 дня — бесплатный тест.",
+          "totalTime": "PT2M",
+          "tool": [
+            { "@type": "HowToTool", "name": "Telegram" },
+            { "@type": "HowToTool", "name": "Happ / Karing / v2rayNG / Hiddify / Streisand" }
+          ],
+          "step": [
+            { "@type": "HowToStep", "position": 1, "name": "Скопируй ключ в боте", "text": "Открой @vlessbots_bot, нажми «Мои ключи», под сообщением нажми «Скопировать 1» (или 2, 3 — разные каналы). Бот пришлёт ключ отдельным сообщением — нажми на него, он скопируется.", "url": "{{ site_url }}#howto" },
+            { "@type": "HowToStep", "position": 2, "name": "Установи приложение", "text": "Happ (iPhone, Android, Windows), Karing (Windows, Android, iOS), v2rayNG (Android), Hiddify (все платформы), Streisand (iPhone, iPad).", "url": "{{ site_url }}#howto" },
+            { "@type": "HowToStep", "position": 3, "name": "Вставь ключ", "text": "Открой приложение, нажми «Добавить конфигурацию» (или «+»), выбери «Импорт из буфера обмена». Если кнопки импорта нет — «Добавить из ссылки» и вставь ключ вручную.", "url": "{{ site_url }}#howto" },
+            { "@type": "HowToStep", "position": 4, "name": "Подключись", "text": "Нажми большую кнопку подключения. Появится «Подключено» — трафик идёт через приватные серверы «ДОСТУП К ИНТЕРНЕТУ».", "url": "{{ site_url }}#howto" }
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            { "@type": "Question", "name": "Какой ключ выбрать, если их несколько?", "acceptedAnswer": { "@type": "Answer", "text": "Первый — основной, работает у большинства. Второй — резервный: если первый не подключается, попробуй его. Третий (XHTTP) — для мобильного интернета, когда обычные не проходят." } },
+            { "@type": "Question", "name": "Есть ли бесплатный тестовый период?", "acceptedAnswer": { "@type": "Answer", "text": "Да, в сервисе «ДОСТУП К ИНТЕРНЕТУ» (@vlessbots_bot) доступен бесплатный тест на 2 дня — чтобы проверить скорость и работоспособность. Если всё устраивает, нажми в боте «ПРОДЛИТЬ»." } },
+            { "@type": "Question", "name": "Что делать, если VPN не подключается?", "acceptedAnswer": { "@type": "Answer", "text": "Переключись с Wi-Fi на мобильный интернет или наоборот. Попробуй другой ключ из списка. В приложении нажми «Обновить подписку» и переподключись. Проверь, что для приложения отключена экономия трафика. Если не помогло — напиши в бот @vlessbots_bot, раздел «Поддержка»." } },
+            { "@type": "Question", "name": "Можно ли передавать ключ другим людям?", "acceptedAnswer": { "@type": "Answer", "text": "Нет. Ключ — это личная ссылка. Не публикуй её в чатах и не передавай другим: посторонние могут использовать подписку, что снизит скорость и приведёт к блокировке ключа." } }
+          ]
+        }
+      ]
     }
     </script>
     <script type="text/javascript">
@@ -162,6 +191,7 @@
                 <a href="#" class="nav-logo">🌐 Доступ к интернету</a>
                 <div class="nav-links">
                     <a href="#configs" class="nav-link">Конфигурации</a>
+                    <a href="#howto" class="nav-link">Инструкция</a>
                     <a href="#proxies" class="nav-link">Прокси</a>
                     <a href="#apps" class="nav-link">Приложения</a>
                     <a href="#news" class="nav-link">Новости</a>
@@ -242,6 +272,108 @@
                 <p class="section-desc">Рабочие ссылки для импорта в ваше приложение. White версии — самые стабильные.</p>
                 <div class="configs-grid" id="configsGrid">
                     <span class="proxy-loading"><span class="spinner"></span> Загружаем конфигурации...</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================
+             ИНСТРУКЦИЯ ПО ПОДКЛЮЧЕНИЮ — статичный блок для SEO/LLM
+             ============================================================ -->
+        <div class="section" id="howto">
+            <div class="container">
+                <div class="section-label">Инструкция</div>
+                <h2 class="section-title">🔌 Как подключиться к VPN за 4 шага</h2>
+                <p class="section-desc">
+                    Подключение к сервису <strong>«ДОСТУП К ИНТЕРНЕТУ»</strong>
+                    (<a href="https://t.me/vlessbots_bot" target="_blank" rel="noopener" style="color:#0072f5;">@vlessbots_bot</a>)
+                    занимает около двух минут: скопировать ключ из бота, установить приложение, импортировать ключ и нажать «Подключиться».
+                    Первые <strong>2 дня — бесплатный тестовый период</strong> для проверки скорости и работоспособности.
+                </p>
+
+                <div class="info-grid" style="margin-bottom:24px;">
+                    <div class="info-card">
+                        <div class="info-icon"><i class="fas fa-key"></i></div>
+                        <h3>Шаг 1. Скопируй ключ в боте</h3>
+                        <p>
+                            Открой бота <a href="https://t.me/vlessbots_bot" target="_blank" rel="noopener" style="color:#0072f5;">@vlessbots_bot</a>,
+                            нажми <strong>«Мои ключи»</strong> — ключи придут блоками.
+                            Под сообщением нажми <strong>«Скопировать 1»</strong> (или 2, 3 — это разные каналы).
+                            Бот пришлёт ключ отдельным сообщением — нажми на него пальцем, он скопируется.
+                        </p>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-icon"><i class="fas fa-download"></i></div>
+                        <h3>Шаг 2. Установи приложение</h3>
+                        <ul style="padding-left:18px;font-size:0.9375rem;color:#4d4d4d;">
+                            <li><strong>Happ</strong> — iPhone, Android, Windows (<a href="https://happ.su/" target="_blank" rel="noopener" style="color:#0072f5;">happ.su</a>)</li>
+                            <li><strong>Karing</strong> — Windows, Android, iOS (<a href="https://karing.app/" target="_blank" rel="noopener" style="color:#0072f5;">karing.app</a>)</li>
+                            <li><strong>v2rayNG</strong> — Android (<a href="https://github.com/2dust/v2rayNG/releases" target="_blank" rel="noopener" style="color:#0072f5;">GitHub</a>)</li>
+                            <li><strong>Hiddify</strong> — все платформы (<a href="https://hiddify.com/" target="_blank" rel="noopener" style="color:#0072f5;">hiddify.com</a>)</li>
+                            <li><strong>Streisand</strong> — iPhone, iPad (<a href="https://apps.apple.com/app/streisand/id6450534064" target="_blank" rel="noopener" style="color:#0072f5;">App Store</a>)</li>
+                        </ul>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-icon"><i class="fas fa-paste"></i></div>
+                        <h3>Шаг 3. Вставь ключ</h3>
+                        <p>
+                            Открой приложение, нажми <strong>«Добавить конфигурацию»</strong> (или «+»),
+                            выбери <strong>«Импорт из буфера обмена»</strong>. Приложение само увидит скопированную ссылку
+                            и предложит добавить. Если кнопки импорта нет — «Добавить из ссылки» и вставь ключ вручную.
+                        </p>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-icon"><i class="fas fa-power-off"></i></div>
+                        <h3>Шаг 4. Подключись</h3>
+                        <p>
+                            Нажми большую кнопку подключения. Появится <strong>«Подключено»</strong> — трафик идёт
+                            через приватные серверы «ДОСТУП К ИНТЕРНЕТУ». Если соединения нет — переходи к разделу ниже.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="info-grid">
+                    <div class="info-card">
+                        <div class="info-icon"><i class="fas fa-layer-group"></i></div>
+                        <h3>Ключей несколько — какой выбрать</h3>
+                        <ul style="padding-left:18px;font-size:0.9375rem;color:#4d4d4d;">
+                            <li><strong>Первый</strong> — основной, работает у большинства.</li>
+                            <li><strong>Второй</strong> — резервный: если первый не подключается, попробуй его.</li>
+                            <li><strong>Третий (XHTTP)</strong> — для мобильного интернета, когда обычные не проходят.</li>
+                        </ul>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-icon"><i class="fas fa-hourglass-half"></i></div>
+                        <h3>Бесплатный тест 2 дня</h3>
+                        <p>
+                            Сейчас доступ бесплатный на <strong>2 дня</strong> — чтобы проверить, работает ли у тебя.
+                            Если всё подключается и скорость устраивает, нажми в боте <strong>«ПРОДЛИТЬ»</strong> —
+                            оформи приватную подписку на VLESS Reality, Hysteria2 или Trojan.
+                        </p>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-icon"><i class="fas fa-wrench"></i></div>
+                        <h3>Если не работает</h3>
+                        <ul style="padding-left:18px;font-size:0.9375rem;color:#4d4d4d;">
+                            <li>Переключись с Wi-Fi на мобильный интернет или наоборот.</li>
+                            <li>Попробуй другой ключ из списка.</li>
+                            <li>В приложении нажми «Обновить подписку» и переподключись.</li>
+                            <li>Проверь, что для приложения отключена экономия трафика.</li>
+                            <li>Всё равно тихо — напиши в бот, раздел <strong>«Поддержка»</strong>.</li>
+                        </ul>
+                    </div>
+                    <div class="info-card" style="box-shadow:0px 0px 0px 1px #171717, 0px 2px 2px rgba(0,0,0,0.04);">
+                        <div class="info-icon" style="background:#171717;color:#fff;"><i class="fas fa-lock"></i></div>
+                        <h3>Важно: ключ — личный</h3>
+                        <p>
+                            Ключ — это личная ссылка. <strong>Не публикуй её в чатах и не передавай другим</strong>:
+                            посторонние могут использовать твою подписку, что снизит скорость и приведёт к блокировке ключа.
+                        </p>
+                        <div style="margin-top:16px;">
+                            <a href="https://t.me/vlessbots_bot" class="btn-primary" target="_blank" rel="noopener">
+                                <i class="fab fa-telegram"></i> Открыть @vlessbots_bot
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
