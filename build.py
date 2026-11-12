@@ -132,6 +132,17 @@ def copy_favicons():
         print("⚠️ Фавиконки не найдены в корне репозитория")
 
 
+def copy_llms_txt():
+    """Копирование llms.txt в dist (для ИИ-краулеров)."""
+    src = Path('llms.txt')
+    if src.exists():
+        dest = DIST_DIR / 'llms.txt'
+        shutil.copy2(src, dest)
+        print(f"✅ llms.txt скопирован: {dest}")
+    else:
+        print("⚠️ llms.txt не найден в корне репозитория")
+
+
 def build_html():
     """Генерация HTML из шаблонов (RU + EN)."""
     print("\n🛠️ Сборка HTML...")
@@ -217,8 +228,21 @@ def create_404():
 
 
 def create_robots_txt():
-    """Создание robots.txt."""
+    """Создание robots.txt с разрешением для LLM-краулеров."""
     robots = f"""User-agent: *
+Allow: /
+
+# LLM crawlers
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
 Allow: /
 
 Sitemap: {SITE_URL}sitemap.xml
@@ -266,6 +290,7 @@ def main():
     copy_static()
     copy_og_image()
     copy_favicons()
+    copy_llms_txt()
     build_html()
     create_404()
     create_robots_txt()
