@@ -31,11 +31,40 @@
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "WebSite",
-      "name": "Internet Access",
-      "url": "{{ site_url }}en/",
-      "description": "{{ meta_description }}",
-      "inLanguage": "en-US"
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "name": "Internet Access",
+          "url": "{{ site_url }}en/",
+          "description": "{{ meta_description }}",
+          "inLanguage": "en-US"
+        },
+        {
+          "@type": "HowTo",
+          "name": "How to connect to Internet Access (@vlessbots_bot) VPN",
+          "description": "Step-by-step: copy the key in the @vlessbots_bot Telegram bot, install an app (Happ, Karing, v2rayNG, Hiddify, Streisand), import the key from clipboard and connect. First 2 days free.",
+          "totalTime": "PT2M",
+          "tool": [
+            { "@type": "HowToTool", "name": "Telegram" },
+            { "@type": "HowToTool", "name": "Happ / Karing / v2rayNG / Hiddify / Streisand" }
+          ],
+          "step": [
+            { "@type": "HowToStep", "position": 1, "name": "Copy the key in the bot", "text": "Open @vlessbots_bot, tap “My keys”, then “Copy 1” (or 2, 3 — different channels). The bot sends the key as a separate message — tap it and it is copied.", "url": "{{ site_url }}en/#howto" },
+            { "@type": "HowToStep", "position": 2, "name": "Install an app", "text": "Happ (iPhone, Android, Windows), Karing (Windows, Android, iOS), v2rayNG (Android), Hiddify (all platforms), Streisand (iPhone, iPad).", "url": "{{ site_url }}en/#howto" },
+            { "@type": "HowToStep", "position": 3, "name": "Paste the key", "text": "Open the app, tap “Add configuration” (or “+”), choose “Import from clipboard”. If there is no import button, use “Add from link” and paste the key manually.", "url": "{{ site_url }}en/#howto" },
+            { "@type": "HowToStep", "position": 4, "name": "Connect", "text": "Tap the big connect button. You will see “Connected” — traffic now goes through Internet Access private servers.", "url": "{{ site_url }}en/#howto" }
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            { "@type": "Question", "name": "Which key should I use if there are several?", "acceptedAnswer": { "@type": "Answer", "text": "First — primary, works for most users. Second — backup if the first fails. Third (XHTTP) — for mobile networks when regular keys fail." } },
+            { "@type": "Question", "name": "Is there a free trial?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Internet Access (@vlessbots_bot) offers a 2-day free trial so you can test speed and reliability. If it works for you, tap “RENEW” in the bot." } },
+            { "@type": "Question", "name": "What should I do if the VPN does not connect?", "acceptedAnswer": { "@type": "Answer", "text": "Switch between Wi-Fi and mobile data. Try another key. In the app tap “Update subscription” and reconnect. Make sure battery/data saver is disabled for the app. If it still fails, contact Support in @vlessbots_bot." } },
+            { "@type": "Question", "name": "Can I share my key with others?", "acceptedAnswer": { "@type": "Answer", "text": "No. The key is a personal link. Do not post it in chats or share it: third parties could use your subscription, which reduces speed and may lead to the key being blocked." } }
+          ]
+        }
+      ]
     }
     </script>
     <script type="text/javascript">
@@ -162,6 +191,7 @@
                 <a href="#" class="nav-logo">🌐 Internet Access</a>
                 <div class="nav-links">
                     <a href="#configs" class="nav-link">Configurations</a>
+                    <a href="#howto" class="nav-link">Setup</a>
                     <a href="#proxies" class="nav-link">Proxies</a>
                     <a href="#apps" class="nav-link">Apps</a>
                     <a href="#news" class="nav-link">News</a>
@@ -242,6 +272,108 @@
                 <p class="section-desc">Working links to import into your app. “White” versions are the most stable.</p>
                 <div class="configs-grid" id="configsGrid">
                     <span class="proxy-loading"><span class="spinner"></span> Loading configurations...</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================
+             SETUP GUIDE — static block for SEO/LLM
+             ============================================================ -->
+        <div class="section" id="howto">
+            <div class="container">
+                <div class="section-label">Setup guide</div>
+                <h2 class="section-title">🔌 How to connect in 4 steps</h2>
+                <p class="section-desc">
+                    Connecting to <strong>“Internet Access”</strong> (the
+                    <a href="https://t.me/vlessbots_bot" target="_blank" rel="noopener" style="color:#0072f5;">@vlessbots_bot</a>
+                    Telegram bot) takes about two minutes: copy the key from the bot, install an app, import the key, and tap “Connect”.
+                    The first <strong>2 days are free</strong> so you can test speed and reliability.
+                </p>
+
+                <div class="info-grid" style="margin-bottom:24px;">
+                    <div class="info-card">
+                        <div class="info-icon"><i class="fas fa-key"></i></div>
+                        <h3>Step 1. Copy the key in the bot</h3>
+                        <p>
+                            Open <a href="https://t.me/vlessbots_bot" target="_blank" rel="noopener" style="color:#0072f5;">@vlessbots_bot</a>,
+                            tap <strong>“My keys”</strong> — keys arrive in blocks.
+                            Under the message tap <strong>“Copy 1”</strong> (or 2, 3 — different channels).
+                            The bot sends the key as a separate message — tap it and it is copied.
+                        </p>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-icon"><i class="fas fa-download"></i></div>
+                        <h3>Step 2. Install an app</h3>
+                        <ul style="padding-left:18px;font-size:0.9375rem;color:#4d4d4d;">
+                            <li><strong>Happ</strong> — iPhone, Android, Windows (<a href="https://happ.su/" target="_blank" rel="noopener" style="color:#0072f5;">happ.su</a>)</li>
+                            <li><strong>Karing</strong> — Windows, Android, iOS (<a href="https://karing.app/" target="_blank" rel="noopener" style="color:#0072f5;">karing.app</a>)</li>
+                            <li><strong>v2rayNG</strong> — Android (<a href="https://github.com/2dust/v2rayNG/releases" target="_blank" rel="noopener" style="color:#0072f5;">GitHub</a>)</li>
+                            <li><strong>Hiddify</strong> — all platforms (<a href="https://hiddify.com/" target="_blank" rel="noopener" style="color:#0072f5;">hiddify.com</a>)</li>
+                            <li><strong>Streisand</strong> — iPhone, iPad (<a href="https://apps.apple.com/app/streisand/id6450534064" target="_blank" rel="noopener" style="color:#0072f5;">App Store</a>)</li>
+                        </ul>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-icon"><i class="fas fa-paste"></i></div>
+                        <h3>Step 3. Paste the key</h3>
+                        <p>
+                            Open the app, tap <strong>“Add configuration”</strong> (or “+”),
+                            choose <strong>“Import from clipboard”</strong>. The app detects the copied link and offers to add it.
+                            If there is no import button — use “Add from link” and paste the key manually.
+                        </p>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-icon"><i class="fas fa-power-off"></i></div>
+                        <h3>Step 4. Connect</h3>
+                        <p>
+                            Tap the big connect button. You will see <strong>“Connected”</strong> — traffic now goes
+                            through “Internet Access” private servers. If it does not connect, see the section below.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="info-grid">
+                    <div class="info-card">
+                        <div class="info-icon"><i class="fas fa-layer-group"></i></div>
+                        <h3>Which key to choose</h3>
+                        <ul style="padding-left:18px;font-size:0.9375rem;color:#4d4d4d;">
+                            <li><strong>First</strong> — primary, works for most users.</li>
+                            <li><strong>Second</strong> — backup: try it if the first one fails.</li>
+                            <li><strong>Third (XHTTP)</strong> — for mobile networks when regular keys fail.</li>
+                        </ul>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-icon"><i class="fas fa-hourglass-half"></i></div>
+                        <h3>2-day free trial</h3>
+                        <p>
+                            Access is currently free for <strong>2 days</strong> so you can verify it works for you.
+                            If speed and stability are fine, tap <strong>“RENEW”</strong> in the bot to get a private
+                            VLESS Reality / Hysteria2 / Trojan subscription.
+                        </p>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-icon"><i class="fas fa-wrench"></i></div>
+                        <h3>If it does not work</h3>
+                        <ul style="padding-left:18px;font-size:0.9375rem;color:#4d4d4d;">
+                            <li>Switch between Wi-Fi and mobile data.</li>
+                            <li>Try another key from the list.</li>
+                            <li>In the app tap “Update subscription” and reconnect.</li>
+                            <li>Make sure battery/data saver is disabled for the app.</li>
+                            <li>Still stuck — open the bot and use the <strong>“Support”</strong> section.</li>
+                        </ul>
+                    </div>
+                    <div class="info-card" style="box-shadow:0px 0px 0px 1px #171717, 0px 2px 2px rgba(0,0,0,0.04);">
+                        <div class="info-icon" style="background:#171717;color:#fff;"><i class="fas fa-lock"></i></div>
+                        <h3>Important: your key is personal</h3>
+                        <p>
+                            The key is a personal link. <strong>Do not post it in chats or share it with others</strong>:
+                            third parties could use your subscription, which reduces speed and may lead to the key being blocked.
+                        </p>
+                        <div style="margin-top:16px;">
+                            <a href="https://t.me/vlessbots_bot" class="btn-primary" target="_blank" rel="noopener">
+                                <i class="fab fa-telegram"></i> Open @vlessbots_bot
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
