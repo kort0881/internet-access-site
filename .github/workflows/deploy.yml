@@ -32,6 +32,13 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           
+      - name: 📰 Fetch Telegram news
+        continue-on-error: true
+        env:
+          TG_CHANNEL: vlesstrojan
+          TG_POSTS_LIMIT: "10"
+        run: python fetch_telegram_news.py
+
       - name: 🛠️ Build static site
         run: |
           python build.py

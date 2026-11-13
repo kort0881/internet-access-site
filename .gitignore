@@ -35,6 +35,11 @@ venv.bak/
 download_links_cache.json
 github_stats_cache.json
 
+# Telegram news cache (генерируется fetch_telegram_news.py)
+telegram_news.json
+*.session
+*.session-journal
+
 # IDE
 .vscode/
 .idea/

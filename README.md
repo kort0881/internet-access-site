@@ -127,6 +127,8 @@ internet-access-site/
 ├── main.py                  # Flask приложение (локальная разработка)
 ├── services.py              # Парсер конфигураций из vpn-checker-backend
 ├── build.py                 # Генератор статики (RU + EN + llms.txt + robots + sitemap)
+├── fetch_telegram_news.py   # Посты из Telegram-канала @vlesstrojan → telegram_news.json
+├── telegram_news.json       # Кэш новостей (генерируется автоматически, в git не попадает)
 ├── requirements.txt         # Python зависимости
 ├── llms.txt                 # Описание для ИИ-краулеров (ChatGPT, Claude, Perplexity)
 ├── templates/
@@ -165,6 +167,8 @@ GitHub Actions автоматически:
 ✅ Собирает сайт каждый час
 
 ✅ Обновляет конфигурации из vpn-checker-backend
+
+✅ Дублирует посты Telegram-канала @vlesstrojan в блок «Новости» (публичная лента t.me/s/, без api_id/api_hash)
 
 ✅ Копирует llms.txt в dist/
 

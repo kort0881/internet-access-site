@@ -1,18 +1,23 @@
 #!/usr/bin/env python3
 """Static site generator for GitHub Pages deployment."""
 
+import json
 import os
 import shutil
 from pathlib import Path
 from datetime import datetime
 from jinja2 import Environment, FileSystemLoader
 from services import get_vpn_configs, get_last_update_time
-import feedparser
 
 # Конфигурация
 DIST_DIR = Path('dist')
 TEMPLATES_DIR = Path('templates')
 STATIC_DIR = Path('static')
+
+# Новости из Telegram-канала: JSON готовит fetch_telegram_news.py
+NEWS_FILE = Path(os.environ.get('TG_NEWS_FILE', 'telegram_news.json'))
+NEWS_LIMIT = 10
+TG_CHANNEL = os.environ.get('TG_CHANNEL', 'vlesstrojan').lstrip('@')
 
 # SEO (RU)
 META_TITLE = "Доступ к интернету - Свободный доступ в сеть"
@@ -33,61 +38,55 @@ META_KEYWORDS_EN = "internet access, free internet access, vless, v2ray, shadows
 SITE_URL = "https://kort0881.github.io/internet-access-site/"
 
 
+def _fallback_news():
+    """Заглушка, если JSON с постами недоступен — сайт не должен падать."""
+    return [{
+        'title': 'Новости сервиса «Доступ к интернету»',
+        'summary': f'Следите за обновлениями в нашем Telegram-канале @{TG_CHANNEL}.',
+        'link': f'https://t.me/{TG_CHANNEL}',
+        'date': datetime.now().strftime('%d.%m.%Y'),
+        'source': 'Telegram',
+    }]
+
+
 def fetch_news():
-    """Парсит новости с Хабра (раздел Интернет)."""
-    news = []
-    habr_url = 'https://habr.com/ru/rss/hub/internet/all/?fl=ru'
-    keywords = [
-        'интернет', 'сеть', 'связь', 'трафик', 'провайдер',
-        'регулирован', 'закон', 'запрет', 'ограничен',
-        'роскомнадзор', 'ркн', 'минцифры', 'минцифра',
-        'телеком', 'мессенджер', 'телеграм', 'telegram',
-    ]
+    """Читает посты Telegram-канала из telegram_news.json.
+
+    Файл готовит fetch_telegram_news.py (публичная веб-лента t.me/s/...,
+    без api_id/api_hash и без сессии). Если файла нет или он битый —
+    возвращаем заглушку, сборка продолжается.
+    """
     try:
-        feed = feedparser.parse(habr_url)
-        for entry in feed.entries[:15]:
-            title_lower = entry.title.lower()
-            if any(kw in title_lower for kw in keywords):
-                summary = entry.summary
-                if len(summary) > 300:
-                    summary = summary[:300] + '...'
-                news.append({
-                    'title': entry.title,
-                    'summary': summary,
-                    'link': entry.link,
-                    'date': datetime(*entry.published_parsed[:6]).strftime('%d %B %Y'),
-                    'source': 'Хабр'
-                })
+        if not NEWS_FILE.exists():
+            print(f"⚠️ {NEWS_FILE} не найден — использую заглушку")
+            return _fallback_news()
+
+        raw = json.loads(NEWS_FILE.read_text(encoding='utf-8'))
+        if not isinstance(raw, list) or not raw:
+            print(f"⚠️ {NEWS_FILE} пустой — использую заглушку")
+            return _fallback_news()
+
+        news = []
+        for item in raw[:NEWS_LIMIT]:
+            if not isinstance(item, dict) or not item.get('title'):
+                continue
+            news.append({
+                'title': item.get('title', ''),
+                'summary': item.get('summary', ''),
+                'link': item.get('link', f'https://t.me/{TG_CHANNEL}'),
+                'date': item.get('date', ''),
+                'source': item.get('source', f'Telegram @{TG_CHANNEL}'),
+            })
+
+        if not news:
+            print(f"⚠️ В {NEWS_FILE} нет валидных постов — использую заглушку")
+            return _fallback_news()
+
+        print(f"✅ Новости из Telegram: {len(news)} постов из @{TG_CHANNEL}")
+        return news
     except Exception as e:
-        print(f"⚠️ Ошибка парсинга новостей: {e}")
-
-    # Fallback: если по ключевым словам ничего не нашли — берём последние 3 новости хаба
-    if not news:
-        try:
-            feed = feedparser.parse(habr_url)
-            for entry in feed.entries[:3]:
-                summary = entry.summary
-                if len(summary) > 300:
-                    summary = summary[:300] + '...'
-                news.append({
-                    'title': entry.title,
-                    'summary': summary,
-                    'link': entry.link,
-                    'date': datetime(*entry.published_parsed[:6]).strftime('%d %B %Y'),
-                    'source': 'Хабр'
-                })
-        except Exception as e:
-            print(f"⚠️ Ошибка fallback-парсинга новостей: {e}")
-
-    if not news:
-        news.append({
-            'title': 'Актуальные новости о свободном доступе в сеть',
-            'summary': 'Следите за новостями о регулировании интернета и доступе к сети.',
-            'link': SITE_URL,
-            'date': datetime.now().strftime('%d %B %Y'),
-            'source': 'Новости'
-        })
-    return news
+        print(f"⚠️ Ошибка чтения {NEWS_FILE}: {e} — использую заглушку")
+        return _fallback_news()
 
 
 def clean_dist():
