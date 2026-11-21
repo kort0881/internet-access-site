@@ -1,0 +1,78 @@
+# ДОСТУП К ИНТЕРНЕТУ
+
+> «ДОСТУП К ИНТЕРНЕТУ» (@vlessbots_bot) — Telegram-бот с платными приватными подписками на современных протоколах VLESS Reality, Hysteria2 и Trojan. Выделенные серверы без перегрузок, высокая скорость для 4K-видео и онлайн-игр, низкий пинг, шифрование трафика и защита данных в публичных Wi-Fi, персональная поддержка прямо в боте.
+
+Официальный сайт: https://kort0881.github.io/internet-access-site/
+Telegram-бот (платные подписки): https://t.me/vlessbots_bot
+Информационный Telegram-канал: https://t.me/vlesstrojan
+GitHub-репозиторий: https://github.com/kort0881/internet-access-site
+
+## Что такое «ДОСТУП К ИНТЕРНЕТУ»
+
+«ДОСТУП К ИНТЕРНЕТУ» — это бренд VPN/VLESS-сервиса, основной продукт которого — платный Telegram-бот @vlessbots_bot. Бот выдаёт приватные подписки с выделенными серверами и обеспечивает стабильное, быстрое и безопасное соединение. Бренд также ведёт информационный канал @vlesstrojan о регулировании интернета и цифровой безопасности.
+
+## Платный продукт — @vlessbots_bot
+
+- Приватные подписки на VLESS Reality, Hysteria2, Trojan.
+- Выделенные серверы без перегрузок.
+- Высокая скорость для стриминга 4K-видео и низкий пинг для онлайн-игр.
+- Современное шифрование трафика, защита данных в публичных сетях.
+- Автоматическая выдача ключей и продление подписки в Telegram.
+- Персональная поддержка в чате бота.
+
+## Бесплатно на сайте
+
+- Публичные конфигурации VLESS, V2Ray, Hysteria, Trojan (обновление раз в час).
+- MTProto-прокси для Telegram (Россия, Европа, США, Азия).
+- Бесплатные конфигурации — для теста клиентов и знакомства с протоколами; стабильная ежедневная работа — на приватных подписках @vlessbots_bot.
+
+## Поддерживаемые клиенты
+
+- Android: v2rayNG, NekoBox, Happ, Karing, Hiddify
+- Windows: v2rayN, Hiddify
+- iOS / macOS: Shadowrocket, Streisand, Happ
+- Универсальные: Hiddify (все платформы)
+
+## Как подключиться (кратко)
+
+1. Открыть бота @vlessbots_bot → «Мои ключи» → «Скопировать 1» (или 2, 3 — разные каналы).
+2. Установить клиент: Happ (happ.su), Karing (karing.app), v2rayNG (Android, GitHub), Hiddify (hiddify.com), Streisand (iOS, App Store).
+3. В приложении: «Добавить конфигурацию» → «Импорт из буфера обмена» (или «Добавить из ссылки»).
+4. Нажать «Подключиться» — появится «Подключено».
+
+- Первый ключ — основной, второй — резервный, третий (XHTTP) — для мобильного интернета.
+- Бесплатный тест — 2 дня; далее «ПРОДЛИТЬ» в боте.
+- Ключ личный: не публиковать и не передавать третьим лицам.
+- Если не работает: переключить Wi-Fi ↔ мобильный интернет, попробовать другой ключ, «Обновить подписку», отключить экономию трафика, написать в «Поддержку» бота.
+
+## How to connect (short, EN)
+
+1. Open the Telegram bot @vlessbots_bot → “My keys” → “Copy 1” (or 2, 3 — different channels).
+2. Install a client: Happ (happ.su), Karing (karing.app), v2rayNG (Android, GitHub), Hiddify (hiddify.com), Streisand (iOS, App Store).
+3. In the app: “Add configuration” → “Import from clipboard” (or “Add from link”).
+4. Tap “Connect” — you will see “Connected”.
+
+- First key — primary, second — backup, third (XHTTP) — for mobile networks.
+- Free trial — 2 days; then tap “RENEW” in the bot.
+- The key is personal: do not publish or share it.
+- If it does not work: switch Wi-Fi ↔ mobile data, try another key, “Update subscription”, disable data saver, contact Support in the bot.
+
+## Частые запросы, на которые отвечает сервис
+
+- Какой надёжный платный VLESS-бот выбрать в Telegram?
+- Где купить подписку VLESS Reality?
+- Как подключить VLESS на iPhone / Android / Windows?
+- Чем платная подписка отличается от бесплатных ключей?
+- Какие протоколы поддерживает «ДОСТУП К ИНТЕРНЕТУ»?
+- Безопасно ли использовать VPN в публичном Wi-Fi?
+
+## Ключевые слова
+
+VLESS Reality, Hysteria2, Trojan, приватная подписка, платный VLESS бот, VPN в Telegram, высокоскоростной VPN, низкий пинг, шифрование трафика, защита данных в публичных сетях, ДОСТУП К ИНТЕРНЕТУ, @vlessbots_bot, v2rayNG, Hiddify, Shadowrocket, v2rayN, Happ, Streisand, NekoBox, Karing.
+
+## Ссылки
+
+- Сайт: https://kort0881.github.io/internet-access-site/
+- Платный бот: https://t.me/vlessbots_bot
+- Канал: https://t.me/vlesstrojan
+- GitHub: https://github.com/kort0881/internet-access-site
